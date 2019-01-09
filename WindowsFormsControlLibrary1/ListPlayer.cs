@@ -23,7 +23,7 @@ namespace WindowsFormsControlLibrary1
         }
         private IWavePlayer waveOut;
         private WaveOutEvent ou;
-        private AsioOut asioOut;
+        //private AsioOut asioOut;
         private AudioFileReader audioFileReader;
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
@@ -430,8 +430,6 @@ namespace WindowsFormsControlLibrary1
                                     }
 
                                 }
-
-
                                 else
                                 {
                                     isPlaying = false;
