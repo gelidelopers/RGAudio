@@ -7,7 +7,7 @@
     <ProjectGuid>{BE82061C-DDB9-4C78-803D-883F3F6694D0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Gelida_Player</RootNamespace>
-    <AssemblyName>Gelida Player</AssemblyName>
+    <AssemblyName>GelidaPlayer</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

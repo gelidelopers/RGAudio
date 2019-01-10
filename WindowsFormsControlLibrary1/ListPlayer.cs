@@ -532,9 +532,11 @@ namespace WindowsFormsControlLibrary1
             {
 
                 var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                if(item.Font != fntPlaying)
-                
-                e.Effect = DragDropEffects.Move;
+                if (item.Font != fntPlaying)
+                {
+
+                    e.Effect = DragDropEffects.Move;
+                }
                 
             }else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
@@ -546,18 +548,18 @@ namespace WindowsFormsControlLibrary1
         {
             if (e.Data.GetDataPresent(typeof(ListViewItem)))
             {
-                if (listView1.SelectedItems.Count == 0)
-                {
-                    return;
-                }
+                //if (listView1.SelectedItems.Count == 0)
+                //{
+                //    return;
+                //}
                 //Returns the location of the mouse pointer in the ListView control.
                 Point cp = listView1.PointToClient(new Point(e.X, e.Y));
                 //Obtain the item that is located at the specified location of the mouse pointer.
                 ListViewItem dragToItem = listView1.GetItemAt(cp.X, cp.Y);
-                if (dragToItem == null)
-                {
-                    return;
-                }
+                //if (dragToItem == null)
+                //{
+                //    return;
+                //}
                 //Obtain the index of the item at the mouse pointer.
                 int dragIndex = dragToItem.Index;
                 ListViewItem[] sel = new ListViewItem[listView1.SelectedItems.Count];
@@ -570,10 +572,10 @@ namespace WindowsFormsControlLibrary1
                     //Obtain the ListViewItem to be dragged to the target location.
                     ListViewItem dragItem = sel[i];
                     int itemIndex = dragIndex;
-                    if (itemIndex == dragItem.Index)
-                    {
-                        return;
-                    }
+                    //if (itemIndex == dragItem.Index)
+                    //{
+                    //    return;
+                    //}
                     if (dragItem.Index < itemIndex)
                         itemIndex++;
                     else

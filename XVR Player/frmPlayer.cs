@@ -16,7 +16,7 @@ namespace Gelida_Player
 {
     public partial class frmPlayer : Form
     {
-        public frmPlayer()
+        public frmPlayer(string[] args)
         {
             InitializeComponent();
             Form esplas = new frmSplash();

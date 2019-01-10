@@ -13,12 +13,12 @@ namespace Gelida_Player
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmSplash());
-            Application.Run(new frmPlayer());
+            Application.Run(new frmPlayer(args));
             
         }
     }
