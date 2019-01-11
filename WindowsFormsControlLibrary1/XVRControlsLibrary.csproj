@@ -59,6 +59,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arxiu.cs" />
+    <Compile Include="DBConnect.cs" />
+    <Compile Include="PlayContinu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PlayContinu.Designer.cs">
+      <DependentUpon>PlayContinu.cs</DependentUpon>
+    </Compile>
     <Compile Include="ListPlayer.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -80,6 +87,9 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="PlayContinu.resx">
+      <DependentUpon>PlayContinu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ListPlayer.resx">
       <DependentUpon>ListPlayer.cs</DependentUpon>
     </EmbeddedResource>

@@ -164,9 +164,9 @@ namespace WindowsFormsControlLibrary1
             TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
             int min, sec;
             min = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.TotalSeconds) / 60;
-            sec = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.Seconds) % 60;
+            sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
 
-            labelRemain.Text = String.Format("{0:00}:{1:00}", min, sec);
+            labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
         }
 
         //volume slider changed
@@ -408,8 +408,6 @@ namespace WindowsFormsControlLibrary1
                             {
                                 isPlaying = false;
                             }
-
-
                         }
                         else if (Continuar && !Borrar)
                         {
@@ -462,7 +460,6 @@ namespace WindowsFormsControlLibrary1
                             }
                             isPlaying = false;
                         }
-
                     }
                     else if (clicat)
                     {
@@ -534,7 +531,6 @@ namespace WindowsFormsControlLibrary1
                 var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
                 if (item.Font != fntPlaying)
                 {
-
                     e.Effect = DragDropEffects.Move;
                 }
                 
@@ -702,8 +698,6 @@ namespace WindowsFormsControlLibrary1
 
                 if (waveOut != null)
                 {
-                    
-                    
                     clicat = true;
                     
                     if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
@@ -719,8 +713,7 @@ namespace WindowsFormsControlLibrary1
                 else
                 {
                     PlaySong();
-                }
-                
+                } 
             }
         }
 
@@ -747,8 +740,6 @@ namespace WindowsFormsControlLibrary1
                 if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     waveOut.Stop();
-                    
-                    
                 }
             }
             else if (Continuar && !Borrar)
@@ -772,9 +763,6 @@ namespace WindowsFormsControlLibrary1
             {
                 listView1.Items.RemoveAt(index);
             }
-
-        }
-
-        
+        } 
     }
 }
