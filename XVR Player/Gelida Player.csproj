@@ -17,7 +17,7 @@
     </TargetFrameworkProfile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>ftp://net2ftp.cluster027.hosting.ovh.net/www/rg/</PublishUrl>
+    <PublishUrl>ftp://ftp.cluster027.hosting.ovh.net/www/rg/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
