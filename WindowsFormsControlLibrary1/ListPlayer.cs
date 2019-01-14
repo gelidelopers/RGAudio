@@ -28,6 +28,7 @@ namespace WindowsFormsControlLibrary1
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
         private int index;
+        private int seguen;
         private bool stoped = false;
         private List<string> errors = new List<string>();
         bool clicat = false;
@@ -40,6 +41,7 @@ namespace WindowsFormsControlLibrary1
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
         //public bool isAsio { get; set; }
         public bool isPlaying;
+        public List<string> extensions = new List<string>(new string[] { ".mp3" ,".wav",".aac",".m4a",".wma"});
 
         private void OnOpenFileClick(object sender, EventArgs e)
         {
@@ -70,7 +72,6 @@ namespace WindowsFormsControlLibrary1
             return postVolumeMeter;
         }
 
-
         void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
             ///left 
@@ -86,7 +87,7 @@ namespace WindowsFormsControlLibrary1
             ///-60 to 0 dB volume
             /// 0 dB to 5 dB volume    
             volumeMeter2.Amplitude = e.MaxSampleValues[1];
-            volumeMeter4.Amplitude = e.MaxSampleValues[0];
+            volumeMeter4.Amplitude = e.MaxSampleValues[1];
         }
         
         private void OnTimerTick(object sender, EventArgs e)
@@ -119,10 +120,7 @@ namespace WindowsFormsControlLibrary1
                 if (waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     waveOut.Pause();
-                    volumeMeter1.Amplitude = 0;
-                    volumeMeter2.Amplitude = 0;
-                    volumeMeter3.Amplitude = 0;
-                    volumeMeter4.Amplitude = 0;
+                    ResetVUMeter();
                 }
             }
         }
@@ -133,11 +131,8 @@ namespace WindowsFormsControlLibrary1
             {
                 waveOut.Stop();
             }
-
-            volumeMeter1.Amplitude = 0;
-            volumeMeter2.Amplitude = 0;
-            volumeMeter3.Amplitude = 0;
-            volumeMeter4.Amplitude = 0;
+            ResetVUMeter();
+            
             stoped = true;
         }
 
@@ -145,6 +140,57 @@ namespace WindowsFormsControlLibrary1
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
             PlaySong();
+        }
+        private void ResetVUMeter()
+        {
+            volumeMeter1.Amplitude = 0;
+            volumeMeter2.Amplitude = 0;
+            volumeMeter3.Amplitude = 0;
+            volumeMeter4.Amplitude = 0;
+        }
+
+
+
+        /// <summary>
+        /// Reestructurar funcio playsong
+        /// </summary>
+        private void CarregarFitxer()
+        {
+            try
+            {
+                //canviar dequeue per first si esta activat o no el borrar
+                sampleProvider = CreateInputStream(listView1.Items[index].SubItems[2].Text);
+            }
+            catch (Exception createException)
+            {
+                MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
+                listView1.Items.RemoveAt(0);
+                return;
+            }
+        }
+        private void CarregarDuracio()
+        {
+            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
+               audioFileReader.TotalTime.Seconds);
+        }
+        private void InicialitzarSo()
+        {
+            try
+            {
+                ou = new WaveOutEvent
+                {
+                    DeviceNumber = outDev
+                };
+                waveOut = ou;
+
+                waveOut.Init(sampleProvider);
+
+            }
+            catch (Exception initException)
+            {
+                MessageBox.Show(String.Format("{0}", initException.Message), "Error amb la sortida de so");
+                return;
+            }
         }
 
         private void PlaySong()
@@ -190,38 +236,11 @@ namespace WindowsFormsControlLibrary1
             }
 
 
-            try
-            {
-                //canviar dequeue per first si esta activat o no el borrar
-                sampleProvider = CreateInputStream(listView1.Items[index].SubItems[2].Text);
-            }
-            catch (Exception createException)
-            {
-                MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
-                listView1.Items.RemoveAt(index);
-                return;
-            }
+            CarregarFitxer();
 
+            CarregarDuracio();
 
-            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
-                audioFileReader.TotalTime.Seconds);
-
-            try
-            {
-
-                ou = new WaveOutEvent
-                {
-                    DeviceNumber = outDev
-                };
-                waveOut = ou;
-                waveOut.Init(sampleProvider);
-               
-            }
-            catch (Exception initException)
-            {
-                MessageBox.Show(String.Format("{0}", initException.Message), "Error amb la sortida de so");
-                return;
-            }
+            InicialitzarSo();
 
             //setVolumeDelegate(volumeSlider1.Volume);
 
@@ -230,10 +249,7 @@ namespace WindowsFormsControlLibrary1
                 try
                 {
 
-                    volumeMeter1.Amplitude = 0;
-                    volumeMeter2.Amplitude = 0;
-                    volumeMeter3.Amplitude = 0;
-                    volumeMeter4.Amplitude = 0;
+                    ResetVUMeter();
 
                     if (!stoped && !clicat)
                     {
@@ -282,6 +298,10 @@ namespace WindowsFormsControlLibrary1
                             
                             isPlaying = false;
                         }
+                        else if(!Continuar && Bucle)
+                        {
+                            PlaySong();
+                        }
                     }
                     else if (clicat)
                     {
@@ -303,9 +323,9 @@ namespace WindowsFormsControlLibrary1
             try
             {
                 waveOut.Play();
+                listView1.Items[index].Font = fntPlaying;
                 stoped = false;
                 clicat = false;
-                listView1.Items[index].Font = fntPlaying;
                 isPlaying = true;
                 timer1.Start();
                 
@@ -359,6 +379,7 @@ namespace WindowsFormsControlLibrary1
         {
             if (e.Data.GetDataPresent(typeof(ListViewItem)))
             {
+                ListViewItem actual = listView1.Items[index];
                 //if (listView1.SelectedItems.Count == 0)
                 //{
                 //    return;
@@ -398,6 +419,7 @@ namespace WindowsFormsControlLibrary1
                     //the item is moved to the new location.
                     listView1.Items.Remove(dragItem);
                 }
+                index = actual.Index;
 
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -410,9 +432,11 @@ namespace WindowsFormsControlLibrary1
         private void AfegirFitxers(string[]files)
         {
             List<string> errors = new List<string>();
+            string extensio;
 
             foreach (string file in files)
             {
+                extensio = Path.GetExtension(file);
                 //posar el path.get en una variable i posar tots els fitxers compatibles en un List
                 if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
                 {
@@ -507,13 +531,20 @@ namespace WindowsFormsControlLibrary1
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
+            
+
             if (listView1.SelectedItems.Count > 0)
             {
-                if (index < listView1.Items.Count)
+                
+
+                if (index < listView1.Items.Count && index >= 0)
                 {
                     listView1.Items[index].Font = fntNotPlaying;
+                    
                 }
+
                 index = listView1.SelectedItems[0].Index;
+
 
                 if (waveOut != null)
                 {
@@ -547,8 +578,7 @@ namespace WindowsFormsControlLibrary1
 
         private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
         {
-            timer1.Stop();
-            
+            timer1.Stop();  
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -581,6 +611,6 @@ namespace WindowsFormsControlLibrary1
             {
                 listView1.Items.RemoveAt(index);
             }
-        } 
+        }
     }
 }

@@ -33,7 +33,6 @@
             this.labelTotalTime = new System.Windows.Forms.Label();
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPLay = new System.Windows.Forms.Button();
@@ -113,11 +112,6 @@
             // 
             this.timer1.Interval = 50;
             this.timer1.Tick += new System.EventHandler(this.OnTimerTick);
-            // 
-            // timer2
-            // 
-            this.timer2.Interval = 1;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // panelBottom
             // 
@@ -463,7 +457,6 @@
         private System.Windows.Forms.Label labelCurrentTime;
         private System.Windows.Forms.Button btnPLay;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel panelBottom;
         private NAudio.Gui.VolumeMeter volumeMeter3;
         private NAudio.Gui.VolumeMeter volumeMeter1;
