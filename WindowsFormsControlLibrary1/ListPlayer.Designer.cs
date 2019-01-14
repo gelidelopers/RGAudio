@@ -33,10 +33,15 @@
             this.labelTotalTime = new System.Windows.Forms.Label();
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPLay = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.materialFlatButton3 = new System.Windows.Forms.Button();
             this.btnContinu = new System.Windows.Forms.Button();
             this.btnLoop = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
@@ -63,12 +68,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.materialFlatButton3 = new System.Windows.Forms.Button();
-            this.btnPLay = new System.Windows.Forms.Button();
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.flowLayoutPanelButtons.SuspendLayout();
@@ -121,13 +120,8 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 50;
+            this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.OnTimerTick);
-            // 
-            // timer2
-            // 
-            this.timer2.Interval = 1;
-            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // panelBottom
             // 
@@ -150,7 +144,6 @@
             this.trackBarPosition.Name = "trackBarPosition";
             this.trackBarPosition.Size = new System.Drawing.Size(526, 45);
             this.trackBarPosition.TabIndex = 1;
-            this.trackBarPosition.Scroll += new System.EventHandler(this.problemes);
             this.trackBarPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseDown);
             this.trackBarPosition.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseUp);
             // 
@@ -171,6 +164,99 @@
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Size = new System.Drawing.Size(526, 112);
             this.flowLayoutPanelButtons.TabIndex = 33;
+            // 
+            // btnPLay
+            // 
+            this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPLay.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.play;
+            this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPLay.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPLay.Location = new System.Drawing.Point(4, 6);
+            this.btnPLay.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPLay.Name = "btnPLay";
+            this.btnPLay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPLay.Size = new System.Drawing.Size(71, 54);
+            this.btnPLay.TabIndex = 21;
+            this.btnPLay.UseVisualStyleBackColor = false;
+            this.btnPLay.Click += new System.EventHandler(this.materialFlatButton1_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPause.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.pause;
+            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Location = new System.Drawing.Point(83, 6);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(56, 45);
+            this.btnPause.TabIndex = 28;
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.OnButtonPauseClick);
+            // 
+            // btnStop
+            // 
+            this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStop.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.stop;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(147, 6);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(49, 45);
+            this.btnStop.TabIndex = 22;
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.OnButtonStopClick);
+            // 
+            // btnNext
+            // 
+            this.btnNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnNext.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.next;
+            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNext.Location = new System.Drawing.Point(204, 6);
+            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(44, 45);
+            this.btnNext.TabIndex = 31;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // button1
+            // 
+            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button1.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.cloud;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(256, 6);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(52, 45);
+            this.button1.TabIndex = 33;
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // materialFlatButton3
+            // 
+            this.materialFlatButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialFlatButton3.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.addfolder;
+            this.materialFlatButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.materialFlatButton3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.flowLayoutPanelButtons.SetFlowBreak(this.materialFlatButton3, true);
+            this.materialFlatButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.materialFlatButton3.Location = new System.Drawing.Point(316, 6);
+            this.materialFlatButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialFlatButton3.Name = "materialFlatButton3";
+            this.materialFlatButton3.Size = new System.Drawing.Size(52, 45);
+            this.materialFlatButton3.TabIndex = 23;
+            this.materialFlatButton3.UseVisualStyleBackColor = true;
+            this.materialFlatButton3.Click += new System.EventHandler(this.OnOpenFileClick);
             // 
             // btnContinu
             // 
@@ -255,7 +341,7 @@
             this.volumeMeter1.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(50, 10);
+            this.volumeMeter1.Size = new System.Drawing.Size(486, 10);
             this.volumeMeter1.TabIndex = 30;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
@@ -297,7 +383,7 @@
             this.volumeMeter2.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(50, 10);
+            this.volumeMeter2.Size = new System.Drawing.Size(486, 10);
             this.volumeMeter2.TabIndex = 30;
             this.volumeMeter2.Text = "volumeMeter2";
             // 
@@ -488,99 +574,6 @@
             this.columnHeader2.Text = "Artista";
             this.columnHeader2.Width = 99;
             // 
-            // materialFlatButton3
-            // 
-            this.materialFlatButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton3.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.addfolder;
-            this.materialFlatButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.materialFlatButton3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.flowLayoutPanelButtons.SetFlowBreak(this.materialFlatButton3, true);
-            this.materialFlatButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialFlatButton3.Location = new System.Drawing.Point(316, 6);
-            this.materialFlatButton3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.materialFlatButton3.Name = "materialFlatButton3";
-            this.materialFlatButton3.Size = new System.Drawing.Size(52, 45);
-            this.materialFlatButton3.TabIndex = 23;
-            this.materialFlatButton3.UseVisualStyleBackColor = true;
-            this.materialFlatButton3.Click += new System.EventHandler(this.OnOpenFileClick);
-            // 
-            // btnPLay
-            // 
-            this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPLay.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.play;
-            this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPLay.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPLay.Location = new System.Drawing.Point(4, 6);
-            this.btnPLay.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnPLay.Name = "btnPLay";
-            this.btnPLay.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnPLay.Size = new System.Drawing.Size(71, 54);
-            this.btnPLay.TabIndex = 21;
-            this.btnPLay.UseVisualStyleBackColor = false;
-            this.btnPLay.Click += new System.EventHandler(this.materialFlatButton1_Click);
-            // 
-            // btnPause
-            // 
-            this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnPause.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.pause;
-            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPause.Location = new System.Drawing.Point(83, 6);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(56, 45);
-            this.btnPause.TabIndex = 28;
-            this.btnPause.UseVisualStyleBackColor = true;
-            this.btnPause.Click += new System.EventHandler(this.OnButtonPauseClick);
-            // 
-            // btnStop
-            // 
-            this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStop.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.stop;
-            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(147, 6);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(49, 45);
-            this.btnStop.TabIndex = 22;
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.OnButtonStopClick);
-            // 
-            // btnNext
-            // 
-            this.btnNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNext.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.next;
-            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(204, 6);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(44, 45);
-            this.btnNext.TabIndex = 31;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // button1
-            // 
-            this.button1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button1.BackgroundImage = global::WindowsFormsControlLibrary1.Properties.Resources.cloud;
-            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(256, 6);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(52, 45);
-            this.button1.TabIndex = 33;
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // ListPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -629,7 +622,6 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnPLay;
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Timer timer2;
         private System.Windows.Forms.Panel panelBottom;
         private NAudio.Gui.VolumeMeter volumeMeter3;
         private NAudio.Gui.VolumeMeter volumeMeter1;

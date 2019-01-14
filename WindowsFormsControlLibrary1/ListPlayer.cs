@@ -41,7 +41,6 @@ namespace WindowsFormsControlLibrary1
         //public bool isAsio { get; set; }
         public bool isPlaying;
 
-
         private void OnOpenFileClick(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
@@ -52,72 +51,19 @@ namespace WindowsFormsControlLibrary1
             //openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                foreach (string fl in openFileDialog.FileNames)
-                {
-                    Arxiu axr = new Arxiu();
-                    axr.fileName = fl;
-
-                    try
-                    {
-                        var tfile = TagLib.File.Create(axr.fileName);
-                        axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                        axr.artist = tfile.Tag.JoinedPerformers;
-
-                        string[] lol = { axr.name, axr.artist, axr.fileName };
-
-                        var item = new ListViewItem(lol);
-                        item.BackColor = Color.Yellow;
-
-                        //item.SubItems.Add(axr.artist);
-                        //item.SubItems.Add(axr.duration.ToString());
-
-                        listView1.Items.Add(item);
-
-                    }
-                    catch (TagLib.CorruptFileException)
-                    {
-
-                        if (!errors.Contains("Fitxer/s Corrupte/s :("))
-                        {
-                            errors.Add("Fitxer/s Corrupte/s :(");
-                        }
-
-                    }
-                    catch (TagLib.UnsupportedFormatException)
-                    {
-                        if (!errors.Contains("Tipus de fitxer " + Path.GetExtension(fl) + " no acceptat :("))
-                        {
-                            errors.Add("Tipus de fitxer " + Path.GetExtension(fl) + " no acceptat :(");
-                        }
-                    }
-                    catch
-                    {
-                        if (!errors.Contains("Error al carregar el fitxer " + Path.GetFullPath(fl) + " :("))
-                        {
-                            errors.Add("Error al carregar el fitxer " + Path.GetFullPath(fl) + " :(");
-                        }
-                    }
-                }
-            }
-    
-            foreach (string error in errors)
-            {
-                MessageBox.Show(error);
+                AfegirFitxers(openFileDialog.FileNames);
             }
         }
-        
-    
-
 
         private ISampleProvider CreateInputStream(string fileName)
         {
             audioFileReader = new AudioFileReader(fileName);
 
-            var sampleChannel = new SampleChannel(audioFileReader, true);
+            SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
 
             setVolumeDelegate = vol => sampleChannel.Volume = vol;
 
-            var postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+            MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
             postVolumeMeter.StreamVolume += OnPostVolumeMeter;
 
 
@@ -150,8 +96,11 @@ namespace WindowsFormsControlLibrary1
                 TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
                 trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
                 labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
+                int min, sec;
+                min = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.TotalSeconds) / 60;
+                sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
 
-
+                labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
 
             }
             else
@@ -159,21 +108,9 @@ namespace WindowsFormsControlLibrary1
                 trackBarPosition.Value = 0;
             }
         }
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
-            int min, sec;
-            min = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.TotalSeconds) / 60;
-            sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
-
-            labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
-        }
 
         //volume slider changed
-        private void problemes(object sender, EventArgs e)
-        {
-            
-        }
+
 
         private void OnButtonPauseClick(object sender, EventArgs e)
         {
@@ -182,6 +119,10 @@ namespace WindowsFormsControlLibrary1
                 if (waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     waveOut.Pause();
+                    volumeMeter1.Amplitude = 0;
+                    volumeMeter2.Amplitude = 0;
+                    volumeMeter3.Amplitude = 0;
+                    volumeMeter4.Amplitude = 0;
                 }
             }
         }
@@ -191,86 +132,19 @@ namespace WindowsFormsControlLibrary1
             if (waveOut != null)
             {
                 waveOut.Stop();
-                volumeMeter1.Amplitude = 0;
-                volumeMeter2.Amplitude = 0;
-                volumeMeter3.Amplitude = 0;
-                volumeMeter4.Amplitude = 0;
-                stoped = true;
-                
             }
+
+            volumeMeter1.Amplitude = 0;
+            volumeMeter2.Amplitude = 0;
+            volumeMeter3.Amplitude = 0;
+            volumeMeter4.Amplitude = 0;
+            stoped = true;
         }
 
         //button play onclick
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
             PlaySong();
-            
-            /*
-
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    return;
-                }
-                else if (waveOut.PlaybackState == PlaybackState.Paused)
-                {
-
-                    waveOut.Play();
-                    timer1.Start();
-
-                    return;
-                }
-            }
-
-            // we are in a stopped state
-            // TODO: only re-initialise if necessary
-
-            if (String.IsNullOrEmpty(fileName))
-            {
-                OnOpenFileClick(sender, e);
-            }
-            if (String.IsNullOrEmpty(fileName))
-            {
-                return;
-            }
-
-
-            try
-            {
-                sampleProvider = CreateInputStream(fileName);
-            }
-            catch (Exception createException)
-            {
-                MessageBox.Show(String.Format("{0}", createException.Message), "Error Loading File");
-                return;
-            }
-
-
-            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
-                audioFileReader.TotalTime.Seconds);
-
-            try
-            {
-                waveOut = new WaveOut();
-                waveOut.Init(sampleProvider);
-            }
-            catch (Exception initException)
-            {
-                MessageBox.Show(String.Format("{0}", initException.Message), "Error Initializing Output");
-                return;
-            }
-
-
-            //setVolumeDelegate(volumeSlider1.Volume);
-
-
-            waveOut.Play();
-            timer1.Start();
-            timer2.Start();
-            */
-
-
         }
 
         private void PlaySong()
@@ -335,19 +209,11 @@ namespace WindowsFormsControlLibrary1
             try
             {
 
-                //if (isAsio)
-                //{
-                //    asioOut = new AsioOut(outDev);
-                //    waveOut = asioOut;
-                //}
-                //else
-                //{
-                    ou = new WaveOutEvent();
-                    ou.DeviceNumber = outDev;
-                    waveOut = ou;
-                //}
-                
-
+                ou = new WaveOutEvent
+                {
+                    DeviceNumber = outDev
+                };
+                waveOut = ou;
                 waveOut.Init(sampleProvider);
                
             }
@@ -368,41 +234,19 @@ namespace WindowsFormsControlLibrary1
                     volumeMeter2.Amplitude = 0;
                     volumeMeter3.Amplitude = 0;
                     volumeMeter4.Amplitude = 0;
+
                     if (!stoped && !clicat)
                     {
-
                         if (Continuar && Borrar)
                         {
                             if (listView1.Items.Count > 1 && index - 1 < listView1.Items.Count)
-                            {
-                                //if (!skiped)
-                                //{
-                                try
-                                {
-
-                                    listView1.Items.RemoveAt(index);
-                                }
-                                catch
-                                {
-
-                                }
-                                //}
-                                //playlist.Dequeue();
+                            { 
+                                listView1.Items.RemoveAt(index);
                                 PlaySong();
-                                //listView1.Items[index].Font = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
                             }
                             else if (listView1.Items.Count == 1)
                             {
-                                try
-                                {
-
-
-                                    listView1.Items.RemoveAt(0);
-                                }
-                                catch
-                                {
-
-                                }
+                                listView1.Items.RemoveAt(0);  
                             }
                             else
                             {
@@ -418,15 +262,7 @@ namespace WindowsFormsControlLibrary1
 
                                 if (index < listView1.Items.Count)
                                 {
-                                    try
-                                    {
-                                        listView1.Items[index - 1].Font = fntNotPlaying;
-                                    }
-                                    catch
-                                    {
-
-                                    }
-
+                                    listView1.Items[index - 1].Font = fntNotPlaying;
                                 }
                                 else
                                 {
@@ -435,46 +271,26 @@ namespace WindowsFormsControlLibrary1
                             }
                             else if (Bucle)
                             {
-                                try
-                                {
-                                    listView1.Items[index].Font = fntNotPlaying;
-                                }
-                                catch
-                                {
-
-                                }
+                                listView1.Items[index].Font = fntNotPlaying;
                                 index = 0;
                                 PlaySong();
                             }
                         }
                         else if (!Continuar && Borrar)
                         {
-                            try
-                            {
-
-                                listView1.Items.RemoveAt(index);
-                            }
-                            catch
-                            {
-
-                            }
+                            listView1.Items.RemoveAt(index);
+                            
                             isPlaying = false;
                         }
                     }
                     else if (clicat)
                     {
-                        if (Borrar)
-                        {
-
-                        }
-                        //wiw
                         PlaySong();
                     }
                     else
                     {
                         isPlaying = false;
                     }
-
                 }
                 catch
                 {
@@ -492,15 +308,14 @@ namespace WindowsFormsControlLibrary1
                 listView1.Items[index].Font = fntPlaying;
                 isPlaying = true;
                 timer1.Start();
-                timer2.Start();
+                
             }
             catch
             {
 
             }
             
-        }
-        
+        } 
 
         private void btnContinu_Click(object sender, EventArgs e)
         {
@@ -584,78 +399,82 @@ namespace WindowsFormsControlLibrary1
                     listView1.Items.Remove(dragItem);
                 }
 
-
-
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                List<string> errors = new List<string>();
-                
-                foreach (string file in files)
+                AfegirFitxers(files);
+            }
+        }
+
+        private void AfegirFitxers(string[]files)
+        {
+            List<string> errors = new List<string>();
+
+            foreach (string file in files)
+            {
+                //posar el path.get en una variable i posar tots els fitxers compatibles en un List
+                if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
                 {
-                    if (Path.GetExtension(file) == ".wav"|| Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
+
+                    Arxiu axr = new Arxiu
+                    {
+                        fileName = file
+                    };
+
+                    try
+                    {
+                        var tfile = TagLib.File.Create(axr.fileName);
+                        axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
+                        axr.artist = tfile.Tag.JoinedPerformers;
+
+                        string[] lol = { axr.name, axr.artist, axr.fileName };
+
+                        var itom = new ListViewItem(lol);
+                        itom.BackColor = Color.Yellow;
+
+                        //item.SubItems.Add(axr.artist);
+                        //item.SubItems.Add(axr.duration.ToString());
+
+                        listView1.Items.Add(itom);
+
+                    }
+                    catch (TagLib.CorruptFileException)
                     {
 
-                        Arxiu axr = new Arxiu();
-                        axr.fileName = file;
-
-                        try
+                        if (!errors.Contains("Fitxer/s Corrupte/s :("))
                         {
-                            var tfile = TagLib.File.Create(axr.fileName);
-                            axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                            axr.artist = tfile.Tag.JoinedPerformers;
-
-                            string[] lol = { axr.name, axr.artist, axr.fileName };
-
-                            var itom = new ListViewItem(lol);
-                            itom.BackColor = Color.Yellow;
-
-                            //item.SubItems.Add(axr.artist);
-                            //item.SubItems.Add(axr.duration.ToString());
-
-                            listView1.Items.Add(itom);
-
-                            
-
+                            errors.Add("Fitxer/s Corrupte/s :(");
                         }
-                        catch (TagLib.CorruptFileException)
-                        {
 
-                            if (!errors.Contains("Fitxer/s Corrupte/s :("))
-                            {
-                                errors.Add("Fitxer/s Corrupte/s :(");
-                            }
-                            
-                        }
-                        catch (TagLib.UnsupportedFormatException)
+                    }
+                    catch (TagLib.UnsupportedFormatException)
+                    {
+                        if (!errors.Contains("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
                         {
-                            if (!errors.Contains("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
-                            {
-                                errors.Add("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
-                            }
-                        }
-                        catch
-                        {
-                            if (!errors.Contains("Error al carregar el fitxer " + Path.GetFullPath(file) + " :("))
-                            {
-                                errors.Add("Error al carregar el fitxer " + Path.GetFullPath(file) + " :(");
-                            }
+                            errors.Add("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
                         }
                     }
-                    else
+                    catch
                     {
-                        if (!errors.Contains("El format " + Path.GetExtension(file) + " no esta soportat :("))
+                        if (!errors.Contains("Error al carregar el fitxer " + Path.GetFullPath(file) + " :("))
                         {
-
-                            errors.Add("El format " + Path.GetExtension(file) + " no esta soportat :(");
+                            errors.Add("Error al carregar el fitxer " + Path.GetFullPath(file) + " :(");
                         }
                     }
                 }
-                foreach(string error in errors)
+                else
                 {
-                    MessageBox.Show(error);
+                    if (!errors.Contains("El format " + Path.GetExtension(file) + " no esta soportat :("))
+                    {
+
+                        errors.Add("El format " + Path.GetExtension(file) + " no esta soportat :(");
+                    }
                 }
+            }
+            foreach (string error in errors)
+            {
+                MessageBox.Show(error);
             }
         }
 
@@ -708,7 +527,6 @@ namespace WindowsFormsControlLibrary1
                     {
                         PlaySong();
                     }
-                    
                 }
                 else
                 {
@@ -722,7 +540,7 @@ namespace WindowsFormsControlLibrary1
             if (waveOut != null)
             {
                 timer1.Start();
-                timer2.Start();
+                
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
             }
         }
@@ -730,14 +548,14 @@ namespace WindowsFormsControlLibrary1
         private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Stop();
-            timer2.Stop();
+            
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (waveOut != null)
             {
-                if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Playing)
+                if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
                 {
                     waveOut.Stop();
                 }
