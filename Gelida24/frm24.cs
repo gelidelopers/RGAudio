@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Gelida24
 {
-    public partial class Form1 : Form
+    public partial class frm24 : Form
     {
-        public Form1()
+        public frm24()
         {
             InitializeComponent();
         }
