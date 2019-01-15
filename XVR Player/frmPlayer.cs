@@ -21,8 +21,8 @@ namespace Gelida_Player
             InitializeComponent();
             Form esplas = new frmSplash();
             esplas.Show();
-            bool value = false;
-            DataSet data;
+            //bool value = false;
+            //DataSet data;
             
             // Used to store the return value
             
@@ -48,7 +48,7 @@ namespace Gelida_Player
                     lp.Padding = new Padding(5);
                     //panel1.Controls.Add(lp);
                 }
-                value = true; // Publish the return value
+                //value = true; // Publish the return value
             });
             
             var t2 = new Thread(

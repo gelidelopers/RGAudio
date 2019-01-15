@@ -28,7 +28,7 @@ namespace WindowsFormsControlLibrary1
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
         private int index;
-        private int seguen;
+        //private int seguen;
         private bool stoped = false;
         private List<string> errors = new List<string>();
         bool clicat = false;
