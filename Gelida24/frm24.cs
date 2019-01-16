@@ -15,11 +15,16 @@ namespace Gelida24
         public frm24()
         {
             InitializeComponent();
+            lblTime.Text = GenerarTimeDate();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            lblTime.Text =  DateTime.Now.DayOfWeek.ToString() + " " + DateTime.Now.ToLongDateString() + " " +  DateTime.Now.ToLongTimeString();
+            lblTime.Text = GenerarTimeDate();
+        }
+        private string GenerarTimeDate()
+        {
+            return DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
         }
     }
 }
