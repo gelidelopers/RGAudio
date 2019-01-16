@@ -42,11 +42,6 @@ namespace Gelida24
         public bool isPlaying;
         public List<string> extensions = new List<string>(new string[] { ".mp3", ".wav", ".aac", ".m4a", ".wma" });
 
-        private void OnOpenFileClick(object sender, EventArgs e)
-        {
-
-        }
-
         private ISampleProvider CreateInputStream(string fileName)
         {
             audioFileReader = new AudioFileReader(fileName);
@@ -80,11 +75,6 @@ namespace Gelida24
             volumeMeter4.Amplitude = e.MaxSampleValues[1];
         }
 
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-
-        }
-
         //volume slider changed
 
 
@@ -103,6 +93,7 @@ namespace Gelida24
         {
             PlaySong();
         }
+
         private void ResetVUMeter()
         {
             volumeMeter1.Amplitude = 0;
@@ -208,76 +199,7 @@ namespace Gelida24
 
             waveOut.PlaybackStopped += (sender, evn) =>
             {
-                try
-                {
-
-                    ResetVUMeter();
-
-                    if (!stoped && !clicat)
-                    {
-                        if (Continuar && Borrar)
-                        {
-                            if (listView1.Items.Count > 1 && index - 1 < listView1.Items.Count)
-                            {
-                                listView1.Items.RemoveAt(index);
-                                PlaySong();
-                            }
-                            else if (listView1.Items.Count == 1)
-                            {
-                                listView1.Items.RemoveAt(0);
-                            }
-                            else
-                            {
-                                isPlaying = false;
-                            }
-                        }
-                        else if (Continuar && !Borrar)
-                        {
-                            if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
-                            {
-                                index++;
-                                PlaySong();
-
-                                if (index < listView1.Items.Count)
-                                {
-                                    listView1.Items[index - 1].Font = fntNotPlaying;
-                                }
-                                else
-                                {
-                                    isPlaying = false;
-                                }
-                            }
-                            else if (Bucle)
-                            {
-                                listView1.Items[index].Font = fntNotPlaying;
-                                index = 0;
-                                PlaySong();
-                            }
-                        }
-                        else if (!Continuar && Borrar)
-                        {
-                            listView1.Items.RemoveAt(index);
-
-                            isPlaying = false;
-                        }
-                        else if (!Continuar && Bucle)
-                        {
-                            PlaySong();
-                        }
-                    }
-                    else if (clicat)
-                    {
-                        PlaySong();
-                    }
-                    else
-                    {
-                        isPlaying = false;
-                    }
-                }
-                catch
-                {
-
-                }
+                
 
                 //waveOut.Dispose();
 
@@ -299,25 +221,6 @@ namespace Gelida24
 
         }
 
-        private void btnContinu_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-
-        }
-
-        private void listView1_DragEnter(object sender, DragEventArgs e)
-        {
-
-        }
-
-        private void listView1_DragDrop(object sender, DragEventArgs e)
-        {
-
-        }
 
         private void AfegirFitxers(string[] files)
         {
@@ -392,41 +295,97 @@ namespace Gelida24
             }
         }
 
-        private void btnBorrar_Click(object sender, EventArgs e)
+        private int ObtenirSeguentIndex(int actual)
         {
+            int i = -1;
 
-        }
-        private void btnLoop_Click(object sender, EventArgs e)
-        {
+            try
+            {
 
-        }
+                ResetVUMeter();
 
-        private void listView1_DoubleClick(object sender, EventArgs e)
-        {
+                if (!stoped && !clicat)
+                {
+                    if (Continuar && Borrar)
+                    {
+                        if (listView1.Items.Count > 1 && index - 1 < listView1.Items.Count)
+                        {
+                            listView1.Items.RemoveAt(index);
+                            PlaySong();
+                        }
+                        else if (listView1.Items.Count == 1)
+                        {
+                            listView1.Items.RemoveAt(0);
+                        }
+                        else
+                        {
+                            isPlaying = false;
+                        }
+                    }
+                    else if (Continuar && !Borrar)
+                    {
+                        if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
+                        {
+                            index++;
+                            PlaySong();
 
-        }
+                            if (index < listView1.Items.Count)
+                            {
+                                listView1.Items[index - 1].Font = fntNotPlaying;
+                            }
+                            else
+                            {
+                                isPlaying = false;
+                            }
+                        }
+                        else if (Bucle)
+                        {
+                            listView1.Items[index].Font = fntNotPlaying;
+                            index = 0;
+                            
+                            PlaySong();
+                        }
+                    }
+                    else if (!Continuar && Borrar)
+                    {
+                        listView1.Items.RemoveAt(index);
 
-        private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
-        {
+                        isPlaying = false;
+                    }
+                    else if (!Continuar && Bucle)
+                    {
+                        PlaySong();
+                    }
+                }
+                else if (clicat)
+                {
+                    PlaySong();
+                }
+                else
+                {
+                    isPlaying = false;
+                }
+            }
+            catch
+            {
 
-        }
+            }
 
-        private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
-
-        private void btnNext_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
+            return i;
 
         }
 
         private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void materialFlatButton3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }

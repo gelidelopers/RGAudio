@@ -121,5 +121,29 @@
       <Name>XVRControlsLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\addfolder1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cont1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\del1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
