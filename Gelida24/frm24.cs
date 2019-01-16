@@ -16,5 +16,10 @@ namespace Gelida24
         {
             InitializeComponent();
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblTime.Text =  DateTime.Now.DayOfWeek.ToString() + " " + DateTime.Now.ToLongDateString() + " " +  DateTime.Now.ToLongTimeString();
+        }
     }
 }

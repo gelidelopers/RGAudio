@@ -28,31 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.player2 = new Gelida24.Player();
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.player2 = new Gelida24.Player();
             this.player1 = new Gelida24.Player();
             this.continu1 = new Gelida24.Continu();
+            this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // player2
-            // 
-            this.player2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.player2.Location = new System.Drawing.Point(6, 6);
-            this.player2.MinimumSize = new System.Drawing.Size(288, 495);
-            this.player2.Name = "player2";
-            this.player2.outDev = ((sbyte)(0));
-            this.player2.Padding = new System.Windows.Forms.Padding(5);
-            this.player2.Size = new System.Drawing.Size(336, 495);
-            this.player2.TabIndex = 3;
-            // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1039, 100);
+            this.panel1.Size = new System.Drawing.Size(1039, 76);
             this.panel1.TabIndex = 4;
             // 
             // tableLayoutPanel1
@@ -66,12 +60,39 @@
             this.tableLayoutPanel1.Controls.Add(this.player1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.continu1, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 100);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 76);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1039, 451);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1039, 475);
             this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(0, 0);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(151, 37);
+            this.lblTime.TabIndex = 0;
+            this.lblTime.Text = "23:59:59";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // player2
+            // 
+            this.player2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.player2.Location = new System.Drawing.Point(6, 6);
+            this.player2.MinimumSize = new System.Drawing.Size(288, 495);
+            this.player2.Name = "player2";
+            this.player2.outDev = ((sbyte)(0));
+            this.player2.Padding = new System.Windows.Forms.Padding(5);
+            this.player2.Size = new System.Drawing.Size(336, 495);
+            this.player2.TabIndex = 3;
             // 
             // player1
             // 
@@ -91,7 +112,7 @@
             this.continu1.Name = "continu1";
             this.continu1.outDev = ((sbyte)(0));
             this.continu1.Padding = new System.Windows.Forms.Padding(5);
-            this.continu1.Size = new System.Drawing.Size(337, 439);
+            this.continu1.Size = new System.Drawing.Size(337, 463);
             this.continu1.TabIndex = 5;
             // 
             // frm24
@@ -106,6 +127,8 @@
             this.Name = "frm24";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -117,6 +140,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Player player1;
         private Continu continu1;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

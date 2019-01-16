@@ -101,9 +101,9 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.labelCurrentTime);
-            this.groupBox2.Location = new System.Drawing.Point(71, 20);
+            this.groupBox2.Location = new System.Drawing.Point(89, 20);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(53, 33);
+            this.groupBox2.Size = new System.Drawing.Size(65, 42);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Passat";
@@ -113,7 +113,7 @@
             this.labelCurrentTime.AutoSize = true;
             this.labelCurrentTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.labelCurrentTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelCurrentTime.Location = new System.Drawing.Point(6, 12);
+            this.labelCurrentTime.Location = new System.Drawing.Point(6, 18);
             this.labelCurrentTime.Name = "labelCurrentTime";
             this.labelCurrentTime.Size = new System.Drawing.Size(36, 18);
             this.labelCurrentTime.TabIndex = 24;
@@ -124,7 +124,7 @@
             this.groupBox1.Controls.Add(this.labelTotalTime);
             this.groupBox1.Location = new System.Drawing.Point(7, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(58, 33);
+            this.groupBox1.Size = new System.Drawing.Size(76, 42);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Duracio";
@@ -134,7 +134,7 @@
             this.labelTotalTime.AutoSize = true;
             this.labelTotalTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.labelTotalTime.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelTotalTime.Location = new System.Drawing.Point(6, 12);
+            this.labelTotalTime.Location = new System.Drawing.Point(6, 18);
             this.labelTotalTime.Name = "labelTotalTime";
             this.labelTotalTime.Size = new System.Drawing.Size(36, 18);
             this.labelTotalTime.TabIndex = 25;
@@ -143,9 +143,9 @@
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Location = new System.Drawing.Point(130, 20);
+            this.groupBox5.Location = new System.Drawing.Point(159, 20);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(60, 33);
+            this.groupBox5.Size = new System.Drawing.Size(86, 42);
             this.groupBox5.TabIndex = 2;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Restant";
@@ -156,7 +156,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(6, 12);
+            this.label1.Location = new System.Drawing.Point(6, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(36, 18);
             this.label1.TabIndex = 27;
@@ -166,9 +166,9 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Location = new System.Drawing.Point(71, 20);
+            this.groupBox6.Location = new System.Drawing.Point(89, 20);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(53, 33);
+            this.groupBox6.Size = new System.Drawing.Size(65, 42);
             this.groupBox6.TabIndex = 1;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Passat";
@@ -179,19 +179,20 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(6, 12);
+            this.label2.Location = new System.Drawing.Point(6, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 18);
             this.label2.TabIndex = 24;
             this.label2.Text = "0:00";
             this.toolTip1.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox7
             // 
             this.groupBox7.Controls.Add(this.label3);
             this.groupBox7.Location = new System.Drawing.Point(7, 20);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(58, 33);
+            this.groupBox7.Size = new System.Drawing.Size(76, 42);
             this.groupBox7.TabIndex = 0;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Duracio";
@@ -202,7 +203,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(6, 12);
+            this.label3.Location = new System.Drawing.Point(10, 18);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(36, 18);
             this.label3.TabIndex = 25;
@@ -215,9 +216,10 @@
             this.groupBox4.Controls.Add(this.groupBox5);
             this.groupBox4.Controls.Add(this.groupBox6);
             this.groupBox4.Controls.Add(this.groupBox7);
-            this.groupBox4.Location = new System.Drawing.Point(3, 71);
+            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.Location = new System.Drawing.Point(3, 77);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(196, 62);
+            this.groupBox4.Size = new System.Drawing.Size(282, 68);
             this.groupBox4.TabIndex = 29;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tota la llista";
@@ -291,9 +293,9 @@
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.labelRemain);
-            this.groupBox3.Location = new System.Drawing.Point(130, 20);
+            this.groupBox3.Location = new System.Drawing.Point(159, 21);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(72, 33);
+            this.groupBox3.Size = new System.Drawing.Size(86, 41);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Restant";
@@ -303,7 +305,7 @@
             this.labelRemain.AutoSize = true;
             this.labelRemain.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.labelRemain.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelRemain.Location = new System.Drawing.Point(6, 12);
+            this.labelRemain.Location = new System.Drawing.Point(8, 17);
             this.labelRemain.Name = "labelRemain";
             this.labelRemain.Size = new System.Drawing.Size(64, 18);
             this.labelRemain.TabIndex = 27;
@@ -330,9 +332,10 @@
             this.groupActual.Controls.Add(this.groupBox3);
             this.groupActual.Controls.Add(this.groupBox2);
             this.groupActual.Controls.Add(this.groupBox1);
+            this.groupActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupActual.Location = new System.Drawing.Point(3, 3);
             this.groupActual.Name = "groupActual";
-            this.groupActual.Size = new System.Drawing.Size(211, 62);
+            this.groupActual.Size = new System.Drawing.Size(282, 68);
             this.groupActual.TabIndex = 28;
             this.groupActual.TabStop = false;
             this.groupActual.Text = "Audio Actual";
@@ -350,7 +353,7 @@
             this.listView1.MinimumSize = new System.Drawing.Size(4, 50);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(288, 99);
+            this.listView1.Size = new System.Drawing.Size(288, 87);
             this.listView1.TabIndex = 33;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -367,9 +370,9 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 99);
+            this.panelBottom.Location = new System.Drawing.Point(0, 87);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(288, 396);
+            this.panelBottom.Size = new System.Drawing.Size(288, 408);
             this.panelBottom.TabIndex = 32;
             // 
             // trackBarPosition
@@ -550,7 +553,7 @@
             this.flowLayoutPanelTimers.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 260);
             this.flowLayoutPanelTimers.Name = "flowLayoutPanelTimers";
-            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 136);
+            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 148);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
             // Player
