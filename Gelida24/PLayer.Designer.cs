@@ -252,6 +252,7 @@
             this.btnPLay.Size = new System.Drawing.Size(71, 54);
             this.btnPLay.TabIndex = 21;
             this.btnPLay.UseVisualStyleBackColor = false;
+            this.btnPLay.Click += new System.EventHandler(this.btnPLay_Click);
             // 
             // btnPause
             // 

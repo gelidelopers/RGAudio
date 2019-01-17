@@ -389,5 +389,10 @@ namespace Gelida24
         {
 
         }
+
+        private void btnPLay_Click(object sender, EventArgs e)
+        {
+            PlaySong();
+        }
     }
 }
