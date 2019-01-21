@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.btnCloud = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -44,19 +43,19 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnPLay = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelRemain = new System.Windows.Forms.Label();
-            this.btnFolder = new System.Windows.Forms.Button();
             this.groupActual = new System.Windows.Forms.GroupBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnPLay = new System.Windows.Forms.Button();
+            this.btnFolder = new System.Windows.Forms.Button();
             this.btnContinu = new System.Windows.Forms.Button();
             this.btnLoop = new System.Windows.Forms.Button();
             this.btnBorrar = new System.Windows.Forms.Button();
@@ -84,20 +83,6 @@
             this.panelVuRight.SuspendLayout();
             this.flowLayoutPanelTimers.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnCloud
-            // 
-            this.btnCloud.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCloud.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnCloud.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnCloud.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCloud.Location = new System.Drawing.Point(4, 72);
-            this.btnCloud.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCloud.Name = "btnCloud";
-            this.btnCloud.Size = new System.Drawing.Size(52, 45);
-            this.btnCloud.TabIndex = 33;
-            this.btnCloud.UseVisualStyleBackColor = true;
-            this.btnCloud.Click += new System.EventHandler(this.OnButtonCloudClick);
             // 
             // groupBox2
             // 
@@ -186,6 +171,7 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "0:00";
             this.toolTip1.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox7
             // 
@@ -228,30 +214,12 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Titol";
-            this.columnHeader1.Width = 163;
+            this.columnHeader1.Width = 209;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Artista";
-            this.columnHeader2.Width = 99;
-            // 
-            // btnPLay
-            // 
-            this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPLay.BackgroundImage = global::Gelida24.Properties.Resources.play;
-            this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPLay.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnPLay.Location = new System.Drawing.Point(4, 6);
-            this.btnPLay.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnPLay.Name = "btnPLay";
-            this.btnPLay.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnPLay.Size = new System.Drawing.Size(71, 54);
-            this.btnPLay.TabIndex = 21;
-            this.btnPLay.UseVisualStyleBackColor = false;
-            this.btnPLay.Click += new System.EventHandler(this.btnPLay_Click);
+            this.columnHeader2.Width = 124;
             // 
             // btnPause
             // 
@@ -313,22 +281,6 @@
             this.labelRemain.TabIndex = 27;
             this.labelRemain.Text = "0:00:000";
             // 
-            // btnFolder
-            // 
-            this.btnFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnFolder.BackgroundImage = global::Gelida24.Properties.Resources.addfolder;
-            this.btnFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.flowLayoutPanelButtons.SetFlowBreak(this.btnFolder, true);
-            this.btnFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFolder.Location = new System.Drawing.Point(64, 72);
-            this.btnFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnFolder.Name = "btnFolder";
-            this.btnFolder.Size = new System.Drawing.Size(52, 45);
-            this.btnFolder.TabIndex = 23;
-            this.btnFolder.UseVisualStyleBackColor = true;
-            this.btnFolder.Click += new System.EventHandler(this.OnButtonFolderClick);
-            // 
             // groupActual
             // 
             this.groupActual.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -361,6 +313,7 @@
             this.listView1.TabIndex = 33;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // timer1
             // 
@@ -398,7 +351,6 @@
             this.flowLayoutPanelButtons.Controls.Add(this.btnPause);
             this.flowLayoutPanelButtons.Controls.Add(this.btnStop);
             this.flowLayoutPanelButtons.Controls.Add(this.btnNext);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnCloud);
             this.flowLayoutPanelButtons.Controls.Add(this.btnFolder);
             this.flowLayoutPanelButtons.Controls.Add(this.btnContinu);
             this.flowLayoutPanelButtons.Controls.Add(this.btnLoop);
@@ -408,6 +360,40 @@
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Size = new System.Drawing.Size(288, 169);
             this.flowLayoutPanelButtons.TabIndex = 33;
+            // 
+            // btnPLay
+            // 
+            this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPLay.BackgroundImage = global::Gelida24.Properties.Resources.play;
+            this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPLay.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnPLay.Location = new System.Drawing.Point(4, 6);
+            this.btnPLay.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPLay.Name = "btnPLay";
+            this.btnPLay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnPLay.Size = new System.Drawing.Size(71, 54);
+            this.btnPLay.TabIndex = 21;
+            this.btnPLay.UseVisualStyleBackColor = false;
+            this.btnPLay.Click += new System.EventHandler(this.btnPLay_Click);
+            // 
+            // btnFolder
+            // 
+            this.btnFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnFolder.BackgroundImage = global::Gelida24.Properties.Resources.addfolder;
+            this.btnFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.flowLayoutPanelButtons.SetFlowBreak(this.btnFolder, true);
+            this.btnFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFolder.Location = new System.Drawing.Point(4, 72);
+            this.btnFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnFolder.Name = "btnFolder";
+            this.btnFolder.Size = new System.Drawing.Size(52, 45);
+            this.btnFolder.TabIndex = 23;
+            this.btnFolder.UseVisualStyleBackColor = true;
+            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderButtonClick);
             // 
             // btnContinu
             // 
@@ -424,7 +410,6 @@
             this.btnContinu.TabIndex = 29;
             this.btnContinu.Text = "Continu";
             this.btnContinu.UseVisualStyleBackColor = false;
-            this.btnContinu.Click += new System.EventHandler(this.btnContinu_Click);
             // 
             // btnLoop
             // 
@@ -441,7 +426,6 @@
             this.btnLoop.TabIndex = 32;
             this.btnLoop.Text = "Bucle";
             this.btnLoop.UseVisualStyleBackColor = false;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
             // 
             // btnBorrar
             // 
@@ -457,7 +441,6 @@
             this.btnBorrar.TabIndex = 30;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = false;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // panelVuLeft
             // 
@@ -604,8 +587,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnCloud;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelCurrentTime;
         private System.Windows.Forms.GroupBox groupBox1;

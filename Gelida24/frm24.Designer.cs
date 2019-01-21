@@ -30,15 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.volumeMeter5 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter6 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter7 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter8 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
-            this.lblTime = new System.Windows.Forms.Label();
             this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
-            this.volumeMeter3 = new NAudio.Gui.VolumeMeter();
+            this.lblTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.continu1 = new Gelida24.Continu();
@@ -47,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.player2 = new Gelida24.Player();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -56,95 +50,25 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.volumeMeter5);
-            this.panel1.Controls.Add(this.volumeMeter6);
-            this.panel1.Controls.Add(this.volumeMeter7);
-            this.panel1.Controls.Add(this.volumeMeter8);
-            this.panel1.Controls.Add(this.volumeMeter2);
-            this.panel1.Controls.Add(this.lblTime);
             this.panel1.Controls.Add(this.volumeMeter1);
-            this.panel1.Controls.Add(this.volumeMeter4);
-            this.panel1.Controls.Add(this.volumeMeter3);
+            this.panel1.Controls.Add(this.lblTime);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1336, 76);
             this.panel1.TabIndex = 4;
             // 
-            // volumeMeter5
+            // volumeMeter1
             // 
-            this.volumeMeter5.Amplitude = 0F;
-            this.volumeMeter5.Location = new System.Drawing.Point(453, 59);
-            this.volumeMeter5.Margin = new System.Windows.Forms.Padding(6);
-            this.volumeMeter5.MaxDb = -1F;
-            this.volumeMeter5.MaximumSize = new System.Drawing.Size(0, 10);
-            this.volumeMeter5.MinDb = -60F;
-            this.volumeMeter5.MinimumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter5.Name = "volumeMeter5";
-            this.volumeMeter5.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter5.Size = new System.Drawing.Size(50, 10);
-            this.volumeMeter5.TabIndex = 37;
-            this.volumeMeter5.Text = "volumeMeter5";
-            // 
-            // volumeMeter6
-            // 
-            this.volumeMeter6.Amplitude = 0F;
-            this.volumeMeter6.Location = new System.Drawing.Point(453, 43);
-            this.volumeMeter6.Margin = new System.Windows.Forms.Padding(6);
-            this.volumeMeter6.MaxDb = -1F;
-            this.volumeMeter6.MaximumSize = new System.Drawing.Size(0, 10);
-            this.volumeMeter6.MinDb = -60F;
-            this.volumeMeter6.MinimumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter6.Name = "volumeMeter6";
-            this.volumeMeter6.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter6.Size = new System.Drawing.Size(50, 10);
-            this.volumeMeter6.TabIndex = 38;
-            this.volumeMeter6.Text = "volumeMeter6";
-            // 
-            // volumeMeter7
-            // 
-            this.volumeMeter7.Amplitude = 0F;
-            this.volumeMeter7.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter7.Location = new System.Drawing.Point(704, 59);
-            this.volumeMeter7.MaxDb = 0.2F;
-            this.volumeMeter7.MaximumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter7.MinDb = -1F;
-            this.volumeMeter7.MinimumSize = new System.Drawing.Size(40, 10);
-            this.volumeMeter7.Name = "volumeMeter7";
-            this.volumeMeter7.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter7.Size = new System.Drawing.Size(40, 10);
-            this.volumeMeter7.TabIndex = 39;
-            this.volumeMeter7.Text = "volumeMeter7";
-            // 
-            // volumeMeter8
-            // 
-            this.volumeMeter8.Amplitude = 0F;
-            this.volumeMeter8.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter8.Location = new System.Drawing.Point(704, 43);
-            this.volumeMeter8.MaxDb = 0.2F;
-            this.volumeMeter8.MaximumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter8.MinDb = -1F;
-            this.volumeMeter8.MinimumSize = new System.Drawing.Size(40, 10);
-            this.volumeMeter8.Name = "volumeMeter8";
-            this.volumeMeter8.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter8.Size = new System.Drawing.Size(40, 10);
-            this.volumeMeter8.TabIndex = 40;
-            this.volumeMeter8.Text = "volumeMeter8";
-            // 
-            // volumeMeter2
-            // 
-            this.volumeMeter2.Amplitude = 0F;
-            this.volumeMeter2.Location = new System.Drawing.Point(9, 59);
-            this.volumeMeter2.Margin = new System.Windows.Forms.Padding(6);
-            this.volumeMeter2.MaxDb = -1F;
-            this.volumeMeter2.MaximumSize = new System.Drawing.Size(0, 10);
-            this.volumeMeter2.MinDb = -60F;
-            this.volumeMeter2.MinimumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter2.Name = "volumeMeter2";
-            this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(50, 10);
-            this.volumeMeter2.TabIndex = 33;
-            this.volumeMeter2.Text = "volumeMeter2";
+            this.volumeMeter1.Amplitude = 0F;
+            this.volumeMeter1.Location = new System.Drawing.Point(7, 40);
+            this.volumeMeter1.MaxDb = 0F;
+            this.volumeMeter1.MinDb = -60F;
+            this.volumeMeter1.Name = "volumeMeter1";
+            this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.volumeMeter1.Size = new System.Drawing.Size(114, 23);
+            this.volumeMeter1.TabIndex = 2;
+            this.volumeMeter1.Text = "volumeMeter1";
             // 
             // lblTime
             // 
@@ -156,51 +80,6 @@
             this.lblTime.Size = new System.Drawing.Size(151, 37);
             this.lblTime.TabIndex = 0;
             this.lblTime.Text = "23:59:59";
-            // 
-            // volumeMeter1
-            // 
-            this.volumeMeter1.Amplitude = 0F;
-            this.volumeMeter1.Location = new System.Drawing.Point(9, 43);
-            this.volumeMeter1.Margin = new System.Windows.Forms.Padding(6);
-            this.volumeMeter1.MaxDb = -1F;
-            this.volumeMeter1.MaximumSize = new System.Drawing.Size(0, 10);
-            this.volumeMeter1.MinDb = -60F;
-            this.volumeMeter1.MinimumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter1.Name = "volumeMeter1";
-            this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(50, 10);
-            this.volumeMeter1.TabIndex = 34;
-            this.volumeMeter1.Text = "volumeMeter1";
-            // 
-            // volumeMeter4
-            // 
-            this.volumeMeter4.Amplitude = 0F;
-            this.volumeMeter4.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter4.Location = new System.Drawing.Point(260, 59);
-            this.volumeMeter4.MaxDb = 0.2F;
-            this.volumeMeter4.MaximumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter4.MinDb = -1F;
-            this.volumeMeter4.MinimumSize = new System.Drawing.Size(40, 10);
-            this.volumeMeter4.Name = "volumeMeter4";
-            this.volumeMeter4.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter4.Size = new System.Drawing.Size(40, 10);
-            this.volumeMeter4.TabIndex = 35;
-            this.volumeMeter4.Text = "volumeMeter4";
-            // 
-            // volumeMeter3
-            // 
-            this.volumeMeter3.Amplitude = 0F;
-            this.volumeMeter3.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter3.Location = new System.Drawing.Point(260, 43);
-            this.volumeMeter3.MaxDb = 0.2F;
-            this.volumeMeter3.MaximumSize = new System.Drawing.Size(50, 10);
-            this.volumeMeter3.MinDb = -1F;
-            this.volumeMeter3.MinimumSize = new System.Drawing.Size(40, 10);
-            this.volumeMeter3.Name = "volumeMeter3";
-            this.volumeMeter3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter3.Size = new System.Drawing.Size(40, 10);
-            this.volumeMeter3.TabIndex = 36;
-            this.volumeMeter3.Text = "volumeMeter3";
             // 
             // tableLayoutPanel1
             // 
@@ -297,6 +176,11 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // timer2
+            // 
+            this.timer2.Enabled = true;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
             // frm24
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -325,19 +209,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private Player player1;
         private Continu continu1;
-        private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private NAudio.Gui.VolumeMeter volumeMeter5;
-        private NAudio.Gui.VolumeMeter volumeMeter6;
-        private NAudio.Gui.VolumeMeter volumeMeter7;
-        private NAudio.Gui.VolumeMeter volumeMeter8;
-        private NAudio.Gui.VolumeMeter volumeMeter2;
+        private System.Windows.Forms.Label lblTime;
         private NAudio.Gui.VolumeMeter volumeMeter1;
-        private NAudio.Gui.VolumeMeter volumeMeter4;
-        private NAudio.Gui.VolumeMeter volumeMeter3;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

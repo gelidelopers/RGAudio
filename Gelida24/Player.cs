@@ -12,6 +12,8 @@ using NAudio.Flac;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using WindowsFormsControlLibrary1;
+using System.Diagnostics;
+
 
 namespace Gelida24
 {
@@ -27,8 +29,7 @@ namespace Gelida24
         private WaveStream audioFileReader;
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
-        private int index;
-        private int next;
+        private int index = 0;
         //private int seguen;
         private bool stoped = false;
         private List<string> errors = new List<string>();
@@ -50,9 +51,10 @@ namespace Gelida24
             {
                 audioFileReader = new FlacReader(fileName);
             }
-            else {
+            else
+            {
                 audioFileReader = new AudioFileReader(fileName);
-                }
+            }
 
             SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
 
@@ -86,7 +88,16 @@ namespace Gelida24
         //volume slider changed
 
 
-  
+        private void OnButtonPauseClick(object sender, EventArgs e)
+        {
+
+        }
+
+        public void OnButtonStopClick(object sender, EventArgs e)
+        {
+
+        }
+
         //button play onclick
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
@@ -198,14 +209,7 @@ namespace Gelida24
 
             waveOut.PlaybackStopped += (sender, evn) =>
             {
-                listView1.Items[index].Font = fntNotPlaying;
-                if (Borrar)
-                {
-                    listView1.Items.RemoveAt(index);
-                }
-                next = ObtenirSeguentIndex(index);
-                next = index;
-                PlaySong();
+                
 
                 //waveOut.Dispose();
 
@@ -307,21 +311,70 @@ namespace Gelida24
 
             try
             {
-                if (Continuar)
-                {
-                    if (!Borrar && listView1.Items.Count < index - 1)
-                    {
-                        i = actual + 1;
-                    }else if (Bucle)
-                    {
-                        i = 0;
-                    }
 
-                }else if (Bucle)
+                ResetVUMeter();
+
+                if (!stoped && !clicat)
                 {
-                    i = actual;
+                    if (Continuar && Borrar)
+                    {
+                        if (listView1.Items.Count > 1 && index - 1 < listView1.Items.Count)
+                        {
+                            listView1.Items.RemoveAt(index);
+                            PlaySong();
+                        }
+                        else if (listView1.Items.Count == 1)
+                        {
+                            listView1.Items.RemoveAt(0);
+                        }
+                        else
+                        {
+                            isPlaying = false;
+                        }
+                    }
+                    else if (Continuar && !Borrar)
+                    {
+                        if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
+                        {
+                            index++;
+                            PlaySong();
+
+                            if (index < listView1.Items.Count)
+                            {
+                                listView1.Items[index - 1].Font = fntNotPlaying;
+                            }
+                            else
+                            {
+                                isPlaying = false;
+                            }
+                        }
+                        else if (Bucle)
+                        {
+                            listView1.Items[index].Font = fntNotPlaying;
+                            index = 0;
+                            
+                            PlaySong();
+                        }
+                    }
+                    else if (!Continuar && Borrar)
+                    {
+                        listView1.Items.RemoveAt(index);
+
+                        isPlaying = false;
+                    }
+                    else if (!Continuar && Bucle)
+                    {
+                        PlaySong();
+                    }
                 }
-                
+                else if (clicat)
+                {
+                    PlaySong();
+                }
+                else
+                {
+                    isPlaying = false;
+                }
             }
             catch
             {
@@ -332,7 +385,12 @@ namespace Gelida24
 
         }
 
-        private void OnButtonFolderClick(object sender, EventArgs e)
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+        //addfolder
+        private void OnAddFolderButtonClick(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             string allExtensions = "*.wav;*.aiff;*.mp3;*.aac;*.flac";
@@ -346,7 +404,7 @@ namespace Gelida24
             }
         }
 
-        private void OnButtonCloudClick(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e)
         {
 
         }
@@ -354,21 +412,6 @@ namespace Gelida24
         private void btnPLay_Click(object sender, EventArgs e)
         {
             PlaySong();
-        }
-
-        private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (waveOut != null)
-            {
-                timer1.Start();
-
-                audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
-            }
-        }
-
-        private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
-        {
-            timer1.Stop();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -391,36 +434,33 @@ namespace Gelida24
             }
         }
 
-        private void btnBorrar_Click(object sender, EventArgs e)
+        private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
         {
-            if (Borrar)
+            if (waveOut != null)
             {
-                Borrar = false;
-                btnBorrar.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Borrar = true;
-                btnBorrar.BackColor = Color.Red;
+                timer1.Start();
+
+                audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
             }
         }
 
-        private void btnContinu_Click(object sender, EventArgs e)
+        private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
         {
-
+            timer1.Stop();
         }
 
-        private void btnLoop_Click(object sender, EventArgs e)
+        private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            if (Bucle)
+            string fl;
+            if (listView1.SelectedItems.Count > 0)
             {
-                Bucle = false;
-                btnLoop.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Bucle = true;
-                btnLoop.BackColor = Color.Lime;
+                fl = listView1.SelectedItems[0].SubItems[2].Text;
+
+                Process proc = null;
+
+                proc = Process.Start("C:/Program Files/ocenaudio/ocenaudio.exe ", $"\"{fl}\"");
+                proc.WaitForInputIdle();
+
             }
         }
     }
