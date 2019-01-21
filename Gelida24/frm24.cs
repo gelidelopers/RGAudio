@@ -34,28 +34,25 @@ namespace Gelida24
 
         public MMDeviceCollection wiw;
         MMDevice caca;
-
-
-
         private NAudio.CoreAudioApi.MMDeviceEnumerator enumerator;
         
-        
+        //foreach que recorri tots els enumerator i els compari amb el string del nom i afegeixi cada mmdevice
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblTime.Text = GenerarTimeDate();
-            volumeMeter1.Amplitude = caca.AudioMeterInformation.MasterPeakValue;
-
-            
-                
-                volumeMeter1.Amplitude = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
-            
 
 
         }
         private string GenerarTimeDate()
         {
             return DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+           // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
+            volumeMeter1.Amplitude = caca.AudioMeterInformation.MasterPeakValue;
         }
     }
 }

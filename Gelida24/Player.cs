@@ -8,9 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
+using NAudio.Flac;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using WindowsFormsControlLibrary1;
+using System.Diagnostics;
+
 
 namespace Gelida24
 {
@@ -23,10 +26,10 @@ namespace Gelida24
         private IWavePlayer waveOut;
         private WaveOutEvent ou;
         //private AsioOut asioOut;
-        private AudioFileReader audioFileReader;
+        private WaveStream audioFileReader;
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
-        private int index;
+        private int index = 0;
         //private int seguen;
         private bool stoped = false;
         private List<string> errors = new List<string>();
@@ -44,7 +47,14 @@ namespace Gelida24
 
         private ISampleProvider CreateInputStream(string fileName)
         {
-            audioFileReader = new AudioFileReader(fileName);
+            if (Path.GetExtension(fileName) == ".flac")
+            {
+                audioFileReader = new FlacReader(fileName);
+            }
+            else
+            {
+                audioFileReader = new AudioFileReader(fileName);
+            }
 
             SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
 
@@ -379,10 +389,19 @@ namespace Gelida24
         {
 
         }
-
-        private void materialFlatButton3_Click(object sender, EventArgs e)
+        //addfolder
+        private void OnAddFolderButtonClick(object sender, EventArgs e)
         {
+            var openFileDialog = new OpenFileDialog();
+            string allExtensions = "*.wav;*.aiff;*.mp3;*.aac;*.flac";
+            openFileDialog.Filter = String.Format("Fiters de musica coneguts|{0}|Tots els fitxers (*.*)|*.*", allExtensions);
+            openFileDialog.Multiselect = true;
 
+            //openFileDialog.FilterIndex = 1;
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                AfegirFitxers(openFileDialog.FileNames);
+            }
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -393,6 +412,56 @@ namespace Gelida24
         private void btnPLay_Click(object sender, EventArgs e)
         {
             PlaySong();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (waveOut != null && audioFileReader != null)
+            {
+                TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
+                trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
+                labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
+                int min, sec;
+                min = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.TotalSeconds) / 60;
+                sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
+
+                labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
+
+            }
+            else
+            {
+                trackBarPosition.Value = 0;
+            }
+        }
+
+        private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (waveOut != null)
+            {
+                timer1.Start();
+
+                audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
+            }
+        }
+
+        private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void listView1_DoubleClick(object sender, EventArgs e)
+        {
+            string fl;
+            if (listView1.SelectedItems.Count > 0)
+            {
+                fl = listView1.SelectedItems[0].SubItems[2].Text;
+
+                Process proc = null;
+
+                proc = Process.Start("C:/Program Files/ocenaudio/ocenaudio.exe ", $"\"{fl}\"");
+                proc.WaitForInputIdle();
+
+            }
         }
     }
 }
