@@ -171,7 +171,6 @@
             this.label2.TabIndex = 24;
             this.label2.Text = "0:00";
             this.toolTip1.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // groupBox7
             // 
@@ -224,6 +223,7 @@
             // btnPause
             // 
             this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPause.BackgroundImage = global::Gelida24.Properties.Resources.pause;
             this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -233,10 +233,12 @@
             this.btnPause.Size = new System.Drawing.Size(56, 45);
             this.btnPause.TabIndex = 28;
             this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
             // 
             // btnStop
             // 
             this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStop.BackgroundImage = global::Gelida24.Properties.Resources.stop;
             this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -246,6 +248,7 @@
             this.btnStop.Size = new System.Drawing.Size(49, 45);
             this.btnStop.TabIndex = 22;
             this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // btnNext
             // 
@@ -410,6 +413,7 @@
             this.btnContinu.TabIndex = 29;
             this.btnContinu.Text = "Continu";
             this.btnContinu.UseVisualStyleBackColor = false;
+            this.btnContinu.Click += new System.EventHandler(this.btnContinu_Click);
             // 
             // btnLoop
             // 
@@ -426,6 +430,7 @@
             this.btnLoop.TabIndex = 32;
             this.btnLoop.Text = "Bucle";
             this.btnLoop.UseVisualStyleBackColor = false;
+            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
             // 
             // btnBorrar
             // 
@@ -441,6 +446,7 @@
             this.btnBorrar.TabIndex = 30;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = false;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
             // 
             // panelVuLeft
             // 
