@@ -31,9 +31,8 @@ namespace Gelida24
         private int index = 0;
         private bool necesitaCalcularSeguen = true;
         private int seguen = 0;
-        private bool stoped = false;
         private List<string> errors = new List<string>();
-        bool clicat = false;
+        
 
 
         public bool Continuar = true;
@@ -67,7 +66,6 @@ namespace Gelida24
 
             return postVolumeMeter;
         }
-
         void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
             ///left 
@@ -91,12 +89,6 @@ namespace Gelida24
             volumeMeter3.Amplitude = 0;
             volumeMeter4.Amplitude = 0;
         }
-
-
-
-        /// <summary>
-        /// Reestructurar funcio playsong
-        /// </summary>
         private void CarregarFitxer()
         {
             try
@@ -135,7 +127,6 @@ namespace Gelida24
                 return;
             }
         }
-
         private void PlaySong()
         {
             if (listView1.Items.Count < 1)
@@ -151,28 +142,20 @@ namespace Gelida24
                 }
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
-
                     waveOut.Play();
                     timer1.Start();
 
                     return;
                 }
             }
-
-            // we are in a stopped state
-            // TODO: only re-initialise if necessary
-
-
             if (String.IsNullOrEmpty(listView1.Items[seguen].SubItems[2].Text))
             {
                 return;
             }
 
-
             CarregarFitxer();
 
             CarregarDuracio();
-
 
             InicialitzarSo();
 
@@ -190,7 +173,6 @@ namespace Gelida24
                     PlaySong();
                 }
                 //waveOut.Dispose();
-
             };
             try
             {
@@ -203,8 +185,7 @@ namespace Gelida24
                    seguen = ObtenirSeguentIndex(index);
                 }
                 listView1.Items[index].Font = fntPlaying;
-                stoped = false;
-                clicat = false;
+
                 isPlaying = true;
                 timer1.Start();
             }
@@ -212,7 +193,6 @@ namespace Gelida24
             {
 
             }
-
         }
         private void AfegirFitxers(string[] files)
         {
@@ -286,7 +266,6 @@ namespace Gelida24
                 MessageBox.Show(error);
             }
         }
-
         private int ObtenirSeguentIndex(int actual)
         {
             int i = -1;
@@ -345,7 +324,6 @@ namespace Gelida24
                 trackBarPosition.Value = 0;
             }
         }
-
         private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
         {
             if (waveOut != null)
@@ -355,12 +333,10 @@ namespace Gelida24
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
             }
         }
-
         private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Stop();
         }
-
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
 
@@ -370,7 +346,6 @@ namespace Gelida24
                 PlaySong();
             }
         }
-
         private void btnPause_Click(object sender, EventArgs e)
         {
             ResetVUMeter();
@@ -383,18 +358,15 @@ namespace Gelida24
                 }
             }
         }
-
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (waveOut != null)
             {
+                seguen = -1;
                 waveOut.Stop();
             }
             ResetVUMeter();
-
-            stoped = true;
         }
-
         private void btnBorrar_Click(object sender, EventArgs e)
         {
             if (Borrar)
@@ -409,7 +381,6 @@ namespace Gelida24
             }
             seguen = ObtenirSeguentIndex(index);
         }
-
         private void btnContinu_Click(object sender, EventArgs e)
         {
             if (Continuar)
@@ -424,7 +395,6 @@ namespace Gelida24
             }
             seguen = ObtenirSeguentIndex(index);
         }
-
         private void btnLoop_Click(object sender, EventArgs e)
         {
             if (Bucle)

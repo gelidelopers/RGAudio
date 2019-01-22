@@ -20,10 +20,8 @@ namespace Gelida24
             lblTime.Text = GenerarTimeDate();
             enumerator = new NAudio.CoreAudioApi.MMDeviceEnumerator();
 
-            try
-            {
-
-
+            try {
+        
                 wiw = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
 
                 caca = (MMDevice)wiw.First();
@@ -49,8 +47,6 @@ namespace Gelida24
         private void timer1_Tick(object sender, EventArgs e)
         {
             lblTime.Text = GenerarTimeDate();
-
-
         }
         private string GenerarTimeDate()
         {
