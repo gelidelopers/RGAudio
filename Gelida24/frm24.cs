@@ -20,10 +20,18 @@ namespace Gelida24
             lblTime.Text = GenerarTimeDate();
             enumerator = new NAudio.CoreAudioApi.MMDeviceEnumerator();
 
-            wiw = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
+            try
+            {
 
-            caca = (MMDevice) wiw.First();
-            
+
+                wiw = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
+
+                caca = (MMDevice)wiw.First();
+            }
+            catch
+            {
+                MessageBox.Show("no s'ha detectat cap dispositiu de so");
+            }
 
         }
         public int out1 { get; set; }

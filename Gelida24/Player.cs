@@ -14,7 +14,6 @@ using System.IO;
 using WindowsFormsControlLibrary1;
 using System.Diagnostics;
 
-
 namespace Gelida24
 {
     public partial class Player : UserControl
@@ -143,16 +142,6 @@ namespace Gelida24
             {
                 return;
             }
-
-            //if (waveOut != null && waveOut.PlaybackState != PlaybackState.Stopped)
-            //{
-            //    waveOut.Stop();
-
-            //}
-            //if (audioFileReader != null)
-            //{
-            //    audioFileReader.Dispose();
-            //}
 
             if (waveOut != null)
             {
