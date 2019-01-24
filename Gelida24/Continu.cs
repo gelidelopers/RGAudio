@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.IO;
+using Quartz;
 using WindowsFormsControlLibrary1;
 
 namespace Gelida24
@@ -26,6 +27,7 @@ namespace Gelida24
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
         private Queue<string> list = new Queue<string>();
+        private TimeSpan duraciototal = new TimeSpan();
 
         public sbyte outDev { get; set; }
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -33,6 +35,18 @@ namespace Gelida24
         public void CrearLlista()
         {
 
+        }
+        private DateTime CalcularHora()
+        {
+            return DateTime.Now.Add(duraciototal);
+        }
+        private void SumarTemps(TimeSpan duraciocanso)
+        {
+            duraciototal.Add(duraciocanso);
+        }
+        private void RestarTemps(TimeSpan duraciocanso)
+        {
+            duraciototal.Subtract(duraciocanso);
         }
 
         private ISampleProvider CreateInputStream(string fileName)
@@ -129,6 +143,7 @@ namespace Gelida24
                 try
                 {
                     ResetVUMeter();
+                    RestarTemps(audioFileReader.TotalTime);
 
                     if (listView1.Items.Count > 1)
                     {

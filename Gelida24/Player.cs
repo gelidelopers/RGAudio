@@ -12,6 +12,7 @@ using NAudio.Flac;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using WindowsFormsControlLibrary1;
+using Quartz;
 using System.Diagnostics;
 
 namespace Gelida24
@@ -33,8 +34,6 @@ namespace Gelida24
         private int seguen = 0;
         private List<string> errors = new List<string>();
         
-
-
         public bool Continuar = true;
         public bool Borrar = true;
         public bool Bucle = false;
@@ -185,9 +184,9 @@ namespace Gelida24
                    seguen = ObtenirSeguentIndex(index);
                 }
                 listView1.Items[index].Font = fntPlaying;
-
+                necesitaCalcularSeguen = true;
                 isPlaying = true;
-                timer1.Start();
+                
             }
             catch
             {
@@ -205,7 +204,6 @@ namespace Gelida24
                 //posar el path.get en una variable i posar tots els fitxers compatibles en un List
                 if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
                 {
-
                     Arxiu axr = new Arxiu
                     {
                         fileName = file
@@ -354,7 +352,6 @@ namespace Gelida24
                 if (waveOut.PlaybackState == PlaybackState.Playing)
                 {
                     waveOut.Pause();
-                    
                 }
             }
         }
@@ -380,6 +377,7 @@ namespace Gelida24
                 btnBorrar.BackColor = Color.Red;
             }
             seguen = ObtenirSeguentIndex(index);
+            necesitaCalcularSeguen = false;
         }
         private void btnContinu_Click(object sender, EventArgs e)
         {
@@ -394,6 +392,7 @@ namespace Gelida24
                 btnContinu.BackColor = SystemColors.Highlight;
             }
             seguen = ObtenirSeguentIndex(index);
+            necesitaCalcularSeguen = false;
         }
         private void btnLoop_Click(object sender, EventArgs e)
         {
@@ -408,6 +407,7 @@ namespace Gelida24
                 btnLoop.BackColor = Color.Lime;
             }
             seguen = ObtenirSeguentIndex(index);
+            necesitaCalcularSeguen = false;
         }
     }
 }
