@@ -28,6 +28,7 @@ namespace Gelida24
         private ISampleProvider sampleProvider;
         private Queue<string> list = new Queue<string>();
         private TimeSpan duraciototal = new TimeSpan();
+        private DateTime hfinalitzacio = DateTime.Now;
 
         public sbyte outDev { get; set; }
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -63,7 +64,6 @@ namespace Gelida24
             return postVolumeMeter;
         }
 
-
         void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
             ///left 
@@ -80,12 +80,6 @@ namespace Gelida24
             volumeMeter2.Amplitude = e.MaxSampleValues[1];
             volumeMeter4.Amplitude = e.MaxSampleValues[0];
         }
-
-        private void OnTimerTick(object sender, EventArgs e)
-        {
-
-        }
-
         //button play onclick
         private void materialFlatButton1_Click(object sender, EventArgs e)
         {
@@ -115,7 +109,6 @@ namespace Gelida24
                 }
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
-
                     waveOut.Play();
                     timer1.Start();
 
@@ -162,11 +155,8 @@ namespace Gelida24
             try
             {
                 waveOut.Play();
-
-                listView1.Items[0].Font = fntPlaying;
-
                 timer1.Start();
-
+                listView1.Items[0].Font = fntPlaying;
             }
             catch
             {

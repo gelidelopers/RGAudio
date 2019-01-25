@@ -39,6 +39,7 @@ namespace Gelida24
         public bool Bucle = false;
         public sbyte outDev { get; set; }
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
+        public Font fntNext = new Font("Arial", 10, System.Drawing.FontStyle.Underline);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
         //public bool isAsio { get; set; }
         public bool isPlaying;
@@ -128,69 +129,76 @@ namespace Gelida24
         }
         private void PlaySong()
         {
-            if (listView1.Items.Count < 1)
+            if (seguen >= 0)
             {
-                return;
-            }
-
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
+                if (listView1.Items.Count < 1)
                 {
                     return;
                 }
-                else if (waveOut.PlaybackState == PlaybackState.Paused)
+
+                if (waveOut != null)
+                {
+                    if (waveOut.PlaybackState == PlaybackState.Playing)
+                    {
+                        return;
+                    }
+                    else if (waveOut.PlaybackState == PlaybackState.Paused)
+                    {
+                        waveOut.Play();
+                        timer1.Start();
+
+                        return;
+                    }
+                }
+                if (String.IsNullOrEmpty(listView1.Items[seguen].SubItems[2].Text))
+                {
+                    return;
+                }
+
+                CarregarFitxer();
+
+                CarregarDuracio();
+
+                InicialitzarSo();
+
+                //setVolumeDelegate(volumeSlider1.Volume);
+
+                waveOut.PlaybackStopped += (sender, evn) =>
+                {
+                    ResetVUMeter();
+                    if (Borrar)
+                    {
+                        listView1.Items.RemoveAt(index);
+                    }
+                    if (seguen >= 0)
+                    {
+                        PlaySong();
+                    }
+                    else
+                    {
+                        isPlaying = false;
+                    }
+                //waveOut.Dispose();
+            };
+                try
                 {
                     waveOut.Play();
                     timer1.Start();
+                    listView1.Items[index].Font = fntNotPlaying;
+                    index = seguen;
+                    if (necesitaCalcularSeguen)
+                    {
+                        seguen = ObtenirSeguentIndex(index);
+                    }
+                    listView1.Items[index].Font = fntPlaying;
+                    necesitaCalcularSeguen = true;
+                    isPlaying = true;
 
-                    return;
                 }
-            }
-            if (String.IsNullOrEmpty(listView1.Items[seguen].SubItems[2].Text))
-            {
-                return;
-            }
-
-            CarregarFitxer();
-
-            CarregarDuracio();
-
-            InicialitzarSo();
-
-            //setVolumeDelegate(volumeSlider1.Volume);
-
-            waveOut.PlaybackStopped += (sender, evn) =>
-            {
-                ResetVUMeter();
-                if (Borrar)
+                catch
                 {
-                    listView1.Items.RemoveAt(index);
-                }
-                if (seguen >= 0)
-                {
-                    PlaySong();
-                }
-                //waveOut.Dispose();
-            };
-            try
-            {
-                waveOut.Play();
-                timer1.Start();
-                listView1.Items[index].Font = fntNotPlaying;
-                index = seguen;
-                if (necesitaCalcularSeguen)
-                {
-                   seguen = ObtenirSeguentIndex(index);
-                }
-                listView1.Items[index].Font = fntPlaying;
-                necesitaCalcularSeguen = true;
-                isPlaying = true;
-                
-            }
-            catch
-            {
 
+                }
             }
         }
         private void AfegirFitxers(string[] files)
@@ -267,23 +275,30 @@ namespace Gelida24
         private int ObtenirSeguentIndex(int actual)
         {
             int i = -1;
-
+            
             if (Continuar && !Borrar)
             {
                 if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1)
                 {
+                    if (seguen >= 0) listView1.Items[seguen].Font = fntPlaying;
                     i = index+1;
+                    if (i >= 0) listView1.Items[i].Font = fntNext;
                 } 
             }
             else if (Continuar && Borrar)
             {
-                i = 0;
+                i = actual;
+
             }else if(!Continuar && Bucle)
             {
+                if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
                 i = actual;
             }
+            else
+            {
+                if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
+            }
             return i;
-
         }
         //addfolder
         private void OnAddFolderButtonClick(object sender, EventArgs e)
@@ -315,7 +330,6 @@ namespace Gelida24
                 sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
 
                 labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
-
             }
             else
             {
