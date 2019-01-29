@@ -31,6 +31,9 @@ namespace Gelida24
         private DateTime hfinalitzacio = DateTime.Now;
 
         public sbyte outDev { get; set; }
+        public string musicPath { get; set; }
+        public string adsPath { get; set; }
+        public string jinglePath { get; set; }
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
 
         public void CrearLlista()
