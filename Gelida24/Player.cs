@@ -33,6 +33,7 @@ namespace Gelida24
         private bool necesitaCalcularSeguen = true;
         private int seguen = 0;
         private List<string> errors = new List<string>();
+        private string failneim;
         
         public bool Continuar = true;
         public bool Borrar = true;
@@ -41,9 +42,11 @@ namespace Gelida24
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntNext = new Font("Arial", 10, System.Drawing.FontStyle.Underline);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
+        public List<string> playlist = new List<string>();
         //public bool isAsio { get; set; }
         public bool isPlaying;
         public List<string> extensions = new List<string>(new string[] { ".mp3", ".wav", ".aac", ".m4a", ".wma" });
+
 
         private ISampleProvider CreateInputStream(string fileName)
         {
@@ -62,7 +65,6 @@ namespace Gelida24
 
             MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
             postVolumeMeter.StreamVolume += OnPostVolumeMeter;
-
 
             return postVolumeMeter;
         }
@@ -93,12 +95,14 @@ namespace Gelida24
         {
             try
             {
+                failneim = playlist.ElementAt(seguen);
                 //canviar dequeue per first si esta activat o no el borrar
-                sampleProvider = CreateInputStream(listView1.Items[seguen].SubItems[2].Text);
+                sampleProvider = CreateInputStream(failneim);
             }
             catch (Exception createException)
             {
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
+                playlist.RemoveAt(seguen);
                 listView1.Items.RemoveAt(0);
                 return;
             }
@@ -131,73 +135,67 @@ namespace Gelida24
         {
             if (seguen >= 0)
             {
-                if (listView1.Items.Count < 1)
+                if (playlist.Count > 0)
                 {
-                    return;
-                }
 
-                if (waveOut != null)
-                {
-                    if (waveOut.PlaybackState == PlaybackState.Playing)
+                    if (waveOut != null)
                     {
-                        return;
+                        if (waveOut.PlaybackState == PlaybackState.Playing)
+                        {
+                            return;
+                        }
+                        else if (waveOut.PlaybackState == PlaybackState.Paused)
+                        {
+                            waveOut.Play();
+                            timer1.Start();
+
+                            return;
+                        }
                     }
-                    else if (waveOut.PlaybackState == PlaybackState.Paused)
+                    CarregarFitxer();
+
+                    CarregarDuracio();
+
+                    InicialitzarSo();
+
+                    //setVolumeDelegate(volumeSlider1.Volume);
+                    try
                     {
                         waveOut.Play();
                         timer1.Start();
-
-                        return;
+                        listView1.Items[index].Font = fntNotPlaying;
+                        index = seguen;
+                        if (necesitaCalcularSeguen)
+                        {
+                            seguen = ObtenirSeguentIndex(index);
+                        }
+                        listView1.Items[index].Font = fntPlaying;
+                        necesitaCalcularSeguen = true;
+                        isPlaying = true;
                     }
-                }
-                if (String.IsNullOrEmpty(listView1.Items[seguen].SubItems[2].Text))
-                {
-                    return;
-                }
-
-                CarregarFitxer();
-
-                CarregarDuracio();
-
-                InicialitzarSo();
-
-                //setVolumeDelegate(volumeSlider1.Volume);
-
-                waveOut.PlaybackStopped += (sender, evn) =>
-                {
-                    ResetVUMeter();
-                    if (Borrar)
+                    catch
                     {
-                        listView1.Items.RemoveAt(index);
-                    }
-                    if (seguen >= 0)
-                    {
-                        PlaySong();
-                    }
-                    else
-                    {
-                        isPlaying = false;
-                    }
-                //waveOut.Dispose();
-            };
-                try
-                {
-                    waveOut.Play();
-                    timer1.Start();
-                    listView1.Items[index].Font = fntNotPlaying;
-                    index = seguen;
-                    if (necesitaCalcularSeguen)
-                    {
-                        seguen = ObtenirSeguentIndex(index);
-                    }
-                    listView1.Items[index].Font = fntPlaying;
-                    necesitaCalcularSeguen = true;
-                    isPlaying = true;
 
-                }
-                catch
-                {
+                    }
 
+                    waveOut.PlaybackStopped += (sender, evn) =>
+                    {
+                        ResetVUMeter();
+                        if (Borrar)
+                        {
+                            playlist.RemoveAt(index);
+                            listView1.Items.RemoveAt(index);
+                        }
+                        if (seguen >= 0)
+                        {
+                            PlaySong();
+                        }
+                        else
+                        {
+                            isPlaying = false;
+                        }
+                        //waveOut.Dispose();
+                    };
                 }
             }
         }
@@ -230,7 +228,7 @@ namespace Gelida24
 
                         //item.SubItems.Add(axr.artist);
                         //item.SubItems.Add(axr.duration.ToString());
-
+                        playlist.Add(axr.fileName);
                         listView1.Items.Add(itom);
 
                     }
@@ -275,21 +273,28 @@ namespace Gelida24
         private int ObtenirSeguentIndex(int actual)
         {
             int i = -1;
-            
-            if (Continuar && !Borrar)
+            int count = playlist.Count;
+            if (Continuar)
             {
-                if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1)
+                if (!Borrar)
                 {
-                    if (seguen >= 0) listView1.Items[seguen].Font = fntPlaying;
-                    i = index+1;
-                    if (i >= 0) listView1.Items[i].Font = fntNext;
-                } 
+                    if (count > 1 && actual < count - 1)
+                    {
+                        if (seguen >= 0) listView1.Items[seguen].Font = fntPlaying;
+                        i = index + 1;
+                        
+                    }
+                    else if (Bucle && actual == count - 1)
+                    {
+                        i = 0;
+                    }
+                }
+                else
+                {
+                    i = actual;
+                }
             }
-            else if (Continuar && Borrar)
-            {
-                i = actual;
-
-            }else if(!Continuar && Bucle)
+            else if (Bucle)
             {
                 if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
                 i = actual;
@@ -298,6 +303,7 @@ namespace Gelida24
             {
                 if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
             }
+            if (i >= 0) listView1.Items[i].Font = fntNext;
             return i;
         }
         //addfolder
@@ -316,6 +322,18 @@ namespace Gelida24
         }
         private void btnPLay_Click(object sender, EventArgs e)
         {
+            if (seguen == -1)
+            {
+                if(listView1.SelectedItems.Count > 0)
+                {
+                    seguen = listView1.SelectedItems[0].Index;
+                }
+                else
+                {
+                    seguen = 0;
+                }
+                
+            }
             PlaySong();
         }
         private void timer1_Tick(object sender, EventArgs e)
