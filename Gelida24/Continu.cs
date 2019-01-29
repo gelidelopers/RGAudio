@@ -30,6 +30,8 @@ namespace Gelida24
         private TimeSpan duraciototal = new TimeSpan();
         private DateTime hfinalitzacio = DateTime.Now;
 
+        //https://gist.github.com/tedmiston/5935757
+
         public sbyte outDev { get; set; }
         public string musicPath { get; set; }
         public string adsPath { get; set; }
