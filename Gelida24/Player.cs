@@ -34,6 +34,7 @@ namespace Gelida24
         private int seguen = 0;
         private List<string> errors = new List<string>();
         private string failneim;
+        private int count = 0;
         
         public bool Continuar = true;
         public bool Borrar = true;
@@ -102,8 +103,8 @@ namespace Gelida24
             catch (Exception createException)
             {
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
-                playlist.RemoveAt(seguen);
-                listView1.Items.RemoveAt(0);
+                //playlist.RemoveAt(seguen);
+                //listView1.Items.RemoveAt(0);
                 return;
             }
         }
@@ -135,7 +136,7 @@ namespace Gelida24
         {
             if (seguen >= 0)
             {
-                if (playlist.Count > 0)
+                if (count > 0)
                 {
 
                     if (waveOut != null)
@@ -184,7 +185,8 @@ namespace Gelida24
                         if (Borrar)
                         {
                             playlist.RemoveAt(index);
-                            listView1.Items.RemoveAt(index);
+                            count = playlist.Count;
+                            
                         }
                         if (seguen >= 0)
                         {
@@ -193,6 +195,10 @@ namespace Gelida24
                         else
                         {
                             isPlaying = false;
+                        }
+                        if (Borrar)
+                        {
+                            listView1.Items.RemoveAt(index);
                         }
                         //waveOut.Dispose();
                     };
@@ -269,11 +275,12 @@ namespace Gelida24
             {
                 MessageBox.Show(error);
             }
+            count = playlist.Count;
         }
         private int ObtenirSeguentIndex(int actual)
         {
             int i = -1;
-            int count = playlist.Count;
+            
             if (Continuar)
             {
                 if (!Borrar)
@@ -324,7 +331,7 @@ namespace Gelida24
         {
             if (seguen == -1)
             {
-                if(listView1.SelectedItems.Count > 0)
+                if(count > 0)
                 {
                     seguen = listView1.SelectedItems[0].Index;
                 }
@@ -369,8 +376,7 @@ namespace Gelida24
         }
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-
-            if(listView1.SelectedItems.Count > 0)
+            if(count > 0)
             {
                 seguen = listView1.SelectedItems[0].Index;
                 PlaySong();
