@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28516.95
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida Player", "XVR Player\Gelida Player.csproj", "{BE82061C-DDB9-4C78-803D-883F3F6694D0}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida24", "Gelida24\Gelida24.csproj", "{413FDE29-24B7-4858-8DCF-BD780CB80F0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControlsLib", "ControlsLib\ControlsLib.csproj", "{97FDA570-BA10-4FD0-984B-946E58D15661}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,18 @@ Global
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x64.Build.0 = Release|Any CPU
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x86.ActiveCfg = Release|Any CPU
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x86.Build.0 = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|x64.Build.0 = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Debug|x86.Build.0 = Debug|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|x64.ActiveCfg = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|x64.Build.0 = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|x86.ActiveCfg = Release|Any CPU
+		{97FDA570-BA10-4FD0-984B-946E58D15661}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

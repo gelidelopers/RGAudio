@@ -1,4 +1,4 @@
-﻿namespace Gelida24
+﻿namespace ControlsLib
 {
     partial class Player
     {
@@ -33,19 +33,9 @@
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalTime = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.btnPause = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelRemain = new System.Windows.Forms.Label();
             this.groupActual = new System.Windows.Forms.GroupBox();
@@ -55,6 +45,8 @@
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPLay = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.btnFolder = new System.Windows.Forms.Button();
             this.btnContinu = new System.Windows.Forms.Button();
             this.btnLoop = new System.Windows.Forms.Button();
@@ -69,10 +61,6 @@
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupActual.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -126,90 +114,6 @@
             this.labelTotalTime.TabIndex = 25;
             this.labelTotalTime.Text = "0:00";
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Location = new System.Drawing.Point(159, 20);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(86, 42);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Restant";
-            this.toolTip1.SetToolTip(this.groupBox5, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(6, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 18);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label1, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Location = new System.Drawing.Point(89, 20);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(65, 42);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Passat";
-            this.toolTip1.SetToolTip(this.groupBox6, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(6, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 18);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Location = new System.Drawing.Point(7, 20);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(76, 42);
-            this.groupBox7.TabIndex = 0;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Duracio";
-            this.toolTip1.SetToolTip(this.groupBox7, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(10, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 18);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label3, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.groupBox6);
-            this.groupBox4.Controls.Add(this.groupBox7);
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(3, 77);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(282, 68);
-            this.groupBox4.TabIndex = 29;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Tota la llista";
-            this.toolTip1.SetToolTip(this.groupBox4, "Temporitzador total pendent de desenvolupament");
-            // 
             // columnHeader1
             // 
             this.columnHeader1.Text = "Titol";
@@ -219,49 +123,6 @@
             // 
             this.columnHeader2.Text = "Artista";
             this.columnHeader2.Width = 124;
-            // 
-            // btnPause
-            // 
-            this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnPause.BackgroundImage = global::Gelida24.Properties.Resources.pause;
-            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPause.Location = new System.Drawing.Point(83, 6);
-            this.btnPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnPause.Name = "btnPause";
-            this.btnPause.Size = new System.Drawing.Size(56, 45);
-            this.btnPause.TabIndex = 28;
-            this.btnPause.UseVisualStyleBackColor = true;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
-            // 
-            // btnStop
-            // 
-            this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStop.BackgroundImage = global::Gelida24.Properties.Resources.stop;
-            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(147, 6);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(49, 45);
-            this.btnStop.TabIndex = 22;
-            this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNext.Location = new System.Drawing.Point(204, 6);
-            this.btnNext.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(44, 45);
-            this.btnNext.TabIndex = 31;
-            this.btnNext.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -294,7 +155,7 @@
             this.groupActual.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupActual.Location = new System.Drawing.Point(3, 3);
             this.groupActual.Name = "groupActual";
-            this.groupActual.Size = new System.Drawing.Size(282, 68);
+            this.groupActual.Size = new System.Drawing.Size(253, 68);
             this.groupActual.TabIndex = 28;
             this.groupActual.TabStop = false;
             this.groupActual.Text = "Audio Actual";
@@ -312,7 +173,7 @@
             this.listView1.MinimumSize = new System.Drawing.Size(4, 50);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(288, 87);
+            this.listView1.Size = new System.Drawing.Size(288, 218);
             this.listView1.TabIndex = 33;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -331,9 +192,9 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 87);
+            this.panelBottom.Location = new System.Drawing.Point(0, 218);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(288, 408);
+            this.panelBottom.Size = new System.Drawing.Size(288, 277);
             this.panelBottom.TabIndex = 32;
             // 
             // trackBarPosition
@@ -353,7 +214,6 @@
             this.flowLayoutPanelButtons.Controls.Add(this.btnPLay);
             this.flowLayoutPanelButtons.Controls.Add(this.btnPause);
             this.flowLayoutPanelButtons.Controls.Add(this.btnStop);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnNext);
             this.flowLayoutPanelButtons.Controls.Add(this.btnFolder);
             this.flowLayoutPanelButtons.Controls.Add(this.btnContinu);
             this.flowLayoutPanelButtons.Controls.Add(this.btnLoop);
@@ -361,14 +221,14 @@
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 91);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(288, 169);
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(288, 112);
             this.flowLayoutPanelButtons.TabIndex = 33;
             // 
             // btnPLay
             // 
             this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPLay.BackgroundImage = global::Gelida24.Properties.Resources.play;
+            this.btnPLay.BackgroundImage = global::ControlsLib.Properties.Resources.play;
             this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -382,15 +242,45 @@
             this.btnPLay.UseVisualStyleBackColor = false;
             this.btnPLay.Click += new System.EventHandler(this.btnPLay_Click);
             // 
+            // btnPause
+            // 
+            this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnPause.BackgroundImage = global::ControlsLib.Properties.Resources.pause;
+            this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPause.Location = new System.Drawing.Point(83, 6);
+            this.btnPause.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(56, 45);
+            this.btnPause.TabIndex = 28;
+            this.btnPause.UseVisualStyleBackColor = true;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // btnStop
+            // 
+            this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnStop.BackgroundImage = global::ControlsLib.Properties.Resources.stop;
+            this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(147, 6);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(49, 45);
+            this.btnStop.TabIndex = 22;
+            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // btnFolder
             // 
             this.btnFolder.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnFolder.BackgroundImage = global::Gelida24.Properties.Resources.addfolder;
+            this.btnFolder.BackgroundImage = global::ControlsLib.Properties.Resources.addfolder;
             this.btnFolder.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnFolder.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.flowLayoutPanelButtons.SetFlowBreak(this.btnFolder, true);
             this.btnFolder.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnFolder.Location = new System.Drawing.Point(4, 72);
+            this.btnFolder.Location = new System.Drawing.Point(204, 6);
             this.btnFolder.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnFolder.Name = "btnFolder";
             this.btnFolder.Size = new System.Drawing.Size(52, 45);
@@ -405,7 +295,7 @@
             this.btnContinu.BackColor = System.Drawing.SystemColors.Highlight;
             this.btnContinu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnContinu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContinu.Location = new System.Drawing.Point(4, 129);
+            this.btnContinu.Location = new System.Drawing.Point(4, 72);
             this.btnContinu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnContinu.Name = "btnContinu";
             this.btnContinu.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -422,7 +312,7 @@
             this.btnLoop.BackColor = System.Drawing.SystemColors.Control;
             this.btnLoop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoop.Location = new System.Drawing.Point(97, 129);
+            this.btnLoop.Location = new System.Drawing.Point(97, 72);
             this.btnLoop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLoop.Name = "btnLoop";
             this.btnLoop.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -439,7 +329,7 @@
             this.btnBorrar.BackColor = System.Drawing.Color.Red;
             this.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnBorrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBorrar.Location = new System.Drawing.Point(173, 129);
+            this.btnBorrar.Location = new System.Drawing.Point(173, 72);
             this.btnBorrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(71, 34);
@@ -548,11 +438,10 @@
             this.flowLayoutPanelTimers.AutoSize = true;
             this.flowLayoutPanelTimers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelTimers.Controls.Add(this.groupActual);
-            this.flowLayoutPanelTimers.Controls.Add(this.groupBox4);
             this.flowLayoutPanelTimers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 260);
+            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 203);
             this.flowLayoutPanelTimers.Name = "flowLayoutPanelTimers";
-            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 148);
+            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
             // Player
@@ -568,13 +457,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupActual.ResumeLayout(false);
@@ -597,20 +479,12 @@
         private System.Windows.Forms.Label labelCurrentTime;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label labelTotalTime;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnPLay;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnStop;
-        private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label labelRemain;
         private System.Windows.Forms.Button btnFolder;

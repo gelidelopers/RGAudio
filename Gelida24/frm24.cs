@@ -53,10 +53,10 @@ namespace Gelida24
             return DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-           // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
-            volumeMeter1.Amplitude = caca.AudioMeterInformation.MasterPeakValue;
-        }
+        //private void timer2_Tick(object sender, EventArgs e)
+        //{
+        //   // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
+        //    //volumeMeter1.Amplitude = caca.AudioMeterInformation.MasterPeakValue;
+        //}
     }
 }

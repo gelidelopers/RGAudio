@@ -1,4 +1,4 @@
-﻿namespace Gelida24
+﻿namespace ControlsLib
 {
     partial class Continu
     {
@@ -31,13 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelRemain = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -59,10 +52,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listView1 = new System.Windows.Forms.ListView();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -79,89 +68,6 @@
             // 
             this.columnHeader2.Text = "Artista";
             this.columnHeader2.Width = 99;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(6, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 18);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label3, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Location = new System.Drawing.Point(7, 20);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(58, 33);
-            this.groupBox7.TabIndex = 0;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Duracio";
-            this.toolTip1.SetToolTip(this.groupBox7, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(6, 12);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 18);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Location = new System.Drawing.Point(71, 20);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(53, 33);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Passat";
-            this.toolTip1.SetToolTip(this.groupBox6, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(6, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(36, 18);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "0:00";
-            this.toolTip1.SetToolTip(this.label1, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Location = new System.Drawing.Point(130, 20);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(60, 33);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Restant";
-            this.toolTip1.SetToolTip(this.groupBox5, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.groupBox6);
-            this.groupBox4.Controls.Add(this.groupBox7);
-            this.groupBox4.Location = new System.Drawing.Point(3, 71);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(196, 62);
-            this.groupBox4.TabIndex = 29;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Tota la llista";
-            this.toolTip1.SetToolTip(this.groupBox4, "Temporitzador total pendent de desenvolupament");
             // 
             // groupBox3
             // 
@@ -261,11 +167,10 @@
             this.flowLayoutPanelTimers.AutoSize = true;
             this.flowLayoutPanelTimers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelTimers.Controls.Add(this.groupActual);
-            this.flowLayoutPanelTimers.Controls.Add(this.groupBox4);
             this.flowLayoutPanelTimers.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 112);
             this.flowLayoutPanelTimers.Name = "flowLayoutPanelTimers";
-            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(337, 136);
+            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(337, 68);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
             // volumeMeter4
@@ -351,7 +256,7 @@
             // 
             this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPLay.BackgroundImage = global::Gelida24.Properties.Resources.play;
+            this.btnPLay.BackgroundImage = global::ControlsLib.Properties.Resources.play;
             this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -381,9 +286,9 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 219);
+            this.panelBottom.Location = new System.Drawing.Point(0, 287);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(337, 248);
+            this.panelBottom.Size = new System.Drawing.Size(337, 180);
             this.panelBottom.TabIndex = 32;
             // 
             // timer1
@@ -421,13 +326,6 @@
             this.Controls.Add(this.listView1);
             this.Name = "Continu";
             this.Size = new System.Drawing.Size(337, 467);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -451,13 +349,6 @@
 
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label labelRemain;
         private System.Windows.Forms.GroupBox groupBox2;

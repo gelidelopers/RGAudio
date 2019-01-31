@@ -11,11 +11,11 @@ using NAudio.Wave;
 using NAudio.Flac;
 using NAudio.Wave.SampleProviders;
 using System.IO;
-using WindowsFormsControlLibrary1;
+
 using Quartz;
 using System.Diagnostics;
 
-namespace Gelida24
+namespace ControlsLib
 {
     public partial class Player : UserControl
     {
@@ -134,76 +134,71 @@ namespace Gelida24
         }
         private void PlaySong()
         {
-            if (seguen >= 0)
+            if (waveOut != null)
             {
-                if (count > 0)
+                if (waveOut.PlaybackState == PlaybackState.Playing)
                 {
+                    return;
+                }
+                else if (waveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    waveOut.Play();
+                    timer1.Start();
 
-                    if (waveOut != null)
-                    {
-                        if (waveOut.PlaybackState == PlaybackState.Playing)
-                        {
-                            return;
-                        }
-                        else if (waveOut.PlaybackState == PlaybackState.Paused)
-                        {
-                            waveOut.Play();
-                            timer1.Start();
-
-                            return;
-                        }
-                    }
-                    CarregarFitxer();
-
-                    CarregarDuracio();
-
-                    InicialitzarSo();
-
-                    //setVolumeDelegate(volumeSlider1.Volume);
-                    try
-                    {
-                        waveOut.Play();
-                        timer1.Start();
-                        listView1.Items[index].Font = fntNotPlaying;
-                        index = seguen;
-                        if (necesitaCalcularSeguen)
-                        {
-                            seguen = ObtenirSeguentIndex(index);
-                        }
-                        listView1.Items[index].Font = fntPlaying;
-                        necesitaCalcularSeguen = true;
-                        isPlaying = true;
-                    }
-                    catch
-                    {
-
-                    }
-
-                    waveOut.PlaybackStopped += (sender, evn) =>
-                    {
-                        ResetVUMeter();
-                        if (Borrar)
-                        {
-                            playlist.RemoveAt(index);
-                            count = playlist.Count;
-                            
-                        }
-                        if (seguen >= 0)
-                        {
-                            PlaySong();
-                        }
-                        else
-                        {
-                            isPlaying = false;
-                        }
-                        if (Borrar)
-                        {
-                            listView1.Items.RemoveAt(index);
-                        }
-                        //waveOut.Dispose();
-                    };
+                    return;
                 }
             }
+            CarregarFitxer();
+
+            CarregarDuracio();
+
+            InicialitzarSo();
+
+            //setVolumeDelegate(volumeSlider1.Volume);
+            try
+            {
+                waveOut.Play();
+                timer1.Start();
+                listView1.Items[index].Font = fntNotPlaying;
+                index = seguen;
+                if (necesitaCalcularSeguen)
+                {
+                    seguen = ObtenirSeguentIndex(index);
+                }
+                listView1.Items[index].Font = fntPlaying;
+                necesitaCalcularSeguen = true;
+                isPlaying = true;
+            }
+            catch
+            {
+
+            }
+
+            waveOut.PlaybackStopped += (sender, evn) =>
+            {
+                ResetVUMeter();
+                if (Borrar)
+                {
+                    playlist.RemoveAt(index);
+                    count = playlist.Count;
+                            
+                }
+                if (seguen >= 0)
+                {
+                    PlaySong();
+                }
+                else
+                {
+                    isPlaying = false;
+                }
+                if (Borrar)
+                {
+                    listView1.Items.RemoveAt(index);
+                }
+                //waveOut.Dispose();
+            };
+                
+            
         }
         private void AfegirFitxers(string[] files)
         {

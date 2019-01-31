@@ -127,23 +127,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Continu.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Continu.Designer.cs">
-      <DependentUpon>Continu.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Arxiu.cs" />
     <Compile Include="frm24.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm24.Designer.cs">
       <DependentUpon>frm24.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Player.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Player.Designer.cs">
-      <DependentUpon>Player.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,14 +142,8 @@
     <Compile Include="WebBrowser.Designer.cs">
       <DependentUpon>WebBrowser.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Continu.resx">
-      <DependentUpon>Continu.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frm24.resx">
       <DependentUpon>frm24.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PLayer.resx">
-      <DependentUpon>Player.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -189,12 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WindowsFormsControlLibrary1\XVRControlsLibrary.csproj">
-      <Project>{b63e910b-0be4-46b8-883c-50600bdc9c0c}</Project>
-      <Name>XVRControlsLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\addfolder1.png" />
@@ -231,6 +208,16 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ControlsLib\ControlsLib.csproj">
+      <Project>{97fda570-ba10-4fd0-984b-946e58d15661}</Project>
+      <Name>ControlsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WindowsFormsControlLibrary1\XVRControlsLibrary.csproj">
+      <Project>{b63e910b-0be4-46b8-883c-50600bdc9c0c}</Project>
+      <Name>XVRControlsLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />

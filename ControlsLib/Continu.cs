@@ -11,9 +11,9 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using Quartz;
-using WindowsFormsControlLibrary1;
 
-namespace Gelida24
+
+namespace ControlsLib
 {
     public partial class Continu : UserControl
     {
@@ -33,9 +33,9 @@ namespace Gelida24
         //https://gist.github.com/tedmiston/5935757
 
         public sbyte outDev { get; set; }
-        public string musicPath { get; set; }
-        public string adsPath { get; set; }
-        public string jinglePath { get; set; }
+        //public string musicPath { get; set; }
+        //public string adsPath { get; set; }
+        //public string jinglePath { get; set; }
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
 
         public void CrearLlista()
