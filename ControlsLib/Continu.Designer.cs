@@ -48,6 +48,7 @@
             this.panelVuLeft = new System.Windows.Forms.Panel();
             this.btnPLay = new System.Windows.Forms.Button();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -268,16 +269,26 @@
             this.btnPLay.Size = new System.Drawing.Size(71, 54);
             this.btnPLay.TabIndex = 21;
             this.btnPLay.UseVisualStyleBackColor = false;
+            this.btnPLay.Click += new System.EventHandler(this.BtnPLay_Click);
             // 
             // flowLayoutPanelButtons
             // 
             this.flowLayoutPanelButtons.AutoSize = true;
             this.flowLayoutPanelButtons.Controls.Add(this.btnPLay);
+            this.flowLayoutPanelButtons.Controls.Add(this.dateTimePicker1);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 46);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Size = new System.Drawing.Size(337, 66);
             this.flowLayoutPanelButtons.TabIndex = 33;
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dateTimePicker1.Location = new System.Drawing.Point(82, 3);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 22;
             // 
             // panelBottom
             // 
@@ -370,5 +381,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

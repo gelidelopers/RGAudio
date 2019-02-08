@@ -28,6 +28,7 @@ namespace ControlsLib
         private ISampleProvider sampleProvider;
         private Queue<string> list = new Queue<string>();
         private TimeSpan duraciototal = new TimeSpan();
+        private TimeSpan duracioActual = new TimeSpan();
         private DateTime hfinalitzacio = DateTime.Now;
 
         //https://gist.github.com/tedmiston/5935757
@@ -57,17 +58,30 @@ namespace ControlsLib
         public async void ScheduleAction(string fileName,DateTime ExecutionTime)
         {
             await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
-            if (list.First() != fileName && list.ElementAt(1) == fileName)
+            if (list.Count > 0)
             {
-                list.Dequeue();
-                waveOut.Stop();
+                if (list.First() != fileName && list.ElementAt(1) == fileName)
+                {
+                    list.Dequeue();
+                    
+                }
+                else
+                {
+                    list.Clear();
+                    list.Enqueue(fileName);
+                }
             }
             else
             {
-                list.Clear();
                 list.Enqueue(fileName);
-                waveOut.Stop();
+                
             }
+            PlaySong();
+        }
+        public async void SchedulePrint(string text, DateTime ExecutionTime)
+        {
+            await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
+            MessageBox.Show(text);
         }
 
         private ISampleProvider CreateInputStream(string fileName)
@@ -104,14 +118,19 @@ namespace ControlsLib
 
         private void PlaySong()
         {
-            
-
             // we are in a stopped state
             // TODO: only re-initialise if necessary
+            if(waveOut != null)
+            {
+                if(waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
+                {
+                    waveOut.Stop();
+                }
+            }
 
             if (String.IsNullOrEmpty(list.First()))
             {
-                return;
+                CrearLlista();
             }
             CarregarFitxer();
 
@@ -125,9 +144,9 @@ namespace ControlsLib
             {
                 try
                 { 
-
                     PlaySong();
-                    RestarTemps(audioFileReader.TotalTime);
+                    RestarTemps(duracioActual);
+                    duracioActual = audioFileReader.TotalTime;
 
                 }
                 catch
@@ -184,6 +203,11 @@ namespace ControlsLib
                 MessageBox.Show(String.Format("{0}", initException.Message), "Error amb la sortida de so");
                 return;
             }
+        }
+
+        private void BtnPLay_Click(object sender, EventArgs e)
+        {
+            ScheduleAction("qwertyuiop.flac", dateTimePicker1.Value);
         }
     }
 }
