@@ -54,6 +54,21 @@ namespace ControlsLib
         {
             duraciototal.Subtract(duraciocanso);
         }
+        public async void ScheduleAction(string fileName,DateTime ExecutionTime)
+        {
+            await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
+            if (list.First() != fileName && list.ElementAt(1) == fileName)
+            {
+                list.Dequeue();
+                waveOut.Stop();
+            }
+            else
+            {
+                list.Clear();
+                list.Enqueue(fileName);
+                waveOut.Stop();
+            }
+        }
 
         private ISampleProvider CreateInputStream(string fileName)
         {
@@ -86,45 +101,15 @@ namespace ControlsLib
             volumeMeter4.Amplitude = e.MaxSampleValues[0];
         }
         //button play onclick
-        private void materialFlatButton1_Click(object sender, EventArgs e)
-        {
-            PlaySong();
-
-        }
-        private void ResetVUMeter()
-        {
-            volumeMeter1.Amplitude = 0;
-            volumeMeter2.Amplitude = 0;
-            volumeMeter3.Amplitude = 0;
-            volumeMeter4.Amplitude = 0;
-        }
 
         private void PlaySong()
         {
-            if (listView1.Items.Count < 1)
-            {
-                return;
-            }
-
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    return;
-                }
-                else if (waveOut.PlaybackState == PlaybackState.Paused)
-                {
-                    waveOut.Play();
-                    timer1.Start();
-
-                    return;
-                }
-            }
+            
 
             // we are in a stopped state
             // TODO: only re-initialise if necessary
 
-            if (String.IsNullOrEmpty(listView1.Items[0].SubItems[2].Text))
+            if (String.IsNullOrEmpty(list.First()))
             {
                 return;
             }
@@ -139,16 +124,11 @@ namespace ControlsLib
             waveOut.PlaybackStopped += (sender, evn) =>
             {
                 try
-                {
-                    ResetVUMeter();
+                { 
+
+                    PlaySong();
                     RestarTemps(audioFileReader.TotalTime);
 
-                    if (listView1.Items.Count > 1)
-                    {
-                        listView1.Items.RemoveAt(0);
-                        //playlist.Dequeue();
-                        PlaySong();
-                    }
                 }
                 catch
                 {
@@ -161,7 +141,6 @@ namespace ControlsLib
             {
                 waveOut.Play();
                 timer1.Start();
-                listView1.Items[0].Font = fntPlaying;
             }
             catch
             {
@@ -173,7 +152,7 @@ namespace ControlsLib
             try
             {
                 //canviar dequeue per first si esta activat o no el borrar
-                sampleProvider = CreateInputStream(listView1.Items[0].SubItems[2].Text);
+                sampleProvider = CreateInputStream(list.Dequeue());
             }
             catch (Exception createException)
             {

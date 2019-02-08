@@ -31,20 +31,20 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.gravadorContinu3 = new ControlsLib.GravadorContinu();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.gravadorContinu2 = new ControlsLib.GravadorContinu();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.gravadorContinu1 = new ControlsLib.GravadorContinu();
             this.lblTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.continu1 = new ControlsLib.Continu();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.player2 = new ControlsLib.Player();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.player1 = new ControlsLib.Player();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.continu1 = new ControlsLib.Continu();
+            this.player2 = new ControlsLib.Player();
+            this.player1 = new ControlsLib.Player();
+            this.gravadorContinu3 = new ControlsLib.GravadorContinu();
+            this.gravadorContinu2 = new ControlsLib.GravadorContinu();
+            this.gravadorContinu1 = new ControlsLib.GravadorContinu();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -79,15 +79,6 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Gravació de programes";
             // 
-            // gravadorContinu3
-            // 
-            this.gravadorContinu3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu3.Location = new System.Drawing.Point(7, 22);
-            this.gravadorContinu3.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu3.Name = "gravadorContinu3";
-            this.gravadorContinu3.Size = new System.Drawing.Size(138, 46);
-            this.gravadorContinu3.TabIndex = 0;
-            // 
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -100,15 +91,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Streaming online";
             // 
-            // gravadorContinu2
-            // 
-            this.gravadorContinu2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu2.Location = new System.Drawing.Point(7, 22);
-            this.gravadorContinu2.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu2.Name = "gravadorContinu2";
-            this.gravadorContinu2.Size = new System.Drawing.Size(138, 46);
-            this.gravadorContinu2.TabIndex = 0;
-            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,15 +102,6 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Gravació continua";
-            // 
-            // gravadorContinu1
-            // 
-            this.gravadorContinu1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu1.Location = new System.Drawing.Point(7, 13);
-            this.gravadorContinu1.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu1.Name = "gravadorContinu1";
-            this.gravadorContinu1.Size = new System.Drawing.Size(138, 55);
-            this.gravadorContinu1.TabIndex = 0;
             // 
             // lblTime
             // 
@@ -171,16 +144,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "24 H";
             // 
-            // continu1
-            // 
-            this.continu1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.continu1.Location = new System.Drawing.Point(3, 18);
-            this.continu1.Margin = new System.Windows.Forms.Padding(4);
-            this.continu1.Name = "continu1";
-            this.continu1.outDev = ((sbyte)(0));
-            this.continu1.Size = new System.Drawing.Size(430, 642);
-            this.continu1.TabIndex = 0;
-            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.player2);
@@ -192,17 +155,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Canal 2";
-            // 
-            // player2
-            // 
-            this.player2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.player2.Location = new System.Drawing.Point(3, 18);
-            this.player2.Margin = new System.Windows.Forms.Padding(4);
-            this.player2.MinimumSize = new System.Drawing.Size(384, 609);
-            this.player2.Name = "player2";
-            this.player2.outDev = ((sbyte)(0));
-            this.player2.Size = new System.Drawing.Size(429, 642);
-            this.player2.TabIndex = 0;
             // 
             // groupBox1
             // 
@@ -216,6 +168,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Canal 1";
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // continu1
+            // 
+            this.continu1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.continu1.Location = new System.Drawing.Point(3, 18);
+            this.continu1.Margin = new System.Windows.Forms.Padding(4);
+            this.continu1.Name = "continu1";
+            this.continu1.outDev = ((sbyte)(0));
+            this.continu1.Size = new System.Drawing.Size(430, 642);
+            this.continu1.TabIndex = 0;
+            // 
+            // player2
+            // 
+            this.player2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.player2.Location = new System.Drawing.Point(3, 18);
+            this.player2.Margin = new System.Windows.Forms.Padding(4);
+            this.player2.MinimumSize = new System.Drawing.Size(384, 609);
+            this.player2.Name = "player2";
+            this.player2.outDev = ((sbyte)(0));
+            this.player2.Size = new System.Drawing.Size(429, 642);
+            this.player2.TabIndex = 0;
+            // 
             // player1
             // 
             this.player1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -227,11 +206,32 @@
             this.player1.Size = new System.Drawing.Size(429, 642);
             this.player1.TabIndex = 0;
             // 
-            // timer1
+            // gravadorContinu3
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.gravadorContinu3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu3.Location = new System.Drawing.Point(7, 22);
+            this.gravadorContinu3.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu3.Name = "gravadorContinu3";
+            this.gravadorContinu3.Size = new System.Drawing.Size(138, 46);
+            this.gravadorContinu3.TabIndex = 0;
+            // 
+            // gravadorContinu2
+            // 
+            this.gravadorContinu2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu2.Location = new System.Drawing.Point(7, 22);
+            this.gravadorContinu2.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu2.Name = "gravadorContinu2";
+            this.gravadorContinu2.Size = new System.Drawing.Size(138, 46);
+            this.gravadorContinu2.TabIndex = 0;
+            // 
+            // gravadorContinu1
+            // 
+            this.gravadorContinu1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu1.Location = new System.Drawing.Point(7, 13);
+            this.gravadorContinu1.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu1.Name = "gravadorContinu1";
+            this.gravadorContinu1.Size = new System.Drawing.Size(138, 55);
+            this.gravadorContinu1.TabIndex = 0;
             // 
             // frm24
             // 

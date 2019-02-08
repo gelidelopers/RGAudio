@@ -34,12 +34,9 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalTime = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelRemain = new System.Windows.Forms.Label();
             this.groupActual = new System.Windows.Forms.GroupBox();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
             this.trackBarPosition = new System.Windows.Forms.TrackBar();
@@ -59,6 +56,9 @@
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -114,16 +114,6 @@
             this.labelTotalTime.TabIndex = 25;
             this.labelTotalTime.Text = "0:00";
             // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Titol";
-            this.columnHeader1.Width = 209;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Artista";
-            this.columnHeader2.Width = 124;
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.labelRemain);
@@ -159,25 +149,6 @@
             this.groupActual.TabIndex = 28;
             this.groupActual.TabStop = false;
             this.groupActual.Text = "Audio Actual";
-            // 
-            // listView1
-            // 
-            this.listView1.AllowDrop = true;
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listView1.FullRowSelect = true;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.MinimumSize = new System.Drawing.Size(4, 50);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(288, 218);
-            this.listView1.TabIndex = 33;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.DoubleClick += new System.EventHandler(this.listView1_DoubleClick);
             // 
             // timer1
             // 
@@ -444,6 +415,29 @@
             this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
+            // listView1
+            // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(288, 218);
+            this.listView1.TabIndex = 33;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Títol";
+            this.columnHeader1.Width = 159;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Artista";
+            this.columnHeader2.Width = 121;
+            // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -480,8 +474,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label labelTotalTime;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnPLay;
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Button btnStop;
@@ -493,7 +485,6 @@
         private System.Windows.Forms.Button btnLoop;
         private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.GroupBox groupActual;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.TrackBar trackBarPosition;
@@ -505,5 +496,8 @@
         private NAudio.Gui.VolumeMeter volumeMeter2;
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

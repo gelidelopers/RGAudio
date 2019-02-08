@@ -27,8 +27,8 @@ namespace Gelida_Recorder
 
                 wiw = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
 
-
-                caca = (MMDevice)wiw.First();
+                caca = (MMDevice)wiw.Where(x => x.DataFlow == DataFlow.Capture).First();
+                
                 timer1.Start();
             }
 
@@ -46,13 +46,11 @@ namespace Gelida_Recorder
             volumeMeter4.Amplitude = caca.AudioMeterInformation.PeakValues[1];
             volumeMeter5.Amplitude = caca.AudioMeterInformation.PeakValues[1];
             volumeMeter6.Amplitude = caca.AudioMeterInformation.PeakValues[1];
-
         }
 
         private void btnGrabar_Click(object sender, EventArgs e)
         {
             lblGrabant.Text = "GRAVANT...";
-            
         }
     }
 }

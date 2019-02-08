@@ -36,12 +36,12 @@
             // 
             this.volumeMeter1.Amplitude = 0F;
             this.volumeMeter1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.volumeMeter1.Location = new System.Drawing.Point(0, 21);
+            this.volumeMeter1.Location = new System.Drawing.Point(0, 373);
             this.volumeMeter1.MaxDb = 18F;
             this.volumeMeter1.MinDb = -60F;
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Padding = new System.Windows.Forms.Padding(3);
-            this.volumeMeter1.Size = new System.Drawing.Size(163, 20);
+            this.volumeMeter1.Size = new System.Drawing.Size(488, 20);
             this.volumeMeter1.TabIndex = 0;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
@@ -49,12 +49,12 @@
             // 
             this.volumeMeter2.Amplitude = 0F;
             this.volumeMeter2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.volumeMeter2.Location = new System.Drawing.Point(0, 1);
+            this.volumeMeter2.Location = new System.Drawing.Point(0, 353);
             this.volumeMeter2.MaxDb = 18F;
             this.volumeMeter2.MinDb = -60F;
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Padding = new System.Windows.Forms.Padding(3);
-            this.volumeMeter2.Size = new System.Drawing.Size(163, 20);
+            this.volumeMeter2.Size = new System.Drawing.Size(488, 20);
             this.volumeMeter2.TabIndex = 1;
             this.volumeMeter2.Text = "volumeMeter2";
             // 
@@ -65,7 +65,7 @@
             this.Controls.Add(this.volumeMeter2);
             this.Controls.Add(this.volumeMeter1);
             this.Name = "GravadorContinu";
-            this.Size = new System.Drawing.Size(163, 41);
+            this.Size = new System.Drawing.Size(488, 393);
             this.ResumeLayout(false);
 
         }
