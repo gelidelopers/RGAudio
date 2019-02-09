@@ -53,6 +53,11 @@ namespace Gelida24
             return DateTime.Now.ToLongDateString() + " " + DateTime.Now.ToLongTimeString();
         }
 
+        private void Frm24_Load(object sender, EventArgs e)
+        {
+            continu1.CrearTasca();
+        }
+
         //private void timer2_Tick(object sender, EventArgs e)
         //{
         //   // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));

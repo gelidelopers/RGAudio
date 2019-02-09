@@ -269,7 +269,7 @@
             this.btnPLay.Size = new System.Drawing.Size(71, 54);
             this.btnPLay.TabIndex = 21;
             this.btnPLay.UseVisualStyleBackColor = false;
-            this.btnPLay.Click += new System.EventHandler(this.BtnPLay_Click);
+            this.btnPLay.Click += new System.EventHandler(this.BtnPLay_ClickAsync);
             // 
             // flowLayoutPanelButtons
             // 
@@ -337,6 +337,7 @@
             this.Controls.Add(this.listView1);
             this.Name = "Continu";
             this.Size = new System.Drawing.Size(337, 467);
+            
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

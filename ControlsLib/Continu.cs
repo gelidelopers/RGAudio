@@ -11,7 +11,7 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using Quartz;
-
+using System.Threading;
 
 namespace ControlsLib
 {
@@ -20,6 +20,8 @@ namespace ControlsLib
         public Continu()
         {
             InitializeComponent();
+            
+
         }
         private IWavePlayer waveOut;
         private WaveOutEvent ou;
@@ -83,6 +85,14 @@ namespace ControlsLib
             await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
             MessageBox.Show(text);
         }
+        public async Task ScheduleListAsync(string text, TimeSpan ExecutionTime)
+        {
+            while (true)
+            {
+                await Task.Delay((int)ExecutionTime.TotalMilliseconds);
+                CrearLlista();
+            }
+        }
 
         private ISampleProvider CreateInputStream(string fileName)
         {
@@ -125,12 +135,8 @@ namespace ControlsLib
                 if(waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
                 {
                     waveOut.Stop();
+                    return;
                 }
-            }
-
-            if (String.IsNullOrEmpty(list.First()))
-            {
-                CrearLlista();
             }
             CarregarFitxer();
 
@@ -204,10 +210,19 @@ namespace ControlsLib
                 return;
             }
         }
-
-        private void BtnPLay_Click(object sender, EventArgs e)
+        private async Task TascaHoraria()
         {
-            ScheduleAction("qwertyuiop.flac", dateTimePicker1.Value);
+            await ScheduleListAsync("lol", TimeSpan.FromSeconds(5));
+        }
+
+        private void BtnPLay_ClickAsync(object sender, EventArgs e)
+        {
+            
+        }
+
+        public void CrearTasca()
+        {
+            Task.Run(TascaHoraria);
         }
     }
 }
