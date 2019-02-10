@@ -28,7 +28,7 @@ namespace ControlsLib
         private AudioFileReader audioFileReader;
         private Action<float> setVolumeDelegate;
         private ISampleProvider sampleProvider;
-        private Queue<string> list = new Queue<string>();
+        private Queue<Arxiu> list = new Queue<Arxiu>();
         private TimeSpan duraciototal = new TimeSpan();
         private TimeSpan duracioActual = new TimeSpan();
         private DateTime hfinalitzacio = DateTime.Now;
@@ -40,10 +40,26 @@ namespace ControlsLib
         //public string adsPath { get; set; }
         //public string jinglePath { get; set; }
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
+        
 
         public void CrearLlista()
         {
+            //mirar events programats
 
+            //si nhi ha
+
+                //sino inclou publicitat i hi ha un bloc de publi a la hora, posar la reproduccio
+                //de la publicitat a la hora del programa menys la duracio del bloc de publi
+
+                //carregar abans o despres el jignle de podcast a la web
+
+            //sino
+
+                //mirar si bloc de publi
+
+                //afegir musica
+
+                //afegir jingle
         }
         private DateTime CalcularHora()
         {
@@ -57,12 +73,12 @@ namespace ControlsLib
         {
             duraciototal.Subtract(duraciocanso);
         }
-        public async void ScheduleAction(string fileName,DateTime ExecutionTime)
+        public async void ScheduleAction(Arxiu arxiu,DateTime ExecutionTime)
         {
             await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
             if (list.Count > 0)
             {
-                if (list.First() != fileName && list.ElementAt(1) == fileName)
+                if (list.First()!= arxiu && list.ElementAt(1) == arxiu)
                 {
                     list.Dequeue();
                     
@@ -70,12 +86,12 @@ namespace ControlsLib
                 else
                 {
                     list.Clear();
-                    list.Enqueue(fileName);
+                    list.Enqueue(arxiu);
                 }
             }
             else
             {
-                list.Enqueue(fileName);
+                list.Enqueue(arxiu);
                 
             }
             PlaySong();
@@ -122,7 +138,7 @@ namespace ControlsLib
             ///-60 to 0 dB volume
             /// 0 dB to 5 dB volume    
             volumeMeter2.Amplitude = e.MaxSampleValues[1];
-            volumeMeter4.Amplitude = e.MaxSampleValues[0];
+            volumeMeter4.Amplitude = e.MaxSampleValues[1];
         }
         //button play onclick
 
@@ -177,7 +193,7 @@ namespace ControlsLib
             try
             {
                 //canviar dequeue per first si esta activat o no el borrar
-                sampleProvider = CreateInputStream(list.Dequeue());
+                sampleProvider = CreateInputStream(list.Dequeue().fileName);
             }
             catch (Exception createException)
             {

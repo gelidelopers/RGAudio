@@ -13,6 +13,10 @@ namespace Gelida24
             public string name { get; set; }
             public string artist { get; set; }
             public TimeSpan duration { get; set; }
+            public Tipus tipus { get; set; }
+
+
+        public enum Tipus { canso, anunci, bloc, jingle, programa};
 
         
     }
