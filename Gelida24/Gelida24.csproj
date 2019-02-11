@@ -52,7 +52,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Gelida24.Program</StartupObject>
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -65,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>RGAudio.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>gelida_player_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -127,6 +131,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutRG24.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutRG24.Designer.cs">
+      <DependentUpon>AboutRG24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Arxiu.cs" />
     <Compile Include="frm24.cs">
       <SubType>Form</SubType>
@@ -154,6 +164,9 @@
     <Compile Include="WebBrowser.Designer.cs">
       <DependentUpon>WebBrowser.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AboutRG24.resx">
+      <DependentUpon>AboutRG24.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm24.resx">
       <DependentUpon>frm24.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,6 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\gelida player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="gelida_player_icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.109.2\build\net46\System.Data.SQLite.Core.targets')" />

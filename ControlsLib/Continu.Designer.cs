@@ -337,7 +337,6 @@
             this.Controls.Add(this.listView1);
             this.Name = "Continu";
             this.Size = new System.Drawing.Size(337, 467);
-            
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);

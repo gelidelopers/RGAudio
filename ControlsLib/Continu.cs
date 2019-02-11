@@ -45,21 +45,33 @@ namespace ControlsLib
         public void CrearLlista()
         {
             //mirar events programats
-
             //si nhi ha
 
-                //sino inclou publicitat i hi ha un bloc de publi a la hora, posar la reproduccio
-                //de la publicitat a la hora del programa menys la duracio del bloc de publi
+            //sino ha passat de la hora
 
-                //carregar abans o despres el jignle de podcast a la web
+            //sino inclou publicitat i hi ha un bloc de publi a la hora, posar la reproduccio
+            //de la publicitat a la hora del programa menys la duracio del bloc de publi
+
+            //si ha passat de la hora --> audio.currentime == datetime.now - hora de inici del programa
+
+            //carregar abans o despres el jignle de podcast a la web
 
             //sino
+            //mirar si bloc de publi
 
-                //mirar si bloc de publi
+            //afegir musica
 
-                //afegir musica
+            //afegir jingle
+            
 
-                //afegir jingle
+        }
+        public void AfegirArxiu()
+        {
+            Arxiu lol = new Arxiu();
+
+            lol.fileName = "qwertyuiop.m4a";
+            list.Enqueue(lol);
+
         }
         private DateTime CalcularHora()
         {
@@ -101,7 +113,7 @@ namespace ControlsLib
             await Task.Delay((int)ExecutionTime.Subtract(DateTime.Now).TotalMilliseconds);
             MessageBox.Show(text);
         }
-        public async Task ScheduleListAsync(string text, TimeSpan ExecutionTime)
+        public async Task CrearLlistaCada(TimeSpan ExecutionTime)
         {
             while (true)
             {
@@ -142,7 +154,7 @@ namespace ControlsLib
         }
         //button play onclick
 
-        private void PlaySong()
+        public void PlaySong()
         {
             // we are in a stopped state
             // TODO: only re-initialise if necessary
@@ -198,14 +210,21 @@ namespace ControlsLib
             catch (Exception createException)
             {
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
-                listView1.Items.RemoveAt(0);
+                
                 return;
             }
         }
         private void CarregarDuracio()
         {
-            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
-               audioFileReader.TotalTime.Seconds);
+            try
+            {
+                labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
+                   audioFileReader.TotalTime.Seconds);
+            }
+            catch
+            {
+
+            }
         }
         private void InicialitzarSo()
         {
@@ -228,12 +247,14 @@ namespace ControlsLib
         }
         private async Task TascaHoraria()
         {
-            await ScheduleListAsync("lol", TimeSpan.FromSeconds(5));
+            await CrearLlistaCada(TimeSpan.FromMinutes(2));
         }
 
         private void BtnPLay_ClickAsync(object sender, EventArgs e)
         {
-            
+            Arxiu lol = new Arxiu();
+            lol.fileName = "qwertyuiop.m4a";
+            ScheduleAction(lol, dateTimePicker1.Value);
         }
 
         public void CrearTasca()

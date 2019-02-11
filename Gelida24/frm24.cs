@@ -56,6 +56,15 @@ namespace Gelida24
         private void Frm24_Load(object sender, EventArgs e)
         {
             continu1.CrearTasca();
+            
+            continu1.AfegirArxiu();
+            continu1.PlaySong();
+        }
+
+        private void InformacióDelProgramaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form form = new AboutRG24();
+            form.Show();
         }
 
         //private void timer2_Tick(object sender, EventArgs e)

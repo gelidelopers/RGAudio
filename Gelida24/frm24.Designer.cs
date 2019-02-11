@@ -31,20 +31,25 @@
             this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.gravadorContinu3 = new ControlsLib.GravadorContinu();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.gravadorContinu2 = new ControlsLib.GravadorContinu();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.gravadorContinu1 = new ControlsLib.GravadorContinu();
             this.lblTime = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.continu1 = new ControlsLib.Continu();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.player2 = new ControlsLib.Player();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.player1 = new ControlsLib.Player();
-            this.gravadorContinu3 = new ControlsLib.GravadorContinu();
-            this.gravadorContinu2 = new ControlsLib.GravadorContinu();
-            this.gravadorContinu1 = new ControlsLib.GravadorContinu();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.configuracióToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.àudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informacióDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -53,6 +58,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,10 +67,11 @@
             this.panel1.Controls.Add(this.groupBox5);
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.lblTime);
+            this.panel1.Controls.Add(this.menuStrip1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1336, 93);
+            this.panel1.Size = new System.Drawing.Size(1336, 118);
             this.panel1.TabIndex = 4;
             // 
             // groupBox6
@@ -72,43 +79,70 @@
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox6.Controls.Add(this.gravadorContinu3);
             this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(841, 12);
+            this.groupBox6.Location = new System.Drawing.Point(841, 38);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(169, 75);
             this.groupBox6.TabIndex = 5;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Gravació de programes";
             // 
+            // gravadorContinu3
+            // 
+            this.gravadorContinu3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu3.Location = new System.Drawing.Point(7, 22);
+            this.gravadorContinu3.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu3.Name = "gravadorContinu3";
+            this.gravadorContinu3.Size = new System.Drawing.Size(138, 46);
+            this.gravadorContinu3.TabIndex = 0;
+            // 
             // groupBox5
             // 
             this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox5.Controls.Add(this.gravadorContinu2);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(1016, 12);
+            this.groupBox5.Location = new System.Drawing.Point(1016, 38);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(152, 75);
             this.groupBox5.TabIndex = 4;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Streaming online";
             // 
+            // gravadorContinu2
+            // 
+            this.gravadorContinu2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu2.Location = new System.Drawing.Point(7, 22);
+            this.gravadorContinu2.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu2.Name = "gravadorContinu2";
+            this.gravadorContinu2.Size = new System.Drawing.Size(138, 46);
+            this.gravadorContinu2.TabIndex = 0;
+            // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.gravadorContinu1);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(1172, 12);
+            this.groupBox4.Location = new System.Drawing.Point(1172, 38);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(152, 75);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Gravació continua";
             // 
+            // gravadorContinu1
+            // 
+            this.gravadorContinu1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu1.Location = new System.Drawing.Point(7, 13);
+            this.gravadorContinu1.Margin = new System.Windows.Forms.Padding(4);
+            this.gravadorContinu1.Name = "gravadorContinu1";
+            this.gravadorContinu1.Size = new System.Drawing.Size(138, 55);
+            this.gravadorContinu1.TabIndex = 0;
+            // 
             // lblTime
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTime.Location = new System.Drawing.Point(0, 0);
+            this.lblTime.Location = new System.Drawing.Point(0, 24);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(151, 37);
             this.lblTime.TabIndex = 0;
@@ -125,11 +159,11 @@
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.groupBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 93);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 118);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1336, 675);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1336, 650);
             this.tableLayoutPanel1.TabIndex = 5;
             // 
             // groupBox3
@@ -139,40 +173,10 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(894, 6);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(436, 663);
+            this.groupBox3.Size = new System.Drawing.Size(436, 638);
             this.groupBox3.TabIndex = 1;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "24 H";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.player2);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(450, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(435, 663);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Canal 2";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.player1);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(435, 663);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Canal 1";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // continu1
             // 
@@ -181,8 +185,20 @@
             this.continu1.Margin = new System.Windows.Forms.Padding(4);
             this.continu1.Name = "continu1";
             this.continu1.outDev = ((sbyte)(0));
-            this.continu1.Size = new System.Drawing.Size(430, 642);
+            this.continu1.Size = new System.Drawing.Size(430, 617);
             this.continu1.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.player2);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(450, 6);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(435, 638);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Canal 2";
             // 
             // player2
             // 
@@ -192,8 +208,20 @@
             this.player2.MinimumSize = new System.Drawing.Size(384, 609);
             this.player2.Name = "player2";
             this.player2.outDev = ((sbyte)(0));
-            this.player2.Size = new System.Drawing.Size(429, 642);
+            this.player2.Size = new System.Drawing.Size(429, 617);
             this.player2.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.player1);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(435, 638);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Canal 1";
             // 
             // player1
             // 
@@ -203,35 +231,55 @@
             this.player1.MinimumSize = new System.Drawing.Size(384, 609);
             this.player1.Name = "player1";
             this.player1.outDev = ((sbyte)(0));
-            this.player1.Size = new System.Drawing.Size(429, 642);
+            this.player1.Size = new System.Drawing.Size(429, 617);
             this.player1.TabIndex = 0;
             // 
-            // gravadorContinu3
+            // timer1
             // 
-            this.gravadorContinu3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu3.Location = new System.Drawing.Point(7, 22);
-            this.gravadorContinu3.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu3.Name = "gravadorContinu3";
-            this.gravadorContinu3.Size = new System.Drawing.Size(138, 46);
-            this.gravadorContinu3.TabIndex = 0;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // gravadorContinu2
+            // menuStrip1
             // 
-            this.gravadorContinu2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu2.Location = new System.Drawing.Point(7, 22);
-            this.gravadorContinu2.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu2.Name = "gravadorContinu2";
-            this.gravadorContinu2.Size = new System.Drawing.Size(138, 46);
-            this.gravadorContinu2.TabIndex = 0;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuracióToolStripMenuItem,
+            this.ajudaToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
             // 
-            // gravadorContinu1
+            // configuracióToolStripMenuItem
             // 
-            this.gravadorContinu1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gravadorContinu1.Location = new System.Drawing.Point(7, 13);
-            this.gravadorContinu1.Margin = new System.Windows.Forms.Padding(4);
-            this.gravadorContinu1.Name = "gravadorContinu1";
-            this.gravadorContinu1.Size = new System.Drawing.Size(138, 55);
-            this.gravadorContinu1.TabIndex = 0;
+            this.configuracióToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.àudioToolStripMenuItem});
+            this.configuracióToolStripMenuItem.Name = "configuracióToolStripMenuItem";
+            this.configuracióToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.configuracióToolStripMenuItem.Text = "Configuració";
+            // 
+            // àudioToolStripMenuItem
+            // 
+            this.àudioToolStripMenuItem.Name = "àudioToolStripMenuItem";
+            this.àudioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.àudioToolStripMenuItem.Text = "Àudio";
+            // 
+            // ajudaToolStripMenuItem
+            // 
+            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.informacióDelProgramaToolStripMenuItem});
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.ajudaToolStripMenuItem.Text = "Ajuda";
+            // 
+            // informacióDelProgramaToolStripMenuItem
+            // 
+            this.informacióDelProgramaToolStripMenuItem.Name = "informacióDelProgramaToolStripMenuItem";
+            this.informacióDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.informacióDelProgramaToolStripMenuItem.Text = "Informació del programa";
+            this.informacióDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.InformacióDelProgramaToolStripMenuItem_Click);
             // 
             // frm24
             // 
@@ -242,6 +290,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "frm24";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -255,6 +304,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -276,5 +327,10 @@
         private ControlsLib.GravadorContinu gravadorContinu3;
         private System.Windows.Forms.GroupBox groupBox5;
         private ControlsLib.GravadorContinu gravadorContinu2;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem configuracióToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem àudioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajudaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem informacióDelProgramaToolStripMenuItem;
     }
 }
