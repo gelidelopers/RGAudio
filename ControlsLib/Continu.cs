@@ -39,7 +39,7 @@ namespace ControlsLib
         //public string musicPath { get; set; }
         //public string adsPath { get; set; }
         //public string jinglePath { get; set; }
-        public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
+        
         
 
         public void CrearLlista()
@@ -62,14 +62,15 @@ namespace ControlsLib
             //afegir musica
 
             //afegir jingle
-            
+            AfegirArxiu();            
 
         }
         public void AfegirArxiu()
         {
-            Arxiu lol = new Arxiu();
-
-            lol.fileName = "qwertyuiop.m4a";
+            Arxiu lol = new Arxiu
+            {
+                fileName = "qwertyuiop.m4a"
+            };
             list.Enqueue(lol);
 
         }
@@ -209,7 +210,7 @@ namespace ControlsLib
             }
             catch (Exception createException)
             {
-                MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
+                
                 
                 return;
             }
@@ -239,9 +240,9 @@ namespace ControlsLib
                 waveOut.Init(sampleProvider);
 
             }
-            catch (Exception initException)
+            catch 
             {
-                MessageBox.Show(String.Format("{0}", initException.Message), "Error amb la sortida de so");
+                
                 return;
             }
         }

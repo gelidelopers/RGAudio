@@ -86,6 +86,12 @@
     <Compile Include="GravadorContinu.Designer.cs">
       <DependentUpon>GravadorContinu.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImportMusic.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ImportMusic.Designer.cs">
+      <DependentUpon>ImportMusic.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GravadorContinu.resx">
       <DependentUpon>GravadorContinu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportMusic.resx">
+      <DependentUpon>ImportMusic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PLayer.resx">
       <DependentUpon>Player.cs</DependentUpon>

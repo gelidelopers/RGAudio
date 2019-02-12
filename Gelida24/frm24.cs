@@ -18,33 +18,19 @@ namespace Gelida24
         {
             InitializeComponent();
             lblTime.Text = GenerarTimeDate();
-            enumerator = new NAudio.CoreAudioApi.MMDeviceEnumerator();
-
-            try {
-        
-                wiw = enumerator.EnumerateAudioEndPoints(DataFlow.All, DeviceState.Active);
-
-                caca = (MMDevice)wiw.First();
-            }
-            catch
-            {
-                MessageBox.Show("no s'ha detectat cap dispositiu de so");
-            }
 
         }
-        public int out1 { get; set; }
-        public int out2 { get; set; }
-        public int out24 { get; set; }
-        public int in1 { get; set; }
-        public int in2 { get; set; }
+        public int Out1 { get; set; }
+        public int Out2 { get; set; }
+        public int Out24 { get; set; }
+        public int In1 { get; set; }
+        public int In2 { get; set; }
+        public string Out1name { get; set; }
 
-        public MMDeviceCollection wiw;
-        MMDevice caca;
-        private NAudio.CoreAudioApi.MMDeviceEnumerator enumerator;
         
         //foreach que recorri tots els enumerator i els compari amb el string del nom i afegeixi cada mmdevice
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             lblTime.Text = GenerarTimeDate();
         }
