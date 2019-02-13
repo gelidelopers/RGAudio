@@ -80,6 +80,12 @@
     <Compile Include="Continu.Designer.cs">
       <DependentUpon>Continu.cs</DependentUpon>
     </Compile>
+    <Compile Include="DeviceSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DeviceSelector.Designer.cs">
+      <DependentUpon>DeviceSelector.cs</DependentUpon>
+    </Compile>
     <Compile Include="GravadorContinu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -109,6 +115,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Continu.resx">
       <DependentUpon>Continu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeviceSelector.resx">
+      <DependentUpon>DeviceSelector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GravadorContinu.resx">
       <DependentUpon>GravadorContinu.cs</DependentUpon>
