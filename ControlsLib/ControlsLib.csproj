@@ -98,6 +98,12 @@
     <Compile Include="ImportMusic.Designer.cs">
       <DependentUpon>ImportMusic.cs</DependentUpon>
     </Compile>
+    <Compile Include="DropBetweenList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropBetweenList.Designer.cs">
+      <DependentUpon>DropBetweenList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ImportMusic.resx">
       <DependentUpon>ImportMusic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropBetweenList.resx">
+      <DependentUpon>DropBetweenList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PLayer.resx">
       <DependentUpon>Player.cs</DependentUpon>
