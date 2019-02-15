@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 namespace ControlsLib
 {
-    public partial class MusicLibrary : UserControl
+    public partial class DropBetweenList : UserControl
     {
-        public MusicLibrary()
+        public DropBetweenList()
         {
             InitializeComponent();
+            listView1.Items.Add("lol");
+            listView1.Items.Add("caca");
+            listView1.Items.Add("culdolla");
         }
 
         private void ListView1_DragEnter(object sender, DragEventArgs e)
@@ -33,6 +36,11 @@ namespace ControlsLib
             var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
             item.ListView.Items.Remove(item);
             listView1.Items.Add(item);
+        }
+
+        private void ListView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            base.DoDragDrop(listView1.SelectedItems[0], DragDropEffects.Move);
         }
     }
 }

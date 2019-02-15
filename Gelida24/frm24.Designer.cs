@@ -184,7 +184,7 @@
             this.continu1.Location = new System.Drawing.Point(3, 18);
             this.continu1.Margin = new System.Windows.Forms.Padding(4);
             this.continu1.Name = "continu1";
-            this.continu1.outDev = ((sbyte)(0));
+            this.continu1.OutDev = ((sbyte)(0));
             this.continu1.Size = new System.Drawing.Size(430, 617);
             this.continu1.TabIndex = 0;
             // 

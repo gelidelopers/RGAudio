@@ -35,7 +35,7 @@ namespace ControlsLib
 
         //https://gist.github.com/tedmiston/5935757
 
-        public sbyte outDev { get; set; }
+        public sbyte OutDev { get; set; }
         //public string musicPath { get; set; }
         //public string adsPath { get; set; }
         //public string jinglePath { get; set; }
@@ -208,7 +208,7 @@ namespace ControlsLib
                 //canviar dequeue per first si esta activat o no el borrar
                 sampleProvider = CreateInputStream(list.Dequeue().fileName);
             }
-            catch (Exception createException)
+            catch (Exception )
             {
                 
                 
@@ -233,7 +233,7 @@ namespace ControlsLib
             {
                 ou = new WaveOutEvent
                 {
-                    DeviceNumber = outDev
+                    DeviceNumber = OutDev
                 };
                 waveOut = ou;
 
@@ -253,8 +253,10 @@ namespace ControlsLib
 
         private void BtnPLay_ClickAsync(object sender, EventArgs e)
         {
-            Arxiu lol = new Arxiu();
-            lol.fileName = "qwertyuiop.m4a";
+            Arxiu lol = new Arxiu
+            {
+                fileName = "qwertyuiop.m4a"
+            };
             ScheduleAction(lol, dateTimePicker1.Value);
         }
 
