@@ -15,10 +15,23 @@ namespace TestingForms
         public Form1()
         {
             InitializeComponent();
+
+            ColumnHeader col = new ColumnHeader
+            {
+                Text = "caca"
+            };
+            dropBetweenList1.AddColumn(col);
+            dropBetweenList2.AddColumn(new ColumnHeader{Text = "caca"});
+
             dropBetweenList1.AddItem(new ListViewItem("wiw"));
             dropBetweenList1.AddItem(new ListViewItem("caca"));
             dropBetweenList1.AddItem(new ListViewItem("culdolla"));
             dropBetweenList1.AddItem(new ListViewItem("llavontes"));
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

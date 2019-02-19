@@ -17,8 +17,10 @@ namespace ControlsLib
             InitializeComponent();
             
         }
-        
-
+        public void AddColumn(ColumnHeader column)
+        {
+            listView1.Columns.Add(column);
+        }
         public void AddItem(ListViewItem item)
         {
             listView1.Items.Add(item);
