@@ -15,32 +15,50 @@ namespace ControlsLib
         public DropBetweenList()
         {
             InitializeComponent();
-            listView1.Items.Add("lol");
-            listView1.Items.Add("caca");
-            listView1.Items.Add("culdolla");
+            
         }
+        
+
+        public void AddItem(ListViewItem item)
+        {
+            listView1.Items.Add(item);
+        }
+
+        public ListViewItem GetItemAt(int index)
+        {
+            return listView1.Items[index];
+        }
+
+        public void DeleteItemAt(int index)
+        {
+            listView1.Items.RemoveAt(index);
+        }
+
 
         private void ListView1_DragEnter(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(typeof(ListViewItem)))
+            if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
             {
-                var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                
-                    e.Effect = DragDropEffects.Move;
-                
+                e.Effect = DragDropEffects.Move; 
             }
         }
 
         private void ListView1_DragDrop(object sender, DragEventArgs e)
         {
-            var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-            item.ListView.Items.Remove(item);
-            listView1.Items.Add(item);
+            var item = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
+
+            foreach(ListViewItem lol in item)
+            {
+                lol.ListView.Items.Remove(lol);
+                listView1.Items.Add(lol);
+            }
+
+            
         }
 
         private void ListView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
-            base.DoDragDrop(listView1.SelectedItems[0], DragDropEffects.Move);
+            base.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
         }
     }
 }

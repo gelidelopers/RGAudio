@@ -15,6 +15,10 @@ namespace TestingForms
         public Form1()
         {
             InitializeComponent();
+            dropBetweenList1.AddItem(new ListViewItem("wiw"));
+            dropBetweenList1.AddItem(new ListViewItem("caca"));
+            dropBetweenList1.AddItem(new ListViewItem("culdolla"));
+            dropBetweenList1.AddItem(new ListViewItem("llavontes"));
         }
     }
 }
