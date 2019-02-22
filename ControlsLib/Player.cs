@@ -22,6 +22,10 @@ namespace ControlsLib
         public Player()
         {
             InitializeComponent();
+            ColumnHeader column = new ColumnHeader() { Text = "Titol" };
+            dropBetweenList1.AddColumn(column);
+            column = new ColumnHeader() { Text = "Artista" };
+            dropBetweenList1.AddColumn(column);
         }
         private IWavePlayer waveOut;
         private WaveOutEvent ou;
@@ -159,13 +163,13 @@ namespace ControlsLib
             {
                 waveOut.Play();
                 timer1.Start();
-                listView1.Items[index].Font = fntNotPlaying;
+                //listView1.Items[index].Font = fntNotPlaying;
                 index = seguen;
                 if (necesitaCalcularSeguen)
                 {
                     seguen = ObtenirSeguentIndex(index);
                 }
-                listView1.Items[index].Font = fntPlaying;
+                //listView1.Items[index].Font = fntPlaying;
                 necesitaCalcularSeguen = true;
                 isPlaying = true;
             }
@@ -193,7 +197,8 @@ namespace ControlsLib
                 }
                 if (Borrar)
                 {
-                    listView1.Items.RemoveAt(index);
+                    //listView1.Items.RemoveAt(index);
+                    dropBetweenList1.DeleteItemAt(index);
                 }
                 //waveOut.Dispose();
             };
@@ -230,7 +235,8 @@ namespace ControlsLib
                         //item.SubItems.Add(axr.artist);
                         //item.SubItems.Add(axr.duration.ToString());
                         playlist.Add(axr.fileName);
-                        listView1.Items.Add(itom);
+                        //listView1.Items.Add(itom);
+                        dropBetweenList1.AddItem(itom);
 
                     }
                     catch (TagLib.CorruptFileException)
@@ -282,7 +288,7 @@ namespace ControlsLib
                 {
                     if (count > 1 && actual < count - 1)
                     {
-                        if (seguen >= 0) listView1.Items[seguen].Font = fntPlaying;
+                        //if (seguen >= 0) listView1.Items[seguen].Font = fntPlaying;
                         i = index + 1;
                         
                     }
@@ -298,14 +304,14 @@ namespace ControlsLib
             }
             else if (Bucle)
             {
-                if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
+                //if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
                 i = actual;
             }
             else
             {
-                if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
+                //if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
             }
-            if (i >= 0) listView1.Items[i].Font = fntNext;
+            //if (i >= 0) listView1.Items[i].Font = fntNext;
             return i;
         }
         //addfolder
@@ -328,7 +334,7 @@ namespace ControlsLib
             {
                 if(count > 0)
                 {
-                    seguen = listView1.SelectedItems[0].Index;
+                    //seguen = listView1.SelectedItems[0].Index;
                 }
                 else
                 {
@@ -373,7 +379,7 @@ namespace ControlsLib
         {
             if(count > 0)
             {
-                seguen = listView1.SelectedItems[0].Index;
+                //seguen = listView1.SelectedItems[0].Index;
                 PlaySong();
             }
         }

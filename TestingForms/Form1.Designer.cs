@@ -28,10 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.button1 = new System.Windows.Forms.Button();
             this.dropBetweenList2 = new ControlsLib.DropBetweenList();
             this.dropBetweenList1 = new ControlsLib.DropBetweenList();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(254, 343);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(458, 95);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // dropBetweenList2
             // 
@@ -44,18 +54,8 @@
             // 
             this.dropBetweenList1.Location = new System.Drawing.Point(12, 12);
             this.dropBetweenList1.Name = "dropBetweenList1";
-            this.dropBetweenList1.Size = new System.Drawing.Size(268, 240);
+            this.dropBetweenList1.Size = new System.Drawing.Size(269, 279);
             this.dropBetweenList1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(254, 343);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(458, 95);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // Form1
             // 

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace ControlsLib
 {
     public partial class DropBetweenList : UserControl
@@ -55,12 +56,94 @@ namespace ControlsLib
                 listView1.Items.Add(lol);
             }
 
-            
         }
 
         private void ListView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
             base.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    ListViewItem selected = listView1.SelectedItems[0];
+                    int indx = selected.Index;
+                    int totl = listView1.Items.Count;
+
+                    if (indx == 0)
+                    {
+                        listView1.Items.Remove(selected);
+                        listView1.Items.Insert(totl - 1, selected);
+                    }
+                    else
+                    {
+                        listView1.Items.Remove(selected);
+                        listView1.Items.Insert(indx - 1, selected);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un item");
+                }
+            }
+            catch 
+            {
+
+            }
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    ListViewItem selected = listView1.SelectedItems[0];
+                    int indx = selected.Index;
+                    int totl = listView1.Items.Count;
+
+                    if (indx == totl - 1)
+                    {
+                        listView1.Items.Remove(selected);
+                        listView1.Items.Insert(0, selected);
+                    }
+                    else
+                    {
+                        listView1.Items.Remove(selected);
+                        listView1.Items.Insert(indx + 1, selected);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un item");
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private void Button4_Click(object sender, EventArgs e)
+        {
+
+            if (MessageBox.Show("Estàs segur que vols borrar tota la llista?", "Borrar tot?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                listView1.Items.Clear();
+            }
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            ListView.SelectedListViewItemCollection selected = listView1.SelectedItems;
+
+            foreach(ListViewItem item in selected)
+            {
+                listView1.Items.Remove(item);
+            }
+
         }
     }
 }

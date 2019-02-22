@@ -56,9 +56,7 @@
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dropBetweenList1 = new ControlsLib.DropBetweenList();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -163,7 +161,7 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 218);
+            this.panelBottom.Location = new System.Drawing.Point(0, 273);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(288, 277);
             this.panelBottom.TabIndex = 32;
@@ -415,38 +413,23 @@
             this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
-            // listView1
+            // dropBetweenList1
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2});
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(288, 218);
-            this.listView1.TabIndex = 33;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Títol";
-            this.columnHeader1.Width = 159;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Artista";
-            this.columnHeader2.Width = 121;
+            this.dropBetweenList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dropBetweenList1.Location = new System.Drawing.Point(0, 0);
+            this.dropBetweenList1.Name = "dropBetweenList1";
+            this.dropBetweenList1.Size = new System.Drawing.Size(288, 273);
+            this.dropBetweenList1.TabIndex = 33;
             // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.dropBetweenList1);
             this.Controls.Add(this.panelBottom);
-            this.MinimumSize = new System.Drawing.Size(288, 495);
+            this.MinimumSize = new System.Drawing.Size(288, 550);
             this.Name = "Player";
-            this.Size = new System.Drawing.Size(288, 495);
+            this.Size = new System.Drawing.Size(288, 550);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -496,8 +479,6 @@
         private NAudio.Gui.VolumeMeter volumeMeter2;
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
+        public DropBetweenList dropBetweenList1;
     }
 }
