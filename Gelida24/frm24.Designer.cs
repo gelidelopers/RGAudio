@@ -207,7 +207,7 @@
             this.player2.Margin = new System.Windows.Forms.Padding(4);
             this.player2.MinimumSize = new System.Drawing.Size(384, 609);
             this.player2.Name = "player2";
-            this.player2.outDev = ((sbyte)(0));
+            this.player2.OutDev = ((sbyte)(0));
             this.player2.Size = new System.Drawing.Size(429, 617);
             this.player2.TabIndex = 0;
             // 
@@ -230,7 +230,7 @@
             this.player1.Margin = new System.Windows.Forms.Padding(4);
             this.player1.MinimumSize = new System.Drawing.Size(384, 609);
             this.player1.Name = "player1";
-            this.player1.outDev = ((sbyte)(0));
+            this.player1.OutDev = ((sbyte)(0));
             this.player1.Size = new System.Drawing.Size(429, 617);
             this.player1.TabIndex = 0;
             // 

@@ -151,7 +151,7 @@
             // timer1
             // 
             this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
             // panelBottom
             // 
@@ -174,8 +174,8 @@
             this.trackBarPosition.Name = "trackBarPosition";
             this.trackBarPosition.Size = new System.Drawing.Size(288, 45);
             this.trackBarPosition.TabIndex = 1;
-            this.trackBarPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseDown);
-            this.trackBarPosition.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseUp);
+            this.trackBarPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TrackBarPosition_MouseDown);
+            this.trackBarPosition.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TrackBarPosition_MouseUp);
             // 
             // flowLayoutPanelButtons
             // 
@@ -209,7 +209,7 @@
             this.btnPLay.Size = new System.Drawing.Size(71, 54);
             this.btnPLay.TabIndex = 21;
             this.btnPLay.UseVisualStyleBackColor = false;
-            this.btnPLay.Click += new System.EventHandler(this.btnPLay_Click);
+            this.btnPLay.Click += new System.EventHandler(this.BtnPLay_Click);
             // 
             // btnPause
             // 
@@ -224,7 +224,7 @@
             this.btnPause.Size = new System.Drawing.Size(56, 45);
             this.btnPause.TabIndex = 28;
             this.btnPause.UseVisualStyleBackColor = true;
-            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            this.btnPause.Click += new System.EventHandler(this.BtnPause_Click);
             // 
             // btnStop
             // 
@@ -239,7 +239,7 @@
             this.btnStop.Size = new System.Drawing.Size(49, 45);
             this.btnStop.TabIndex = 22;
             this.btnStop.UseVisualStyleBackColor = true;
-            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            this.btnStop.Click += new System.EventHandler(this.BtnStop_Click);
             // 
             // btnFolder
             // 
@@ -272,7 +272,7 @@
             this.btnContinu.TabIndex = 29;
             this.btnContinu.Text = "Continu";
             this.btnContinu.UseVisualStyleBackColor = false;
-            this.btnContinu.Click += new System.EventHandler(this.btnContinu_Click);
+            this.btnContinu.Click += new System.EventHandler(this.BtnContinu_Click);
             // 
             // btnLoop
             // 
@@ -289,7 +289,7 @@
             this.btnLoop.TabIndex = 32;
             this.btnLoop.Text = "Bucle";
             this.btnLoop.UseVisualStyleBackColor = false;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
+            this.btnLoop.Click += new System.EventHandler(this.BtnLoop_Click);
             // 
             // btnBorrar
             // 
@@ -305,7 +305,7 @@
             this.btnBorrar.TabIndex = 30;
             this.btnBorrar.Text = "Borrar";
             this.btnBorrar.UseVisualStyleBackColor = false;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.btnBorrar.Click += new System.EventHandler(this.BtnBorrar_Click);
             // 
             // panelVuLeft
             // 

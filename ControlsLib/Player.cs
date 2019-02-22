@@ -43,7 +43,7 @@ namespace ControlsLib
         public bool Continuar = true;
         public bool Borrar = true;
         public bool Bucle = false;
-        public sbyte outDev { get; set; }
+        public sbyte OutDev { get; set; }
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntNext = new Font("Arial", 10, System.Drawing.FontStyle.Underline);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -98,19 +98,12 @@ namespace ControlsLib
         }
         private void CarregarFitxer()
         {
-            try
-            {
+            
                 failneim = playlist.ElementAt(seguen);
                 //canviar dequeue per first si esta activat o no el borrar
                 sampleProvider = CreateInputStream(failneim);
-            }
-            catch (Exception createException)
-            {
-                MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
-                //playlist.RemoveAt(seguen);
-                //listView1.Items.RemoveAt(0);
-                return;
-            }
+            
+            
         }
         private void CarregarDuracio()
         {
@@ -119,22 +112,17 @@ namespace ControlsLib
         }
         private void InicialitzarSo()
         {
-            try
-            {
+            
                 ou = new WaveOutEvent
                 {
-                    DeviceNumber = outDev
+                    DeviceNumber = OutDev
                 };
                 waveOut = ou;
 
                 waveOut.Init(sampleProvider);
 
-            }
-            catch (Exception initException)
-            {
-                MessageBox.Show(String.Format("{0}", initException.Message), "Error amb la sortida de so");
-                return;
-            }
+            
+            
         }
         private void PlaySong()
         {
@@ -144,39 +132,67 @@ namespace ControlsLib
                 {
                     return;
                 }
+
+
                 else if (waveOut.PlaybackState == PlaybackState.Paused)
                 {
-                    waveOut.Play();
-                    timer1.Start();
+                    try
+                    {
+                        waveOut.Play();
+                        timer1.Start();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Error al reprendre la reproduccio");
+                    }
 
                     return;
+
                 }
             }
-            CarregarFitxer();
+
+            try
+            {
+                CarregarFitxer();
+            }
+            catch
+            {
+                MessageBox.Show("Error amb el fitxer","Error 1");
+                return;
+            }
 
             CarregarDuracio();
 
-            InicialitzarSo();
+            try
+            {
+                InicialitzarSo();
+            }
+            catch
+            {
+                MessageBox.Show("Error amb la sortida de so","Error 2");
+                return;
+            }
 
             //setVolumeDelegate(volumeSlider1.Volume);
             try
             {
                 waveOut.Play();
-                timer1.Start();
-                //listView1.Items[index].Font = fntNotPlaying;
-                index = seguen;
-                if (necesitaCalcularSeguen)
-                {
-                    seguen = ObtenirSeguentIndex(index);
-                }
-                //listView1.Items[index].Font = fntPlaying;
-                necesitaCalcularSeguen = true;
-                isPlaying = true;
             }
             catch
             {
-
+                MessageBox.Show("Error al reproduir","Error 3");
             }
+            timer1.Start();
+            //listView1.Items[index].Font = fntNotPlaying;
+            index = seguen;
+            if (necesitaCalcularSeguen)
+            {
+                seguen = ObtenirSeguentIndex(index);
+            }
+            //listView1.Items[index].Font = fntPlaying;
+            necesitaCalcularSeguen = true;
+            isPlaying = true;
+            
 
             waveOut.PlaybackStopped += (sender, evn) =>
             {
@@ -229,8 +245,10 @@ namespace ControlsLib
 
                         string[] lol = { axr.name, axr.artist, axr.fileName };
 
-                        var itom = new ListViewItem(lol);
-                        itom.BackColor = Color.Yellow;
+                        var itom = new ListViewItem(lol)
+                        {
+                            BackColor = Color.Yellow
+                        };
 
                         //item.SubItems.Add(axr.artist);
                         //item.SubItems.Add(axr.duration.ToString());
@@ -242,39 +260,39 @@ namespace ControlsLib
                     catch (TagLib.CorruptFileException)
                     {
 
-                        if (!errors.Contains("Fitxer/s Corrupte/s :("))
+                        if (!errors.Contains("Error 4.1: Fitxer/s Corrupte/s :("))
                         {
-                            errors.Add("Fitxer/s Corrupte/s :(");
+                            errors.Add("Error 4.1: Fitxer/s Corrupte/s :(");
                         }
 
                     }
                     catch (TagLib.UnsupportedFormatException)
                     {
-                        if (!errors.Contains("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
+                        if (!errors.Contains("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
                         {
-                            errors.Add("Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
+                            errors.Add("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
                         }
                     }
                     catch
                     {
-                        if (!errors.Contains("Error al carregar el fitxer " + Path.GetFullPath(file) + " :("))
+                        if (!errors.Contains("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :("))
                         {
-                            errors.Add("Error al carregar el fitxer " + Path.GetFullPath(file) + " :(");
+                            errors.Add("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :(");
                         }
                     }
                 }
                 else
                 {
-                    if (!errors.Contains("El format " + Path.GetExtension(file) + " no esta soportat :("))
+                    if (!errors.Contains("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :("))
                     {
 
-                        errors.Add("El format " + Path.GetExtension(file) + " no esta soportat :(");
+                        errors.Add("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :(");
                     }
                 }
             }
             foreach (string error in errors)
             {
-                MessageBox.Show(error);
+                MessageBox.Show(error,"Error 4");
             }
             count = playlist.Count;
         }
@@ -328,7 +346,7 @@ namespace ControlsLib
                 AfegirFitxers(openFileDialog.FileNames);
             }
         }
-        private void btnPLay_Click(object sender, EventArgs e)
+        private void BtnPLay_Click(object sender, EventArgs e)
         {
             if (seguen == -1)
             {
@@ -344,7 +362,7 @@ namespace ControlsLib
             }
             PlaySong();
         }
-        private void timer1_Tick(object sender, EventArgs e)
+        private void Timer1_Tick(object sender, EventArgs e)
         {
             if (waveOut != null && audioFileReader != null)
             {
@@ -362,7 +380,7 @@ namespace ControlsLib
                 trackBarPosition.Value = 0;
             }
         }
-        private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
+        private void TrackBarPosition_MouseUp(object sender, MouseEventArgs e)
         {
             if (waveOut != null)
             {
@@ -371,11 +389,11 @@ namespace ControlsLib
                 audioFileReader.CurrentTime = TimeSpan.FromSeconds(audioFileReader.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
             }
         }
-        private void trackBarPosition_MouseDown(object sender, MouseEventArgs e)
+        private void TrackBarPosition_MouseDown(object sender, MouseEventArgs e)
         {
             timer1.Stop();
         }
-        private void listView1_DoubleClick(object sender, EventArgs e)
+        private void ListView1_DoubleClick(object sender, EventArgs e)
         {
             if(count > 0)
             {
@@ -383,7 +401,7 @@ namespace ControlsLib
                 PlaySong();
             }
         }
-        private void btnPause_Click(object sender, EventArgs e)
+        private void BtnPause_Click(object sender, EventArgs e)
         {
             ResetVUMeter();
             if (waveOut != null)
@@ -394,7 +412,7 @@ namespace ControlsLib
                 }
             }
         }
-        private void btnStop_Click(object sender, EventArgs e)
+        private void BtnStop_Click(object sender, EventArgs e)
         {
             if (waveOut != null)
             {
@@ -403,7 +421,7 @@ namespace ControlsLib
             }
             ResetVUMeter();
         }
-        private void btnBorrar_Click(object sender, EventArgs e)
+        private void BtnBorrar_Click(object sender, EventArgs e)
         {
             if (Borrar)
             {
@@ -418,7 +436,7 @@ namespace ControlsLib
             seguen = ObtenirSeguentIndex(index);
             necesitaCalcularSeguen = false;
         }
-        private void btnContinu_Click(object sender, EventArgs e)
+        private void BtnContinu_Click(object sender, EventArgs e)
         {
             if (Continuar)
             {
@@ -433,7 +451,7 @@ namespace ControlsLib
             seguen = ObtenirSeguentIndex(index);
             necesitaCalcularSeguen = false;
         }
-        private void btnLoop_Click(object sender, EventArgs e)
+        private void BtnLoop_Click(object sender, EventArgs e)
         {
             if (Bucle)
             {

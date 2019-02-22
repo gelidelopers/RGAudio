@@ -49,13 +49,14 @@ namespace Gelida24
 
         private void InformacióDelProgramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form form = new AboutRG24();
-            form.Show();
+            Form frmAbout = new AboutRG24();
+            frmAbout.Show();
         }
 
         //private void timer2_Tick(object sender, EventArgs e)
         //{
-        //   // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
+        //  
+        // progressBar1.Value = (int)(Math.Round(caca.AudioMeterInformation.MasterPeakValue * 100));
         //    //volumeMeter1.Amplitude = caca.AudioMeterInformation.MasterPeakValue;
         //}
     }
