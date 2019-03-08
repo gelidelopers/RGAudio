@@ -86,12 +86,19 @@
     <Compile Include="DeviceSelector.Designer.cs">
       <DependentUpon>DeviceSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmError.Designer.cs">
+      <DependentUpon>frmError.cs</DependentUpon>
+    </Compile>
     <Compile Include="GravadorContinu.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="GravadorContinu.Designer.cs">
       <DependentUpon>GravadorContinu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers.cs" />
     <Compile Include="ImportMusic.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DeviceSelector.resx">
       <DependentUpon>DeviceSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmError.resx">
+      <DependentUpon>frmError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GravadorContinu.resx">
       <DependentUpon>GravadorContinu.cs</DependentUpon>

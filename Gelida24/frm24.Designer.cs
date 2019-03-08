@@ -37,6 +37,11 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.gravadorContinu1 = new ControlsLib.GravadorContinu();
             this.lblTime = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.configuracióToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.àudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.informacióDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.continu1 = new ControlsLib.Continu();
@@ -45,20 +50,15 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.player1 = new ControlsLib.Player();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.configuracióToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.àudioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informacióDelProgramaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -89,9 +89,14 @@
             // gravadorContinu3
             // 
             this.gravadorContinu3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu3.InDev = 0;
             this.gravadorContinu3.Location = new System.Drawing.Point(7, 22);
             this.gravadorContinu3.Margin = new System.Windows.Forms.Padding(4);
             this.gravadorContinu3.Name = "gravadorContinu3";
+            this.gravadorContinu3.OutFormat = null;
+            this.gravadorContinu3.OutPath = null;
+            this.gravadorContinu3.Programa = null;
+            this.gravadorContinu3.RecordMP3 = false;
             this.gravadorContinu3.Size = new System.Drawing.Size(138, 46);
             this.gravadorContinu3.TabIndex = 0;
             // 
@@ -110,9 +115,14 @@
             // gravadorContinu2
             // 
             this.gravadorContinu2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu2.InDev = 0;
             this.gravadorContinu2.Location = new System.Drawing.Point(7, 22);
             this.gravadorContinu2.Margin = new System.Windows.Forms.Padding(4);
             this.gravadorContinu2.Name = "gravadorContinu2";
+            this.gravadorContinu2.OutFormat = null;
+            this.gravadorContinu2.OutPath = null;
+            this.gravadorContinu2.Programa = null;
+            this.gravadorContinu2.RecordMP3 = false;
             this.gravadorContinu2.Size = new System.Drawing.Size(138, 46);
             this.gravadorContinu2.TabIndex = 0;
             // 
@@ -131,9 +141,14 @@
             // gravadorContinu1
             // 
             this.gravadorContinu1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gravadorContinu1.InDev = 0;
             this.gravadorContinu1.Location = new System.Drawing.Point(7, 13);
             this.gravadorContinu1.Margin = new System.Windows.Forms.Padding(4);
             this.gravadorContinu1.Name = "gravadorContinu1";
+            this.gravadorContinu1.OutFormat = null;
+            this.gravadorContinu1.OutPath = null;
+            this.gravadorContinu1.Programa = null;
+            this.gravadorContinu1.RecordMP3 = false;
             this.gravadorContinu1.Size = new System.Drawing.Size(138, 55);
             this.gravadorContinu1.TabIndex = 0;
             // 
@@ -147,6 +162,47 @@
             this.lblTime.Size = new System.Drawing.Size(151, 37);
             this.lblTime.TabIndex = 0;
             this.lblTime.Text = "23:59:59";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuracióToolStripMenuItem,
+            this.ajudaToolStripMenuItem});
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // configuracióToolStripMenuItem
+            // 
+            this.configuracióToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.àudioToolStripMenuItem});
+            this.configuracióToolStripMenuItem.Name = "configuracióToolStripMenuItem";
+            this.configuracióToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+            this.configuracióToolStripMenuItem.Text = "Configuració";
+            // 
+            // àudioToolStripMenuItem
+            // 
+            this.àudioToolStripMenuItem.Name = "àudioToolStripMenuItem";
+            this.àudioToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.àudioToolStripMenuItem.Text = "Àudio";
+            // 
+            // ajudaToolStripMenuItem
+            // 
+            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.informacióDelProgramaToolStripMenuItem});
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.ajudaToolStripMenuItem.Text = "Ajuda";
+            // 
+            // informacióDelProgramaToolStripMenuItem
+            // 
+            this.informacióDelProgramaToolStripMenuItem.Name = "informacióDelProgramaToolStripMenuItem";
+            this.informacióDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.informacióDelProgramaToolStripMenuItem.Text = "Informació del programa";
+            this.informacióDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.InformacióDelProgramaToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -240,47 +296,6 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.Timer1_Tick);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configuracióToolStripMenuItem,
-            this.ajudaToolStripMenuItem});
-            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1336, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // configuracióToolStripMenuItem
-            // 
-            this.configuracióToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.àudioToolStripMenuItem});
-            this.configuracióToolStripMenuItem.Name = "configuracióToolStripMenuItem";
-            this.configuracióToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-            this.configuracióToolStripMenuItem.Text = "Configuració";
-            // 
-            // àudioToolStripMenuItem
-            // 
-            this.àudioToolStripMenuItem.Name = "àudioToolStripMenuItem";
-            this.àudioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.àudioToolStripMenuItem.Text = "Àudio";
-            // 
-            // ajudaToolStripMenuItem
-            // 
-            this.ajudaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.informacióDelProgramaToolStripMenuItem});
-            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
-            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.ajudaToolStripMenuItem.Text = "Ajuda";
-            // 
-            // informacióDelProgramaToolStripMenuItem
-            // 
-            this.informacióDelProgramaToolStripMenuItem.Name = "informacióDelProgramaToolStripMenuItem";
-            this.informacióDelProgramaToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.informacióDelProgramaToolStripMenuItem.Text = "Informació del programa";
-            this.informacióDelProgramaToolStripMenuItem.Click += new System.EventHandler(this.InformacióDelProgramaToolStripMenuItem_Click);
-            // 
             // frm24
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,18 +309,19 @@
             this.Name = "frm24";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm24_FormClosing);
             this.Load += new System.EventHandler(this.Frm24_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
 
         }

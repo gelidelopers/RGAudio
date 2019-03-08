@@ -45,13 +45,35 @@ namespace Gelida24
             
             continu1.AfegirArxiu();
             continu1.PlaySong();
+            gravadorContinu1.RecordMP3 = true;
+            try
+            {
+                gravadorContinu1.StartRecording();
+                MessageBox.Show("recording");
+            }
+            catch
+            {
+                MessageBox.Show("Error 5: ", "No s'ha pogut inicialitzar la gravació");
+            }
         }
 
         private void InformacióDelProgramaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form frmAbout = new AboutRG24();
             frmAbout.Show();
+            
         }
+
+        private void Frm24_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+                gravadorContinu1.StopRecording();
+                MessageBox.Show("recording stopped");
+            
+        }
+
+
+
 
         //private void timer2_Tick(object sender, EventArgs e)
         //{
