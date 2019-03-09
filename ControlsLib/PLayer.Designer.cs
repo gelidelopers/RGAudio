@@ -56,6 +56,10 @@
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.dropBetweenList1 = new ControlsLib.DropBetweenList();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -68,6 +72,8 @@
             this.panel1.SuspendLayout();
             this.panelVuRight.SuspendLayout();
             this.flowLayoutPanelTimers.SuspendLayout();
+            this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -161,7 +167,7 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 273);
+            this.panelBottom.Location = new System.Drawing.Point(0, 373);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(288, 277);
             this.panelBottom.TabIndex = 32;
@@ -340,7 +346,7 @@
             this.volumeMeter1.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(248, 10);
+            this.volumeMeter1.Size = new System.Drawing.Size(50, 10);
             this.volumeMeter1.TabIndex = 30;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
@@ -382,7 +388,7 @@
             this.volumeMeter2.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(248, 10);
+            this.volumeMeter2.Size = new System.Drawing.Size(50, 10);
             this.volumeMeter2.TabIndex = 30;
             this.volumeMeter2.Text = "volumeMeter2";
             // 
@@ -413,9 +419,50 @@
             this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.panel3);
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 273);
+            this.panel2.MaximumSize = new System.Drawing.Size(1920, 100);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(288, 100);
+            this.panel2.TabIndex = 34;
+            // 
+            // label1
+            // 
+            this.label1.AutoEllipsis = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(288, 43);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "label1";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 43);
+            this.pictureBox1.MaximumSize = new System.Drawing.Size(1920, 60);
+            this.pictureBox1.MinimumSize = new System.Drawing.Size(0, 40);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(288, 57);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.Black;
+            this.panel3.Location = new System.Drawing.Point(0, 47);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1, 53);
+            this.panel3.TabIndex = 2;
+            // 
             // dropBetweenList1
             // 
-            this.dropBetweenList1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dropBetweenList1.Dock = System.Windows.Forms.DockStyle.Top;
             this.dropBetweenList1.Location = new System.Drawing.Point(0, 0);
             this.dropBetweenList1.Name = "dropBetweenList1";
             this.dropBetweenList1.Size = new System.Drawing.Size(288, 273);
@@ -425,11 +472,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.dropBetweenList1);
             this.Controls.Add(this.panelBottom);
-            this.MinimumSize = new System.Drawing.Size(288, 550);
+            this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
-            this.Size = new System.Drawing.Size(288, 550);
+            this.Size = new System.Drawing.Size(288, 650);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -446,6 +494,8 @@
             this.panel1.ResumeLayout(false);
             this.panelVuRight.ResumeLayout(false);
             this.flowLayoutPanelTimers.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -480,5 +530,9 @@
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
         public DropBetweenList dropBetweenList1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel3;
     }
 }

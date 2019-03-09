@@ -15,6 +15,7 @@ using System.IO;
 using Quartz;
 using System.Diagnostics;
 using Models;
+using WaveFormRendererLib;
 
 namespace ControlsLib
 {
@@ -27,13 +28,17 @@ namespace ControlsLib
             dropBetweenList1.AddColumn(column);
             column = new ColumnHeader() { Text = "Artista" };
             dropBetweenList1.AddColumn(column);
+            waveFormPos = new Pen(Color.Black);
         }
         private int index = 0;
-        private bool necesitaCalcularSeguen = true;
+
         private int seguen = 0;
         private List<string> errors = new List<string>();
-        private string failneim;
         private int count = 0;
+        private Action<float> setVolumeDelegate;
+        private WaveFormRenderer waveFormRenderer;
+        private Pen waveFormPos;
+        private AudioItem audioActual;
         
         public bool Continuar = true;
         public bool Borrar = true;
@@ -50,21 +55,28 @@ namespace ControlsLib
 
         private void CreateInputStream(AudioItem audioItem)
         {
-            //if (Path.GetExtension(fileName) == ".flac")
-            //{
-            //    audioFileReader = new FlacReader(fileName);
-            //}
-            //else
-            //{
+            if (Path.GetExtension(audioItem.FileName) == ".flac")
+            {
+                audioItem.Flac = new FlacReader(audioItem.FileName);
+                SampleChannel sampleChannel = new SampleChannel(audioItem.Flac, true);
+
+                setVolumeDelegate = vol => sampleChannel.Volume = vol;
+
+                MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+                postVolumeMeter.StreamVolume += OnPostVolumeMeter;
+                audioItem.SampleProvider = postVolumeMeter;
+            }
+            else
+            {
                 audioItem.Stream  = new AudioFileReader(audioItem.FileName);
-            //}
+                SampleChannel sampleChannel = new SampleChannel(audioItem.Stream, true);
 
-            SampleChannel sampleChannel = new SampleChannel(audioItem.Stream, true);
+                setVolumeDelegate = vol => sampleChannel.Volume = vol;
 
-            MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
-            postVolumeMeter.StreamVolume += OnPostVolumeMeter;
-
-            
+                MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+                postVolumeMeter.StreamVolume += OnPostVolumeMeter;
+                audioItem.SampleProvider = postVolumeMeter;
+            }
         }
         void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
         {
@@ -102,7 +114,7 @@ namespace ControlsLib
                 DeviceNumber = devnumber
             };
                
-            audioItem.Wave.Init(audioItem.Stream);
+            audioItem.Wave.Init(audioItem.SampleProvider);
         }
         private void PlaySong()
         {
@@ -126,7 +138,7 @@ namespace ControlsLib
                             
                         
                         //listView1.Items[index].Font = fntPlaying;
-                        necesitaCalcularSeguen = true;
+                        
                         isPlaying = true;
 
 
@@ -157,10 +169,11 @@ namespace ControlsLib
                         };
 
                         timer1.Start();
+                        RenderWaveform();
                     }
-                    catch
+                    catch(Exception e)
                     {
-                        MessageBox.Show("Error al reprendre la reproduccio");
+                        MessageBox.Show(e.ToString(),"Error al reprendre la reproduccio");
                     }
 
                     return;
@@ -200,6 +213,57 @@ namespace ControlsLib
         {
             audioItem.Fade = new FadeInOutSampleProvider(audioItem.Stream);
         }
+
+
+        private WaveFormRendererSettings GetRendererSettings()
+        {
+            var settings = new StandardWaveFormRendererSettings
+            {
+                TopHeight = pictureBox1.Height/2,
+                BottomHeight = pictureBox1.Height / 2,
+                Width = pictureBox1.Width,
+                DecibelScale = false,
+                
+
+            };
+            return settings;
+        }
+
+        private void RenderWaveform()
+        {
+            if (playlist.ElementAt(index).FileName == null) return;
+            var settings = GetRendererSettings();
+            
+            pictureBox1.Image = null;
+            //labelRendering.Visible = true;
+            //Enabled = false;
+            var peakProvider = new RmsPeakProvider(pictureBox1.Height / 2);
+            Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings));
+        }
+
+        private void RenderThreadFunc(IPeakProvider peakProvider, WaveFormRendererSettings settings)
+        {
+            Image image = null;
+            try
+            {
+                waveFormRenderer = new WaveFormRenderer();
+                
+                image = waveFormRenderer.Render(playlist.ElementAt(index).FileName, peakProvider, settings);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            BeginInvoke((Action)(() => FinishedRender(image)));
+        }
+
+        private void FinishedRender(Image image)
+        {
+            //labelRendering.Visible = false;
+            pictureBox1.Image = image;
+            Enabled = true;
+        }
+
 
         private void AfegirFitxers(string[] files)
         {
@@ -258,11 +322,11 @@ namespace ControlsLib
                             errors.Add("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
                         }
                     }
-                    catch
+                    catch(Exception e)
                     {
-                        if (!errors.Contains("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :("))
+                        if (!errors.Contains("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString()))
                         {
-                            errors.Add("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :(");
+                            errors.Add("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString());
                         }
                     }
                 }
@@ -353,8 +417,10 @@ namespace ControlsLib
             {
                 if (playlist.ElementAt(index).Wave != null && playlist.ElementAt(index).Stream != null)
                 {
+                    
                     TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Stream.CurrentTime;
                     trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds));
+                    panel3.Location = new Point(Math.Min(pictureBox1.Width, (int)(pictureBox1.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds)), panel3.Location.Y);
                     labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
                     int min, sec;
                     min = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds - playlist.ElementAt(index).Stream.CurrentTime.TotalSeconds) / 60;
@@ -365,6 +431,7 @@ namespace ControlsLib
                 else
                 {
                     trackBarPosition.Value = 0;
+                    panel3.Location = new Point(0,panel3.Location.Y);
                 }
             }
             catch { }
@@ -423,7 +490,7 @@ namespace ControlsLib
                 btnBorrar.BackColor = Color.Red;
             }
             //seguen = ObtenirSeguentIndex(index);
-            necesitaCalcularSeguen = false;
+            //necesitaCalcularSeguen = false;
         }
         private void BtnContinu_Click(object sender, EventArgs e)
         {
@@ -438,7 +505,7 @@ namespace ControlsLib
                 btnContinu.BackColor = SystemColors.Highlight;
             }
             //seguen = ObtenirSeguentIndex(index);
-            necesitaCalcularSeguen = false;
+            //necesitaCalcularSeguen = false;
         }
         private void BtnLoop_Click(object sender, EventArgs e)
         {
@@ -453,7 +520,7 @@ namespace ControlsLib
                 btnLoop.BackColor = Color.Lime;
             }
             //seguen = ObtenirSeguentIndex(index);
-            necesitaCalcularSeguen = false;
+            //necesitaCalcularSeguen = false;
         }
     }
 }

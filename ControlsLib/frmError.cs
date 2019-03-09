@@ -17,16 +17,18 @@ namespace ControlsLib
         public frmError(Exception err, Form frm)
         {
             InitializeComponent();
-            errtext = Utils.GetExceptionString(err);
+            errtext = err.ToString();
             label1.Text = errtext;
 
             MailAddress from = new MailAddress("excepcioproblemes@gmail.com");
             MailAddress to = new MailAddress("xavib99@gmail.com");
             List<MailAddress> cc = new List<MailAddress>();
+            string textbr = errtext.Replace("\n", "</br>");
             //cc.Add(new MailAddress("Someone@domain.topleveldomain", "Name and stuff"));
             try
             {
-                SendEmail("Problemes", errtext, from, to, cc, null, "smtp.gmail.com", 587, "excepcioproblemes@gmail.com", "pr0bl3m3s");
+
+                SendEmail("Problemes", textbr, from, to, cc, null, "smtp.gmail.com", 587, "excepcioproblemes@gmail.com", "pr0bl3m3s");
             }
             catch
             {
