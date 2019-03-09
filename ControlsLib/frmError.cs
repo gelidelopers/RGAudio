@@ -75,5 +75,19 @@ namespace ControlsLib
             msgMail.Dispose();
         }
 
+        private void frmError_Shown(object sender, EventArgs e)
+        {
+            Timer tm = new Timer()
+            {
+                Interval = 5000,
+                Enabled = true
+            };
+            tm.Tick += Tm_Tick;
+        }
+
+        private void Tm_Tick(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

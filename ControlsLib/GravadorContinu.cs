@@ -121,7 +121,7 @@ namespace ControlsLib
                 Recording = false;
                 timer.Stop();
 
-                MessageBox.Show("moved : " + Path.GetFullPath(filename + filetype) + "to: " + Path.GetFullPath(path + filename + filetype));
+                //MessageBox.Show("moved : " + Path.GetFullPath(filename + filetype) + "to: " + Path.GetFullPath(path + filename + filetype));
 
                 File.Move(filename + filetype, path + filename + filetype);
 

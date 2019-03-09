@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28606.126
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida Player", "XVR Player\Gelida Player.csproj", "{BE82061C-DDB9-4C78-803D-883F3F6694D0}"
 EndProject
@@ -23,6 +23,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida Recorder", "Gelida Recorder\Gelida Recorder.csproj", "{C044C665-C77D-4575-9938-25AA4FDDA17F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestingForms", "TestingForms\TestingForms.csproj", "{6018A9AF-B73D-4F71-86B8-E9774145FA50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +132,18 @@ Global
 		{6018A9AF-B73D-4F71-86B8-E9774145FA50}.Release|x64.Build.0 = Release|Any CPU
 		{6018A9AF-B73D-4F71-86B8-E9774145FA50}.Release|x86.ActiveCfg = Release|Any CPU
 		{6018A9AF-B73D-4F71-86B8-E9774145FA50}.Release|x86.Build.0 = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|x64.Build.0 = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Debug|x86.Build.0 = Debug|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|x64.ActiveCfg = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|x64.Build.0 = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1EECB171-4C21-48EF-BFEF-843A3DE78D2B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

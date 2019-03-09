@@ -47,6 +47,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmError";
             this.Text = "frmError";
+            this.Shown += new System.EventHandler(this.frmError_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
