@@ -39,7 +39,6 @@
             this.groupActual = new System.Windows.Forms.GroupBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
-            this.trackBarPosition = new System.Windows.Forms.TrackBar();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPLay = new System.Windows.Forms.Button();
             this.btnPause = new System.Windows.Forms.Button();
@@ -57,16 +56,22 @@
             this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dropBetweenList1 = new ControlsLib.DropBetweenList();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupActual.SuspendLayout();
             this.panelBottom.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.flowLayoutPanelButtons.SuspendLayout();
             this.panelVuLeft.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -74,6 +79,9 @@
             this.flowLayoutPanelTimers.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -162,26 +170,14 @@
             // panelBottom
             // 
             this.panelBottom.AutoSize = true;
-            this.panelBottom.Controls.Add(this.trackBarPosition);
             this.panelBottom.Controls.Add(this.flowLayoutPanelButtons);
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 373);
+            this.panelBottom.Location = new System.Drawing.Point(0, 848);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(288, 277);
+            this.panelBottom.Size = new System.Drawing.Size(288, 232);
             this.panelBottom.TabIndex = 32;
-            // 
-            // trackBarPosition
-            // 
-            this.trackBarPosition.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.trackBarPosition.Location = new System.Drawing.Point(0, 46);
-            this.trackBarPosition.Maximum = 100;
-            this.trackBarPosition.Name = "trackBarPosition";
-            this.trackBarPosition.Size = new System.Drawing.Size(288, 45);
-            this.trackBarPosition.TabIndex = 1;
-            this.trackBarPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TrackBarPosition_MouseDown);
-            this.trackBarPosition.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TrackBarPosition_MouseUp);
             // 
             // flowLayoutPanelButtons
             // 
@@ -194,7 +190,7 @@
             this.flowLayoutPanelButtons.Controls.Add(this.btnLoop);
             this.flowLayoutPanelButtons.Controls.Add(this.btnBorrar);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 91);
+            this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 46);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
             this.flowLayoutPanelButtons.Size = new System.Drawing.Size(288, 112);
             this.flowLayoutPanelButtons.TabIndex = 33;
@@ -346,7 +342,7 @@
             this.volumeMeter1.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(50, 10);
+            this.volumeMeter1.Size = new System.Drawing.Size(248, 10);
             this.volumeMeter1.TabIndex = 30;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
@@ -388,7 +384,7 @@
             this.volumeMeter2.MinimumSize = new System.Drawing.Size(50, 10);
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(50, 10);
+            this.volumeMeter2.Size = new System.Drawing.Size(248, 10);
             this.volumeMeter2.TabIndex = 30;
             this.volumeMeter2.Text = "volumeMeter2";
             // 
@@ -414,7 +410,7 @@
             this.flowLayoutPanelTimers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelTimers.Controls.Add(this.groupActual);
             this.flowLayoutPanelTimers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 203);
+            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 158);
             this.flowLayoutPanelTimers.Name = "flowLayoutPanelTimers";
             this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
@@ -423,23 +419,21 @@
             // 
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.lblName);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 273);
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.MaximumSize = new System.Drawing.Size(1920, 100);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(288, 100);
             this.panel2.TabIndex = 34;
             // 
-            // label1
+            // panel3
             // 
-            this.label1.AutoEllipsis = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(288, 43);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.panel3.BackColor = System.Drawing.Color.Red;
+            this.panel3.Location = new System.Drawing.Point(0, 40);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(2, 60);
+            this.panel3.TabIndex = 2;
             // 
             // pictureBox1
             // 
@@ -452,32 +446,105 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // panel3
+            // lblName
             // 
-            this.panel3.BackColor = System.Drawing.Color.Black;
-            this.panel3.Location = new System.Drawing.Point(0, 47);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1, 53);
-            this.panel3.TabIndex = 2;
+            this.lblName.AutoEllipsis = true;
+            this.lblName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.Location = new System.Drawing.Point(0, 0);
+            this.lblName.MaximumSize = new System.Drawing.Size(1920, 50);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(288, 43);
+            this.lblName.TabIndex = 0;
             // 
-            // dropBetweenList1
+            // panel4
             // 
-            this.dropBetweenList1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dropBetweenList1.Location = new System.Drawing.Point(0, 0);
-            this.dropBetweenList1.Name = "dropBetweenList1";
-            this.dropBetweenList1.Size = new System.Drawing.Size(288, 273);
-            this.dropBetweenList1.TabIndex = 33;
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.panel6);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(0, 100);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(288, 748);
+            this.panel4.TabIndex = 35;
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.button4);
+            this.panel5.Controls.Add(this.button3);
+            this.panel5.Controls.Add(this.button2);
+            this.panel5.Controls.Add(this.button1);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel5.Location = new System.Drawing.Point(215, 0);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(73, 748);
+            this.panel5.TabIndex = 3;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(3, 183);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(67, 54);
+            this.button4.TabIndex = 3;
+            this.button4.Text = "BORRAR TOT";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(3, 123);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(67, 54);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "Borrar";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(3, 63);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(67, 54);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Baixar";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(67, 54);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Pujar";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // listView1
+            // 
+            this.listView1.AllowDrop = true;
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(288, 748);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.listView1);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(288, 748);
+            this.panel6.TabIndex = 4;
             // 
             // Player
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.dropBetweenList1);
             this.Controls.Add(this.panelBottom);
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
-            this.Size = new System.Drawing.Size(288, 650);
+            this.Size = new System.Drawing.Size(288, 1080);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -487,7 +554,6 @@
             this.groupActual.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
             this.flowLayoutPanelButtons.ResumeLayout(false);
             this.flowLayoutPanelButtons.PerformLayout();
             this.panelVuLeft.ResumeLayout(false);
@@ -496,6 +562,9 @@
             this.flowLayoutPanelTimers.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -520,7 +589,6 @@
         private System.Windows.Forms.GroupBox groupActual;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panelBottom;
-        private System.Windows.Forms.TrackBar trackBarPosition;
         private System.Windows.Forms.Panel panelVuLeft;
         private System.Windows.Forms.Panel panel1;
         private NAudio.Gui.VolumeMeter volumeMeter1;
@@ -529,10 +597,17 @@
         private NAudio.Gui.VolumeMeter volumeMeter2;
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
-        public DropBetweenList dropBetweenList1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel6;
+        public System.Windows.Forms.ListView listView1;
     }
 }

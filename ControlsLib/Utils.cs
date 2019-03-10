@@ -32,7 +32,7 @@ namespace ControlsLib
         }
         public static string GetErrorString(string errno, string err, Exception ex)
         {
-            return errno + ": \n" + err + "\n" + GetExceptionString(ex);
+            return errno + ": \n" + err + "\n" + ex.ToString();
         }
         public static string GetExceptionString(Exception ex)
         {

@@ -25,11 +25,14 @@ namespace ControlsLib
         {
             InitializeComponent();
             ColumnHeader column = new ColumnHeader() { Text = "Titol" };
-            dropBetweenList1.AddColumn(column);
+            listView1.Columns.Add(column);
             column = new ColumnHeader() { Text = "Artista" };
-            dropBetweenList1.AddColumn(column);
+            listView1.Columns.Add(column);
             waveFormPos = new Pen(Color.Black);
+            listView1.DoubleClick += ListView1_DoubleClick;
+           
         }
+
         private int index = 0;
 
         private int seguen = 0;
@@ -65,6 +68,7 @@ namespace ControlsLib
                 MeteringSampleProvider postVolumeMeter = new MeteringSampleProvider(sampleChannel);
                 postVolumeMeter.StreamVolume += OnPostVolumeMeter;
                 audioItem.SampleProvider = postVolumeMeter;
+                audioItem.Isflac = true;
             }
             else
             {
@@ -102,10 +106,18 @@ namespace ControlsLib
             volumeMeter4.Amplitude = 0;
         }
         
-        private void CarregarDuracio(AudioFileReader audioFileReader)
+        private void CarregarDuracio(AudioItem audioItem)
         {
-            labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioFileReader.TotalTime.TotalMinutes,
-               audioFileReader.TotalTime.Seconds);
+            if (audioItem.Isflac)
+            {
+                labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioItem.Flac.TotalTime.TotalMinutes,
+                   audioItem.Flac.TotalTime.Seconds);
+            }
+            else
+            {
+                labelTotalTime.Text = String.Format("{0:00}:{1:00}", (int)audioItem.Stream.TotalTime.TotalMinutes,
+                   audioItem.Stream.TotalTime.Seconds);
+            }
         }
         private void InicialitzarSo(AudioItem audioItem, int devnumber)
         {
@@ -116,86 +128,97 @@ namespace ControlsLib
                
             audioItem.Wave.Init(audioItem.SampleProvider);
         }
-        private void PlaySong()
+        private async Task PlaySongAsync()
         {
-            if (playlist.ElementAt(seguen).Wave  != null)
+            if (count > 0)
             {
-                if (playlist.ElementAt(seguen).Wave.PlaybackState == PlaybackState.Playing)
+                if (playlist.ElementAt(index).Wave != null)
                 {
-                    return;
-                }
+                    if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
+                    {
+                        return;
+                    }else if(playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Paused)
+                    {
+                        playlist.ElementAt(index).Wave.Play();
+                        return;
+                    }
 
+                    else
+                    {
+                        try
+                        {
+                            playlist.ElementAt(seguen).Wave.Play();
+                            CarregarDuracio(playlist.ElementAt(seguen));
+
+                            
+
+                            index = seguen;
+
+                            seguen = ObtenirSeguentIndex(index);
+
+
+                            //listView1.Items[index].Font = fntPlaying;
+
+                            isPlaying = true;
+
+
+                            playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
+                            {
+                                ResetVUMeter();
+                                if (Borrar)
+                                {
+                                    playlist.RemoveAt(index);
+                                    count = playlist.Count;
+
+                                }
+                                if (seguen >= 0)
+                                {
+                                    PlaySongAsync();
+                                }
+                                else
+                                {
+                                    isPlaying = false;
+                                }
+                                if (Borrar)
+                                {
+                                //listView1.Items.RemoveAt(index);
+                                listView1.Items.RemoveAt(index);
+                                    
+
+                                }
+                            //waveOut.Dispose();
+                        };
+
+                            timer1.Start();
+
+                            await Task.Run(RenderWaveform);
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.ToString(), "Error al reprendre la reproduccio");
+                        }
+
+                        return;
+
+                    }
+
+                }
                 else
                 {
                     try
                     {
-                        playlist.ElementAt(seguen).Wave.Play();
-                        CarregarDuracio(playlist.ElementAt(seguen).Stream);
+                        CarregarFitxer(playlist.ElementAt(index));
 
-                        index = seguen;
-                        
-                        seguen = ObtenirSeguentIndex(index);
-                            
-                        
-                        //listView1.Items[index].Font = fntPlaying;
-                        
-                        isPlaying = true;
-
-
-                        playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
-                        {
-                            ResetVUMeter();
-                            if (Borrar)
-                            {
-                                playlist.RemoveAt(index);
-                                count = playlist.Count;
-
-                            }
-                            if (seguen >= 0)
-                            {
-                                PlaySong();
-                            }
-                            else
-                            {
-                                isPlaying = false;
-                            }
-                            if (Borrar)
-                            {
-                                //listView1.Items.RemoveAt(index);
-                                dropBetweenList1.DeleteItemAt(index);
-                                
-                            }
-                            //waveOut.Dispose();
-                        };
-
-                        timer1.Start();
-                        RenderWaveform();
                     }
-                    catch(Exception e)
+                    catch
                     {
-                        MessageBox.Show(e.ToString(),"Error al reprendre la reproduccio");
+                        MessageBox.Show("Error amb el fitxer", "Error 1");
+                        return;
                     }
 
-                    return;
+                    //PlaySong();
 
                 }
-                
-            }
-            else
-            {
-                try
-                {
-                    CarregarFitxer(playlist.ElementAt(index));
-                   
-                }
-                catch
-                {
-                    MessageBox.Show("Error amb el fitxer", "Error 1");
-                    return;
-                }
-
-                //PlaySong();
-                
             }
         }
         
@@ -223,13 +246,14 @@ namespace ControlsLib
                 BottomHeight = pictureBox1.Height / 2,
                 Width = pictureBox1.Width,
                 DecibelScale = false,
-                
+                BottomPeakPen = new Pen(Color.Green),
+                TopPeakPen = new Pen(Color.Green)
 
             };
             return settings;
         }
 
-        private void RenderWaveform()
+        private async Task RenderWaveform()
         {
             if (playlist.ElementAt(index).FileName == null) return;
             var settings = GetRendererSettings();
@@ -238,7 +262,7 @@ namespace ControlsLib
             //labelRendering.Visible = true;
             //Enabled = false;
             var peakProvider = new RmsPeakProvider(pictureBox1.Height / 2);
-            Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings));
+            await Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings));
         }
 
         private void RenderThreadFunc(IPeakProvider peakProvider, WaveFormRendererSettings settings)
@@ -303,7 +327,7 @@ namespace ControlsLib
                         CarregarFitxer(ai);
                         playlist.Add(ai);
                         //listView1.Items.Add(itom);
-                        dropBetweenList1.AddItem(itom);
+                        listView1.Items.Add(itom);
 
                     }
                     catch (TagLib.CorruptFileException)
@@ -397,52 +421,91 @@ namespace ControlsLib
         }
         private void BtnPLay_Click(object sender, EventArgs e)
         {
-            if (seguen == -1)
+            if (count > 0)
             {
-                if(count > 0)
+                if (seguen == -1)
                 {
-                    //seguen = listView1.SelectedItems[0].Index;
+                    if (listView1.SelectedItems.Count > 0)
+                    {
+                        seguen = listView1.SelectedItems[0].Index;
+                    }
+                    else
+                    {
+                        seguen = 0;
+                    }
+
                 }
-                else
-                {
-                    seguen = 0;
-                }
-                
+                PlaySongAsync();
             }
-            PlaySong();
         }
         private void Timer1_Tick(object sender, EventArgs e)
         {
             try
             {
-                if (playlist.ElementAt(index).Wave != null && playlist.ElementAt(index).Stream != null)
+                if (!playlist.ElementAt(index).Isflac)
                 {
-                    
-                    TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Stream.CurrentTime;
-                    trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds));
-                    panel3.Location = new Point(Math.Min(pictureBox1.Width, (int)(pictureBox1.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds)), panel3.Location.Y);
-                    labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
-                    int min, sec;
-                    min = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds - playlist.ElementAt(index).Stream.CurrentTime.TotalSeconds) / 60;
-                    sec = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalMilliseconds - playlist.ElementAt(index).Stream.CurrentTime.TotalMilliseconds) % 60000;
+                    if (playlist.ElementAt(index).Wave != null && playlist.ElementAt(index).Stream != null)
+                    {
 
-                    labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
+                        TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Stream.CurrentTime;
+                        //trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds));
+                        panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, (int)(pictureBox1.Image.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds)), panel3.Location.Y);
+                        labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
+                        int min, sec;
+                        min = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds - playlist.ElementAt(index).Stream.CurrentTime.TotalSeconds) / 60;
+                        sec = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalMilliseconds - playlist.ElementAt(index).Stream.CurrentTime.TotalMilliseconds) % 60000;
+
+                        labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
+                    }
+                    else
+                    {
+                       //trackBarPosition.Value = 0;
+                        panel3.Location = new Point(0, panel3.Location.Y);
+                    }
                 }
                 else
                 {
-                    trackBarPosition.Value = 0;
-                    panel3.Location = new Point(0,panel3.Location.Y);
+                    if (playlist.ElementAt(index).Wave != null && playlist.ElementAt(index).Flac != null)
+                    {
+
+                        TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Flac.CurrentTime;
+                        //trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Flac.TotalTime.TotalSeconds));
+                        panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, (int)(pictureBox1.Image.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Flac.TotalTime.TotalSeconds)), panel3.Location.Y);
+                        labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
+                        int min, sec;
+                        min = (int)(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds - playlist.ElementAt(index).Flac.CurrentTime.TotalSeconds) / 60;
+                        sec = (int)(playlist.ElementAt(index).Flac.TotalTime.TotalMilliseconds - playlist.ElementAt(index).Flac.CurrentTime.TotalMilliseconds) % 60000;
+
+                        labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
+                    }
+                    else
+                    {
+                        //trackBarPosition.Value = 0;
+                        panel3.Location = new Point(0, panel3.Location.Y);
+                    }
                 }
             }
             catch { }
         }
         private void TrackBarPosition_MouseUp(object sender, MouseEventArgs e)
         {
-            if (playlist.ElementAt(index).Stream != null)
+            if (!playlist.ElementAt(index).Isflac)
             {
-                timer1.Start();
+                if (playlist.ElementAt(index).Stream != null)
+                {
+                    timer1.Start();
 
-                playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
+                    //playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
+                }
+            }
+            else
+            {
+                if (playlist.ElementAt(index).Flac != null)
+                {
+                    timer1.Start();
+
+                    //playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
+                }
             }
         }
         private void TrackBarPosition_MouseDown(object sender, MouseEventArgs e)
@@ -451,10 +514,10 @@ namespace ControlsLib
         }
         private void ListView1_DoubleClick(object sender, EventArgs e)
         {
-            if(count > 0)
+            if(listView1.SelectedItems.Count > 0)
             {
-                //seguen = listView1.SelectedItems[0].Index;
-                PlaySong();
+                seguen = listView1.SelectedItems[0].Index;
+                PlaySongAsync();
             }
         }
         private void BtnPause_Click(object sender, EventArgs e)

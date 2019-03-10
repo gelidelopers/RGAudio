@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.gravadorContinu3 = new ControlsLib.GravadorContinu();
@@ -48,7 +49,7 @@
             this.player2 = new ControlsLib.Player();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.player1 = new ControlsLib.Player();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
