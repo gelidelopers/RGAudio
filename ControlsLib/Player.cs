@@ -130,7 +130,7 @@ namespace ControlsLib
         }
         private async Task PlaySongAsync()
         {
-            if (count > 0)
+            if (count > 0 && seguen >= 0)
             {
                 if (playlist.ElementAt(index).Wave != null)
                 {
@@ -165,6 +165,7 @@ namespace ControlsLib
                             playlist.ElementAt(index).Wave.PlaybackStopped += async (sender, evn) =>
                             {
                                 ResetVUMeter();
+                                panel3.Location = new Point(0, panel3.Location.Y);
                                 if (Borrar)
                                 {
                                     playlist.RemoveAt(index);
@@ -533,11 +534,23 @@ namespace ControlsLib
         }
         private void BtnStop_Click(object sender, EventArgs e)
         {
-            if (playlist.ElementAt(index).Wave != null)
+            foreach (AudioItem audioItem in playlist)
             {
-                seguen = -1;
-                playlist.ElementAt(index).Wave.Stop();
+                if (audioItem.Wave != null)
+                {
+                    seguen = -1;
+                    audioItem.Wave.Stop();
+                    if (audioItem.Isflac)
+                    {
+                        audioItem.Flac.CurrentTime = TimeSpan.MinValue;
+                    }
+                    else
+                    {
+                        audioItem.Stream.CurrentTime = TimeSpan.MinValue;
+                    }
+                }
             }
+            timer1.Stop();
             ResetVUMeter();
         }
         private void BtnBorrar_Click(object sender, EventArgs e)
