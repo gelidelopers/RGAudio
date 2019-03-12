@@ -162,7 +162,7 @@ namespace ControlsLib
                             isPlaying = true;
 
 
-                            playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
+                            playlist.ElementAt(index).Wave.PlaybackStopped += async (sender, evn) =>
                             {
                                 ResetVUMeter();
                                 if (Borrar)
@@ -173,7 +173,7 @@ namespace ControlsLib
                                 }
                                 if (seguen >= 0)
                                 {
-                                    PlaySongAsync();
+                                    await PlaySongAsync();
                                 }
                                 else
                                 {
@@ -584,6 +584,36 @@ namespace ControlsLib
             }
             //seguen = ObtenirSeguentIndex(index);
             //necesitaCalcularSeguen = false;
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            timer1.Stop();
+            panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, e.X), panel3.Location.Y);
+
+            if (!playlist.ElementAt(index).Isflac)
+            {
+                if (playlist.ElementAt(index).Stream != null)
+                {
+                    
+
+                    playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * panel3.Location.X / pictureBox1.Image.Width);
+
+
+                    timer1.Start();
+                }
+            }
+            else
+            {
+                if (playlist.ElementAt(index).Flac != null)
+                {
+                    playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * panel3.Location.X / pictureBox1.Image.Width);
+                    timer1.Start();
+                }
+            }
+
+
+
         }
     }
 }
