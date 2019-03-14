@@ -47,6 +47,7 @@ namespace ControlsLib
         public bool Borrar = true;
         public bool Bucle = false;
         public sbyte OutDev { get; set; }
+        
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntNext = new Font("Arial", 10, System.Drawing.FontStyle.Underline);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -128,7 +129,7 @@ namespace ControlsLib
                
             audioItem.Wave.Init(audioItem.SampleProvider);
         }
-        private async Task PlaySongAsync()
+        private void PlaySong()
         {
             if (count > 0 && seguen >= 0)
             {
@@ -137,7 +138,8 @@ namespace ControlsLib
                     if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
                     {
                         return;
-                    }else if(playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Paused)
+                    }
+                    else if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Paused)
                     {
                         playlist.ElementAt(index).Wave.Play();
                         return;
@@ -149,8 +151,8 @@ namespace ControlsLib
                         {
                             playlist.ElementAt(seguen).Wave.Play();
                             CarregarDuracio(playlist.ElementAt(seguen));
+                            pictureBox1.Image = playlist.ElementAt(seguen).myImage;
 
-                            
 
                             index = seguen;
 
@@ -162,7 +164,7 @@ namespace ControlsLib
                             isPlaying = true;
 
 
-                            playlist.ElementAt(index).Wave.PlaybackStopped += async (sender, evn) =>
+                            playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
                             {
                                 ResetVUMeter();
                                 panel3.Location = new Point(0, panel3.Location.Y);
@@ -174,7 +176,7 @@ namespace ControlsLib
                                 }
                                 if (seguen >= 0)
                                 {
-                                    await PlaySongAsync();
+                                    PlaySong();
                                 }
                                 else
                                 {
@@ -182,17 +184,17 @@ namespace ControlsLib
                                 }
                                 if (Borrar)
                                 {
-                                //listView1.Items.RemoveAt(index);
-                                listView1.Items.RemoveAt(index);
-                                    
+                                    //listView1.Items.RemoveAt(index);
+                                    listView1.Items.RemoveAt(index);
+
 
                                 }
-                            //waveOut.Dispose();
-                        };
+                                //waveOut.Dispose();
+                            };
 
                             timer1.Start();
 
-                            await Task.Run(RenderWaveform);
+
                         }
                         catch (Exception e)
                         {
@@ -222,7 +224,7 @@ namespace ControlsLib
                 }
             }
         }
-        
+
 
         private void CarregarFitxer(AudioItem audioItem)
         {
@@ -254,32 +256,32 @@ namespace ControlsLib
             return settings;
         }
 
-        private async Task RenderWaveform()
+        private async Task<Image> RenderWaveformAsync(string filename)
         {
-            if (playlist.ElementAt(index).FileName == null) return;
+           
             var settings = GetRendererSettings();
-            
-            pictureBox1.Image = null;
+
             //labelRendering.Visible = true;
             //Enabled = false;
             var peakProvider = new RmsPeakProvider(pictureBox1.Height / 2);
-            await Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings));
+            return await Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings,filename));
         }
 
-        private void RenderThreadFunc(IPeakProvider peakProvider, WaveFormRendererSettings settings)
+        private Image RenderThreadFunc(IPeakProvider peakProvider, WaveFormRendererSettings settings, string filename)
         {
             Image image = null;
             try
             {
                 waveFormRenderer = new WaveFormRenderer();
                 
-                image = waveFormRenderer.Render(playlist.ElementAt(index).FileName, peakProvider, settings);
+                image = waveFormRenderer.Render(filename, peakProvider, settings);
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
             }
             BeginInvoke((Action)(() => FinishedRender(image)));
+            return image;
         }
 
         private void FinishedRender(Image image)
@@ -290,7 +292,7 @@ namespace ControlsLib
         }
 
 
-        private void AfegirFitxers(string[] files)
+        private async Task AfegirFitxersAsync(string[] files)
         {
             List<string> errors = new List<string>();
             string extensio;
@@ -326,6 +328,7 @@ namespace ControlsLib
                             FileName = axr.fileName
                         };
                         CarregarFitxer(ai);
+                        ai.myImage = await RenderWaveformAsync(ai.FileName);
                         playlist.Add(ai);
                         //listView1.Items.Add(itom);
                         listView1.Items.Add(itom);
@@ -407,7 +410,7 @@ namespace ControlsLib
             return i;
         }
         //addfolder
-        private void OnAddFolderButtonClick(object sender, EventArgs e)
+        private async void OnAddFolderButtonClickAsync(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             string allExtensions = "*.wav;*.aiff;*.mp3;*.aac;*.flac";
@@ -417,7 +420,7 @@ namespace ControlsLib
             //openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                AfegirFitxers(openFileDialog.FileNames);
+                await AfegirFitxersAsync(openFileDialog.FileNames);
             }
         }
         private void BtnPLay_Click(object sender, EventArgs e)
@@ -436,7 +439,7 @@ namespace ControlsLib
                     }
 
                 }
-                PlaySongAsync();
+                PlaySong();
             }
         }
         private void Timer1_Tick(object sender, EventArgs e)
@@ -518,7 +521,7 @@ namespace ControlsLib
             if(listView1.SelectedItems.Count > 0)
             {
                 seguen = listView1.SelectedItems[0].Index;
-                PlaySongAsync();
+                PlaySong();
             }
         }
         private void BtnPause_Click(object sender, EventArgs e)
@@ -599,7 +602,7 @@ namespace ControlsLib
             //necesitaCalcularSeguen = false;
         }
 
-        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             timer1.Stop();
             panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, e.X), panel3.Location.Y);

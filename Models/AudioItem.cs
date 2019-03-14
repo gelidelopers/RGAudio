@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
 using NAudio.Flac;
+using NAudio.Wave.SampleProviders;
+using System.IO;
+
 
 namespace Models
 {
-    public class AudioItem
+    public class AudioItem 
     {
         public ListViewItem LstviewItem { get; set; }
         public WaveOutEvent Wave { get; set; }
@@ -20,5 +25,6 @@ namespace Models
         public ISampleProvider SampleProvider { get; set; }
         public FadeInOutSampleProvider Fade { get; set; } 
         public string FileName { get; set; }
+        public Image myImage { get; set; }
     }
 }

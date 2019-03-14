@@ -257,7 +257,7 @@
             this.btnFolder.Size = new System.Drawing.Size(52, 45);
             this.btnFolder.TabIndex = 23;
             this.btnFolder.UseVisualStyleBackColor = true;
-            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderButtonClick);
+            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderButtonClickAsync);
             // 
             // btnContinu
             // 
@@ -445,7 +445,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(288, 57);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
             // 
             // lblName
             // 
