@@ -30,6 +30,7 @@ namespace ControlsLib
             listView1.Columns.Add(column);
             waveFormPos = new Pen(Color.Black);
             listView1.DoubleClick += ListView1_DoubleClick;
+            
            
         }
 
@@ -131,10 +132,11 @@ namespace ControlsLib
         }
         private void PlaySong()
         {
-            if (count > 0 && seguen >= 0)
+            if (count > 0 && seguen >= 0 && index < playlist.Count)
             {
                 if (playlist.ElementAt(index).Wave != null)
                 {
+                    //problemes al borrar dona out of bounds
                     if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
                     {
                         return;
@@ -149,56 +151,96 @@ namespace ControlsLib
                     {
                         try
                         {
-                            playlist.ElementAt(seguen).Wave.Play();
-                            CarregarDuracio(playlist.ElementAt(seguen));
-                            pictureBox1.Image = playlist.ElementAt(seguen).myImage;
-
-
-                            index = seguen;
-
-                            seguen = ObtenirSeguentIndex(index);
-
-
-                            //listView1.Items[index].Font = fntPlaying;
-
-                            isPlaying = true;
-
-
-                            playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
+                            if (playlist.ElementAt(seguen).Wave != null)
                             {
-                                ResetVUMeter();
-                                panel3.Location = new Point(0, panel3.Location.Y);
-                                if (Borrar)
-                                {
-                                    playlist.RemoveAt(index);
-                                    count = playlist.Count;
-
-                                }
-                                if (seguen >= 0)
-                                {
-                                    PlaySong();
-                                }
-                                else
-                                {
-                                    isPlaying = false;
-                                }
-                                if (Borrar)
-                                {
-                                    //listView1.Items.RemoveAt(index);
-                                    listView1.Items.RemoveAt(index);
+                                playlist.ElementAt(seguen).Wave.Play();
+                                audioActual = playlist.ElementAt(seguen);
+                                lblName.Text = playlist.ElementAt(seguen).Name + "\n" + playlist.ElementAt(seguen).Artist;
+                                listView1.Items[seguen].Font = fntPlaying;
+                                CarregarDuracio(playlist.ElementAt(seguen));
+                                pictureBox1.Image = playlist.ElementAt(seguen).myImage;
 
 
-                                }
+                                index = seguen;
+
+                                seguen = ObtenirSeguentIndex(index);
+
+
+                                //listView1.Items[index].Font = fntPlaying;
+
+                                isPlaying = true;
+
+
+                                playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
+                                {
+                                    ResetVUMeter();
+                                    panelCursor.Location = new Point(0, panelCursor.Location.Y);
+                                    if (playlist.ElementAt(index) != null)
+                                    {
+                                        if (playlist.ElementAt(index).Isflac)
+                                        {
+                                            if (playlist.ElementAt(index).Flac != null)
+                                            {
+                                                playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (playlist.ElementAt(index).Stream != null)
+                                            {
+                                                playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                            }
+                                        }
+                                        lblName.Text = "";
+                                        try
+                                        {
+                                            listView1.Items[index].Font = fntNotPlaying;
+                                        }
+                                        catch
+                                        {
+
+                                        }
+                                        if (Borrar)
+                                        {
+                                            listView1.Items.Remove(audioActual.LstviewItem);
+                                            playlist.Remove(audioActual);
+
+                                            count = playlist.Count;
+
+                                        }
+                                        if (seguen >= 0)
+                                        {
+                                            PlaySong();
+                                        }
+                                        else
+                                        {
+                                            isPlaying = false;
+                                        }
+                                        if (Borrar)
+                                        {
+                                            //listView1.Items.RemoveAt(index);
+
+
+
+                                        }
+                                    }
                                 //waveOut.Dispose();
-                            };
+                                };
 
-                            timer1.Start();
+                                timer1.Start();
+                            }
+                            else
+                            {
+                                CarregarFitxer(playlist.ElementAt(seguen));
+                                PlaySong();
+
+                            }
 
 
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show(e.ToString(), "Error al reprendre la reproduccio");
+                            MessageBox.Show("Error de reproduccio");
                         }
 
                         return;
@@ -211,6 +253,7 @@ namespace ControlsLib
                     try
                     {
                         CarregarFitxer(playlist.ElementAt(index));
+                        PlaySong();
 
                     }
                     catch
@@ -219,7 +262,7 @@ namespace ControlsLib
                         return;
                     }
 
-                    //PlaySong();
+                    //
 
                 }
             }
@@ -280,7 +323,7 @@ namespace ControlsLib
             {
                 MessageBox.Show(e.Message);
             }
-            BeginInvoke((Action)(() => FinishedRender(image)));
+            //BeginInvoke((Action)(() => FinishedRender(image)));
             return image;
         }
 
@@ -292,84 +335,87 @@ namespace ControlsLib
         }
 
 
-        private async Task AfegirFitxersAsync(string[] files)
+        private async  Task AfegirFitxers(string file)
         {
             List<string> errors = new List<string>();
             string extensio;
 
-            foreach (string file in files)
+
+            extensio = Path.GetExtension(file);
+            //posar el path.get en una variable i posar tots els fitxers compatibles en un List
+            if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
             {
-                extensio = Path.GetExtension(file);
-                //posar el path.get en una variable i posar tots els fitxers compatibles en un List
-                if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
+                Arxiu axr = new Arxiu
                 {
-                    Arxiu axr = new Arxiu
+                    fileName = file
+                };
+
+                try
+                {
+                    var tfile = TagLib.File.Create(axr.fileName);
+                    axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
+                    axr.artist = tfile.Tag.JoinedPerformers;
+
+                    string[] lol = { axr.name, axr.artist, axr.fileName };
+
+                    var itom = new ListViewItem(lol)
                     {
-                        fileName = file
+                        BackColor = Color.Yellow
                     };
 
-                    try
+                    //item.SubItems.Add(axr.artist);
+                    //item.SubItems.Add(axr.duration.ToString());
+                    AudioItem ai = new AudioItem()
                     {
-                        var tfile = TagLib.File.Create(axr.fileName);
-                        axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                        axr.artist = tfile.Tag.JoinedPerformers;
+                        FileName = axr.fileName,
+                        Name = axr.name,
+                        Artist = axr.artist,
+                        LstviewItem = itom
 
-                        string[] lol = { axr.name, axr.artist, axr.fileName };
+                    };
+                    CarregarFitxer(ai);
+                    //ai.myImage = await RenderWaveformAsync(ai.FileName);
+                    playlist.Add(ai);
+                    //listView1.Items.Add(itom);
+                    listView1.Items.Add(itom);
 
-                        var itom = new ListViewItem(lol)
-                        {
-                            BackColor = Color.Yellow
-                        };
+                }
+                catch (TagLib.CorruptFileException)
+                {
 
-                        //item.SubItems.Add(axr.artist);
-                        //item.SubItems.Add(axr.duration.ToString());
-                        AudioItem ai = new AudioItem()
-                        {
-                            FileName = axr.fileName
-                        };
-                        CarregarFitxer(ai);
-                        ai.myImage = await RenderWaveformAsync(ai.FileName);
-                        playlist.Add(ai);
-                        //listView1.Items.Add(itom);
-                        listView1.Items.Add(itom);
-
+                    if (!errors.Contains("Error 4.1: Fitxer/s Corrupte/s :("))
+                    {
+                        errors.Add("Error 4.1: Fitxer/s Corrupte/s :(");
                     }
-                    catch (TagLib.CorruptFileException)
-                    {
 
-                        if (!errors.Contains("Error 4.1: Fitxer/s Corrupte/s :("))
-                        {
-                            errors.Add("Error 4.1: Fitxer/s Corrupte/s :(");
-                        }
-
-                    }
-                    catch (TagLib.UnsupportedFormatException)
+                }
+                catch (TagLib.UnsupportedFormatException)
+                {
+                    if (!errors.Contains("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
                     {
-                        if (!errors.Contains("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :("))
-                        {
-                            errors.Add("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
-                        }
-                    }
-                    catch(Exception e)
-                    {
-                        if (!errors.Contains("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString()))
-                        {
-                            errors.Add("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString());
-                        }
+                        errors.Add("Error 4.2: Tipus de fitxer " + Path.GetExtension(file) + " no acceptat :(");
                     }
                 }
-                else
+                catch (Exception e)
                 {
-                    if (!errors.Contains("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :("))
+                    if (!errors.Contains("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString()))
                     {
-
-                        errors.Add("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :(");
+                        errors.Add("Error 4.3: Error al carregar el fitxer " + Path.GetFullPath(file) + " :( \n" + e.ToString());
                     }
                 }
             }
+            else
+            {
+                if (!errors.Contains("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :("))
+                {
+
+                    errors.Add("Error 4.4: El format " + Path.GetExtension(file) + " no esta soportat :(");
+                }
+            }
+
             foreach (string error in errors)
             {
-                MessageBox.Show(error,"Error 4");
+                MessageBox.Show(error, "Error 4");
             }
             count = playlist.Count;
         }
@@ -400,7 +446,10 @@ namespace ControlsLib
             else if (Bucle)
             {
                 //if (seguen >= 0 && listView1.Items[seguen].Font == fntNext) listView1.Items[seguen].Font = fntNotPlaying;
-                i = actual;
+                if (!Borrar)
+                {
+                    i = actual;
+                }
             }
             else
             {
@@ -420,7 +469,10 @@ namespace ControlsLib
             //openFileDialog.FilterIndex = 1;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                await AfegirFitxersAsync(openFileDialog.FileNames);
+                foreach (string file in openFileDialog.FileNames)
+                {
+                    await AfegirFitxers(file);
+                }
             }
         }
         private void BtnPLay_Click(object sender, EventArgs e)
@@ -453,7 +505,7 @@ namespace ControlsLib
 
                         TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Stream.CurrentTime;
                         //trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds));
-                        panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, (int)(pictureBox1.Image.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds)), panel3.Location.Y);
+                        panelCursor.Location = new Point(Math.Min(panelTop.Width, (int)(panelTop.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Stream.TotalTime.TotalSeconds)), panelCursor.Location.Y);
                         labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
                         int min, sec;
                         min = (int)(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds - playlist.ElementAt(index).Stream.CurrentTime.TotalSeconds) / 60;
@@ -464,7 +516,7 @@ namespace ControlsLib
                     else
                     {
                        //trackBarPosition.Value = 0;
-                        panel3.Location = new Point(0, panel3.Location.Y);
+                        panelCursor.Location = new Point(0, panelCursor.Location.Y);
                     }
                 }
                 else
@@ -474,7 +526,7 @@ namespace ControlsLib
 
                         TimeSpan currentTime = (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : playlist.ElementAt(index).Flac.CurrentTime;
                         //trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / playlist.ElementAt(index).Flac.TotalTime.TotalSeconds));
-                        panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, (int)(pictureBox1.Image.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Flac.TotalTime.TotalSeconds)), panel3.Location.Y);
+                        panelCursor.Location = new Point(Math.Min(panelTop.Width, (int)(panelTop.Width * currentTime.TotalSeconds / playlist.ElementAt(index).Flac.TotalTime.TotalSeconds)), panelCursor.Location.Y);
                         labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
                         int min, sec;
                         min = (int)(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds - playlist.ElementAt(index).Flac.CurrentTime.TotalSeconds) / 60;
@@ -485,7 +537,7 @@ namespace ControlsLib
                     else
                     {
                         //trackBarPosition.Value = 0;
-                        panel3.Location = new Point(0, panel3.Location.Y);
+                        panelCursor.Location = new Point(0, panelCursor.Location.Y);
                     }
                 }
             }
@@ -527,32 +579,20 @@ namespace ControlsLib
         private void BtnPause_Click(object sender, EventArgs e)
         {
             ResetVUMeter();
-            if (playlist.ElementAt(index).Wave != null)
+            if (count > 0)
             {
-                if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
+                if (playlist.ElementAt(index).Wave != null)
                 {
-                    playlist.ElementAt(index).Wave.Pause();
+                    if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
+                    {
+                        playlist.ElementAt(index).Wave.Pause();
+                    }
                 }
             }
         }
         private void BtnStop_Click(object sender, EventArgs e)
         {
-            foreach (AudioItem audioItem in playlist)
-            {
-                if (audioItem.Wave != null)
-                {
-                    seguen = -1;
-                    audioItem.Wave.Stop();
-                    if (audioItem.Isflac)
-                    {
-                        audioItem.Flac.CurrentTime = TimeSpan.MinValue;
-                    }
-                    else
-                    {
-                        audioItem.Stream.CurrentTime = TimeSpan.MinValue;
-                    }
-                }
-            }
+            PararTot();
             timer1.Stop();
             ResetVUMeter();
         }
@@ -568,7 +608,7 @@ namespace ControlsLib
                 Borrar = true;
                 btnBorrar.BackColor = Color.Red;
             }
-            //seguen = ObtenirSeguentIndex(index);
+            seguen = ObtenirSeguentIndex(index);
             //necesitaCalcularSeguen = false;
         }
         private void BtnContinu_Click(object sender, EventArgs e)
@@ -583,7 +623,7 @@ namespace ControlsLib
                 Continuar = true;
                 btnContinu.BackColor = SystemColors.Highlight;
             }
-            //seguen = ObtenirSeguentIndex(index);
+            seguen = ObtenirSeguentIndex(index);
             //necesitaCalcularSeguen = false;
         }
         private void BtnLoop_Click(object sender, EventArgs e)
@@ -598,38 +638,156 @@ namespace ControlsLib
                 Bucle = true;
                 btnLoop.BackColor = Color.Lime;
             }
-            //seguen = ObtenirSeguentIndex(index);
+            seguen = ObtenirSeguentIndex(index);
             //necesitaCalcularSeguen = false;
         }
 
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             timer1.Stop();
-            panel3.Location = new Point(Math.Min(pictureBox1.Image.Width, e.X), panel3.Location.Y);
-
-            if (!playlist.ElementAt(index).Isflac)
+            panelCursor.Location = new Point(Math.Min(panelTop.Width, e.X), panelCursor.Location.Y);
+            if (count > 0)
             {
-                if (playlist.ElementAt(index).Stream != null)
+                if (!playlist.ElementAt(index).Isflac)
                 {
-                    
+                    if (playlist.ElementAt(index).Stream != null)
+                    {
 
-                    playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * panel3.Location.X / pictureBox1.Image.Width);
+
+                        playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
 
 
-                    timer1.Start();
+                        timer1.Start();
+                    }
+                }
+                else
+                {
+                    if (playlist.ElementAt(index).Flac != null)
+                    {
+                        playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
+                        timer1.Start();
+                    }
                 }
             }
-            else
+
+
+
+        }
+
+        private void OnButtonUpClick(object sender, EventArgs e)
+        {
+            try
             {
-                if (playlist.ElementAt(index).Flac != null)
+                if (listView1.SelectedItems.Count > 0)
                 {
-                    playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * panel3.Location.X / pictureBox1.Image.Width);
-                    timer1.Start();
+                    ListViewItem selected = listView1.SelectedItems[0];
+                    AudioItem audioItem = playlist.ElementAt(listView1.SelectedIndices[0]);
+                    int indx = selected.Index;
+                    int totl = listView1.Items.Count;
+
+                    if (indx == 0)
+                    {
+                        listView1.Items.Remove(selected);
+                        playlist.Remove(audioItem);
+
+                        listView1.Items.Insert(totl - 1, selected);
+                        playlist.Insert(totl - 1, audioItem);
+                    }
+                    else
+                    {
+                        listView1.Items.Remove(selected);
+                        playlist.Remove(audioItem);
+
+                        listView1.Items.Insert(indx - 1, selected);
+                        playlist.Insert(indx - 1, audioItem);
+                    }
                 }
+                
+                index = playlist.IndexOf(audioActual);
+                seguen = ObtenirSeguentIndex(index);
             }
+            catch 
+            {
 
+            }
+            
+        }
 
+        private void OnButtonDownClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (listView1.SelectedItems.Count > 0)
+                {
+                    ListViewItem selected = listView1.SelectedItems[0];
+                    AudioItem audioItem = playlist.ElementAt(listView1.SelectedIndices[0]);
+                    int indx = selected.Index;
+                    int totl = listView1.Items.Count;
 
+                    if (indx == totl - 1)
+                    {
+                        listView1.Items.Remove(selected);
+                        playlist.Remove(audioItem);
+
+                        listView1.Items.Insert(0, selected);
+                        playlist.Insert(0, audioItem);
+                    }
+                    else
+                    {
+                        listView1.Items.Remove(selected);
+                        playlist.Remove(audioItem);
+                        listView1.Items.Insert(indx + 1, selected);
+                        playlist.Insert(indx + 1, audioItem);
+                    }
+                }
+                index = playlist.IndexOf(audioActual);
+                seguen = ObtenirSeguentIndex(index);
+
+            }
+            catch 
+            {
+            }
+            
+        }
+        private void PararTot()
+        {
+            foreach (AudioItem audioItem in playlist)
+            {
+                
+                seguen = -1;
+                if (audioItem.Wave != null)
+                {
+                    audioItem.Wave.Stop();
+                    audioItem.Wave.Dispose();
+                    audioItem.Wave = null;
+                }
+                if (audioItem.Isflac)
+                {
+                    if (audioItem.Flac != null)
+                    {
+                        audioItem.Flac.Dispose();
+                        audioItem.Flac = null;
+                    }
+                }
+                else
+                {
+                    if (audioItem.Stream != null)
+                    {
+                        audioItem.Stream.Dispose();
+
+                        audioItem.Stream = null;
+                    }
+                }
+                
+            }
+        }
+
+        private void Button3_Click(object sender, EventArgs e)
+        {
+            listView1.Items.Clear();
+            PararTot();
+            playlist.Clear();
+            count = 0;
         }
     }
 }

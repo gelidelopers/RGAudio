@@ -29,6 +29,7 @@ namespace ControlsLib
             {
 
                 SendEmail("Problemes", textbr, from, to, cc, null, "smtp.gmail.com", 587, "excepcioproblemes@gmail.com", "pr0bl3m3s");
+                Utils.SaveLog("excep", "0", "exception thrown", err);
             }
             catch
             {
@@ -46,6 +47,7 @@ namespace ControlsLib
                 EnableSsl = true,
                 UseDefaultCredentials = true,
                 
+                
 
             };
 
@@ -56,7 +58,9 @@ namespace ControlsLib
 
             msgMail = new MailMessage
             {
-                From = _from
+                From = _from,
+                IsBodyHtml = true
+                
             };
             msgMail.To.Add(_to);
             foreach (MailAddress addr in _cc)

@@ -25,6 +25,10 @@ namespace Models
         public ISampleProvider SampleProvider { get; set; }
         public FadeInOutSampleProvider Fade { get; set; } 
         public string FileName { get; set; }
+
+        public string Name { get; set; }
+        public string Artist { get; set; }
+
         public Image myImage { get; set; }
     }
 }

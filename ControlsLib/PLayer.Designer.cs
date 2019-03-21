@@ -55,17 +55,17 @@
             this.volumeMeter2 = new NAudio.Gui.VolumeMeter();
             this.volumeMeter4 = new NAudio.Gui.VolumeMeter();
             this.flowLayoutPanelTimers = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.panelTop = new System.Windows.Forms.Panel();
+            this.panelCursor = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblName = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button4 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.listView1 = new System.Windows.Forms.ListView();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -77,11 +77,11 @@
             this.panel1.SuspendLayout();
             this.panelVuRight.SuspendLayout();
             this.flowLayoutPanelTimers.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox2
@@ -415,28 +415,29 @@
             this.flowLayoutPanelTimers.Size = new System.Drawing.Size(288, 74);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
-            // panel2
+            // panelTop
             // 
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.lblName);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.MaximumSize = new System.Drawing.Size(1920, 100);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(288, 100);
-            this.panel2.TabIndex = 34;
+            this.panelTop.Controls.Add(this.panelCursor);
+            this.panelTop.Controls.Add(this.pictureBox1);
+            this.panelTop.Controls.Add(this.lblName);
+            this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.MaximumSize = new System.Drawing.Size(1920, 100);
+            this.panelTop.Name = "panelTop";
+            this.panelTop.Size = new System.Drawing.Size(288, 100);
+            this.panelTop.TabIndex = 34;
             // 
-            // panel3
+            // panelCursor
             // 
-            this.panel3.BackColor = System.Drawing.Color.Red;
-            this.panel3.Location = new System.Drawing.Point(0, 40);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(2, 60);
-            this.panel3.TabIndex = 2;
+            this.panelCursor.BackColor = System.Drawing.Color.Red;
+            this.panelCursor.Location = new System.Drawing.Point(0, 40);
+            this.panelCursor.Name = "panelCursor";
+            this.panelCursor.Size = new System.Drawing.Size(2, 60);
+            this.panelCursor.TabIndex = 2;
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 43);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(1920, 60);
@@ -467,6 +468,21 @@
             this.panel4.Size = new System.Drawing.Size(288, 748);
             this.panel4.TabIndex = 35;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 748);
+            this.tableLayoutPanel1.TabIndex = 4;
+            // 
             // panel5
             // 
             this.panel5.Controls.Add(this.button4);
@@ -495,6 +511,7 @@
             this.button3.TabIndex = 2;
             this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
             // 
             // button2
             // 
@@ -504,6 +521,7 @@
             this.button2.TabIndex = 1;
             this.button2.Text = "Baixar";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.OnButtonDownClick);
             // 
             // button1
             // 
@@ -513,21 +531,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Pujar";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tableLayoutPanel1.Controls.Add(this.panel5, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 748);
-            this.tableLayoutPanel1.TabIndex = 4;
+            this.button1.Click += new System.EventHandler(this.OnButtonUpClick);
             // 
             // listView1
             // 
@@ -547,7 +551,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelTop);
             this.Controls.Add(this.panelBottom);
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
@@ -567,11 +571,11 @@
             this.panel1.ResumeLayout(false);
             this.panelVuRight.ResumeLayout(false);
             this.flowLayoutPanelTimers.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
+            this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel4.ResumeLayout(false);
-            this.panel5.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -604,10 +608,10 @@
         private NAudio.Gui.VolumeMeter volumeMeter2;
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblName;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panelCursor;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button button4;
