@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArtistSet" EntityType="Model.Artist" />
+          <AssociationSet Name="ArtistSong" Association="Model.ArtistSong">
+            <End Role="Artist" EntitySet="ArtistSet" />
+            <End Role="Song" EntitySet="AudioFileSet" />
+          </AssociationSet>
+          <EntitySet Name="AlbumSet" EntityType="Model.Album" />
+          <AssociationSet Name="ArtistAlbum" Association="Model.ArtistAlbum">
+            <End Role="Artist" EntitySet="ArtistSet" />
+            <End Role="Album" EntitySet="AlbumSet" />
+          </AssociationSet>
+          <AssociationSet Name="SongAlbum" Association="Model.SongAlbum">
+            <End Role="Song" EntitySet="AudioFileSet" />
+            <End Role="Album" EntitySet="AlbumSet" />
+          </AssociationSet>
+          <EntitySet Name="CategorySet" EntityType="Model.Category" />
+          <AssociationSet Name="CategorySong" Association="Model.CategorySong">
+            <End Role="Category" EntitySet="CategorySet" />
+            <End Role="Song" EntitySet="AudioFileSet" />
+          </AssociationSet>
+          <EntitySet Name="ShowSet" EntityType="Model.Show" />
+          <EntitySet Name="AudioFileSet" EntityType="Model.AudioFile" />
+        </EntityContainer>
+        <EntityType Name="Song" BaseType="Model.AudioFile">
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Artist" Relationship="Model.ArtistSong" FromRole="Song" ToRole="Artist" />
+          <NavigationProperty Name="Album" Relationship="Model.SongAlbum" FromRole="Song" ToRole="Album" />
+          <NavigationProperty Name="Category" Relationship="Model.CategorySong" FromRole="Song" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Song" Relationship="Model.ArtistSong" FromRole="Artist" ToRole="Song" />
+          <NavigationProperty Name="Album" Relationship="Model.ArtistAlbum" FromRole="Artist" ToRole="Album" />
+        </EntityType>
+        <Association Name="ArtistSong">
+          <End Type="Model.Artist" Role="Artist" Multiplicity="*" />
+          <End Type="Model.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Artist" Relationship="Model.ArtistAlbum" FromRole="Album" ToRole="Artist" />
+          <NavigationProperty Name="Song" Relationship="Model.SongAlbum" FromRole="Album" ToRole="Song" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Year" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="ArtistAlbum">
+          <End Type="Model.Artist" Role="Artist" Multiplicity="*" />
+          <End Type="Model.Album" Role="Album" Multiplicity="*" />
+        </Association>
+        <Association Name="SongAlbum">
+          <End Type="Model.Song" Role="Song" Multiplicity="*" />
+          <End Type="Model.Album" Role="Album" Multiplicity="1" />
+        </Association>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="HexColor" Type="String" Nullable="false" />
+          <NavigationProperty Name="Song" Relationship="Model.CategorySong" FromRole="Category" ToRole="Song" />
+        </EntityType>
+        <Association Name="CategorySong">
+          <End Type="Model.Category" Role="Category" Multiplicity="1" />
+          <End Type="Model.Song" Role="Song" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Show">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="String" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Podcast" BaseType="Model.AudioFile">
+          <Property Name="isPublic" Type="Boolean" Nullable="false" />
+          <Property Name="Uploaded" Type="Boolean" Nullable="false" />
+          <Property Name="AirDateTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AudioFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

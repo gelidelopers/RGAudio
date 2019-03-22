@@ -1,4 +1,5 @@
-﻿namespace ControlsLib
+﻿using NAudio.Gui;
+namespace ControlsLib
 {
     partial class Player
     {
