@@ -23,7 +23,6 @@ namespace Gelida_Player
             esplas.Show();
             //bool value = false;
             //DataSet data;
-            
             // Used to store the return value
             
             var thread = new Thread(

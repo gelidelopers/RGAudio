@@ -155,7 +155,8 @@ namespace ControlsLib
                             {
                                 playlist.ElementAt(seguen).Wave.Play();
                                 audioActual = playlist.ElementAt(seguen);
-                                lblName.Text = playlist.ElementAt(seguen).Name + "\n" + playlist.ElementAt(seguen).Artist;
+                                lblName.Text = playlist.ElementAt(seguen).Name;
+                                lblArtist.Text = playlist.ElementAt(seguen).Artist;
                                 listView1.Items[seguen].Font = fntPlaying;
                                 CarregarDuracio(playlist.ElementAt(seguen));
                                 pictureBox1.Image = playlist.ElementAt(seguen).myImage;
@@ -175,53 +176,57 @@ namespace ControlsLib
                                 {
                                     ResetVUMeter();
                                     panelCursor.Location = new Point(0, panelCursor.Location.Y);
-                                    if (playlist.ElementAt(index) != null)
+                                    if (count > index)
                                     {
-                                        if (playlist.ElementAt(index).Isflac)
+                                        if (playlist.ElementAt(index) != null)
                                         {
-                                            if (playlist.ElementAt(index).Flac != null)
+                                            if (playlist.ElementAt(index).Isflac)
                                             {
-                                                playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                if (playlist.ElementAt(index).Flac != null)
+                                                {
+                                                    playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            if (playlist.ElementAt(index).Stream != null)
+                                            else
                                             {
-                                                playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                if (playlist.ElementAt(index).Stream != null)
+                                                {
+                                                    playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                }
                                             }
-                                        }
-                                        lblName.Text = "";
-                                        try
-                                        {
-                                            listView1.Items[index].Font = fntNotPlaying;
-                                        }
-                                        catch
-                                        {
+                                            lblName.Text = "";
+                                            lblArtist.Text = "";
+                                            try
+                                            {
+                                                listView1.Items[index].Font = fntNotPlaying;
+                                            }
+                                            catch
+                                            {
 
-                                        }
-                                        if (Borrar)
-                                        {
-                                            listView1.Items.Remove(audioActual.LstviewItem);
-                                            playlist.Remove(audioActual);
+                                            }
+                                            if (Borrar)
+                                            {
+                                                listView1.Items.Remove(audioActual.LstviewItem);
+                                                playlist.Remove(audioActual);
 
-                                            count = playlist.Count;
+                                                count = playlist.Count;
 
-                                        }
-                                        if (seguen >= 0)
-                                        {
-                                            PlaySong();
-                                        }
-                                        else
-                                        {
-                                            isPlaying = false;
-                                        }
-                                        if (Borrar)
-                                        {
-                                            //listView1.Items.RemoveAt(index);
+                                            }
+                                            if (seguen >= 0)
+                                            {
+                                                PlaySong();
+                                            }
+                                            else
+                                            {
+                                                isPlaying = false;
+                                            }
+                                            if (Borrar)
+                                            {
+                                                //listView1.Items.RemoveAt(index);
 
 
 
+                                            }
                                         }
                                     }
                                 //waveOut.Dispose();
@@ -459,7 +464,7 @@ namespace ControlsLib
             return i;
         }
         //addfolder
-        private async void OnAddFolderButtonClickAsync(object sender, EventArgs e)
+        private async void OnAddFolderBtnClickAsync(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             string allExtensions = "*.wav;*.aiff;*.mp3;*.aac;*.flac";
@@ -474,6 +479,8 @@ namespace ControlsLib
                     await AfegirFitxers(file);
                 }
             }
+            count = playlist.Count;
+            seguen = ObtenirSeguentIndex(index);
         }
         private void BtnPLay_Click(object sender, EventArgs e)
         {
@@ -543,31 +550,7 @@ namespace ControlsLib
             }
             catch { }
         }
-        private void TrackBarPosition_MouseUp(object sender, MouseEventArgs e)
-        {
-            if (!playlist.ElementAt(index).Isflac)
-            {
-                if (playlist.ElementAt(index).Stream != null)
-                {
-                    timer1.Start();
-
-                    //playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
-                }
-            }
-            else
-            {
-                if (playlist.ElementAt(index).Flac != null)
-                {
-                    timer1.Start();
-
-                    //playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * trackBarPosition.Value / 100.0);
-                }
-            }
-        }
-        private void TrackBarPosition_MouseDown(object sender, MouseEventArgs e)
-        {
-            timer1.Stop();
-        }
+       
         private void ListView1_DoubleClick(object sender, EventArgs e)
         {
             if(listView1.SelectedItems.Count > 0)
@@ -653,11 +636,7 @@ namespace ControlsLib
                     if (playlist.ElementAt(index).Stream != null)
                     {
 
-
                         playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
-
-
-                        timer1.Start();
                     }
                 }
                 else
@@ -665,16 +644,18 @@ namespace ControlsLib
                     if (playlist.ElementAt(index).Flac != null)
                     {
                         playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
-                        timer1.Start();
+                        
                     }
                 }
+                timer1.Start();
+
             }
 
 
 
         }
 
-        private void OnButtonUpClick(object sender, EventArgs e)
+        private void OnBtnUpClick(object sender, EventArgs e)
         {
             try
             {
@@ -713,7 +694,7 @@ namespace ControlsLib
             
         }
 
-        private void OnButtonDownClick(object sender, EventArgs e)
+        private void OnBtnDownClick(object sender, EventArgs e)
         {
             try
             {
@@ -782,12 +763,25 @@ namespace ControlsLib
             }
         }
 
-        private void Button3_Click(object sender, EventArgs e)
+        private void OnBtnDeleteClick(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ÒnBtnClearClick(object sender, EventArgs e)
         {
             listView1.Items.Clear();
             PararTot();
             playlist.Clear();
             count = 0;
+        }
+
+        private void Player_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F2)
+            {
+
+            }
         }
     }
 }

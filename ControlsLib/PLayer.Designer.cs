@@ -59,6 +59,8 @@ namespace ControlsLib
             this.panelTop = new System.Windows.Forms.Panel();
             this.panelCursor = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblArtist = new System.Windows.Forms.Label();
             this.lblName = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -80,6 +82,7 @@ namespace ControlsLib
             this.flowLayoutPanelTimers.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -175,7 +178,7 @@ namespace ControlsLib
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 848);
+            this.panelBottom.Location = new System.Drawing.Point(0, 418);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(288, 232);
             this.panelBottom.TabIndex = 32;
@@ -258,7 +261,7 @@ namespace ControlsLib
             this.btnFolder.Size = new System.Drawing.Size(52, 45);
             this.btnFolder.TabIndex = 23;
             this.btnFolder.UseVisualStyleBackColor = true;
-            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderButtonClickAsync);
+            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderBtnClickAsync);
             // 
             // btnContinu
             // 
@@ -420,7 +423,7 @@ namespace ControlsLib
             // 
             this.panelTop.Controls.Add(this.panelCursor);
             this.panelTop.Controls.Add(this.pictureBox1);
-            this.panelTop.Controls.Add(this.lblName);
+            this.panelTop.Controls.Add(this.panel2);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.MaximumSize = new System.Drawing.Size(1920, 100);
@@ -431,23 +434,44 @@ namespace ControlsLib
             // panelCursor
             // 
             this.panelCursor.BackColor = System.Drawing.Color.Red;
-            this.panelCursor.Location = new System.Drawing.Point(0, 40);
+            this.panelCursor.Location = new System.Drawing.Point(0, 55);
             this.panelCursor.Name = "panelCursor";
-            this.panelCursor.Size = new System.Drawing.Size(2, 60);
+            this.panelCursor.Size = new System.Drawing.Size(2, 45);
             this.panelCursor.TabIndex = 2;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 43);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 60);
             this.pictureBox1.MaximumSize = new System.Drawing.Size(1920, 60);
             this.pictureBox1.MinimumSize = new System.Drawing.Size(0, 40);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(288, 57);
+            this.pictureBox1.Size = new System.Drawing.Size(288, 40);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblArtist);
+            this.panel2.Controls.Add(this.lblName);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.MaximumSize = new System.Drawing.Size(0, 60);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(288, 60);
+            this.panel2.TabIndex = 3;
+            // 
+            // lblArtist
+            // 
+            this.lblArtist.AutoEllipsis = true;
+            this.lblArtist.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblArtist.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblArtist.Location = new System.Drawing.Point(0, 30);
+            this.lblArtist.Name = "lblArtist";
+            this.lblArtist.Size = new System.Drawing.Size(288, 30);
+            this.lblArtist.TabIndex = 1;
             // 
             // lblName
             // 
@@ -455,9 +479,8 @@ namespace ControlsLib
             this.lblName.Dock = System.Windows.Forms.DockStyle.Top;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.Location = new System.Drawing.Point(0, 0);
-            this.lblName.MaximumSize = new System.Drawing.Size(1920, 50);
             this.lblName.Name = "lblName";
-            this.lblName.Size = new System.Drawing.Size(288, 43);
+            this.lblName.Size = new System.Drawing.Size(288, 30);
             this.lblName.TabIndex = 0;
             // 
             // panel4
@@ -466,7 +489,7 @@ namespace ControlsLib
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 100);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(288, 748);
+            this.panel4.Size = new System.Drawing.Size(288, 318);
             this.panel4.TabIndex = 35;
             // 
             // tableLayoutPanel1
@@ -481,7 +504,7 @@ namespace ControlsLib
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 748);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(288, 318);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // panel5
@@ -492,7 +515,7 @@ namespace ControlsLib
             this.panel5.Controls.Add(this.button1);
             this.panel5.Location = new System.Drawing.Point(211, 3);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(73, 742);
+            this.panel5.Size = new System.Drawing.Size(73, 312);
             this.panel5.TabIndex = 3;
             // 
             // button4
@@ -503,6 +526,7 @@ namespace ControlsLib
             this.button4.TabIndex = 3;
             this.button4.Text = "BORRAR TOT";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.ÒnBtnClearClick);
             // 
             // button3
             // 
@@ -512,7 +536,7 @@ namespace ControlsLib
             this.button3.TabIndex = 2;
             this.button3.Text = "Borrar";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.button3.Click += new System.EventHandler(this.OnBtnDeleteClick);
             // 
             // button2
             // 
@@ -522,7 +546,7 @@ namespace ControlsLib
             this.button2.TabIndex = 1;
             this.button2.Text = "Baixar";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.OnButtonDownClick);
+            this.button2.Click += new System.EventHandler(this.OnBtnDownClick);
             // 
             // button1
             // 
@@ -532,7 +556,7 @@ namespace ControlsLib
             this.button1.TabIndex = 0;
             this.button1.Text = "Pujar";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.OnButtonUpClick);
+            this.button1.Click += new System.EventHandler(this.OnBtnUpClick);
             // 
             // listView1
             // 
@@ -542,7 +566,7 @@ namespace ControlsLib
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(3, 3);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(202, 742);
+            this.listView1.Size = new System.Drawing.Size(202, 312);
             this.listView1.TabIndex = 4;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -556,7 +580,9 @@ namespace ControlsLib
             this.Controls.Add(this.panelBottom);
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
-            this.Size = new System.Drawing.Size(288, 1080);
+            this.Size = new System.Drawing.Size(288, 650);
+            
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Player_KeyUp);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -574,6 +600,7 @@ namespace ControlsLib
             this.flowLayoutPanelTimers.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -611,7 +638,6 @@ namespace ControlsLib
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
         private System.Windows.Forms.Panel panelTop;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Panel panelCursor;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
@@ -621,5 +647,8 @@ namespace ControlsLib
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label lblArtist;
+        private System.Windows.Forms.Label lblName;
     }
 }

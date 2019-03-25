@@ -79,8 +79,17 @@
     <TargetZone>Internet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Models">
+      <HintPath>..\Models\bin\Release\Models.dll</HintPath>
+    </Reference>
     <Reference Include="NAudio, Version=1.8.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.5\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Flac">
+      <HintPath>..\packages\NAudio.Flac.1.0.5702.29018\lib\net45\NAudio.Flac.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Lame">
+      <HintPath>..\packages\NAudio.Lame.1.0.9\lib\net40\NAudio.Lame.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -93,6 +102,9 @@
     <Reference Include="System.Xml" />
     <Reference Include="taglib-sharp, Version=2.1.0.0, Culture=neutral, PublicKeyToken=db62eba44689b5b0, processorArchitecture=MSIL">
       <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="WaveFormRendererLib">
+      <HintPath>..\ControlsLib\bin\Release\WaveFormRendererLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +189,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlsLib\ControlsLib.csproj">
+      <Project>{97FDA570-BA10-4FD0-984B-946E58D15661}</Project>
+      <Name>ControlsLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WindowsFormsControlLibrary1\XVRControlsLibrary.csproj">
       <Project>{b63e910b-0be4-46b8-883c-50600bdc9c0c}</Project>
       <Name>XVRControlsLibrary</Name>
