@@ -448,6 +448,7 @@ namespace ControlsLib
             this.pictureBox1.MinimumSize = new System.Drawing.Size(0, 40);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(288, 40);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.PictureBox1_MouseClick);
@@ -526,7 +527,7 @@ namespace ControlsLib
             this.button4.TabIndex = 3;
             this.button4.Text = "BORRAR TOT";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.ÒnBtnClearClick);
+            this.button4.Click += new System.EventHandler(this.OnBtnClearClick);
             // 
             // button3
             // 
@@ -581,7 +582,6 @@ namespace ControlsLib
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
             this.Size = new System.Drawing.Size(288, 650);
-            
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Player_KeyUp);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

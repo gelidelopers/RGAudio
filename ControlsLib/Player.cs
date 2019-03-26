@@ -121,7 +121,7 @@ namespace ControlsLib
                    audioItem.Stream.TotalTime.Seconds);
             }
         }
-        private void InicialitzarSo(AudioItem audioItem, int devnumber)
+        private async Task InicialitzarSo(AudioItem audioItem, int devnumber)
         {
             audioItem.Wave = new WaveOutEvent
             {
@@ -130,7 +130,7 @@ namespace ControlsLib
                
             audioItem.Wave.Init(audioItem.SampleProvider);
         }
-        private void PlaySong()
+        private async void PlaySong()
         {
             if (count > 0 && seguen >= 0 && index < playlist.Count)
             {
@@ -236,7 +236,7 @@ namespace ControlsLib
                             }
                             else
                             {
-                                CarregarFitxer(playlist.ElementAt(seguen));
+                                await CarregarFitxer(playlist.ElementAt(seguen));
                                 PlaySong();
 
                             }
@@ -245,7 +245,7 @@ namespace ControlsLib
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show("Error de reproduccio");
+                            MessageBox.Show(e.ToString(),"Error de reproduccio");
                         }
 
                         return;
@@ -257,7 +257,7 @@ namespace ControlsLib
                 {
                     try
                     {
-                        CarregarFitxer(playlist.ElementAt(index));
+                        await CarregarFitxer(playlist.ElementAt(index));
                         PlaySong();
 
                     }
@@ -274,13 +274,13 @@ namespace ControlsLib
         }
 
 
-        private void CarregarFitxer(AudioItem audioItem)
+        private async Task CarregarFitxer(AudioItem audioItem)
         {
             CreateInputStream(audioItem);
 
             CrearFader(audioItem);
 
-            InicialitzarSo(audioItem, OutDev);
+            await InicialitzarSo(audioItem, OutDev);
         }
 
         private void CrearFader(AudioItem audioItem)
@@ -378,7 +378,7 @@ namespace ControlsLib
                         LstviewItem = itom
 
                     };
-                    CarregarFitxer(ai);
+                    await CarregarFitxer(ai);
                     //ai.myImage = await RenderWaveformAsync(ai.FileName);
                     playlist.Add(ai);
                     //listView1.Items.Add(itom);
@@ -765,10 +765,13 @@ namespace ControlsLib
 
         private void OnBtnDeleteClick(object sender, EventArgs e)
         {
-            
+            foreach(ListViewItem lst in listView1.SelectedItems)
+            {
+                listView1.Items.Remove(lst);
+            }
         }
 
-        private void ÒnBtnClearClick(object sender, EventArgs e)
+        private void OnBtnClearClick(object sender, EventArgs e)
         {
             listView1.Items.Clear();
             PararTot();
@@ -776,11 +779,11 @@ namespace ControlsLib
             count = 0;
         }
 
-        private void Player_KeyUp(object sender, KeyEventArgs e)
+        private async void Player_KeyUp(object sender, KeyEventArgs e)
         {
             if(e.KeyCode == Keys.F2)
             {
-
+               pictureBox1.Image = await RenderWaveformAsync(playlist.ElementAt(index).FileName);
             }
         }
     }
