@@ -117,6 +117,7 @@ namespace Gelida_Player
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fainal_FormClosing);
             this.Load += new System.EventHandler(this.fainal_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPlayer_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

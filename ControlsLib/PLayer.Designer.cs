@@ -582,7 +582,7 @@ namespace ControlsLib
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
             this.Size = new System.Drawing.Size(288, 650);
-            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Player_KeyUp);
+            
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

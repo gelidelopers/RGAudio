@@ -21,6 +21,7 @@ namespace Gelida_Player
             InitializeComponent();
             Form esplas = new frmSplash();
             esplas.Show();
+            KeyPreview = true;
             //bool value = false;
             //DataSet data;
             // Used to store the return value
@@ -68,14 +69,19 @@ namespace Gelida_Player
             esplas.Close();
             //foreach (Control ctr in GetAll(this, typeof(ListPlayer)))
             //{
-                
+
 
             //    sais += (ctr.MinimumSize.Width);
 
             //}
             //size.Width = sais;
             //MinimumSize = size;
+            player1.StartedPlaying += Player1_StartedPLaying;
+        }
 
+        private void Player1_StartedPLaying(object sender, EventArgs e)
+        {
+            player1.CarregarWaveFormAsync();
         }
 
         private void fainal_FormClosing(object sender, FormClosingEventArgs e)
@@ -121,6 +127,14 @@ namespace Gelida_Player
         {
             Form form = new frmAbout();
             form.Show();
+        }
+
+        private void frmPlayer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F3)
+            {
+                player1.CarregarWaveFormAsync();
+            }
         }
     }
 }

@@ -165,7 +165,7 @@ namespace ControlsLib
                                 index = seguen;
 
                                 seguen = ObtenirSeguentIndex(index);
-
+                                OnStartedPlaying(EventArgs.Empty);
 
                                 //listView1.Items[index].Font = fntPlaying;
 
@@ -779,12 +779,17 @@ namespace ControlsLib
             count = 0;
         }
 
-        private async void Player_KeyUp(object sender, KeyEventArgs e)
+        
+        public async void CarregarWaveFormAsync()
         {
-            if(e.KeyCode == Keys.F2)
-            {
-               pictureBox1.Image = await RenderWaveformAsync(playlist.ElementAt(index).FileName);
-            }
+            pictureBox1.Image = await RenderWaveformAsync(playlist.ElementAt(index).FileName);
         }
+
+        protected virtual void OnStartedPlaying(EventArgs e)
+        {
+            StartedPlaying?.Invoke(this, e);
+        }
+
+        public event EventHandler StartedPlaying;
     }
 }
