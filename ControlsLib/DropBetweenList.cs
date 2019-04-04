@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ControlsLib
 {
-    public partial class DropBetweenList : UserControl
+    public partial class DragListView : ListView
     {
-        public DropBetweenList()
+        public DragListView()
         {
             InitializeComponent();
             

@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
-            this.dropBetweenList2 = new ControlsLib.DropBetweenList();
-            this.dropBetweenList1 = new ControlsLib.DropBetweenList();
+            this.dropBetweenList2 = new ControlsLib.DragListView();
+            this.dropBetweenList1 = new ControlsLib.DragListView();
             this.SuspendLayout();
             // 
             // button1
@@ -73,8 +73,8 @@
 
         #endregion
 
-        private ControlsLib.DropBetweenList dropBetweenList1;
-        private ControlsLib.DropBetweenList dropBetweenList2;
+        private ControlsLib.DragListView dropBetweenList1;
+        private ControlsLib.DragListView dropBetweenList2;
         private System.Windows.Forms.Button button1;
     }
 }

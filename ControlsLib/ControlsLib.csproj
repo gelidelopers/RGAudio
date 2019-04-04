@@ -72,11 +72,23 @@
       <HintPath>..\packages\taglib.2.1.0.0\lib\taglib-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WaveFormRendererLib">
-      <HintPath>..\packages\WaveFormRendererLib.dll</HintPath>
+      <HintPath>..\WaveFormRendererLib\obj\Debug\WaveFormRendererLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Arxiu.cs" />
+    <Compile Include="BBDDAudio.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BBDDAudio.Designer.cs">
+      <DependentUpon>BBDDAudio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CategoriesManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CategoriesManager.Designer.cs">
+      <DependentUpon>CategoriesManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Continu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -88,6 +100,12 @@
     </Compile>
     <Compile Include="DeviceSelector.Designer.cs">
       <DependentUpon>DeviceSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DragList.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DragList.Designer.cs">
+      <DependentUpon>DragList.cs</DependentUpon>
     </Compile>
     <Compile Include="frmError.cs">
       <SubType>Form</SubType>
@@ -109,7 +127,7 @@
       <DependentUpon>ImportMusic.cs</DependentUpon>
     </Compile>
     <Compile Include="DropBetweenList.cs">
-      <SubType>UserControl</SubType>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="DropBetweenList.Designer.cs">
       <DependentUpon>DropBetweenList.cs</DependentUpon>
@@ -130,6 +148,12 @@
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BBDDAudio.resx">
+      <DependentUpon>BBDDAudio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CategoriesManager.resx">
+      <DependentUpon>CategoriesManager.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Continu.resx">
       <DependentUpon>Continu.cs</DependentUpon>
     </EmbeddedResource>

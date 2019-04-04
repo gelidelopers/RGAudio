@@ -1,6 +1,6 @@
 ﻿namespace ControlsLib
 {
-    partial class DropBetweenList
+    partial class DragListView
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -116,8 +116,8 @@
             // 
             // DropBetweenList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            //this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            //this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "DropBetweenList";
