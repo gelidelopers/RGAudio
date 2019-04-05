@@ -37,6 +37,7 @@ namespace Gelida_Player
             this.panelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.player1 = new ControlsLib.Player();
+            this.bBDDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,7 +66,8 @@ namespace Gelida_Player
             // 
             this.configuracióToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.audioToolStripMenuItem,
-            this.panelsToolStripMenuItem});
+            this.panelsToolStripMenuItem,
+            this.bBDDToolStripMenuItem});
             this.configuracióToolStripMenuItem.Name = "configuracióToolStripMenuItem";
             this.configuracióToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
             this.configuracióToolStripMenuItem.Text = "Configuració";
@@ -73,13 +75,13 @@ namespace Gelida_Player
             // audioToolStripMenuItem
             // 
             this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-            this.audioToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.audioToolStripMenuItem.Text = "Audio";
             // 
             // panelsToolStripMenuItem
             // 
             this.panelsToolStripMenuItem.Name = "panelsToolStripMenuItem";
-            this.panelsToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.panelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.panelsToolStripMenuItem.Text = "Panels";
             // 
             // infoToolStripMenuItem
@@ -98,6 +100,13 @@ namespace Gelida_Player
             this.player1.OutDev = ((sbyte)(0));
             this.player1.Size = new System.Drawing.Size(310, 665);
             this.player1.TabIndex = 8;
+            // 
+            // bBDDToolStripMenuItem
+            // 
+            this.bBDDToolStripMenuItem.Name = "bBDDToolStripMenuItem";
+            this.bBDDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bBDDToolStripMenuItem.Text = "BBDD";
+            this.bBDDToolStripMenuItem.Click += new System.EventHandler(this.bBDDToolStripMenuItem_Click);
             // 
             // frmPlayer
             // 
@@ -134,5 +143,6 @@ namespace Gelida_Player
         private System.Windows.Forms.ToolStripMenuItem panelsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private ControlsLib.Player player1;
+        private System.Windows.Forms.ToolStripMenuItem bBDDToolStripMenuItem;
     }
 }

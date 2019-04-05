@@ -136,5 +136,10 @@ namespace Gelida_Player
                 player1.CarregarWaveFormAsync();
             }
         }
+
+        private void bBDDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmBBDDSettings().Show();
+        }
     }
 }

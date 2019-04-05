@@ -102,6 +102,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmBBDDSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBBDDSettings.Designer.cs">
+      <DependentUpon>frmBBDDSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmPlayer.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBBDDSettings.resx">
+      <DependentUpon>frmBBDDSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPlayer.resx">
       <DependentUpon>frmPlayer.cs</DependentUpon>

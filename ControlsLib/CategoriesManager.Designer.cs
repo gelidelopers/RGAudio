@@ -30,27 +30,27 @@
         {
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.btnNou = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.btnEdit = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnNou = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // treeView1
@@ -80,67 +80,6 @@
             this.splitContainer1.SplitterDistance = 156;
             this.splitContainer1.TabIndex = 3;
             // 
-            // btnEliminar
-            // 
-            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnEliminar.Location = new System.Drawing.Point(242, 0);
-            this.btnEliminar.MaximumSize = new System.Drawing.Size(50, 20);
-            this.btnEliminar.MinimumSize = new System.Drawing.Size(50, 20);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(50, 20);
-            this.btnEliminar.TabIndex = 0;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
-            // 
-            // btnNou
-            // 
-            this.btnNou.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnNou.Location = new System.Drawing.Point(242, 0);
-            this.btnNou.MaximumSize = new System.Drawing.Size(50, 20);
-            this.btnNou.MinimumSize = new System.Drawing.Size(50, 20);
-            this.btnNou.Name = "btnNou";
-            this.btnNou.Size = new System.Drawing.Size(50, 20);
-            this.btnNou.TabIndex = 1;
-            this.btnNou.Text = "Nou";
-            this.btnNou.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(0, 0);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(242, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSave.Location = new System.Drawing.Point(214, 8);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
-            this.btnSave.TabIndex = 3;
-            this.btnSave.Text = "Guardar";
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnSave);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 375);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(292, 34);
-            this.panel1.TabIndex = 4;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panel5);
-            this.panel2.Controls.Add(this.panel4);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 275);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(292, 100);
-            this.panel2.TabIndex = 5;
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.listView1);
@@ -159,15 +98,15 @@
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // panel4
+            // panel2
             // 
-            this.panel4.Controls.Add(this.textBox1);
-            this.panel4.Controls.Add(this.btnNou);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 62);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(292, 38);
-            this.panel4.TabIndex = 3;
+            this.panel2.Controls.Add(this.panel5);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 275);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(292, 100);
+            this.panel2.TabIndex = 5;
             // 
             // panel5
             // 
@@ -200,6 +139,68 @@
             this.btnEdit.Text = "Edita";
             this.btnEdit.UseVisualStyleBackColor = true;
             // 
+            // btnEliminar
+            // 
+            this.btnEliminar.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEliminar.Location = new System.Drawing.Point(242, 0);
+            this.btnEliminar.MaximumSize = new System.Drawing.Size(50, 20);
+            this.btnEliminar.MinimumSize = new System.Drawing.Size(50, 20);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(50, 20);
+            this.btnEliminar.TabIndex = 0;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.btnNou);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 62);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(292, 38);
+            this.panel4.TabIndex = 3;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(0, 0);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(242, 20);
+            this.textBox1.TabIndex = 2;
+            // 
+            // btnNou
+            // 
+            this.btnNou.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNou.Location = new System.Drawing.Point(242, 0);
+            this.btnNou.MaximumSize = new System.Drawing.Size(50, 20);
+            this.btnNou.MinimumSize = new System.Drawing.Size(50, 20);
+            this.btnNou.Name = "btnNou";
+            this.btnNou.Size = new System.Drawing.Size(50, 20);
+            this.btnNou.TabIndex = 1;
+            this.btnNou.Text = "Nou";
+            this.btnNou.UseVisualStyleBackColor = true;
+            this.btnNou.Click += new System.EventHandler(this.btnNou_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.btnSave);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 375);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(292, 34);
+            this.panel1.TabIndex = 4;
+            // 
+            // btnSave
+            // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSave.Location = new System.Drawing.Point(214, 8);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 3;
+            this.btnSave.Text = "Guardar";
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
             // CategoriesManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -211,13 +212,13 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.panel2.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ControlsLib
+namespace Gelida_Player
 {
-    public partial class CategoriesManager : UserControl
+    public partial class frmBBDDSettings : Form
     {
-        public CategoriesManager()
+        public frmBBDDSettings()
         {
             InitializeComponent();
-        }
-
-        private void btnNou_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

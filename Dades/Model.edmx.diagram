@@ -14,7 +14,7 @@
         <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.5" PointY="0.875" />
         <AssociationConnector Association="Model.CategorySong" />
         <EntityTypeShape EntityType="Model.Show" Width="1.5" PointX="0.5" PointY="3.625" />
-        <EntityTypeShape EntityType="Model.Podcast" Width="1.5" PointX="0.875" PointY="6.375" />
+        <EntityTypeShape EntityType="Model.Podcast" Width="1.5" PointX="0.875" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AudioFile" Width="1.5" PointX="2.625" PointY="4" />
         <InheritanceConnector EntityType="Model.Song" />
         <InheritanceConnector EntityType="Model.Podcast" />

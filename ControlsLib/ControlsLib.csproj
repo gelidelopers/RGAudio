@@ -83,6 +83,12 @@
     <Compile Include="BBDDAudio.Designer.cs">
       <DependentUpon>BBDDAudio.cs</DependentUpon>
     </Compile>
+    <Compile Include="BBDDConfig.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BBDDConfig.Designer.cs">
+      <DependentUpon>BBDDConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="CategoriesManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,6 +156,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BBDDAudio.resx">
       <DependentUpon>BBDDAudio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BBDDConfig.resx">
+      <DependentUpon>BBDDConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CategoriesManager.resx">
       <DependentUpon>CategoriesManager.cs</DependentUpon>
