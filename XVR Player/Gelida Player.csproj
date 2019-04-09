@@ -196,6 +196,10 @@
       <Project>{97FDA570-BA10-4FD0-984B-946E58D15661}</Project>
       <Name>ControlsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Dades\Dades.csproj">
+      <Project>{dae14810-787b-493c-a138-44e1ce55b532}</Project>
+      <Name>Dades</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{1eecb171-4c21-48ef-bfef-843a3de78d2b}</Project>
       <Name>Models</Name>

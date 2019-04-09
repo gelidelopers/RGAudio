@@ -11,13 +11,21 @@
         <EntityTypeShape EntityType="Model.Album" Width="1.5" PointX="4.5" PointY="3.375" />
         <AssociationConnector Association="Model.ArtistAlbum" />
         <AssociationConnector Association="Model.SongAlbum" />
-        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.5" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="0.5" PointY="0.875" IsExpanded="true" />
         <AssociationConnector Association="Model.CategorySong" />
         <EntityTypeShape EntityType="Model.Show" Width="1.5" PointX="0.5" PointY="3.625" />
         <EntityTypeShape EntityType="Model.Podcast" Width="1.5" PointX="0.875" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.AudioFile" Width="1.5" PointX="2.625" PointY="4" />
         <InheritanceConnector EntityType="Model.Song" />
         <InheritanceConnector EntityType="Model.Podcast" />
+        <EntityTypeShape EntityType="Model.Users" Width="1.5" PointX="7.875" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.Permisos" Width="1.5" PointX="7.375" PointY="3.875" />
+        <EntityTypeShape EntityType="Model.Apps" Width="1.5" PointX="7.25" PointY="6.375" />
+        <AssociationConnector Association="Model.AppsPermisos" />
+        <AssociationConnector Association="Model.PermisosUsers" />
+        <EntityTypeShape EntityType="Model.Noticies" Width="1.5" PointX="3.125" PointY="6.375" />
+        <EntityTypeShape EntityType="Model.NotCatego" Width="1.5" PointX="5.25" PointY="5.625" />
+        <AssociationConnector Association="Model.NoticiesNotCatego" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
