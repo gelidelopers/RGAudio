@@ -18,6 +18,6 @@ namespace Dades
         public System.DateTime DateTime { get; set; }
         public string HTML { get; set; }
     
-        public virtual NotCatego NotCatego { get; set; }
+        public virtual NewsCatego NotCatego { get; set; }
     }
 }

@@ -43,6 +43,7 @@ namespace ControlsLib
         private WaveFormRenderer waveFormRenderer;
         private Pen waveFormPos;
         private AudioItem audioActual;
+        private sbyte trais = 0;
         
         public bool Continuar = true;
         public bool Borrar = true;
@@ -71,6 +72,7 @@ namespace ControlsLib
                 postVolumeMeter.StreamVolume += OnPostVolumeMeter;
                 audioItem.SampleProvider = postVolumeMeter;
                 audioItem.Isflac = true;
+                
             }
             else
             {
@@ -121,7 +123,7 @@ namespace ControlsLib
                    audioItem.Stream.TotalTime.Seconds);
             }
         }
-        private async Task InicialitzarSo(AudioItem audioItem, int devnumber)
+        private void InicialitzarSo(AudioItem audioItem, int devnumber)
         {
             audioItem.Wave = new WaveOutEvent
             {
@@ -130,7 +132,7 @@ namespace ControlsLib
                
             audioItem.Wave.Init(audioItem.SampleProvider);
         }
-        private async void PlaySong()
+        private void PlaySong()
         {
             if (count > 0 && seguen >= 0 && index < playlist.Count)
             {
@@ -229,23 +231,28 @@ namespace ControlsLib
                                             }
                                         }
                                     }
-                                //waveOut.Dispose();
+                                    //waveOut.Dispose();
                                 };
 
                                 timer1.Start();
                             }
                             else
                             {
-                                await CarregarFitxer(playlist.ElementAt(seguen));
-                                PlaySong();
-
+                                CarregarFitxer(playlist.ElementAt(seguen));
+                                if (trais < 3)
+                                {
+                                    PlaySong();
+                                }
+                                else
+                                {
+                                    listView1.Items.RemoveAt(seguen);
+                                    playlist.RemoveAt(seguen);
+                                }
                             }
-
-
                         }
                         catch (Exception e)
                         {
-                            MessageBox.Show(e.ToString(),"Error de reproduccio");
+                            MessageBox.Show(e.ToString(), "Error de reproduccio");
                         }
 
                         return;
@@ -255,17 +262,21 @@ namespace ControlsLib
                 }
                 else
                 {
-                    try
+                    CarregarFitxer(playlist.ElementAt(index));
+                    if (trais < 3)
                     {
-                        await CarregarFitxer(playlist.ElementAt(index));
                         PlaySong();
+                    }
+                    else
+                    {
+                        listView1.Items.RemoveAt(index);
+                        playlist.RemoveAt(index);
+                        
 
                     }
-                    catch
-                    {
-                        MessageBox.Show("Error amb el fitxer", "Error 1");
-                        return;
-                    }
+
+                    return;
+                    
 
                     //
 
@@ -274,13 +285,45 @@ namespace ControlsLib
         }
 
 
-        private async Task CarregarFitxer(AudioItem audioItem)
+        private void CarregarFitxer(AudioItem audioItem)
         {
-            CreateInputStream(audioItem);
+            try
+            {
+                CreateInputStream(audioItem);
+            }
+            catch
+            {
+                MessageBox.Show("Error amb el fitxer");
+                trais++;
+                try
+                {
+                    playlist.Remove(audioItem);
+                }
+                catch
+                {
+
+                }
+                return;
+            }
 
             CrearFader(audioItem);
 
-            await InicialitzarSo(audioItem, OutDev);
+
+            try
+            {
+                InicialitzarSo(audioItem, OutDev);
+                
+            }
+            catch
+            {
+                trais++;
+                MessageBox.Show("Error amb la sortida de so.");
+                audioItem.Wave.Dispose();
+                audioItem.Wave = null;
+                return;
+            }
+            trais = 0;
+
         }
 
         private void CrearFader(AudioItem audioItem)
@@ -340,7 +383,7 @@ namespace ControlsLib
         }
 
 
-        private async  Task AfegirFitxers(string file)
+        private void AfegirFitxers(string file)
         {
             List<string> errors = new List<string>();
             string extensio;
@@ -378,7 +421,7 @@ namespace ControlsLib
                         LstviewItem = itom
 
                     };
-                    await CarregarFitxer(ai);
+                    //await CarregarFitxer(ai);
                     //ai.myImage = await RenderWaveformAsync(ai.FileName);
                     playlist.Add(ai);
                     //listView1.Items.Add(itom);
@@ -422,7 +465,7 @@ namespace ControlsLib
             {
                 MessageBox.Show(error, "Error 4");
             }
-            count = playlist.Count;
+            
         }
         private int ObtenirSeguentIndex(int actual)
         {
@@ -447,6 +490,10 @@ namespace ControlsLib
                 {
                     i = actual;
                 }
+                if(playlist.ElementAt(i).Wave == null)
+                {
+                    CarregarFitxer(playlist.ElementAt(i));
+                }
             }
             else if (Bucle)
             {
@@ -464,7 +511,7 @@ namespace ControlsLib
             return i;
         }
         //addfolder
-        private async void OnAddFolderBtnClickAsync(object sender, EventArgs e)
+        private void OnAddFolderBtnClick(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
             string allExtensions = "*.wav;*.aiff;*.mp3;*.aac;*.flac";
@@ -476,13 +523,13 @@ namespace ControlsLib
             {
                 foreach (string file in openFileDialog.FileNames)
                 {
-                    await AfegirFitxers(file);
+                    AfegirFitxers(file);
                 }
             }
             count = playlist.Count;
             seguen = ObtenirSeguentIndex(index);
         }
-        private void BtnPLay_Click(object sender, EventArgs e)
+        private void BtnPlay_Click(object sender, EventArgs e)
         {
             if (count > 0)
             {
@@ -505,6 +552,7 @@ namespace ControlsLib
         {
             try
             {
+                
                 if (!playlist.ElementAt(index).Isflac)
                 {
                     if (playlist.ElementAt(index).Wave != null && playlist.ElementAt(index).Stream != null)
@@ -628,7 +676,13 @@ namespace ControlsLib
         private void PictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             timer1.Stop();
-            panelCursor.Location = new Point(Math.Min(panelTop.Width, e.X), panelCursor.Location.Y);
+            int mouseX = 2;
+            if(e.X > 2)
+            {
+                mouseX = e.X;
+            }
+            
+            panelCursor.Location = new Point(Math.Min(panelTop.Width, mouseX), panelCursor.Location.Y);
             if (count > 0)
             {
                 if (!playlist.ElementAt(index).Isflac)
@@ -636,23 +690,20 @@ namespace ControlsLib
                     if (playlist.ElementAt(index).Stream != null)
                     {
 
-                        playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
+                        playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Stream.TotalTime.TotalSeconds * mouseX / panelTop.Width);
                     }
                 }
                 else
                 {
                     if (playlist.ElementAt(index).Flac != null)
                     {
-                        playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * panelCursor.Location.X / panelTop.Width);
+                        playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromSeconds(playlist.ElementAt(index).Flac.TotalTime.TotalSeconds * mouseX / panelTop.Width);
                         
                     }
                 }
                 timer1.Start();
 
             }
-
-
-
         }
 
         private void OnBtnUpClick(object sender, EventArgs e)
@@ -762,7 +813,6 @@ namespace ControlsLib
                 
             }
         }
-
         private void OnBtnDeleteClick(object sender, EventArgs e)
         {
             foreach(ListViewItem lst in listView1.SelectedItems)
@@ -778,8 +828,6 @@ namespace ControlsLib
             playlist.Clear();
             count = 0;
         }
-
-        
         public async void CarregarWaveFormAsync()
         {
             pictureBox1.Image = await RenderWaveformAsync(playlist.ElementAt(index).FileName);

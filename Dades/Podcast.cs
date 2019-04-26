@@ -17,7 +17,5 @@ namespace Dades
         public bool isPublic { get; set; }
         public bool Uploaded { get; set; }
         public System.DateTime AirDateTime { get; set; }
-        public string Property1 { get; set; }
-        public string Property2 { get; set; }
     }
 }

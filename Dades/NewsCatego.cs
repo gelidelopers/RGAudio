@@ -12,10 +12,10 @@ namespace Dades
     using System;
     using System.Collections.Generic;
     
-    public partial class NotCatego
+    public partial class NewsCatego
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NotCatego()
+        public NewsCatego()
         {
             this.Noticies = new HashSet<Noticies>();
         }

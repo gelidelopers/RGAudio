@@ -65,15 +65,7 @@ namespace Gelida_Player
         {
         }
 
-        private void ToolBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            toolStrip.Visible = toolBarToolStripMenuItem.Checked;
-        }
-
-        private void StatusBarToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            statusStrip.Visible = statusBarToolStripMenuItem.Checked;
-        }
+        
 
         private void CascadeToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -104,6 +96,32 @@ namespace Gelida_Player
         }
 
         private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HelpMenu_Click(object sender, EventArgs e)
         {
 
         }

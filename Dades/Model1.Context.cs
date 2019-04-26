@@ -34,6 +34,6 @@ namespace Dades
         public virtual DbSet<Apps> AppsSet { get; set; }
         public virtual DbSet<Permisos> PermisosSet { get; set; }
         public virtual DbSet<Noticies> NoticiesSet { get; set; }
-        public virtual DbSet<NotCatego> NotCategoSet { get; set; }
+        public virtual DbSet<NewsCatego> NewsCategoSet { get; set; }
     }
 }

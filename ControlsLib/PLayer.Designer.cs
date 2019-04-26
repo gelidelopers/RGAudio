@@ -215,7 +215,7 @@ namespace ControlsLib
             this.btnPLay.Size = new System.Drawing.Size(71, 54);
             this.btnPLay.TabIndex = 21;
             this.btnPLay.UseVisualStyleBackColor = false;
-            this.btnPLay.Click += new System.EventHandler(this.BtnPLay_Click);
+            this.btnPLay.Click += new System.EventHandler(this.BtnPlay_Click);
             // 
             // btnPause
             // 
@@ -261,7 +261,7 @@ namespace ControlsLib
             this.btnFolder.Size = new System.Drawing.Size(52, 45);
             this.btnFolder.TabIndex = 23;
             this.btnFolder.UseVisualStyleBackColor = true;
-            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderBtnClickAsync);
+            this.btnFolder.Click += new System.EventHandler(this.OnAddFolderBtnClick);
             // 
             // btnContinu
             // 
@@ -521,6 +521,7 @@ namespace ControlsLib
             // 
             // button4
             // 
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button4.Location = new System.Drawing.Point(3, 183);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(67, 54);
@@ -531,6 +532,7 @@ namespace ControlsLib
             // 
             // button3
             // 
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button3.Location = new System.Drawing.Point(3, 123);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(67, 54);
@@ -541,6 +543,7 @@ namespace ControlsLib
             // 
             // button2
             // 
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button2.Location = new System.Drawing.Point(3, 63);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(67, 54);
@@ -551,6 +554,7 @@ namespace ControlsLib
             // 
             // button1
             // 
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.button1.Location = new System.Drawing.Point(3, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(67, 54);
@@ -582,7 +586,6 @@ namespace ControlsLib
             this.MinimumSize = new System.Drawing.Size(288, 650);
             this.Name = "Player";
             this.Size = new System.Drawing.Size(288, 650);
-            
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);

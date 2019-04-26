@@ -211,6 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="gelida_player_icon.ico" />
+    <None Include="Resources\baseline_play_arrow_black_18dp.png" />
     <None Include="Resources\gelida player.png" />
   </ItemGroup>
   <ItemGroup />

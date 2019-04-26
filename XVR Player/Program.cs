@@ -15,7 +15,7 @@ namespace Gelida_Player
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new frmSplash());
-            Application.Run(new frmPlayer(args));
+            Application.Run(new MDI());
             
         }
     }

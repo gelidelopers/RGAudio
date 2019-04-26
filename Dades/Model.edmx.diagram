@@ -24,7 +24,7 @@
         <AssociationConnector Association="Model.AppsPermisos" />
         <AssociationConnector Association="Model.PermisosUsers" />
         <EntityTypeShape EntityType="Model.Noticies" Width="1.5" PointX="3.125" PointY="6.375" />
-        <EntityTypeShape EntityType="Model.NotCatego" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="Model.NewsCatego" Width="1.5" PointX="5.25" PointY="5.625" />
         <AssociationConnector Association="Model.NoticiesNotCatego" />
       </Diagram>
     </edmx:Diagrams>
