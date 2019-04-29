@@ -43,6 +43,7 @@ namespace ControlsLib
         private WaveFormRenderer waveFormRenderer;
         private Pen waveFormPos;
         private AudioItem audioActual;
+        private AudioItem audioSeguen;
         private sbyte trais = 0;
         
         public bool Continuar = true;
@@ -136,16 +137,16 @@ namespace ControlsLib
         {
             if (count > 0 && seguen >= 0 && index < playlist.Count)
             {
-                if (playlist.ElementAt(index).Wave != null)
+                if (audioActual != null)
                 {
                     //problemes al borrar dona out of bounds
-                    if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Playing)
+                    if (audioActual.Wave.PlaybackState == PlaybackState.Playing)
                     {
                         return;
                     }
-                    else if (playlist.ElementAt(index).Wave.PlaybackState == PlaybackState.Paused)
+                    else if (audioActual.Wave.PlaybackState == PlaybackState.Paused)
                     {
-                        playlist.ElementAt(index).Wave.Play();
+                        audioActual.Wave.Play();
                         return;
                     }
 
@@ -153,16 +154,15 @@ namespace ControlsLib
                     {
                         try
                         {
-                            if (playlist.ElementAt(seguen).Wave != null)
+                            if (audioSeguen.Wave != null)
                             {
-                                playlist.ElementAt(seguen).Wave.Play();
-                                audioActual = playlist.ElementAt(seguen);
-                                lblName.Text = playlist.ElementAt(seguen).Name;
-                                lblArtist.Text = playlist.ElementAt(seguen).Artist;
+                                audioSeguen.Wave.Play();
+                                audioActual = audioSeguen;
+                                lblName.Text = audioSeguen.Name;
+                                lblArtist.Text = audioSeguen.Artist;
                                 listView1.Items[seguen].Font = fntPlaying;
-                                CarregarDuracio(playlist.ElementAt(seguen));
-                                pictureBox1.Image = playlist.ElementAt(seguen).myImage;
-
+                                CarregarDuracio(audioSeguen);
+                                pictureBox1.Image = audioSeguen.myImage;
 
                                 index = seguen;
 
@@ -174,26 +174,26 @@ namespace ControlsLib
                                 isPlaying = true;
 
 
-                                playlist.ElementAt(index).Wave.PlaybackStopped += (sender, evn) =>
+                                audioActual.Wave.PlaybackStopped += (sender, evn) =>
                                 {
                                     ResetVUMeter();
                                     panelCursor.Location = new Point(0, panelCursor.Location.Y);
                                     if (count > index)
                                     {
-                                        if (playlist.ElementAt(index) != null)
+                                        if (audioActual != null)
                                         {
-                                            if (playlist.ElementAt(index).Isflac)
+                                            if (audioActual.Isflac)
                                             {
-                                                if (playlist.ElementAt(index).Flac != null)
+                                                if (audioActual.Flac != null)
                                                 {
-                                                    playlist.ElementAt(index).Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                    audioActual.Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
                                                 }
                                             }
                                             else
                                             {
-                                                if (playlist.ElementAt(index).Stream != null)
+                                                if (audioActual.Stream != null)
                                                 {
-                                                    playlist.ElementAt(index).Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
+                                                    audioActual.Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
                                                 }
                                             }
                                             lblName.Text = "";
@@ -209,8 +209,6 @@ namespace ControlsLib
                                             if (Borrar)
                                             {
                                                 listView1.Items.Remove(audioActual.LstviewItem);
-                                                playlist.Remove(audioActual);
-
                                                 count = playlist.Count;
 
                                             }
@@ -226,8 +224,6 @@ namespace ControlsLib
                                             {
                                                 //listView1.Items.RemoveAt(index);
 
-
-
                                             }
                                         }
                                     }
@@ -238,7 +234,7 @@ namespace ControlsLib
                             }
                             else
                             {
-                                CarregarFitxer(playlist.ElementAt(seguen));
+                                CarregarFitxer(audioSeguen);
                                 if (trais < 3)
                                 {
                                     PlaySong();
@@ -246,7 +242,6 @@ namespace ControlsLib
                                 else
                                 {
                                     listView1.Items.RemoveAt(seguen);
-                                    playlist.RemoveAt(seguen);
                                 }
                             }
                         }
@@ -393,17 +388,19 @@ namespace ControlsLib
             //posar el path.get en una variable i posar tots els fitxers compatibles en un List
             if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
             {
-                Arxiu axr = new Arxiu
-                {
-                    fileName = file
-                };
+                
 
                 try
                 {
-                    var tfile = TagLib.File.Create(axr.fileName);
-                    axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                    axr.artist = tfile.Tag.JoinedPerformers;
+                    var tfile = TagLib.File.Create(file);
+                    Arxiu axr = new Arxiu
+                    {
+                        fileName = file,
+                        name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(file),
+                        artist = tfile.Tag.JoinedPerformers
 
+                    };
+                    
                     string[] lol = { axr.name, axr.artist, axr.fileName };
 
                     var itom = new ListViewItem(lol)
@@ -413,17 +410,7 @@ namespace ControlsLib
 
                     //item.SubItems.Add(axr.artist);
                     //item.SubItems.Add(axr.duration.ToString());
-                    AudioItem ai = new AudioItem()
-                    {
-                        FileName = axr.fileName,
-                        Name = axr.name,
-                        Artist = axr.artist,
-                        LstviewItem = itom
-
-                    };
-                    //await CarregarFitxer(ai);
-                    //ai.myImage = await RenderWaveformAsync(ai.FileName);
-                    playlist.Add(ai);
+                    
                     //listView1.Items.Add(itom);
                     listView1.Items.Add(itom);
 
@@ -490,9 +477,14 @@ namespace ControlsLib
                 {
                     i = actual;
                 }
-                if(playlist.ElementAt(i).Wave == null)
+                if(audioSeguen != null)
                 {
-                    CarregarFitxer(playlist.ElementAt(i));
+                    if(audioSeguen.FileName != listView1.Items[i].SubItems[3].Text)
+                    {
+                        audioSeguen.FileName = listView1.Items[i].SubItems[3].Text;
+                        CarregarFitxer(audioSeguen);
+                    }
+                    
                 }
             }
             else if (Bucle)
@@ -501,6 +493,7 @@ namespace ControlsLib
                 if (!Borrar)
                 {
                     i = actual;
+                    audioSeguen = audioActual;
                 }
             }
             else
