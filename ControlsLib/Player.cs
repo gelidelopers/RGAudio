@@ -30,8 +30,8 @@ namespace ControlsLib
             listView1.Columns.Add(column);
             waveFormPos = new Pen(Color.Black);
             listView1.DoubleClick += ListView1_DoubleClick;
-            
-           
+
+
         }
 
         private int index = 0;
@@ -45,12 +45,13 @@ namespace ControlsLib
         private AudioItem audioActual;
         private AudioItem audioSeguen;
         private sbyte trais = 0;
-        
+
         public bool Continuar = true;
         public bool Borrar = true;
         public bool Bucle = false;
-        public sbyte OutDev { get; set; }
-        
+        public int OutDev { get; set; }
+        public Color waveColor {get; set;}
+
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntNext = new Font("Arial", 10, System.Drawing.FontStyle.Underline);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -335,8 +336,8 @@ namespace ControlsLib
                 BottomHeight = pictureBox1.Height / 2,
                 Width = pictureBox1.Width,
                 DecibelScale = false,
-                BottomPeakPen = new Pen(Color.Green),
-                TopPeakPen = new Pen(Color.Green)
+                BottomPeakPen = new Pen(waveColor),
+                TopPeakPen = new Pen(waveColor)
 
             };
             return settings;
@@ -381,12 +382,10 @@ namespace ControlsLib
         private void AfegirFitxers(string file)
         {
             List<string> errors = new List<string>();
-            string extensio;
+            string extensio = Path.GetExtension(file);
 
-
-            extensio = Path.GetExtension(file);
             //posar el path.get en una variable i posar tots els fitxers compatibles en un List
-            if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
+            if (extensio == ".wav" || extensio == ".flac" || extensio == ".mp3" || extensio == ".aac")
             {
                 
 
@@ -396,7 +395,7 @@ namespace ControlsLib
                     Arxiu axr = new Arxiu
                     {
                         fileName = file,
-                        name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(file),
+                        name = tfile.Tag.Title ?? file.Replace(extensio,""),
                         artist = tfile.Tag.JoinedPerformers
 
                     };

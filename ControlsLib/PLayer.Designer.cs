@@ -29,15 +29,16 @@ namespace ControlsLib
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelCurrentTime = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.labelTotalTime = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.labelRemain = new System.Windows.Forms.Label();
             this.groupActual = new System.Windows.Forms.GroupBox();
-            this.timer1 = new System.Windows.Forms.Timer();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelBottom = new System.Windows.Forms.Panel();
             this.flowLayoutPanelButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnPLay = new System.Windows.Forms.Button();

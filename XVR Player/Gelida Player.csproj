@@ -102,6 +102,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuracio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuracio.Designer.cs">
+      <DependentUpon>Configuracio.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmBBDDSettings.cs">
       <SubType>Form</SubType>
     </Compile>
