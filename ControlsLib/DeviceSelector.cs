@@ -13,16 +13,56 @@ namespace ControlsLib
 {
     public partial class DeviceSelector : UserControl
     {
+       
         public DeviceSelector()
         {
             InitializeComponent();
 
-            for (int n = -1; n < WaveOut.DeviceCount; n++)
+            
+
+            foreach (var dev in DirectSoundOut.Devices)
             {
-                var caps = WaveOut.GetCapabilities(n);
-                comboBox1.Items.Add($"{caps.ProductName} ({caps.ManufacturerGuid.ToString()} {caps.ProductGuid.ToString()}");
+                comboBox1.Items.Add(dev);
             }
+            //var outputDevice = new WaveOut(/*((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid*/);
+
+            comboBox1.DisplayMember = "Description";
+
         }
+
+        /// <summary>
+        /// stack overflo
+        /// https://stackoverflow.com/questions/14679253/how-to-append-two-field-values-in-combobox-display-member-in-c-sharp
+        /// 
+        /// This example will guide you how to do that without modifying your base class.
+
+        //        First, you can leave your DisplayMember with one property, let's say:
+
+        //cmbEmployees.DisplayMember = "lastname";
+        //Now, go to your form in a[Design] mode, right click on the ComboBox -> Properties.
+
+        //In the top of the Properties window, click on Events(lightning icon),
+
+        //look for Format in the events list below(under Property Changed) and type there some event name, let's say: ComboBoxFormat , and press Enter. You will see this:
+
+        //private void ComboBoxFormat(object sender, ListControlConvertEventArgs e)
+        //        {
+
+        //        }
+        //        And now write these following lines inside:
+
+        //private void ComboBoxFormat(object sender, ListControlConvertEventArgs e)
+        //        {
+        //            // Assuming your class called Employee , and Firstname & Lastname are the fields
+        //            string lastname = ((Employee)e.ListItem).Firstname;
+        //            string firstname = ((Employee)e.ListItem).Lastname;
+        //            e.Value = lastname + " " + firstname;
+        //        }
+        //        That's it ;)
+        /// 
+        /// </summary>
+
+
         public string Title
         {
             get
@@ -34,16 +74,21 @@ namespace ControlsLib
                 lblTitle.Text = value;
             }
         }
-        public int SelectedDevice
+        public Guid SelectedDevice
         {
             get
             {
-                return comboBox1.SelectedIndex;
+                return ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid;
             }
             set
             {
-                comboBox1.SelectedIndex = value;
+                ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid = value;
             }
+        }
+
+        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show(SelectedDevice.ToString());
         }
     }
 }

@@ -125,5 +125,12 @@ namespace Gelida_Player
         {
 
         }
+
+        private void ConfiguracioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Configuracio frm = new Configuracio();
+
+            frm.Show();
+        }
     }
 }
