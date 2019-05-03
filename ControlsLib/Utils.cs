@@ -6,6 +6,8 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Models;
 
 namespace ControlsLib
 {
@@ -36,30 +38,34 @@ namespace ControlsLib
         {
             return errno + ": \n" + err + "\n" + ex.ToString();
         }
-        public static string GetExceptionString(Exception ex)
-        {
-            string excep;
-            try
-            {
-                excep = ex.HResult.ToString() + "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.StackTrace + "\n" + ex.TargetSite.ToString() + "\n\n" + ex.InnerException.Message + "\n" + ex.InnerException.Source + "\n" + ex.InnerException.StackTrace + "\n" + ex.InnerException.TargetSite.ToString();
-
-            }
-            catch
-            {
-                try
-                {
-                    excep = ex.HResult.ToString() + "\n" + ex.Message + "\n" + ex.Source + "\n" + ex.StackTrace + "\n" + ex.TargetSite.ToString() + "\n\n";
-
-                }
-                catch
-                {
-                    excep = "Error desconegut";
-                }
-            }
-
-
-             return excep;
-        }
         
+        public static AudioDevConfig GetAudioDevConfig(string FileName)
+        {
+            if (!File.Exists(FileName))
+            {
+                using (var stream = new StreamWriter(FileName))
+                {
+                    var serializer = new XmlSerializer(typeof(AudioDevConfig));
+                    serializer.Serialize(stream, new AudioDevConfig());
+                    stream.Flush();
+                }
+            }
+            using (var stream = System.IO.File.OpenRead(FileName))
+            {
+                var serializer = new XmlSerializer(typeof(AudioDevConfig));
+                return serializer.Deserialize(stream) as AudioDevConfig;
+            }
+        }
+
+        public static void SetAudioDevConfig(AudioDevConfig config, string FileName)
+        {
+            using (var stream = new StreamWriter(FileName))
+            {
+                var serializer = new XmlSerializer(typeof(AudioDevConfig));
+                serializer.Serialize(stream,config);
+                stream.Flush();
+            }
+        }
+
     }
 }

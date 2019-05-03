@@ -49,7 +49,7 @@ namespace ControlsLib
         public bool Continuar = true;
         public bool Borrar = true;
         public bool Bucle = false;
-        public int OutDev { get; set; }
+        public Guid OutDev { get; set; }
         public Color waveColor {get; set;}
 
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
@@ -125,12 +125,9 @@ namespace ControlsLib
                    audioItem.Stream.TotalTime.Seconds);
             }
         }
-        private void InicialitzarSo(AudioItem audioItem, int devnumber)
+        private void InicialitzarSo(AudioItem audioItem, Guid devnumber)
         {
-            audioItem.Wave = new WaveOutEvent
-            {
-                DeviceNumber = devnumber
-            };
+            audioItem.Wave = new DirectSoundOut(devnumber);
                
             audioItem.Wave.Init(audioItem.SampleProvider);
         }
@@ -173,7 +170,6 @@ namespace ControlsLib
                                 //listView1.Items[index].Font = fntPlaying;
 
                                 isPlaying = true;
-
 
                                 audioActual.Wave.PlaybackStopped += (sender, evn) =>
                                 {
@@ -250,7 +246,6 @@ namespace ControlsLib
                         {
                             MessageBox.Show(e.ToString(), "Error de reproduccio");
                         }
-
                         return;
 
                     }

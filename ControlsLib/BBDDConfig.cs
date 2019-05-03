@@ -22,7 +22,6 @@ namespace ControlsLib
         }
         public string Connection { get; set; }
 
-        Dades.ModelContainer lol;
 
         private void CreateString() {
 

@@ -1,4 +1,5 @@
-﻿using WindowsFormsControlLibrary1;
+﻿using System;
+using WindowsFormsControlLibrary1;
 namespace Gelida_Player
 {
     public partial class frmPlayer
@@ -97,7 +98,7 @@ namespace Gelida_Player
             this.player1.Location = new System.Drawing.Point(0, 24);
             this.player1.MinimumSize = new System.Drawing.Size(288, 650);
             this.player1.Name = "player1";
-            this.player1.OutDev = ((sbyte)(0));
+            this.player1.OutDev = new Guid();
             this.player1.Size = new System.Drawing.Size(310, 665);
             this.player1.TabIndex = 8;
             // 

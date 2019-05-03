@@ -8,10 +8,10 @@ namespace Models
 {
     public class AudioDevConfig
     {
-        public int In1Number { get; set; }
-        public int In2Number { get; set; }
-        public int Out1Number { get; set; }
-        public int Out2Number { get; set; }
-        public int Out24Number { get; set; }
+        public Guid In1Number { get; set; }
+        public Guid In2Number { get; set; }
+        public Guid Out1Number { get; set; }
+        public Guid Out2Number { get; set; }
+        public Guid Out24Number { get; set; }
     }
 }

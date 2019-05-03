@@ -228,7 +228,7 @@
             this.player1.Location = new System.Drawing.Point(13, 30);
             this.player1.MinimumSize = new System.Drawing.Size(288, 650);
             this.player1.Name = "player1";
-            this.player1.OutDev = 0;
+            this.player1.OutDev = new System.Guid();
             this.player1.Size = new System.Drawing.Size(288, 650);
             this.player1.TabIndex = 4;
             this.player1.waveColor = System.Drawing.Color.Empty;

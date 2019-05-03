@@ -78,11 +78,25 @@ namespace ControlsLib
         {
             get
             {
-                return ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid;
+                try
+                {
+                    return ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid;
+                }
+                catch
+                {
+                    return new Guid();
+                }
             }
             set
             {
-                ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid = value;
+                try
+                {
+                    ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid = value;
+                }
+                catch
+                {
+
+                }
             }
         }
 
