@@ -93,7 +93,7 @@
             // 
             this.selectIn2.Location = new System.Drawing.Point(8, 102);
             this.selectIn2.Name = "selectIn2";
-            this.selectIn2.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.selectIn2.Size = new System.Drawing.Size(287, 26);
             this.selectIn2.TabIndex = 3;
             this.selectIn2.Title = "Grabacio 2";
@@ -102,7 +102,7 @@
             // 
             this.selectIn1.Location = new System.Drawing.Point(8, 70);
             this.selectIn1.Name = "selectIn1";
-            this.selectIn1.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.selectIn1.Size = new System.Drawing.Size(287, 26);
             this.selectIn1.TabIndex = 2;
             this.selectIn1.Title = "Grabacio 1";
@@ -111,7 +111,7 @@
             // 
             this.selectOut2.Location = new System.Drawing.Point(8, 38);
             this.selectOut2.Name = "selectOut2";
-            this.selectOut2.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.selectOut2.Size = new System.Drawing.Size(287, 26);
             this.selectOut2.TabIndex = 1;
             this.selectOut2.Title = "Canal 2";
@@ -120,7 +120,7 @@
             // 
             this.selectOut1.Location = new System.Drawing.Point(8, 6);
             this.selectOut1.Name = "selectOut1";
-            this.selectOut1.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.selectOut1.Size = new System.Drawing.Size(287, 26);
             this.selectOut1.TabIndex = 0;
             this.selectOut1.Title = "Canal 1";
@@ -129,7 +129,7 @@
             // 
             this.devOut1.Location = new System.Drawing.Point(8, 6);
             this.devOut1.Name = "devOut1";
-            this.devOut1.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.devOut1.Size = new System.Drawing.Size(287, 26);
             this.devOut1.TabIndex = 0;
             this.devOut1.Title = "Canal 1";
@@ -138,7 +138,7 @@
             // 
             this.deviceSelector2.Location = new System.Drawing.Point(8, 38);
             this.deviceSelector2.Name = "deviceSelector2";
-            this.deviceSelector2.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.deviceSelector2.Size = new System.Drawing.Size(287, 26);
             this.deviceSelector2.TabIndex = 1;
             this.deviceSelector2.Title = "Canal 2";
@@ -147,7 +147,7 @@
             // 
             this.deviceSelectorOut1.Location = new System.Drawing.Point(8, 6);
             this.deviceSelectorOut1.Name = "deviceSelectorOut1";
-            this.deviceSelectorOut1.SelectedDevice = new System.Guid("00000000-0000-0000-0000-000000000000");
+            
             this.deviceSelectorOut1.Size = new System.Drawing.Size(287, 26);
             this.deviceSelectorOut1.TabIndex = 0;
             this.deviceSelectorOut1.Title = "Canal 1";

@@ -19,15 +19,22 @@ namespace ControlsLib
             InitializeComponent();
 
             
-
+            
+        }
+        public void Carregar(Guid selected)
+        {
             foreach (var dev in DirectSoundOut.Devices)
             {
                 comboBox1.Items.Add(dev);
+                if (dev.Guid == selected)
+                {
+                    comboBox1.SelectedItem = dev;
+                }
             }
             //var outputDevice = new WaveOut(/*((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid*/);
 
-            comboBox1.DisplayMember = "Description";
 
+            comboBox1.DisplayMember = "Description";
         }
 
         /// <summary>
@@ -78,31 +85,16 @@ namespace ControlsLib
         {
             get
             {
-                try
+                if (((DirectSoundDeviceInfo)comboBox1.SelectedItem) != null)
                 {
                     return ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid;
                 }
-                catch
+                else
                 {
-                    return new Guid();
+                    return new DirectSoundDeviceInfo().Guid;
                 }
             }
-            set
-            {
-                try
-                {
-                    ((DirectSoundDeviceInfo)comboBox1.SelectedItem).Guid = value;
-                }
-                catch
-                {
-
-                }
-            }
-        }
-
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            MessageBox.Show(SelectedDevice.ToString());
+            
         }
     }
 }
