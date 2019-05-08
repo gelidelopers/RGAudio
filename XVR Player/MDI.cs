@@ -132,5 +132,10 @@ namespace Gelida_Player
 
             frm.Show();
         }
+
+        private void Canal1ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
