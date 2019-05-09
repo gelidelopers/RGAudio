@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using ControlsLib;
 
 namespace Gelida_Player
 {
@@ -16,7 +17,9 @@ namespace Gelida_Player
         public MDI()
         {
             InitializeComponent();
+            AudioDev = Utils.GetAudioDevConfig("audioconfig.xml");
         }
+        public Models.AudioDevConfig AudioDev;
 
         private void ShowNewForm(object sender, EventArgs e)
         {
@@ -135,7 +138,14 @@ namespace Gelida_Player
 
         private void Canal1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmPlayer frm = new frmPlayer() { OutDev = AudioDev.Out1Number, MdiParent = this};
+            frm.Show();
+        }
 
+        private void Canal2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPlayer frm = new frmPlayer() { OutDev = AudioDev.Out2Number, MdiParent = this };
+            frm.Show();
         }
     }
 }

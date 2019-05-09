@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +15,20 @@ namespace Gelida_Player
 {
     public partial class frmPlayer : Form
     {
-        public frmPlayer(string[] args)
+
+        public Guid OutDev
+        {
+            get
+            {
+                return player1.OutDev;
+            }
+            set
+            {
+                _ = player1.OutDev;
+            }
+        }
+        
+        public frmPlayer()
         {
             InitializeComponent();
             Form esplas = new frmSplash();
@@ -29,35 +41,13 @@ namespace Gelida_Player
             var thread = new Thread(
             () =>
             {
-                Size size = new Size(15, 450);
-                int sais = size.Width;
-                for (byte i = 0; i <= Gelida_Player.Properties.Settings.Default.Players; i++)
-                {
-                    ListPlayer lp = new ListPlayer();
-                    if ((i + 1) % 2 == 0)
-                    {
-                        lp.outDev = Properties.Settings.Default.OutputDev2;
-                    }
-                    else
-                    {
-                        lp.outDev = Properties.Settings.Default.OutputDev1;
-                    }
-                    lp.Dock = DockStyle.Fill;
-                    lp.AutoSize = true;
-                    lp.AutoSizeMode = AutoSizeMode.GrowOnly;
-                    lp.Padding = new Padding(5);
-                    //panel1.Controls.Add(lp);
-                }
-                //value = true; // Publish the return value
+
             });
             
             var t2 = new Thread(
             () =>
             {
 
-
-                
-            
             });
             thread.Start();
             t2.Start();
@@ -86,25 +76,17 @@ namespace Gelida_Player
 
         private void fainal_FormClosing(object sender, FormClosingEventArgs e)
         {
-            bool willClose = true;
-            
-            foreach(ListPlayer lp in GetAll(this, typeof(ListPlayer)))
+
+            if (player1.isPlaying)
             {
-                
-                  if(lp.isPlaying)
-                  {
-                        willClose = false;
-                        break;
-                  }
-                
-            }
-            if (!willClose) {
+
                 var window = MessageBox.Show(
                 "Close the window?",
                 "Are you sure?",
                 MessageBoxButtons.YesNo);
 
                 e.Cancel = (window == DialogResult.No);
+                
             }
             
         }
