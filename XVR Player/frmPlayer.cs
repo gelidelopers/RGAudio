@@ -16,19 +16,10 @@ namespace Gelida_Player
     public partial class frmPlayer : Form
     {
 
-        public Guid OutDev
-        {
-            get
-            {
-                return player1.OutDev;
-            }
-            set
-            {
-                _ = player1.OutDev;
-            }
-        }
         
-        public frmPlayer()
+        
+
+        public frmPlayer(Guid OutDev)
         {
             InitializeComponent();
             Form esplas = new frmSplash();
@@ -62,7 +53,7 @@ namespace Gelida_Player
 
 
             //    sais += (ctr.MinimumSize.Width);
-
+            player1.OutDev = OutDev;
             //}
             //size.Width = sais;
             //MinimumSize = size;

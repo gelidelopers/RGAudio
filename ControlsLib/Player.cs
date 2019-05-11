@@ -63,6 +63,7 @@ namespace ControlsLib
 
         private void CreateInputStream(AudioItem audioItem)
         {
+            //audioItem = new AudioItem();
             if (Path.GetExtension(audioItem.FileName) == ".flac")
             {
                 audioItem.Flac = new FlacReader(audioItem.FileName);
@@ -169,77 +170,24 @@ namespace ControlsLib
 
                                 actualAudio = nextAudio;
 
+                                CarregarSeguenAudio();
+
                                 
+
+                                audio[actualAudio].Wave.PlaybackStopped += PlayNext;
                                 
 
                                 //listView1.Items[index].Font = fntPlaying;
 
                                 isPlaying = true;
 
-                                audio[actualAudio].Wave.PlaybackStopped += (sender, evn) =>
-                                {
-                                    if (seguen >= 0)
-                                    {
-                                        PlaySong();
-                                    }
-                                    else
-                                    {
-                                        isPlaying = false;
-                                        ResetVUMeter();
-                                    }
-
-                                    
-                                    panelCursor.Location = new Point(0, panelCursor.Location.Y);
-                                    if (count > index)
-                                    {
-                                        if (audio[actualAudio] != null)
-                                        {
-                                            if (audio[actualAudio].Isflac)
-                                            {
-                                                if (audio[actualAudio].Flac != null)
-                                                {
-                                                    audio[actualAudio].Flac.CurrentTime = TimeSpan.FromMilliseconds(5);
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (audio[actualAudio].Stream != null)
-                                                {
-                                                    audio[actualAudio].Stream.CurrentTime = TimeSpan.FromMilliseconds(5);
-                                                }
-                                            }
-                                            lblName.Text = "";
-                                            lblArtist.Text = "";
-                                            try
-                                            {
-                                                listView1.Items[index].Font = fntNotPlaying;
-                                            }
-                                            catch
-                                            {
-
-                                            }
-                                            if (Borrar)
-                                            {
-                                                listView1.Items.Remove(audio[actualAudio].LstviewItem);
-
-
-                                            }
-                                            
-                                            if (Borrar)
-                                            {
-                                                //listView1.Items.RemoveAt(index);
-
-                                            }
-                                        }
-                                    }
-                                    //waveOut.Dispose();
-                                };
+                                
 
                                 timer1.Start();
                             }
                             else
                             {
-                                CarregarFitxer(audio[nextAudio]);
+                                audio[nextAudio] =  CarregarFitxer(audio[nextAudio]);
                                 if (trais < 3)
                                 {
                                     PlaySong();
@@ -261,7 +209,7 @@ namespace ControlsLib
                 }
                 else
                 {
-                    CarregarFitxer(audio[actualAudio]);
+                    audio[actualAudio] = CarregarFitxer(audio[actualAudio]);
                     if (trais < 3)
                     {
                         PlaySong();
@@ -270,6 +218,7 @@ namespace ControlsLib
                     {
 
                         listView1.Items.RemoveAt(index);
+                        
                     }
 
                     return;
@@ -279,6 +228,12 @@ namespace ControlsLib
 
                 }
             }
+        }
+
+        private void PlayNext(object sender, StoppedEventArgs e)
+        {
+            audio[nextAudio].Wave.Play();
+            actualAudio = nextAudio;
         }
 
         private void CarregarSeguenAudio()
@@ -298,22 +253,25 @@ namespace ControlsLib
                 {
                     nextAudio = 0;
                 }
+                audio[nextAudio] = CarregarFitxer(audio[nextAudio]);
+
             }
         }
 
-        private void CarregarFitxer(AudioItem audioItem)
+        private AudioItem CarregarFitxer(AudioItem audioItem)
         {
             try
             {
+                audioItem = new AudioItem { FileName = listView1.Items[index].SubItems[2].Text };
                 CreateInputStream(audioItem);
             }
-            catch
+            catch(Exception e)
             {
                 MessageBox.Show("Error amb el fitxer");
                 trais++;
                 
                 var window = MessageBox.Show(
-                "S'ha intentat varies vegades carregar el fitxer, vols borrar-lo de la llista de reproducció?",
+                "S'ha intentat varies vegades carregar el fitxer = "+e.ToString() +", vols borrar-lo de la llista de reproducció?",
                 "Error al carregar el fitxer"/*Barra de titulo*/,
                 MessageBoxButtons.YesNo);
 
@@ -325,7 +283,7 @@ namespace ControlsLib
                 {
 
                 }
-                return;
+                return null;
             }
 
             CrearFader(audioItem);
@@ -342,9 +300,10 @@ namespace ControlsLib
                 MessageBox.Show("Error amb la sortida de so.");
                 audioItem.Wave.Dispose();
                 audioItem.Wave = null;
-                return;
+                return null;
             }
             trais = 0;
+            return audioItem;
 
         }
 
@@ -501,12 +460,13 @@ namespace ControlsLib
                 else
                 {
                     i = actual;
+
                 }
                 if(audio[nextAudio] != null)
                 {
-                    if(audio[nextAudio].FileName != listView1.Items[i].SubItems[3].Text)
+                    if(audio[nextAudio].FileName != listView1.Items[i].SubItems[2].Text)
                     {
-                        audio[nextAudio].FileName = listView1.Items[i].SubItems[3].Text;
+                        audio[nextAudio].FileName = listView1.Items[i].SubItems[2].Text;
                     }
                 }
             }
@@ -805,27 +765,30 @@ namespace ControlsLib
             {
                 
                 seguen = -1;
-                if (audioItem.Wave != null)
+                if (audioItem != null)
                 {
-                    audioItem.Wave.Stop();
-                    audioItem.Wave.Dispose();
-                    audioItem.Wave = null;
-                }
-                if (audioItem.Isflac)
-                {
-                    if (audioItem.Flac != null)
+                    if (audioItem.Wave != null)
                     {
-                        audioItem.Flac.Dispose();
-                        audioItem.Flac = null;
+                        audioItem.Wave.Stop();
+                        audioItem.Wave.Dispose();
+                        audioItem.Wave = null;
                     }
-                }
-                else
-                {
-                    if (audioItem.Stream != null)
+                    if (audioItem.Isflac)
                     {
-                        audioItem.Stream.Dispose();
+                        if (audioItem.Flac != null)
+                        {
+                            audioItem.Flac.Dispose();
+                            audioItem.Flac = null;
+                        }
+                    }
+                    else
+                    {
+                        if (audioItem.Stream != null)
+                        {
+                            audioItem.Stream.Dispose();
 
-                        audioItem.Stream = null;
+                            audioItem.Stream = null;
+                        }
                     }
                 }
                 

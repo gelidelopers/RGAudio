@@ -138,13 +138,13 @@ namespace Gelida_Player
 
         private void Canal1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPlayer frm = new frmPlayer() { OutDev = AudioDev.Out1Number, MdiParent = this};
+            frmPlayer frm = new frmPlayer(AudioDev.Out1Number) { MdiParent = this};
             frm.Show();
         }
 
         private void Canal2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPlayer frm = new frmPlayer() { OutDev = AudioDev.Out2Number, MdiParent = this };
+            frmPlayer frm = new frmPlayer(AudioDev.Out2Number) { MdiParent = this};
             frm.Show();
         }
     }

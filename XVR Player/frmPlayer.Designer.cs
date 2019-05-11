@@ -67,9 +67,7 @@ namespace Gelida_Player
             this.MinimumSize = new System.Drawing.Size(326, 728);
             this.Name = "frmPlayer";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gelida Player";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.fainal_FormClosing);
             this.Load += new System.EventHandler(this.fainal_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmPlayer_KeyDown);
