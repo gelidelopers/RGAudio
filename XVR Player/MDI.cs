@@ -131,9 +131,17 @@ namespace Gelida_Player
 
         private void ConfiguracioToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Configuracio frm = new Configuracio();
 
-            frm.Show();
+            LogIn logIn = new LogIn() /*{ MdiParent = this }*/;
+            logIn.ShowDialog();
+
+            if (logIn.DialogResult == DialogResult.OK)
+            {
+
+                Configuracio frm = new Configuracio() { MdiParent = this};
+
+                frm.Show();
+            }
         }
 
         private void Canal1ToolStripMenuItem_Click(object sender, EventArgs e)
