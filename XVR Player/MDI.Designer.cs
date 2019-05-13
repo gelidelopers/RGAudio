@@ -54,6 +54,8 @@
             this.obrirReproductorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canal1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canal2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.obrirNavegadorWebToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -218,7 +220,8 @@
             this.editMenu,
             this.windowsMenu,
             this.helpMenu,
-            this.obrirReproductorToolStripMenuItem});
+            this.obrirReproductorToolStripMenuItem,
+            this.obrirNavegadorWebToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.MdiWindowListItem = this.windowsMenu;
             this.menuStrip.Name = "menuStrip";
@@ -238,16 +241,31 @@
             // canal1ToolStripMenuItem
             // 
             this.canal1ToolStripMenuItem.Name = "canal1ToolStripMenuItem";
-            this.canal1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.canal1ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.canal1ToolStripMenuItem.Text = "Canal 1";
             this.canal1ToolStripMenuItem.Click += new System.EventHandler(this.Canal1ToolStripMenuItem_Click);
             // 
             // canal2ToolStripMenuItem
             // 
             this.canal2ToolStripMenuItem.Name = "canal2ToolStripMenuItem";
-            this.canal2ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.canal2ToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
             this.canal2ToolStripMenuItem.Text = "Canal 2";
             this.canal2ToolStripMenuItem.Click += new System.EventHandler(this.Canal2ToolStripMenuItem_Click);
+            // 
+            // obrirNavegadorWebToolStripMenuItem
+            // 
+            this.obrirNavegadorWebToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.chromeToolStripMenuItem});
+            this.obrirNavegadorWebToolStripMenuItem.Name = "obrirNavegadorWebToolStripMenuItem";
+            this.obrirNavegadorWebToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.obrirNavegadorWebToolStripMenuItem.Text = "Obrir Navegador Web";
+            // 
+            // chromeToolStripMenuItem
+            // 
+            this.chromeToolStripMenuItem.Name = "chromeToolStripMenuItem";
+            this.chromeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.chromeToolStripMenuItem.Text = "Chrome";
+            this.chromeToolStripMenuItem.Click += new System.EventHandler(this.ChromeToolStripMenuItem_Click);
             // 
             // MDI
             // 
@@ -295,6 +313,8 @@
         private System.Windows.Forms.ToolStripMenuItem obrirReproductorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canal1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem canal2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem obrirNavegadorWebToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chromeToolStripMenuItem;
     }
 }
 

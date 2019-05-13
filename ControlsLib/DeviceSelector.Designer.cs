@@ -34,12 +34,13 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(108, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(176, 21);
+            this.comboBox1.Size = new System.Drawing.Size(291, 21);
             this.comboBox1.TabIndex = 0;
-            
             // 
             // lblTitle
             // 
@@ -56,7 +57,7 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.comboBox1);
             this.Name = "DeviceSelector";
-            this.Size = new System.Drawing.Size(287, 26);
+            this.Size = new System.Drawing.Size(402, 26);
             this.ResumeLayout(false);
             this.PerformLayout();
 

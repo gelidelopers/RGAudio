@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using ControlsLib;
+
+
+
 
 namespace Gelida_Player
 {
@@ -154,6 +160,24 @@ namespace Gelida_Player
         {
             frmPlayer frm = new frmPlayer(AudioDev.Out2Number) { MdiParent = this};
             frm.Show();
+        }
+        [DllImport("user32")]
+        public static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+
+        const int WM_SYSCOMMAND = 274;
+        const int SC_MAXIMIZE = 61488;
+
+
+        [DllImport("user32.dll")]
+        static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private void ChromeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
