@@ -336,7 +336,8 @@ namespace ControlsLib
             //labelRendering.Visible = true;
             //Enabled = false;
             var peakProvider = new RmsPeakProvider(pictureBox1.Height / 2);
-            return await Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings,filename));
+            var img = await Task.Factory.StartNew(() => RenderThreadFunc(peakProvider, settings, filename));
+            return img;
         }
 
         private Image RenderThreadFunc(IPeakProvider peakProvider, WaveFormRendererSettings settings, string filename)
@@ -527,13 +528,13 @@ namespace ControlsLib
             }
         }
         private void Timer1_Tick(object sender, EventArgs e)
-        {
+        {/*
             try
             {
                 
                 if (audio[actualAudio].Isflac)
                 {
-                    if (audio[actualAudio].Wave != null && audio[actualAudio].Stream != null)
+                    if (audio[actualAudio].Wave != null)
                     {
 
                         TimeSpan currentTime = (audio[actualAudio].Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audio[actualAudio].Stream.CurrentTime;
@@ -554,7 +555,7 @@ namespace ControlsLib
                 }
                 else
                 {
-                    if (audio[actualAudio].Wave != null && audio[actualAudio].Flac != null)
+                    if (audio[actualAudio].Wave != null)
                     {
 
                         TimeSpan currentTime = (audio[actualAudio].Wave.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audio[actualAudio].Flac.CurrentTime;
@@ -575,6 +576,7 @@ namespace ControlsLib
                 }
             }
             catch { }
+            */
         }
        
         private void ListView1_DoubleClick(object sender, EventArgs e)
@@ -761,37 +763,20 @@ namespace ControlsLib
         }
         private void PararTot()
         {
-            foreach (AudioItem audioItem in audio)
+            try
             {
-                
-                seguen = -1;
-                if (audioItem != null)
-                {
-                    if (audioItem.Wave != null)
-                    {
-                        audioItem.Wave.Stop();
-                        audioItem.Wave.Dispose();
-                        audioItem.Wave = null;
-                    }
-                    if (audioItem.Isflac)
-                    {
-                        if (audioItem.Flac != null)
-                        {
-                            audioItem.Flac.Dispose();
-                            audioItem.Flac = null;
-                        }
-                    }
-                    else
-                    {
-                        if (audioItem.Stream != null)
-                        {
-                            audioItem.Stream.Dispose();
+                audio[actualAudio].Wave.Stop();
+                audio[nextAudio].Wave.Stop();
 
-                            audioItem.Stream = null;
-                        }
-                    }
-                }
                 
+            }
+            catch
+            {
+
+            }
+            foreach (string culdolla in AsioOut.GetDriverNames())
+            {
+                MessageBox.Show(culdolla);
             }
         }
         private void OnBtnDeleteClick(object sender, EventArgs e)

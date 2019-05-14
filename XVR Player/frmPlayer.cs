@@ -54,6 +54,7 @@ namespace Gelida_Player
 
             //    sais += (ctr.MinimumSize.Width);
             player1.OutDev = OutDev;
+            player1.waveColor = Color.Green;
             //}
             //size.Width = sais;
             //MinimumSize = size;
