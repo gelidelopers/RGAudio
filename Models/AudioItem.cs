@@ -18,7 +18,7 @@ namespace Models
     public class AudioItem 
     {
         public ListViewItem LstviewItem { get; set; }
-        public DirectSoundOut Wave { get; set; }
+        public WaveOutEvent Wave { get; set; }
         public AudioFileReader Stream { get; set; }
         public FlacReader Flac { get; set; }
         public bool Isflac { get; set; }

@@ -128,9 +128,13 @@ namespace ControlsLib
         }
         private void InicialitzarSo(AudioItem audioItem, Guid devnumber)
         {
-            audioItem.Wave = new DirectSoundOut(devnumber);
+            audioItem.Wave = new WaveOutEvent();
                
             audioItem.Wave.Init(audioItem.SampleProvider);
+            audioItem.Wave.Volume = 0;
+            audioItem.Wave.Play();
+            audioItem.Wave.Pause();
+            audioItem.Wave.Volume = 1;
         }
         private void PlaySong()
         {
@@ -143,60 +147,38 @@ namespace ControlsLib
                     {
                         return;
                     }
-                    else if (audio[actualAudio].Wave.PlaybackState == PlaybackState.Paused)
-                    {
-                        audio[actualAudio].Wave.Play();
-                        return;
-                    }
-
-                    else
+                    else 
                     {
                         try
                         {
-                            if (audio[nextAudio].Wave != null)
+                            audio[actualAudio].Wave.Play();
+                            audio[actualAudio].Wave.PlaybackStopped += PlayNext;
+                            lblName.Text = audio[actualAudio].Name;
+                            lblArtist.Text = audio[actualAudio].Artist;
+                            listView1.Items[index].Font = fntPlaying;
+                            CarregarDuracio(audio[actualAudio]);
+                            pictureBox1.Image = audio[actualAudio].myImage;
+                            seguen = ObtenirSeguentIndex(index);
+                            OnStartedPlaying(EventArgs.Empty);
+
+                            if (Borrar)
                             {
-                                audio[nextAudio].Wave.Play();
-                                
-                                lblName.Text = audio[nextAudio].Name;
-                                lblArtist.Text = audio[nextAudio].Artist;
-                                listView1.Items[seguen].Font = fntPlaying;
-                                CarregarDuracio(audio[nextAudio]);
-                                pictureBox1.Image = audio[nextAudio].myImage;
-
-                                index = seguen;
-
-                                seguen = ObtenirSeguentIndex(index);
-                                OnStartedPlaying(EventArgs.Empty);
-
-                                actualAudio = nextAudio;
-
-                                CarregarSeguenAudio();
-
-                                
-
-                                audio[actualAudio].Wave.PlaybackStopped += PlayNext;
-                                
-
-                                //listView1.Items[index].Font = fntPlaying;
-
-                                isPlaying = true;
-
-                                
-
-                                timer1.Start();
+                                listView1.Items.RemoveAt(index);
                             }
                             else
                             {
-                                audio[nextAudio] =  CarregarFitxer(audio[nextAudio]);
-                                if (trais < 3)
-                                {
-                                    PlaySong();
-                                }
-                                else
-                                {
-                                    listView1.Items.RemoveAt(seguen);
-                                }
+                                listView1.Items[index].Font = fntNotPlaying;
                             }
+
+
+                            CarregarSeguenAudio();
+
+                            //listView1.Items[index].Font = fntPlaying;
+
+                            isPlaying = true;
+
+                            timer1.Start();
+                            
                         }
                         catch (Exception e)
                         {
@@ -209,7 +191,7 @@ namespace ControlsLib
                 }
                 else
                 {
-                    audio[actualAudio] = CarregarFitxer(audio[actualAudio]);
+                    audio[actualAudio] = CarregarFitxer(audio[actualAudio], index);
                     if (trais < 3)
                     {
                         PlaySong();
@@ -233,6 +215,7 @@ namespace ControlsLib
         private void PlayNext(object sender, StoppedEventArgs e)
         {
             audio[nextAudio].Wave.Play();
+
             actualAudio = nextAudio;
         }
 
@@ -253,16 +236,16 @@ namespace ControlsLib
                 {
                     nextAudio = 0;
                 }
-                audio[nextAudio] = CarregarFitxer(audio[nextAudio]);
+                audio[nextAudio] = CarregarFitxer(audio[nextAudio], seguen);
 
             }
         }
 
-        private AudioItem CarregarFitxer(AudioItem audioItem)
+        private AudioItem CarregarFitxer(AudioItem audioItem, int num)
         {
             try
             {
-                audioItem = new AudioItem { FileName = listView1.Items[index].SubItems[2].Text };
+                audioItem = new AudioItem { FileName = listView1.Items[num].SubItems[2].Text };
                 CreateInputStream(audioItem);
             }
             catch(Exception e)
@@ -455,12 +438,12 @@ namespace ControlsLib
                     }
                     else if (Bucle && actual == count - 1)
                     {
-                        i = 0;
+                        i = index + 1;
                     }
                 }
                 else
                 {
-                    i = actual;
+                    i = index +1;
 
                 }
                 if(audio[nextAudio] != null)
@@ -528,11 +511,11 @@ namespace ControlsLib
             }
         }
         private void Timer1_Tick(object sender, EventArgs e)
-        {/*
+        {
             try
             {
                 
-                if (audio[actualAudio].Isflac)
+                if (!audio[actualAudio].Isflac)
                 {
                     if (audio[actualAudio].Wave != null)
                     {
@@ -542,8 +525,14 @@ namespace ControlsLib
                         panelCursor.Location = new Point(Math.Min(panelTop.Width, (int)(panelTop.Width * currentTime.TotalSeconds / audio[actualAudio].Stream.TotalTime.TotalSeconds)), panelCursor.Location.Y);
                         labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
                         int min, sec;
+
                         min = (int)(audio[actualAudio].Stream.TotalTime.TotalSeconds - audio[actualAudio].Stream.CurrentTime.TotalSeconds) / 60;
                         sec = (int)(audio[actualAudio].Stream.TotalTime.TotalMilliseconds - audio[actualAudio].Stream.CurrentTime.TotalMilliseconds) % 60000;
+
+                        if (min == 0 && sec == 5)
+                        {
+                            StartFade();
+                        }
 
                         labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
                     }
@@ -574,11 +563,19 @@ namespace ControlsLib
                         panelCursor.Location = new Point(0, panelCursor.Location.Y);
                     }
                 }
+
+                
             }
             catch { }
-            */
+            
         }
-       
+
+        private void StartFade()
+        {
+            audio[actualAudio].Fade.BeginFadeOut(5000);
+            audio[actualAudio].Fade.FollowedBy(audio[nextAudio].Stream);
+        }
+
         private void ListView1_DoubleClick(object sender, EventArgs e)
         {
             if(listView1.SelectedItems.Count > 0)
@@ -765,19 +762,29 @@ namespace ControlsLib
         {
             try
             {
+                audio[actualAudio].Wave.PlaybackStopped -= PlayNext;
+                audio[nextAudio].Wave.PlaybackStopped -= PlayNext;
+
+
                 audio[actualAudio].Wave.Stop();
                 audio[nextAudio].Wave.Stop();
 
-                
+                audio[actualAudio].Wave.Dispose();
+                audio[nextAudio].Wave.Dispose();
+
+                audio[actualAudio].Wave = null;
+                audio[nextAudio].Wave = null;
+
+                audio[actualAudio] = null;
+                audio[nextAudio] = null;
+
+
             }
             catch
             {
 
             }
-            foreach (string culdolla in AsioOut.GetDriverNames())
-            {
-                MessageBox.Show(culdolla);
-            }
+            
         }
         private void OnBtnDeleteClick(object sender, EventArgs e)
         {

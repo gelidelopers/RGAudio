@@ -38,10 +38,16 @@
             this.radioButtonSintonia = new System.Windows.Forms.RadioButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.colFileName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.colName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listView1
             // 
+            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colFileName,
+            this.colName});
             this.listView1.Location = new System.Drawing.Point(3, 122);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(765, 341);
@@ -51,7 +57,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(671, 11);
+            this.button1.Location = new System.Drawing.Point(674, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 58);
             this.button1.TabIndex = 1;
@@ -61,7 +67,7 @@
             // btnAddFiles
             // 
             this.btnAddFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddFiles.Location = new System.Drawing.Point(3, 4);
+            this.btnAddFiles.Location = new System.Drawing.Point(3, 20);
             this.btnAddFiles.Name = "btnAddFiles";
             this.btnAddFiles.Size = new System.Drawing.Size(75, 58);
             this.btnAddFiles.TabIndex = 2;
@@ -71,7 +77,7 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(652, 75);
+            this.checkBox1.Location = new System.Drawing.Point(653, 90);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(115, 17);
             this.checkBox1.TabIndex = 3;
@@ -81,7 +87,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(84, 4);
+            this.button3.Location = new System.Drawing.Point(84, 20);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(103, 58);
             this.button3.TabIndex = 4;
@@ -91,7 +97,7 @@
             // radioButtonJingle
             // 
             this.radioButtonJingle.AutoSize = true;
-            this.radioButtonJingle.Location = new System.Drawing.Point(203, 74);
+            this.radioButtonJingle.Location = new System.Drawing.Point(203, 69);
             this.radioButtonJingle.Name = "radioButtonJingle";
             this.radioButtonJingle.Size = new System.Drawing.Size(52, 17);
             this.radioButtonJingle.TabIndex = 6;
@@ -137,10 +143,27 @@
             this.comboBox2.Size = new System.Drawing.Size(206, 21);
             this.comboBox2.TabIndex = 9;
             // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(272, 68);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(206, 21);
+            this.comboBox3.TabIndex = 10;
+            // 
+            // colFileName
+            // 
+            this.colFileName.Text = "Fitxer";
+            // 
+            // colName
+            // 
+            this.colName.Text = "Nom";
+            // 
             // ImportMusic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.radioButtonSintonia);
@@ -170,5 +193,8 @@
         private System.Windows.Forms.RadioButton radioButtonSintonia;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ColumnHeader colFileName;
+        private System.Windows.Forms.ColumnHeader colName;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }
