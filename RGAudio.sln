@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida Player", "XVR Player\Gelida Player.csproj", "{BE82061C-DDB9-4C78-803D-883F3F6694D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XVRControlsLibrary", "WindowsFormsControlLibrary1\XVRControlsLibrary.csproj", "{B63E910B-0BE4-46B8-883C-50600BDC9C0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAudioControls", "WindowsFormsControlLibrary1\RAudioControls.csproj", "{B63E910B-0BE4-46B8-883C-50600BDC9C0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XVRImport", "XVRImport\XVRImport.csproj", "{8866684F-8A81-47FF-AE26-00331EB06D02}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gelida24", "Gelida24\Gelida24.csproj", "{413FDE29-24B7-4858-8DCF-BD780CB80F0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RAudioDataAccess", "RAudioDataAccess\RAudioDataAccess.csproj", "{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -88,6 +90,18 @@ Global
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x64.Build.0 = Release|Any CPU
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x86.ActiveCfg = Release|Any CPU
 		{413FDE29-24B7-4858-8DCF-BD780CB80F0A}.Release|x86.Build.0 = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|x64.Build.0 = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Debug|x86.Build.0 = Debug|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|x64.ActiveCfg = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|x64.Build.0 = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|x86.ActiveCfg = Release|Any CPU
+		{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

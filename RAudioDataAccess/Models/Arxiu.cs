@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace WindowsFormsControlLibrary1
+namespace RAudioDataAccess.Models
 {
     public class Arxiu
     {

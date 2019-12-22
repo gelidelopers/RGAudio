@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B63E910B-0BE4-46B8-883C-50600BDC9C0C}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WindowsFormsControlLibrary1</RootNamespace>
-    <AssemblyName>WindowsFormsControlLibrary1</AssemblyName>
+    <RootNamespace>RAudioControls</RootNamespace>
+    <AssemblyName>RAudioControls</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -59,8 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arxiu.cs" />
+    <Compile Include="AudioFinder.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AudioFinder.Designer.cs">
+      <DependentUpon>AudioFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="DBConnect.cs" />
+    <Compile Include="frmAudioFinder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAudioFinder.Designer.cs">
+      <DependentUpon>frmAudioFinder.cs</DependentUpon>
+    </Compile>
     <Compile Include="PlayContinu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -79,13 +90,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Recorder.cs" />
-    <Compile Include="Recorder.Designer.cs">
-      <DependentUpon>Recorder.cs</DependentUpon>
-    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AudioFinder.resx">
+      <DependentUpon>AudioFinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAudioFinder.resx">
+      <DependentUpon>frmAudioFinder.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PlayContinu.resx">
       <DependentUpon>PlayContinu.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,9 +108,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Recorder.resx">
-      <DependentUpon>Recorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -127,6 +137,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RAudioDataAccess\RAudioDataAccess.csproj">
+      <Project>{82A5F3A5-E9CE-4F8F-A121-A3774F949D15}</Project>
+      <Name>RAudioDataAccess</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 
-namespace WindowsFormsControlLibrary1
+namespace RAudioControls
 {
     class DBConnect
     {
@@ -67,7 +67,7 @@ namespace WindowsFormsControlLibrary1
             SqlDataAdapter dataAdapter = new SqlDataAdapter(queryOriginal, Con);
             SqlCommandBuilder sqlCommandBuilder = new SqlCommandBuilder(dataAdapter);
 
-            dataAdapter.Update(dataSet.Tables[0]);
+            dataAdapter.Update(dataSet);
             TancarConnexio();
         }
 

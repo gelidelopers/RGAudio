@@ -47,7 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
@@ -80,9 +82,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WindowsFormsControlLibrary1\XVRControlsLibrary.csproj">
+    <ProjectReference Include="..\WindowsFormsControlLibrary1\RAudioControls.csproj">
       <Project>{b63e910b-0be4-46b8-883c-50600bdc9c0c}</Project>
-      <Name>XVRControlsLibrary</Name>
+      <Name>RAudioControls</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

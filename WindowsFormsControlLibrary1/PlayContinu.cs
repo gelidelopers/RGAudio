@@ -11,7 +11,7 @@ using NAudio.Wave.SampleProviders;
 using System.IO;
 using System.Threading;
 
-namespace WindowsFormsControlLibrary1
+namespace RAudioControls
 {
 
     public partial class PlayContinu : UserControl

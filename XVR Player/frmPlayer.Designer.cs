@@ -1,4 +1,4 @@
-﻿using WindowsFormsControlLibrary1;
+﻿using RAudioControls;
 namespace Gelida_Player
 {
     public partial class frmPlayer
@@ -39,12 +39,12 @@ namespace Gelida_Player
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.listPlayer1 = new WindowsFormsControlLibrary1.ListPlayer();
-            this.listPlayer2 = new WindowsFormsControlLibrary1.ListPlayer();
+            this.listPlayer1 = new RAudioControls.ListPlayer();
+            this.listPlayer2 = new RAudioControls.ListPlayer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.listPlayer3 = new WindowsFormsControlLibrary1.ListPlayer();
-            this.listPlayer4 = new WindowsFormsControlLibrary1.ListPlayer();
+            this.listPlayer3 = new RAudioControls.ListPlayer();
+            this.listPlayer4 = new RAudioControls.ListPlayer();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();

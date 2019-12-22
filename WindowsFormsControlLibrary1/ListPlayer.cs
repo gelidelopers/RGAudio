@@ -11,8 +11,10 @@ using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.IO;
 using System.Threading;
+using RAudioDataAccess.Models;
+using Gelida_Player;
 
-namespace WindowsFormsControlLibrary1
+namespace RAudioControls
 {
 
     public partial class ListPlayer : UserControl
@@ -43,6 +45,8 @@ namespace WindowsFormsControlLibrary1
         public bool isPlaying;
         public List<string> extensions = new List<string>(new string[] { ".mp3" ,".wav",".aac",".m4a",".wma"});
 
+        #region Events functioms
+
         private void OnOpenFileClick(object sender, EventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
@@ -56,6 +60,46 @@ namespace WindowsFormsControlLibrary1
                 AfegirFitxers(openFileDialog.FileNames);
             }
         }
+
+        private void OnButtonPauseClick(object sender, EventArgs e)
+        {
+            if (waveOut != null)
+            {
+                if (waveOut.PlaybackState == PlaybackState.Playing)
+                {
+                    waveOut.Pause();
+                    ResetVUMeter();
+                }
+            }
+        }
+
+        public void OnButtonStopClick(object sender, EventArgs e)
+        {
+            Stop();
+        }
+        public void OnContinuClick()
+        {
+            if (Continuar)
+            {
+                Continuar = false;
+                btnContinu.BackColor = Control.DefaultBackColor;
+            }
+            else
+            {
+                Continuar = true;
+                btnContinu.BackColor = SystemColors.Highlight;
+            }
+        }
+        #endregion
+
+        public void BuidarLlista()
+        {
+            if (!isPlaying)
+            {
+                listView1.Items.Clear();
+            }
+        }
+
 
         private ISampleProvider CreateInputStream(string fileName)
         {
@@ -95,13 +139,13 @@ namespace WindowsFormsControlLibrary1
             if (waveOut != null && audioFileReader != null)
             {
                 TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
+                TimeSpan remainingTime = audioFileReader.TotalTime - currentTime;
                 trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
-                labelCurrentTime.Text = String.Format("{0:00}:{1:00}", (int)currentTime.TotalMinutes, currentTime.Seconds);
-                int min, sec;
-                min = (int)(audioFileReader.TotalTime.TotalSeconds - audioFileReader.CurrentTime.TotalSeconds) / 60;
-                sec = (int)(audioFileReader.TotalTime.TotalMilliseconds - audioFileReader.CurrentTime.TotalMilliseconds) % 60000;
+                labelCurrentTime.Text = currentTime.ToString();
+                
 
-                labelRemain.Text = String.Format("{0:00}:{1:00:000}", min, sec);
+
+                labelRemain.Text = remainingTime.ToString();
 
             }
             else
@@ -113,28 +157,26 @@ namespace WindowsFormsControlLibrary1
         //volume slider changed
 
 
-        private void OnButtonPauseClick(object sender, EventArgs e)
-        {
-            if (waveOut != null)
-            {
-                if (waveOut.PlaybackState == PlaybackState.Playing)
-                {
-                    waveOut.Pause();
-                    ResetVUMeter();
-                }
-            }
-        }
 
-        public void OnButtonStopClick(object sender, EventArgs e)
+        public void Stop()
         {
             if (waveOut != null)
             {
                 waveOut.Stop();
             }
             ResetVUMeter();
-            
+
+            if (index > -1 &&  listView1.Items.Count > index)
+            {
+                listView1.Items[index].Font = fntNotPlaying;
+            }
+            index = -1;
+
+            ResetTimeLabels();
+
             stoped = true;
         }
+
 
         //button play onclick
         private void materialFlatButton1_Click(object sender, EventArgs e)
@@ -149,6 +191,12 @@ namespace WindowsFormsControlLibrary1
             volumeMeter4.Amplitude = 0;
         }
 
+        private void ResetTimeLabels()
+        {
+            labelCurrentTime.Text = "0:00:00";
+            labelTotalTime.Text = "0:00:00";
+            labelRemain.Text = "0:00:00";
+        }
 
 
         /// <summary>
@@ -195,6 +243,7 @@ namespace WindowsFormsControlLibrary1
 
         private void PlaySong()
         {
+
             if (listView1.Items.Count < 1)
             {
                 return;
@@ -229,8 +278,12 @@ namespace WindowsFormsControlLibrary1
             // we are in a stopped state
             // TODO: only re-initialise if necessary
 
-
-            if (String.IsNullOrEmpty(listView1.Items[index].SubItems[2].Text))
+            if(index < 0)
+            {
+                index = 0;
+            }
+            //TODO: test index range validation
+            if (index > listView1.Items.Count -1 || String.IsNullOrEmpty(listView1.Items[index].SubItems[2].Text))
             {
                 return;
             }
@@ -271,7 +324,31 @@ namespace WindowsFormsControlLibrary1
                         }
                         else if (Continuar && !Borrar)
                         {
-                            if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
+                            //TODO: Fer que funcioni el mode bucle
+                            if (Bucle)
+                            {
+                                if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
+                                {
+                                    index++;
+                                    PlaySong();
+
+                                    if (index < listView1.Items.Count)
+                                    {
+                                        listView1.Items[index - 1].Font = fntNotPlaying;
+                                    }
+                                    else
+                                    {
+                                        isPlaying = false;
+                                    }
+                                }
+                                else 
+                                {
+                                    listView1.Items[index].Font = fntNotPlaying;
+                                    index = 0;
+                                    PlaySong();
+                                }
+                            }
+                            else
                             {
                                 index++;
                                 PlaySong();
@@ -284,12 +361,6 @@ namespace WindowsFormsControlLibrary1
                                 {
                                     isPlaying = false;
                                 }
-                            }
-                            else if (Bucle)
-                            {
-                                listView1.Items[index].Font = fntNotPlaying;
-                                index = 0;
-                                PlaySong();
                             }
                         }
                         else if (!Continuar && Borrar)
@@ -339,17 +410,9 @@ namespace WindowsFormsControlLibrary1
 
         private void btnContinu_Click(object sender, EventArgs e)
         {
-            if (Continuar)
-            {
-                Continuar = false;
-                btnContinu.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Continuar = true;
-                btnContinu.BackColor = SystemColors.Highlight; 
-            }
+            OnContinuClick();
         }
+        
 
         private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
         {
@@ -454,8 +517,10 @@ namespace WindowsFormsControlLibrary1
 
                         string[] lol = { axr.name, axr.artist, axr.fileName };
 
-                        var itom = new ListViewItem(lol);
-                        itom.BackColor = Color.Yellow;
+                        var itom = new ListViewItem(lol)
+                        {
+                            BackColor = Color.Yellow
+                        };
 
                         //item.SubItems.Add(axr.artist);
                         //item.SubItems.Add(axr.duration.ToString());
@@ -612,5 +677,62 @@ namespace WindowsFormsControlLibrary1
                 listView1.Items.RemoveAt(index);
             }
         }
+
+        #region Windows Forms events
+
+        
+        private void btnDB_Click(object sender, EventArgs e)
+        {
+            frmAudioFinder af = new frmAudioFinder();
+            af.Show();
+        }
+
+        private void toolStripMenuDelete_Click(object sender, EventArgs e)
+        {
+            if (listView1.FocusedItem.Index != index)
+            {
+                listView1.FocusedItem.Remove();
+            }
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listView1.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    contextMenuStripSelected.Show(Cursor.Position);
+                }
+            }
+        }
+
+        private void listView1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.MediaPlayPause)
+            {
+                PlaySong();
+            }
+        }
+
+        private void listView1_Enter(object sender, EventArgs e)
+        {
+            listView1.BackColor = Color.LightBlue;
+        }
+
+        private void listView1_Leave(object sender, EventArgs e)
+        {
+            listView1.BackColor = Color.White;
+        }
+
+        private void buidarLlistaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BuidarLlista();
+        }
+
+        private void btnLoop_MouseEnter(object sender, EventArgs e)
+        {
+            toolTipDesen.Show("Tooltip text goes here", btnLoop);
+        }
+        #endregion
     }
 }
