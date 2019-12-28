@@ -23,10 +23,10 @@ namespace Gelida_Player
             DataSet data;
             
             // Used to store the return value
-            
+            /*
             var thread = new Thread(
             () =>
-            {
+            {*/
                 Size size = new Size(15, 450);
                 int sais = size.Width;
                 for (byte i = 0; i <= Gelida_Player.Properties.Settings.Default.Players; i++)
@@ -45,9 +45,14 @@ namespace Gelida_Player
                     lp.AutoSizeMode = AutoSizeMode.GrowOnly;
                     lp.Padding = new Padding(5);
                     //panel1.Controls.Add(lp);
+
+                
                 }
+                /*
                 value = true; // Publish the return value
             });
+            */
+        
             
             var t2 = new Thread(
             () =>
@@ -57,13 +62,15 @@ namespace Gelida_Player
                 
             
             });
+
+            /*
             thread.Start();
             t2.Start();
             //thread.Join();
             thread.Join();
             //thread.Join();
             
-
+    */
             esplas.Close();
             //foreach (Control ctr in GetAll(this, typeof(ListPlayer)))
             //{
