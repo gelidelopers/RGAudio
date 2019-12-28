@@ -102,6 +102,12 @@
       <DependentUpon>AudioFinder.cs</DependentUpon>
     </Compile>
     <Compile Include="DBConnect.cs" />
+    <Compile Include="DropListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DropListView.Designer.cs">
+      <DependentUpon>DropListView.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAudioFinder.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,6 +137,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AudioFinder.resx">
       <DependentUpon>AudioFinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropListView.resx">
+      <DependentUpon>DropListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAudioFinder.resx">
       <DependentUpon>frmAudioFinder.cs</DependentUpon>
