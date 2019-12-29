@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RAudioControls
 {
-    class DBConnect
+    public class MSDBConnect
     {
         private SqlConnection Con;
         private readonly string connectionString = "Data Source=den1.mssql8.gear.host;Initial Catalog=inviktusdatabase; User Id=inviktusdatabase;Password=Vd23hHD_4?T3";

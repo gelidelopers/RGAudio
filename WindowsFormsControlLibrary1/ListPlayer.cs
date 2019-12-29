@@ -22,6 +22,7 @@ namespace RAudioControls
         public ListPlayer()
         {
             InitializeComponent();
+            dropListView1.listView1.DoubleClick += listView1_DoubleClick;
         }
         private IWavePlayer waveOut;
         private WaveOutEvent ou;
@@ -96,7 +97,7 @@ namespace RAudioControls
         {
             if (!isPlaying)
             {
-                listView1.Items.Clear();
+                dropListView1.listView1.Items.Clear();
             }
         }
 
@@ -166,9 +167,9 @@ namespace RAudioControls
             }
             ResetVUMeter();
 
-            if (index > -1 &&  listView1.Items.Count > index)
+            if (index > -1 &&  dropListView1.listView1.Items.Count > index)
             {
-                listView1.Items[index].Font = fntNotPlaying;
+                dropListView1.listView1.Items[index].Font = fntNotPlaying;
             }
             index = -1;
 
@@ -207,12 +208,12 @@ namespace RAudioControls
             try
             {
                 //canviar dequeue per first si esta activat o no el borrar
-                sampleProvider = CreateInputStream(listView1.Items[index].SubItems[2].Text);
+                sampleProvider = CreateInputStream(dropListView1.listView1.Items[index].SubItems[2].Text);
             }
             catch (Exception createException)
             {
                 MessageBox.Show(String.Format("{0}", createException.Message), "Error al carregar el fitxer");
-                listView1.Items.RemoveAt(0);
+                dropListView1.listView1.Items.RemoveAt(0);
                 return;
             }
         }
@@ -244,7 +245,7 @@ namespace RAudioControls
         private void PlaySong()
         {
 
-            if (listView1.Items.Count < 1)
+            if (dropListView1.listView1.Items.Count < 1)
             {
                 return;
             }
@@ -283,7 +284,7 @@ namespace RAudioControls
                 index = 0;
             }
             //TODO: test index range validation
-            if (index > listView1.Items.Count -1 || String.IsNullOrEmpty(listView1.Items[index].SubItems[2].Text))
+            if (index > dropListView1.listView1.Items.Count -1 || String.IsNullOrEmpty(dropListView1.listView1.Items[index].SubItems[2].Text))
             {
                 return;
             }
@@ -308,14 +309,14 @@ namespace RAudioControls
                     {
                         if (Continuar && Borrar)
                         {
-                            if (listView1.Items.Count > 1 && index - 1 < listView1.Items.Count)
-                            { 
-                                listView1.Items.RemoveAt(index);
+                            if (dropListView1.listView1.Items.Count > 1 && index - 1 < dropListView1.listView1.Items.Count)
+                            {
+                                dropListView1.listView1.Items.RemoveAt(index);
                                 PlaySong();
                             }
-                            else if (listView1.Items.Count == 1)
+                            else if (dropListView1.listView1.Items.Count == 1)
                             {
-                                listView1.Items.RemoveAt(0);  
+                                dropListView1.listView1.Items.RemoveAt(0);  
                             }
                             else
                             {
@@ -327,14 +328,14 @@ namespace RAudioControls
                             //TODO: Fer que funcioni el mode bucle
                             if (Bucle)
                             {
-                                if (listView1.Items.Count > 1 && index < listView1.Items.Count - 1 && !Bucle)
+                                if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count - 1 && !Bucle)
                                 {
                                     index++;
                                     PlaySong();
 
-                                    if (index < listView1.Items.Count)
+                                    if (index < dropListView1.listView1.Items.Count)
                                     {
-                                        listView1.Items[index - 1].Font = fntNotPlaying;
+                                        dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
                                     }
                                     else
                                     {
@@ -343,7 +344,7 @@ namespace RAudioControls
                                 }
                                 else 
                                 {
-                                    listView1.Items[index].Font = fntNotPlaying;
+                                    dropListView1.listView1.Items[index].Font = fntNotPlaying;
                                     index = 0;
                                     PlaySong();
                                 }
@@ -353,9 +354,9 @@ namespace RAudioControls
                                 index++;
                                 PlaySong();
 
-                                if (index < listView1.Items.Count)
+                                if (index < dropListView1.listView1.Items.Count)
                                 {
-                                    listView1.Items[index - 1].Font = fntNotPlaying;
+                                    dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
                                 }
                                 else
                                 {
@@ -365,7 +366,7 @@ namespace RAudioControls
                         }
                         else if (!Continuar && Borrar)
                         {
-                            listView1.Items.RemoveAt(index);
+                            dropListView1.listView1.Items.RemoveAt(index);
                             
                             isPlaying = false;
                         }
@@ -394,7 +395,7 @@ namespace RAudioControls
             try
             {
                 waveOut.Play();
-                listView1.Items[index].Font = fntPlaying;
+                dropListView1.listView1.Items[index].Font = fntPlaying;
                 stoped = false;
                 clicat = false;
                 isPlaying = true;
@@ -414,83 +415,6 @@ namespace RAudioControls
         }
         
 
-        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            //Begins a drag-and-drop operation in the ListView control.
-           // listView1.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
-            base.DoDragDrop(listView1.SelectedItems[0], DragDropEffects.Move);
-        }
-
-        private void listView1_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(ListViewItem)))
-            {
-
-                var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                if (item.Font != fntPlaying)
-                {
-                    e.Effect = DragDropEffects.Move;
-                }
-                
-            }else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
-            }
-        }
-
-        private void listView1_DragDrop(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(ListViewItem)))
-            {
-                ListViewItem actual = listView1.Items[index];
-                //if (listView1.SelectedItems.Count == 0)
-                //{
-                //    return;
-                //}
-                //Returns the location of the mouse pointer in the ListView control.
-                Point cp = listView1.PointToClient(new Point(e.X, e.Y));
-                //Obtain the item that is located at the specified location of the mouse pointer.
-                ListViewItem dragToItem = listView1.GetItemAt(cp.X, cp.Y);
-                //if (dragToItem == null)
-                //{
-                //    return;
-                //}
-                //Obtain the index of the item at the mouse pointer.
-                int dragIndex = dragToItem.Index;
-                ListViewItem[] sel = new ListViewItem[listView1.SelectedItems.Count];
-                for (int i = 0; i <= listView1.SelectedItems.Count - 1; i++)
-                {
-                    sel[i] = listView1.SelectedItems[i];
-                }
-                for (int i = 0; i < sel.GetLength(0); i++)
-                {
-                    //Obtain the ListViewItem to be dragged to the target location.
-                    ListViewItem dragItem = sel[i];
-                    int itemIndex = dragIndex;
-                    //if (itemIndex == dragItem.Index)
-                    //{
-                    //    return;
-                    //}
-                    if (dragItem.Index < itemIndex)
-                        itemIndex++;
-                    else
-                        itemIndex = dragIndex + i;
-                    //Insert the item at the mouse pointer.
-                    ListViewItem insertItem = (ListViewItem)dragItem.Clone();
-                    listView1.Items.Insert(itemIndex, insertItem);
-                    //Removes the item from the initial location while 
-                    //the item is moved to the new location.
-                    listView1.Items.Remove(dragItem);
-                }
-                index = actual.Index;
-
-            }
-            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                AfegirFitxers(files);
-            }
-        }
 
         private void AfegirFitxers(string[]files)
         {
@@ -525,7 +449,7 @@ namespace RAudioControls
                         //item.SubItems.Add(axr.artist);
                         //item.SubItems.Add(axr.duration.ToString());
 
-                        listView1.Items.Add(itom);
+                        dropListView1.listView1.Items.Add(itom);
 
                     }
                     catch (TagLib.CorruptFileException)
@@ -598,17 +522,17 @@ namespace RAudioControls
         {
             
 
-            if (listView1.SelectedItems.Count > 0)
+            if (dropListView1.listView1.SelectedItems.Count > 0)
             {
                 
 
-                if (index < listView1.Items.Count && index >= 0)
+                if (index < dropListView1.listView1.Items.Count && index >= 0)
                 {
-                    listView1.Items[index].Font = fntNotPlaying;
+                    dropListView1.listView1.Items[index].Font = fntNotPlaying;
                     
                 }
 
-                index = listView1.SelectedItems[0].Index;
+                index = dropListView1.listView1.SelectedItems[0].Index;
 
 
                 if (waveOut != null)
@@ -657,14 +581,14 @@ namespace RAudioControls
             }
             else if (Continuar && !Borrar)
             {
-                if (listView1.Items.Count > 1 && index < listView1.Items.Count)
+                if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count)
                 {
                     index++;
                     PlaySong();
 
-                    if (index < listView1.Items.Count)
+                    if (index < dropListView1.listView1.Items.Count)
                     {
-                        listView1.Items[index - 1].Font = fntNotPlaying;
+                        dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
                     }
                     else
                     {
@@ -674,7 +598,7 @@ namespace RAudioControls
             }
             else if (!Continuar && Borrar)
             {
-                listView1.Items.RemoveAt(index);
+                dropListView1.listView1.Items.RemoveAt(index);
             }
         }
 
@@ -689,9 +613,9 @@ namespace RAudioControls
 
         private void toolStripMenuDelete_Click(object sender, EventArgs e)
         {
-            if (listView1.FocusedItem.Index != index)
+            if (dropListView1.listView1.FocusedItem.Index != index)
             {
-                listView1.FocusedItem.Remove();
+                dropListView1.listView1.FocusedItem.Remove();
             }
         }
 
@@ -699,7 +623,7 @@ namespace RAudioControls
         {
             if (e.Button == MouseButtons.Right)
             {
-                if (listView1.FocusedItem.Bounds.Contains(e.Location))
+                if (dropListView1.listView1.FocusedItem.Bounds.Contains(e.Location))
                 {
                     contextMenuStripSelected.Show(Cursor.Position);
                 }
@@ -716,12 +640,12 @@ namespace RAudioControls
 
         private void listView1_Enter(object sender, EventArgs e)
         {
-            listView1.BackColor = Color.LightBlue;
+            dropListView1.listView1.BackColor = Color.LightBlue;
         }
 
         private void listView1_Leave(object sender, EventArgs e)
         {
-            listView1.BackColor = Color.White;
+            dropListView1.listView1.BackColor = Color.White;
         }
 
         private void buidarLlistaToolStripMenuItem_Click(object sender, EventArgs e)
