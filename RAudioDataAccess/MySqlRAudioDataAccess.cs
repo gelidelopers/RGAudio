@@ -36,9 +36,9 @@ namespace RAudioDataAccess
             return result;
         }
 
-        public IEnumerable<Artist> GetArtists()
+        public List<Artist> GetArtists()
         {
-            IEnumerable<Artist> artists = new List<Artist>();
+            List<Artist> artists = new List<Artist>();
             using (MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM ra_artist", mySqlConnection))
             {
                 mySqlConnection.Open();
@@ -51,7 +51,7 @@ namespace RAudioDataAccess
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1)
                         };
-                        artists.Append(item);
+                        artists.Add(item);
                     }
                 }
                 mySqlConnection.Close();
@@ -59,12 +59,12 @@ namespace RAudioDataAccess
             return artists;
         }
 
-        public IEnumerable<Arxiu> GetArxiusByCategory(Category category, int offset, int limit)
+        public List<Arxiu> GetArxiusByCategory(Category category, int offset, int limit)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Category> GetCategories()
+        public List<Category> GetCategories()
         {
             throw new NotImplementedException();
         }

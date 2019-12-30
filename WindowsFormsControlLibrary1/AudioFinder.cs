@@ -25,7 +25,15 @@ namespace RAudioControls
             lol.UserID = "root";
             lol.Password = "";
             dataAccess = new MySqlRAudioDataAccess(lol.GetConnectionString(true));
-            
+
+            List<Artist> test = dataAccess.GetArtists();
+
+            BindingList<Artist> objects = new BindingList<Artist>(test);
+
+            comboBox1.ValueMember = "Id";
+            comboBox1.DisplayMember = "Name";
+            comboBox1.DataSource = objects;
+
         }
 
         private void materialFlatButton3_Click(object sender, EventArgs e)
