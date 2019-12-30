@@ -8,13 +8,9 @@ namespace RAudioDataAccess
 {
     public interface IRAudioDataAccess
     {
-        void ExecuteQuery(string query, string[] parameters);
-
-        List<Arxiu> GetArxiusByCategory(Category category, int offset,int limit);
-        List<Category> GetCategories();
-        List<Artist> GetArtists();
-
-
-
+        int ExecuteQuery(string query, Dictionary<string,string> parameters);
+        IEnumerable<Arxiu> GetArxiusByCategory(Category category, int offset,int limit);
+        IEnumerable<Category> GetCategories();
+        IEnumerable<Artist> GetArtists();
     }
 }

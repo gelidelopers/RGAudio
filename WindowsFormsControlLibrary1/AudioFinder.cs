@@ -8,14 +8,24 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using RAudioDataAccess.Models;
+using RAudioDataAccess;
+using MySql.Data.MySqlClient;
 
 namespace RAudioControls
 {
     public partial class AudioFinder : UserControl
     {
+        private IRAudioDataAccess dataAccess;
         public AudioFinder()
         {
             InitializeComponent();
+            MySqlConnectionStringBuilder lol = new MySqlConnectionStringBuilder();
+            lol.Database = "raudio";
+            lol.Server = "localhost";
+            lol.UserID = "root";
+            lol.Password = "";
+            dataAccess = new MySqlRAudioDataAccess(lol.GetConnectionString(true));
+            
         }
 
         private void materialFlatButton3_Click(object sender, EventArgs e)

@@ -15,14 +15,30 @@ namespace RAudioDataAccess
         {
             Connect(connectionString);
         }
-        public void ExecuteQuery(string query, string[] parameters)
+        public int ExecuteQuery(string query, Dictionary<string,string> parameters)
         {
-            throw new NotImplementedException();
+            int result = -1;
+            try
+            {
+                using (MySqlCommand cmd = new MySqlCommand())
+                {               
+                    cmd.Connection = mySqlConnection;
+                    cmd.CommandText = query;
+                    mySqlConnection.Open();
+                    result = cmd.ExecuteNonQuery();
+                    mySqlConnection.Close();
+                }
+            }
+            catch(Exception e)
+            {
+                throw new RAudioDataAccessException(query, e);
+            }
+            return result;
         }
 
-        public List<Artist> GetArtists()
+        public IEnumerable<Artist> GetArtists()
         {
-            List<Artist> artists = new List<Artist>();
+            IEnumerable<Artist> artists = new List<Artist>();
             using (MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM ra_artist", mySqlConnection))
             {
                 mySqlConnection.Open();
@@ -35,8 +51,7 @@ namespace RAudioDataAccess
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1)
                         };
-                        artists.Add(item);
-
+                        artists.Append(item);
                     }
                 }
                 mySqlConnection.Close();
@@ -44,12 +59,12 @@ namespace RAudioDataAccess
             return artists;
         }
 
-        public List<Arxiu> GetArxiusByCategory(Category category, int offset, int limit)
+        public IEnumerable<Arxiu> GetArxiusByCategory(Category category, int offset, int limit)
         {
             throw new NotImplementedException();
         }
 
-        public List<Category> GetCategories()
+        public IEnumerable<Category> GetCategories()
         {
             throw new NotImplementedException();
         }
