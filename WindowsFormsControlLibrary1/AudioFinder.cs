@@ -142,5 +142,10 @@ namespace RAudioControls
         {
             base.DoDragDrop(listView1.SelectedItems[0], DragDropEffects.All);
         }
+
+        private void btnLoadMore_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
