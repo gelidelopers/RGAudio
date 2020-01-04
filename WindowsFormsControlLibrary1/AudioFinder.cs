@@ -19,14 +19,24 @@ namespace RAudioControls
         public AudioFinder()
         {
             InitializeComponent();
-            MySqlConnectionStringBuilder lol = new MySqlConnectionStringBuilder();
-            lol.Database = "raudio";
-            lol.Server = "localhost";
-            lol.UserID = "root";
-            lol.Password = "";
+            MySqlConnectionStringBuilder lol = new MySqlConnectionStringBuilder
+            {
+                Database = "raudio",
+                Server = "localhost",
+                UserID = "root",
+                Password = ""
+            };
             dataAccess = new MySqlRAudioDataAccess(lol.GetConnectionString(true));
 
-            List<Artist> test = dataAccess.GetArtists();
+            List<Artist> test;
+            try
+            {
+                test = dataAccess.GetArtists();
+            }catch(RAudioDataAccessException e)
+            {
+                MessageBox.Show(e.Message, "Error de base de dades");
+                test = new List<Artist>();
+            }
 
             BindingList<Artist> objects = new BindingList<Artist>(test);
 
@@ -48,6 +58,7 @@ namespace RAudioControls
             {
                 AfegirFitxers(openFileDialog.FileNames);
             }
+            openFileDialog.Dispose();
         }
 
         private void AfegirFitxers(string[] files)
@@ -72,6 +83,7 @@ namespace RAudioControls
                         var tfile = TagLib.File.Create(axr.fileName);
                         axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
                         axr.artist = tfile.Tag.JoinedPerformers;
+                        tfile.Dispose();
 
                         string[] lol = { axr.name, axr.artist, axr.fileName };
 

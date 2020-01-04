@@ -86,13 +86,14 @@ namespace Gelida_Player
             // audioToolStripMenuItem
             // 
             this.audioToolStripMenuItem.Name = "audioToolStripMenuItem";
-            this.audioToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.audioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.audioToolStripMenuItem.Text = "Audio";
+            this.audioToolStripMenuItem.Click += new System.EventHandler(this.audioToolStripMenuItem_Click);
             // 
             // panelsToolStripMenuItem
             // 
             this.panelsToolStripMenuItem.Name = "panelsToolStripMenuItem";
-            this.panelsToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.panelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.panelsToolStripMenuItem.Text = "Panels";
             // 
             // infoToolStripMenuItem

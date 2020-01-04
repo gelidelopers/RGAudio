@@ -128,5 +128,11 @@ namespace Gelida_Player
             Form form = new frmAbout();
             form.Show();
         }
+
+        private void audioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPlayerSettings frm = new frmPlayerSettings();
+            frm.Show();
+        }
     }
 }

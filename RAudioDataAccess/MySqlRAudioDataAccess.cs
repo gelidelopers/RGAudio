@@ -39,22 +39,29 @@ namespace RAudioDataAccess
         public List<Artist> GetArtists()
         {
             List<Artist> artists = new List<Artist>();
-            using (MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM ra_artist", mySqlConnection))
+            try
             {
-                mySqlConnection.Open();
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlCommand cmd = new MySqlCommand("SELECT id, name FROM ra_artist", mySqlConnection))
                 {
-                    while (reader.Read())
+                    mySqlConnection.Open();
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        Artist item = new Artist
+                        while (reader.Read())
                         {
-                            Id = reader.GetInt32(0),
-                            Name = reader.GetString(1)
-                        };
-                        artists.Add(item);
+                            Artist item = new Artist
+                            {
+                                Id = reader.GetInt32(0),
+                                Name = reader.GetString(1)
+                            };
+                            artists.Add(item);
+                        }
                     }
+                    mySqlConnection.Close();
                 }
-                mySqlConnection.Close();
+            }
+            catch(Exception e)
+            {
+                throw new RAudioDataAccessException("Error al obtenir la llista d'artistes", e);
             }
             return artists;
         }

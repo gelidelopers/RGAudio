@@ -12,23 +12,22 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
-    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>ftp://net2ftp.cluster027.hosting.ovh.net/www/rg/</PublishUrl>
+    <PublishUrl>E:\xavi\Documentos\raudio\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Web</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://barrien.es/rg/</InstallUrl>
-    <ApplicationRevision>30</ApplicationRevision>
+    <ApplicationRevision>32</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -214,6 +213,10 @@
     <None Include="Resources\gelida player.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RAudioUtils\RAudioUtils.csproj">
+      <Project>{0085df40-43bb-4000-915f-270045bc3013}</Project>
+      <Name>RAudioUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WindowsFormsControlLibrary1\RAudioControls.csproj">
       <Project>{B63E910B-0BE4-46B8-883C-50600BDC9C0C}</Project>
       <Name>RAudioControls</Name>

@@ -26,36 +26,36 @@ namespace Gelida_Player.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public sbyte OutputDev1 {
+        public int OutputDev1 {
             get {
-                return ((sbyte)(this["OutputDev1"]));
+                return ((int)(this["OutputDev1"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public sbyte InputDev1 {
+        public int InputDev1 {
             get {
-                return ((sbyte)(this["InputDev1"]));
+                return ((int)(this["InputDev1"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public sbyte OutputDev2 {
+        public int OutputDev2 {
             get {
-                return ((sbyte)(this["OutputDev2"]));
+                return ((int)(this["OutputDev2"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("-1")]
-        public sbyte InputDev2 {
+        public int InputDev2 {
             get {
-                return ((sbyte)(this["InputDev2"]));
+                return ((int)(this["InputDev2"]));
             }
         }
         
@@ -68,25 +68,12 @@ namespace Gelida_Player.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection Setting {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        public string Conexio {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["Setting"]));
-            }
-            set {
-                this["Setting"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Data.DataSet Setting1 {
-            get {
-                return ((global::System.Data.DataSet)(this["Setting1"]));
-            }
-            set {
-                this["Setting1"] = value;
+                return ((string)(this["Conexio"]));
             }
         }
     }

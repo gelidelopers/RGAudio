@@ -28,85 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBoxAudioConf = new System.Windows.Forms.GroupBox();
+            this.groupBoxCh2 = new System.Windows.Forms.GroupBox();
+            this.comboBoxOut2 = new System.Windows.Forms.ComboBox();
+            this.groupBoxCh1 = new System.Windows.Forms.GroupBox();
+            this.comboBoxOut1 = new System.Windows.Forms.ComboBox();
+            this.tableLayoutPanelSound = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBoxAudioConf.SuspendLayout();
+            this.groupBoxCh2.SuspendLayout();
+            this.groupBoxCh1.SuspendLayout();
+            this.tableLayoutPanelSound.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // groupBoxAudioConf
             // 
-            this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(287, 156);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Configuracio de so";
+            this.groupBoxAudioConf.Controls.Add(this.tableLayoutPanelSound);
+            this.groupBoxAudioConf.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxAudioConf.Location = new System.Drawing.Point(0, 0);
+            this.groupBoxAudioConf.Name = "groupBoxAudioConf";
+            this.groupBoxAudioConf.Size = new System.Drawing.Size(265, 115);
+            this.groupBoxAudioConf.TabIndex = 1;
+            this.groupBoxAudioConf.TabStop = false;
+            this.groupBoxAudioConf.Text = "Configuració de so";
             // 
-            // groupBox2
+            // groupBoxCh2
             // 
-            this.groupBox2.Controls.Add(this.comboBox1);
-            this.groupBox2.Location = new System.Drawing.Point(7, 20);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(270, 59);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Canal 1";
+            this.groupBoxCh2.Controls.Add(this.comboBoxOut2);
+            this.groupBoxCh2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxCh2.Location = new System.Drawing.Point(3, 51);
+            this.groupBoxCh2.Name = "groupBoxCh2";
+            this.groupBoxCh2.Size = new System.Drawing.Size(253, 42);
+            this.groupBoxCh2.TabIndex = 1;
+            this.groupBoxCh2.TabStop = false;
+            this.groupBoxCh2.Text = "Canal 2";
             // 
-            // comboBox1
+            // comboBoxOut2
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(7, 20);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(257, 21);
-            this.comboBox1.TabIndex = 0;
+            this.comboBoxOut2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxOut2.FormattingEnabled = true;
+            this.comboBoxOut2.Location = new System.Drawing.Point(3, 16);
+            this.comboBoxOut2.Name = "comboBoxOut2";
+            this.comboBoxOut2.Size = new System.Drawing.Size(247, 21);
+            this.comboBoxOut2.TabIndex = 0;
             // 
-            // groupBox3
+            // groupBoxCh1
             // 
-            this.groupBox3.Controls.Add(this.comboBox2);
-            this.groupBox3.Location = new System.Drawing.Point(7, 85);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(270, 59);
-            this.groupBox3.TabIndex = 1;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Canal 2";
+            this.groupBoxCh1.Controls.Add(this.comboBoxOut1);
+            this.groupBoxCh1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxCh1.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxCh1.Name = "groupBoxCh1";
+            this.groupBoxCh1.Size = new System.Drawing.Size(253, 42);
+            this.groupBoxCh1.TabIndex = 0;
+            this.groupBoxCh1.TabStop = false;
+            this.groupBoxCh1.Text = "Canal 1";
             // 
-            // comboBox2
+            // comboBoxOut1
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(7, 20);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(257, 21);
-            this.comboBox2.TabIndex = 0;
+            this.comboBoxOut1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.comboBoxOut1.FormattingEnabled = true;
+            this.comboBoxOut1.Location = new System.Drawing.Point(3, 16);
+            this.comboBoxOut1.Name = "comboBoxOut1";
+            this.comboBoxOut1.Size = new System.Drawing.Size(247, 21);
+            this.comboBoxOut1.TabIndex = 0;
+            // 
+            // tableLayoutPanelSound
+            // 
+            this.tableLayoutPanelSound.ColumnCount = 1;
+            this.tableLayoutPanelSound.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelSound.Controls.Add(this.groupBoxCh1, 0, 0);
+            this.tableLayoutPanelSound.Controls.Add(this.groupBoxCh2, 0, 1);
+            this.tableLayoutPanelSound.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelSound.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanelSound.Name = "tableLayoutPanelSound";
+            this.tableLayoutPanelSound.RowCount = 2;
+            this.tableLayoutPanelSound.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelSound.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanelSound.Size = new System.Drawing.Size(259, 96);
+            this.tableLayoutPanelSound.TabIndex = 2;
             // 
             // frmPlayerSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 181);
-            this.Controls.Add(this.groupBox1);
+            this.ClientSize = new System.Drawing.Size(265, 115);
+            this.Controls.Add(this.groupBoxAudioConf);
             this.Name = "frmPlayerSettings";
             this.Text = "Configuració del Player";
             this.Load += new System.EventHandler(this.frmPlayerSettings_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
+            this.groupBoxAudioConf.ResumeLayout(false);
+            this.groupBoxCh2.ResumeLayout(false);
+            this.groupBoxCh1.ResumeLayout(false);
+            this.tableLayoutPanelSound.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.GroupBox groupBoxAudioConf;
+        private System.Windows.Forms.GroupBox groupBoxCh2;
+        private System.Windows.Forms.ComboBox comboBoxOut2;
+        private System.Windows.Forms.GroupBox groupBoxCh1;
+        private System.Windows.Forms.ComboBox comboBoxOut1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelSound;
     }
 }

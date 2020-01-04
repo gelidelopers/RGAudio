@@ -91,14 +91,19 @@ namespace RAudioControls
             }
             else
             {
-                if (e.Data.GetDataPresent(typeof(ListViewItem)))
+                if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
                 {
+                    var items = (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
 
+                    foreach (ListViewItem item in items)
+                    {
+                        item.ListView.Items.Remove(item);
+                        listView1.Items.Add(item);
+                    }
                 }
                 else if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 {
                     string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
-
                 }
             }
         }
@@ -107,26 +112,30 @@ namespace RAudioControls
         {
             if (checkBoxOrder.Checked)
             {
+                if (e.Data.GetDataPresent(typeof(ListViewItem)))
+                {
 
+                    var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
+                    if (item.Font != fntPlaying)
+                    {
+                        e.Effect = DragDropEffects.Move;
+                    }
+                }
+                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
             }
             else
             {
-
-            }
-
-            if (e.Data.GetDataPresent(typeof(ListViewItem)))
-            {
-
-                var item = (ListViewItem)e.Data.GetData(typeof(ListViewItem));
-                if (item.Font != fntPlaying)
+                if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)))
                 {
                     e.Effect = DragDropEffects.Move;
                 }
-
-            }
-            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
-            {
-                e.Effect = DragDropEffects.Copy;
+                else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+                {
+                    e.Effect = DragDropEffects.Copy;
+                }
             }
         }
     }
