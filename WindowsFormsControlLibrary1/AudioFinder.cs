@@ -73,7 +73,7 @@ namespace RAudioControls
                 if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
                 {
 
-                    Arxiu axr = new Arxiu
+                    Audio axr = new Audio
                     {
                         fileName = file
                     };
@@ -82,10 +82,10 @@ namespace RAudioControls
                     {
                         var tfile = TagLib.File.Create(axr.fileName);
                         axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                        axr.artist = tfile.Tag.JoinedPerformers;
+                        axr.duration = tfile.Properties.Duration;
                         tfile.Dispose();
 
-                        string[] lol = { axr.name, axr.artist, axr.fileName };
+                        string[] lol = { axr.name, axr.duration.ToString("c"), axr.fileName };
 
                         var itom = new ListViewItem(lol)
                         {

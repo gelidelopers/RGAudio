@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace RAudioNAudioLib
 {
@@ -15,6 +17,26 @@ namespace RAudioNAudioLib
         public bool EnableAutoFadeOut { get; set; }
         public bool IsPlaying { get { return waveOut.PlaybackState == PlaybackState.Playing; } }
         public PlaybackState Status { get { return waveOut.PlaybackState; } }
+        private double _fadems = 2000;
+
+
+        public TimeSpan TotalTime
+        {
+            get { return audioFileReader.TotalTime; }
+        }
+        public TimeSpan CurrentTime
+        {
+            get { return audioFileReader.CurrentTime; }
+            set { audioFileReader.CurrentTime = value; }
+        }
+
+        public double FadeMs
+        {
+            get { return _fadems; }
+            set { _fadems = value; }
+        }
+
+
 
         #endregion
 
@@ -38,12 +60,14 @@ namespace RAudioNAudioLib
         private FadeInOutSampleProvider fade;
         private readonly string FullPath;
         private int OutDev;
+        private Timer fadeTimer;
+        
         #endregion
 
         #region Constructor
         public RAudioNAudio(string fullpath, int outdev)
         {
-            OutDev = outdev;
+            OutDev = -1;
             FullPath = fullpath;
             CarregarFitxer();
             InicialitzarSo();
@@ -65,9 +89,54 @@ namespace RAudioNAudioLib
                     waveOut.Play();
                     return;
                 }
+                
+                waveOut.Play();
+                if (EnableAutoFadeOut)
+                {
+                    fadeTimer = new Timer
+                    {
+                        Interval = 100
+                    };
+                    fadeTimer.Elapsed += FadeTimer_Elapsed;
+                    fadeTimer.Start();
+                }
+                waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
             }
-            waveOut.Play();
+            
+        }
 
+        private void FadeTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if ((audioFileReader.TotalTime - audioFileReader.CurrentTime) <= TimeSpan.FromMilliseconds(_fadems))
+            {
+                Ending.Invoke(sender, e);
+                fade.BeginFadeOut(_fadems);
+                fadeTimer.Stop();
+            }
+        }
+
+        private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            Ended.Invoke(sender, e);
+        }
+
+        public void PlayFade()
+        {
+            //audioFileReader.Volume = 0;
+            fade.BeginFadeIn(_fadems);
+            Play();
+            
+        }
+        public void Stop()
+        {
+            try
+            {
+                waveOut.Stop();
+            }
+            catch (Exception e)
+            {
+                throw new RAudioNAudioException("error al parar la reproduccio", e);
+            }
         }
         #endregion
 
@@ -88,8 +157,9 @@ namespace RAudioNAudioLib
         {
             audioFileReader = new AudioFileReader(fileName);
             SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
-            postVolumeMeter = new MeteringSampleProvider(sampleChannel);
-            fade = new FadeInOutSampleProvider(sampleChannel);
+            fade = new FadeInOutSampleProvider(audioFileReader);
+            postVolumeMeter = new MeteringSampleProvider(fade);
+            
             return fade;
         }
         private void InicialitzarSo()

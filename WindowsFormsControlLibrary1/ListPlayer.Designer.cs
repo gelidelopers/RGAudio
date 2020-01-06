@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ListPlayer));
             this.labelRemain = new System.Windows.Forms.Label();
             this.labelTotalTime = new System.Windows.Forms.Label();
             this.labelCurrentTime = new System.Windows.Forms.Label();
@@ -42,9 +43,10 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnDB = new System.Windows.Forms.Button();
             this.materialFlatButton3 = new System.Windows.Forms.Button();
-            this.btnContinu = new System.Windows.Forms.Button();
-            this.btnLoop = new System.Windows.Forms.Button();
-            this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnContinuar = new RAudioControls.RAudioButton();
+            this.btnLoop = new RAudioControls.RAudioButton();
+            this.btnCross = new RAudioControls.RAudioButton();
+            this.btnDel = new RAudioControls.RAudioButton();
             this.panelVuLeft = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
@@ -160,9 +162,10 @@
             this.flowLayoutPanelButtons.Controls.Add(this.btnNext);
             this.flowLayoutPanelButtons.Controls.Add(this.btnDB);
             this.flowLayoutPanelButtons.Controls.Add(this.materialFlatButton3);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnContinu);
+            this.flowLayoutPanelButtons.Controls.Add(this.btnContinuar);
             this.flowLayoutPanelButtons.Controls.Add(this.btnLoop);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnBorrar);
+            this.flowLayoutPanelButtons.Controls.Add(this.btnCross);
+            this.flowLayoutPanelButtons.Controls.Add(this.btnDel);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 91);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
@@ -173,7 +176,7 @@
             // 
             this.btnPLay.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnPLay.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPLay.BackgroundImage = global::RAudioControls.Properties.Resources.play;
+            this.btnPLay.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPLay.BackgroundImage")));
             this.btnPLay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPLay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPLay.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -190,7 +193,7 @@
             // btnPause
             // 
             this.btnPause.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnPause.BackgroundImage = global::RAudioControls.Properties.Resources.pause;
+            this.btnPause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnPause.BackgroundImage")));
             this.btnPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnPause.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnPause.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -205,7 +208,7 @@
             // btnStop
             // 
             this.btnStop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnStop.BackgroundImage = global::RAudioControls.Properties.Resources.stop;
+            this.btnStop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnStop.BackgroundImage")));
             this.btnStop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -220,7 +223,7 @@
             // btnNext
             // 
             this.btnNext.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnNext.BackgroundImage = global::RAudioControls.Properties.Resources.next;
+            this.btnNext.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNext.BackgroundImage")));
             this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnNext.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,7 +238,7 @@
             // btnDB
             // 
             this.btnDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnDB.BackgroundImage = global::RAudioControls.Properties.Resources.cloud;
+            this.btnDB.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDB.BackgroundImage")));
             this.btnDB.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnDB.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -250,7 +253,7 @@
             // materialFlatButton3
             // 
             this.materialFlatButton3.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.materialFlatButton3.BackgroundImage = global::RAudioControls.Properties.Resources.addfolder;
+            this.materialFlatButton3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("materialFlatButton3.BackgroundImage")));
             this.materialFlatButton3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.materialFlatButton3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.flowLayoutPanelButtons.SetFlowBreak(this.materialFlatButton3, true);
@@ -263,57 +266,69 @@
             this.materialFlatButton3.UseVisualStyleBackColor = true;
             this.materialFlatButton3.Click += new System.EventHandler(this.OnOpenFileClick);
             // 
-            // btnContinu
+            // btnContinuar
             // 
-            this.btnContinu.AutoSize = true;
-            this.btnContinu.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnContinu.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnContinu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnContinu.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContinu.Location = new System.Drawing.Point(4, 72);
-            this.btnContinu.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnContinu.Name = "btnContinu";
-            this.btnContinu.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnContinu.Size = new System.Drawing.Size(85, 34);
-            this.btnContinu.TabIndex = 29;
-            this.btnContinu.Text = "Continu";
-            this.btnContinu.UseVisualStyleBackColor = false;
-            this.btnContinu.Click += new System.EventHandler(this.btnContinu_Click);
+            this.btnContinuar.Active = true;
+            this.btnContinuar.ActiveColor = System.Drawing.Color.DodgerBlue;
+            this.btnContinuar.BackColor = System.Drawing.Color.DodgerBlue;
+            this.btnContinuar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnContinuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnContinuar.Location = new System.Drawing.Point(4, 72);
+            this.btnContinuar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnContinuar.Name = "btnContinuar";
+            this.btnContinuar.Size = new System.Drawing.Size(89, 34);
+            this.btnContinuar.TabIndex = 34;
+            this.btnContinuar.Text = "Continuar";
+            this.btnContinuar.UnactiveColor = System.Drawing.Color.Transparent;
+            this.btnContinuar.UseVisualStyleBackColor = false;
             // 
             // btnLoop
             // 
-            this.btnLoop.AutoSize = true;
-            this.btnLoop.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnLoop.BackColor = System.Drawing.SystemColors.Control;
-            this.btnLoop.Enabled = false;
-            this.btnLoop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoop.Location = new System.Drawing.Point(97, 72);
+            this.btnLoop.Active = true;
+            this.btnLoop.ActiveColor = System.Drawing.Color.LightBlue;
+            this.btnLoop.BackColor = System.Drawing.Color.LightBlue;
+            this.btnLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoop.Location = new System.Drawing.Point(101, 72);
             this.btnLoop.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnLoop.Name = "btnLoop";
-            this.btnLoop.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnLoop.Size = new System.Drawing.Size(68, 34);
-            this.btnLoop.TabIndex = 32;
+            this.btnLoop.Size = new System.Drawing.Size(75, 34);
+            this.btnLoop.TabIndex = 35;
             this.btnLoop.Text = "Bucle";
+            this.btnLoop.UnactiveColor = System.Drawing.Color.Transparent;
             this.btnLoop.UseVisualStyleBackColor = false;
-            this.btnLoop.Click += new System.EventHandler(this.btnLoop_Click);
-            this.btnLoop.MouseEnter += new System.EventHandler(this.btnLoop_MouseEnter);
             // 
-            // btnBorrar
+            // btnCross
             // 
-            this.btnBorrar.AutoSize = true;
-            this.btnBorrar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBorrar.BackColor = System.Drawing.Color.Red;
-            this.btnBorrar.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBorrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBorrar.Location = new System.Drawing.Point(173, 72);
-            this.btnBorrar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnBorrar.Name = "btnBorrar";
-            this.btnBorrar.Size = new System.Drawing.Size(71, 34);
-            this.btnBorrar.TabIndex = 30;
-            this.btnBorrar.Text = "Borrar";
-            this.btnBorrar.UseVisualStyleBackColor = false;
-            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            this.btnCross.Active = true;
+            this.btnCross.ActiveColor = System.Drawing.Color.LawnGreen;
+            this.btnCross.BackColor = System.Drawing.Color.LawnGreen;
+            this.btnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCross.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCross.Location = new System.Drawing.Point(184, 72);
+            this.btnCross.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCross.Name = "btnCross";
+            this.btnCross.Size = new System.Drawing.Size(85, 34);
+            this.btnCross.TabIndex = 36;
+            this.btnCross.Text = "Crossfade";
+            this.btnCross.UnactiveColor = System.Drawing.Color.Transparent;
+            this.btnCross.UseVisualStyleBackColor = false;
+            // 
+            // btnDel
+            // 
+            this.btnDel.Active = true;
+            this.btnDel.ActiveColor = System.Drawing.Color.Red;
+            this.btnDel.BackColor = System.Drawing.Color.Red;
+            this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDel.Location = new System.Drawing.Point(277, 72);
+            this.btnDel.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(75, 34);
+            this.btnDel.TabIndex = 37;
+            this.btnDel.Text = "Borrar";
+            this.btnDel.UnactiveColor = System.Drawing.Color.Transparent;
+            this.btnDel.UseVisualStyleBackColor = false;
             // 
             // panelVuLeft
             // 
@@ -607,7 +622,6 @@
             this.panelBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
             this.flowLayoutPanelButtons.ResumeLayout(false);
-            this.flowLayoutPanelButtons.PerformLayout();
             this.panelVuLeft.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panelVuRight.ResumeLayout(false);
@@ -652,8 +666,6 @@
         private NAudio.Gui.VolumeMeter volumeMeter4;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelButtons;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelTimers;
-        private System.Windows.Forms.Button btnContinu;
-        private System.Windows.Forms.Button btnBorrar;
         private System.Windows.Forms.ToolTip toolTipDesen;
         private System.Windows.Forms.GroupBox groupActual;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -669,12 +681,15 @@
         private System.Windows.Forms.TrackBar trackBarPosition;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.Button btnLoop;
         private System.Windows.Forms.Button btnDB;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripSelected;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuDelete;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripList;
         private System.Windows.Forms.ToolStripMenuItem buidarLlistaToolStripMenuItem;
         private DropListView dropListView1;
+        private RAudioButton btnContinuar;
+        private RAudioButton btnLoop;
+        private RAudioButton btnCross;
+        private RAudioButton btnDel;
     }
 }

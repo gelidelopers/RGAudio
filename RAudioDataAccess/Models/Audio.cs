@@ -6,12 +6,10 @@ using System.Text;
 
 namespace RAudioDataAccess.Models
 {
-    public class Arxiu
+    public class Audio
     {
-      
             public string fileName { get; set; }
             public string name { get; set; }
-            public string artist { get; set; }
             public TimeSpan duration { get; set; }
 
         

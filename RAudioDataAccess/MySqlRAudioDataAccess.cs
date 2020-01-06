@@ -66,7 +66,7 @@ namespace RAudioDataAccess
             return artists;
         }
 
-        public List<Arxiu> GetArxiusByCategory(Category category, int offset, int limit)
+        public List<Audio> GetArxiusByCategory(Category category, int offset, int limit)
         {
             throw new NotImplementedException();
         }

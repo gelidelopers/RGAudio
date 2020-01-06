@@ -35,9 +35,7 @@ namespace RAudioControls
 
         public RAudioNAudio rAudio;
 
-        public bool Continuar = true;
-        public bool Borrar = true;
-        public bool Bucle = false;
+
         public int outDev { get; set; }
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
@@ -78,19 +76,7 @@ namespace RAudioControls
         {
             Stop();
         }
-        public void OnContinuClick()
-        {
-            if (Continuar)
-            {
-                Continuar = false;
-                btnContinu.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Continuar = true;
-                btnContinu.BackColor = SystemColors.Highlight;
-            }
-        }
+ 
         #endregion
 
         public void BuidarLlista()
@@ -101,35 +87,15 @@ namespace RAudioControls
             }
         }
 
-
-        
-
-        void OnPostVolumeMeter(object sender, StreamVolumeEventArgs e)
-        {
-            ///left 
-            ///-
-            ///-60 to 0 dB volume
-            /// 0 dB to 5 dB volume            
-            volumeMeter1.Amplitude = e.MaxSampleValues[0];
-            volumeMeter3.Amplitude = e.MaxSampleValues[0];
-
-
-            ///right
-            ///-
-            ///-60 to 0 dB volume
-            /// 0 dB to 5 dB volume    
-            volumeMeter2.Amplitude = e.MaxSampleValues[1];
-            volumeMeter4.Amplitude = e.MaxSampleValues[1];
-        }
         
         private void OnTimerTick(object sender, EventArgs e)
         {
-            /*
-            if (waveOut != null && audioFileReader != null)
+            
+            if (((RAudioNAudio)dropListView1.listView1.Items[index].Tag) != null )
             {
-                TimeSpan currentTime = (waveOut.PlaybackState == PlaybackState.Stopped) ? TimeSpan.Zero : audioFileReader.CurrentTime;
-                TimeSpan remainingTime = audioFileReader.TotalTime - currentTime;
-                trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / audioFileReader.TotalTime.TotalSeconds));
+                TimeSpan currentTime = (((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Status == PlaybackState.Stopped) ? TimeSpan.Zero : ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).CurrentTime;
+                TimeSpan remainingTime = ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).TotalTime - currentTime;
+                trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).TotalTime.TotalSeconds));
                 labelCurrentTime.Text = currentTime.ToString();
                 
 
@@ -141,7 +107,7 @@ namespace RAudioControls
             {
                 trackBarPosition.Value = 0;
             }
-            */
+            
         }
 
         //volume slider changed
@@ -150,11 +116,14 @@ namespace RAudioControls
 
         public void Stop()
         {
-            /*
-            if (waveOut != null)
+            try
             {
-                waveOut.Stop();
+                foreach (ListViewItem i in dropListView1.listView1.Items)
+                {
+                    ((RAudioNAudio)i.Tag).Stop();
+                }
             }
+            catch { }
             ResetVUMeter();
 
             if (index > -1 &&  dropListView1.listView1.Items.Count > index)
@@ -166,7 +135,7 @@ namespace RAudioControls
             ResetTimeLabels();
 
             stoped = true;
-            */
+            
         }
 
 
@@ -207,7 +176,7 @@ namespace RAudioControls
         private void PlaySong()
         {
 
-            if (dropListView1.listView1.Items.Count < 1)
+            if (!index.IsInRange(dropListView1.listView1.Items.Count))
             {
                 return;
             }
@@ -222,45 +191,83 @@ namespace RAudioControls
             //    audioFileReader.Dispose();
             //}
 
-            if (rAudio != null)
+            if (dropListView1.listView1.Items[index].Tag != null)
             {
-                if (rAudio.IsPlaying)
+                if (((RAudioNAudio)dropListView1.listView1.Items[index].Tag).IsPlaying)
                 {
                     return;
                 }
-                else if (rAudio.Status == PlaybackState.Paused)
+                else if (((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Status == PlaybackState.Paused)
                 {
 
-                    rAudio.Play();
+                    ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Play();
                     timer1.Start();
 
                     return;
                 }
             }
-
-            // we are in a stopped state
-            // TODO: only re-initialise if necessary
-
-            if(index < 0)
+            else
             {
-                index = 0;
-            }
-            //TODO: test index range validation
-            if (index.IsInRange(dropListView1.listView1.Items.Count) || String.IsNullOrEmpty(dropListView1.listView1.Items[index].SubItems[2].Text))
-            {
-                return;
+                dropListView1.listView1.Items[index].Tag = new RAudioNAudio(dropListView1.listView1.Items[index].SubItems[2].Text, outDev);
             }
 
 
-            rAudio.Play();
+            if (btnCross.Active)
+            {
+                ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).PlayFade();
+            }
+            else
+            {
+                ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Play();
+            }
 
             //setVolumeDelegate(volumeSlider1.Volume);
 
-            rAudio.Ending += RAudio_Ending;
+            ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).postVolumeMeter.StreamVolume += PostVolumeMeter_StreamVolume; 
 
-            /*
-            waveOut.PlaybackStopped += (sender, evn) => 
+            ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Ending += RAudio_Ending;
+            ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Ended += RAudio_Ended;
+
+        }
+
+        private void PostVolumeMeter_StreamVolume(object sender, StreamVolumeEventArgs e)
+        {
+            ///left 
+            ///-
+            ///-60 to 0 dB volume
+            /// 0 dB to 5 dB volume            
+            volumeMeter1.Amplitude = e.MaxSampleValues[0];
+            volumeMeter3.Amplitude = e.MaxSampleValues[0];
+
+
+            ///right
+            ///-
+            ///-60 to 0 dB volume
+            /// 0 dB to 5 dB volume    
+            volumeMeter2.Amplitude = e.MaxSampleValues[1];
+            volumeMeter4.Amplitude = e.MaxSampleValues[1];
+        }
+
+        private void RAudio_Ended(object sender, EventArgs e)
+        {
+            if (!btnCross.Active)
             {
+                OnEnding();
+            }
+            ResetTimeLabels();
+        }
+
+        private void RAudio_Ending(object sender, EventArgs e)
+        {
+            if (btnCross.Active)
+            {
+                OnEnding();
+            }
+        }
+
+        private void OnEnding()
+        {
+            
                 try
                 {
 
@@ -268,9 +275,9 @@ namespace RAudioControls
 
                     if (!stoped && !clicat)
                     {
-                        if (Continuar && Borrar)
+                        if (btnContinuar.Active && btnDel.Active)
                         {
-                            if (dropListView1.listView1.Items.Count > 1 && index - 1 < dropListView1.listView1.Items.Count)
+                            if (index.IsInRange(dropListView1.listView1.Items.Count))
                             {
                                 dropListView1.listView1.Items.RemoveAt(index);
                                 PlaySong();
@@ -284,12 +291,12 @@ namespace RAudioControls
                                 isPlaying = false;
                             }
                         }
-                        else if (Continuar && !Borrar)
+                        else if (btnContinuar.Active && !btnDel.Active)
                         {
                             //TODO: Fer que funcioni el mode bucle
-                            if (Bucle)
+                            if (btnLoop.Active)
                             {
-                                if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count - 1 && !Bucle)
+                                if (index.IsInRange(dropListView1.listView1.Items.Count) && !btnLoop.Active)
                                 {
                                     index++;
                                     PlaySong();
@@ -325,13 +332,13 @@ namespace RAudioControls
                                 }
                             }
                         }
-                        else if (!Continuar && Borrar)
+                        else if (!btnContinuar.Active && btnDel.Active)
                         {
                             dropListView1.listView1.Items.RemoveAt(index);
                             
                             isPlaying = false;
                         }
-                        else if(!Continuar && Bucle)
+                        else if(!btnContinuar.Active && btnLoop.Active)
                         {
                             PlaySong();
                         }
@@ -351,37 +358,8 @@ namespace RAudioControls
                 }
 
                 //waveOut.Dispose();
-                
-            };
-            try
-            {
-                waveOut.Play();
-                dropListView1.listView1.Items[index].Font = fntPlaying;
-                stoped = false;
-                clicat = false;
-                isPlaying = true;
-                timer1.Start();
-                
-            }
-            catch
-            {
-
-            }
-
-            */
             
         }
-
-        private void RAudio_Ending(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void btnContinu_Click(object sender, EventArgs e)
-        {
-            OnContinuClick();
-        }
-        
 
 
         private void AfegirFitxers(string[]files)
@@ -396,7 +374,7 @@ namespace RAudioControls
                 if (Path.GetExtension(file) == ".wav" || Path.GetExtension(file) == ".flac" || Path.GetExtension(file) == ".mp3" || Path.GetExtension(file) == ".aac")
                 {
 
-                    Arxiu axr = new Arxiu
+                    Audio axr = new Audio
                     {
                         fileName = file
                     };
@@ -405,9 +383,10 @@ namespace RAudioControls
                     {
                         var tfile = TagLib.File.Create(axr.fileName);
                         axr.name = tfile.Tag.Title ?? Path.GetFileNameWithoutExtension(axr.fileName);
-                        axr.artist = tfile.Tag.JoinedPerformers;
+                        axr.duration = tfile.Properties.Duration;
+                        tfile.Dispose();
 
-                        string[] lol = { axr.name, axr.artist, axr.fileName };
+                        string[] lol = { axr.name, axr.duration.ToString("c"), axr.fileName };
 
                         var itom = new ListViewItem(lol)
                         {
@@ -459,68 +438,35 @@ namespace RAudioControls
             }
         }
 
-        private void btnBorrar_Click(object sender, EventArgs e)
-        {
-            if (Borrar)
-            {
-                Borrar = false;
-                btnBorrar.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Borrar = true;
-                btnBorrar.BackColor = Color.Red;
-            }
-        }
-        private void btnLoop_Click(object sender, EventArgs e)
-        {
-            if (Bucle)
-            {
-                Bucle = false;
-                btnLoop.BackColor = Control.DefaultBackColor;
-            }
-            else
-            {
-                Bucle = true;
-                btnLoop.BackColor = Color.Lime;
-            }
-        }
+       
 
         private void listView1_DoubleClick(object sender, EventArgs e)
         {
-            
 
-            //if (dropListView1.listView1.SelectedItems.Count > 0)
-            //{
+
+            if (dropListView1.listView1.SelectedItems.Count == 1)
+            {
+
+
+                if (index.IsInRange(dropListView1.listView1.Items.Count))
+                {
+                    dropListView1.listView1.Items[index].Font = fntNotPlaying;
+                }
+
+
+                clicat = true;
+
+                if (isPlaying)
+                {
+                    ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Stop();
+                }
+                index = dropListView1.listView1.SelectedItems[0].Index;
+                PlaySong();
+                    
                 
-
-            //    if (index < dropListView1.listView1.Items.Count && index >= 0)
-            //    {
-            //        dropListView1.listView1.Items[index].Font = fntNotPlaying;
-                    
-            //    }
-
-            //    index = dropListView1.listView1.SelectedItems[0].Index;
-
-
-            //    if (waveOut != null)
-            //    {
-            //        clicat = true;
-                    
-            //        if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
-            //        {
-            //            waveOut.Stop();
-            //        }
-            //        else
-            //        {
-            //            PlaySong();
-            //        }
-            //    }
-            //    else
-            //    {
-            //        PlaySong();
-            //    } 
-            //}
+                
+                
+            }
         }
 
         private void trackBarPosition_MouseUp(object sender, MouseEventArgs e)
@@ -540,34 +486,34 @@ namespace RAudioControls
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            //if (waveOut != null)
-            //{
-            //    if (waveOut.PlaybackState == PlaybackState.Playing || waveOut.PlaybackState == PlaybackState.Paused)
-            //    {
-            //        waveOut.Stop();
-            //    }
-            //}
-            //else if (Continuar && !Borrar)
-            //{
-            //    if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count)
-            //    {
-            //        index++;
-            //        PlaySong();
+            if (dropListView1.listView1.Items[index].Tag != null)
+            {
+                if (((RAudioNAudio) dropListView1.listView1.Items[index].Tag).Status == PlaybackState.Playing || ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Status == PlaybackState.Paused)
+                {
+                    ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).Stop();
+                }
+            }
+            if (btnContinuar.Active && !btnDel.Active)
+            {
+                if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count)
+                {
+                    index++;
+                    PlaySong();
 
-            //        if (index < dropListView1.listView1.Items.Count)
-            //        {
-            //            dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
-            //        }
-            //        else
-            //        {
-            //            isPlaying = false;
-            //        }
-            //    }
-            //}
-            //else if (!Continuar && Borrar)
-            //{
-            //    dropListView1.listView1.Items.RemoveAt(index);
-            //}
+                    if (index < dropListView1.listView1.Items.Count)
+                    {
+                        dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
+                    }
+                    else
+                    {
+                        isPlaying = false;
+                    }
+                }
+            }
+            else if (!btnContinuar.Active && btnDel.Active)
+            {
+                dropListView1.listView1.Items.RemoveAt(index);
+            }
         }
 
 
@@ -623,10 +569,7 @@ namespace RAudioControls
             BuidarLlista();
         }
 
-        private void btnLoop_MouseEnter(object sender, EventArgs e)
-        {
-            toolTipDesen.Show("Tooltip text goes here", btnLoop);
-        }
+
         #endregion
     }
 }
