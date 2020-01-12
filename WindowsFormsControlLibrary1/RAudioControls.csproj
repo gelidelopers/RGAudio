@@ -98,12 +98,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AudioFinder.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="AudioFinder.Designer.cs">
-      <DependentUpon>AudioFinder.cs</DependentUpon>
-    </Compile>
     <Compile Include="DropListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,6 +109,12 @@
     </Compile>
     <Compile Include="frmAudioFinder.Designer.cs">
       <DependentUpon>frmAudioFinder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmImport.Designer.cs">
+      <DependentUpon>frmImport.cs</DependentUpon>
     </Compile>
     <Compile Include="PlayContinu.cs">
       <SubType>UserControl</SubType>
@@ -140,17 +140,23 @@
     <Compile Include="RAudioButton.Designer.cs">
       <DependentUpon>RAudioButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="RAudioProgressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="RAudioProgressBar.Designer.cs">
+      <DependentUpon>RAudioProgressBar.cs</DependentUpon>
+    </Compile>
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AudioFinder.resx">
-      <DependentUpon>AudioFinder.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DropListView.resx">
       <DependentUpon>DropListView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmAudioFinder.resx">
       <DependentUpon>frmAudioFinder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmImport.resx">
+      <DependentUpon>frmImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PlayContinu.resx">
       <DependentUpon>PlayContinu.cs</DependentUpon>
@@ -161,6 +167,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RAudioProgressBar.resx">
+      <DependentUpon>RAudioProgressBar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -203,10 +212,6 @@
     <ProjectReference Include="..\RAudioUtils\RAudioUtils.csproj">
       <Project>{0085df40-43bb-4000-915f-270045bc3013}</Project>
       <Name>RAudioUtils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\XVRImport\XVRImport.csproj">
-      <Project>{8866684f-8a81-47ff-ae26-00331eb06d02}</Project>
-      <Name>XVRImport</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -15,7 +15,13 @@ namespace RAudioDataAccess
         {
             Connect(connectionString);
         }
-        public int ExecuteQuery(string query, Dictionary<string,string> parameters)
+
+        public int DeleteSong(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ExecuteQuery(string query, string[] parameters,object[] paramValues)
         {
             int result = -1;
             try
@@ -24,6 +30,18 @@ namespace RAudioDataAccess
                 {               
                     cmd.Connection = mySqlConnection;
                     cmd.CommandText = query;
+                    if(parameters.Length == paramValues.Length)
+                    {
+                        for(int i = 0; i < parameters.Length; i++)
+                        {
+                            cmd.Parameters.AddWithValue(parameters[i],paramValues[i]);
+                        }
+                    }
+                    else
+                    {
+                        throw new RAudioDataAccessException("Numero d'arguments i valors incoherent", new ArgumentException());
+                    }
+                    
                     mySqlConnection.Open();
                     result = cmd.ExecuteNonQuery();
                     mySqlConnection.Close();
@@ -75,6 +93,25 @@ namespace RAudioDataAccess
         {
             throw new NotImplementedException();
         }
+
+        public int InsertSong(Song song)
+        {
+            int r = 0;
+            r += ExecuteQuery("INSERT INTO ra_audio (filename) values (@filename)", new string[] { "@filename" }, new string[] { song.Audio.fileName });
+            r += ExecuteQuery("INSERT INTO ra_song (name, duration, id_audio) values (@name, @duration, (select id from ra_audio where filename = @filename))", new string[] { "@name","@duration","@filename" }, new object[] { song.Name, song.Duration, song.Audio.fileName });
+            return r;
+        }
+
+        public int UpdateSong(Song song)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int UpdateSong(Song oldSong, Song newSong)
+        {
+            throw new NotImplementedException();
+        }
+
         private void Connect(string connectionString)
         {
             mySqlConnection = new MySqlConnection(connectionString);

@@ -33,8 +33,10 @@ namespace RAudioControls
         private List<string> errors = new List<string>();
         bool clicat = false;
 
-        public RAudioNAudio rAudio;
-
+        public RAudioNAudio[] rAudio = new RAudioNAudio[2];
+        public int actualRaudio = 0;
+        public int nextRaudio = 1; 
+        
 
         public int outDev { get; set; }
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
@@ -98,7 +100,6 @@ namespace RAudioControls
                 trackBarPosition.Value = Math.Min(trackBarPosition.Maximum, (int)(100 * currentTime.TotalSeconds / ((RAudioNAudio)dropListView1.listView1.Items[index].Tag).TotalTime.TotalSeconds));
                 labelCurrentTime.Text = currentTime.ToString();
                 
-
 
                 labelRemain.Text = remainingTime.ToString();
 
