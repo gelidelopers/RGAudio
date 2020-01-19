@@ -26,14 +26,33 @@ namespace RAudioControls
             InitializeComponent();
             dropListView1.listView1.DoubleClick += listView1_DoubleClick;
             dropListView1.listView1.KeyUp += ListView1_KeyUp;
+            dropListView1.listView1.DragDrop += ListView1_DragDrop;
+            dropListView1.listView1.DragEnter += ListView1_DragEnter;
+            btnContinuar.Click += BtnContinuar_Click;
+            btnDel.Click += BtnDel_Click;
+            btnCross.Click += BtnCross_Click; 
+            btnLoop.Click += BtnLoop_Click;
         }
 
-        
+        private void ListView1_DragEnter(object sender, DragEventArgs e)
+        {
+            playing = dropListView1.listView1.Items[index];
+        }
+
+        private void ListView1_DragDrop(object sender, DragEventArgs e)
+        {
+            if (playing != null)
+            {
+                index = dropListView1.listView1.Items.IndexOf(playing);
+                CalcularSeguenIndex();
+            }
+        }
 
         private int index;
         private int seguen;
-        private bool stoped = false;
-        bool clicat = false;
+        ListViewItem playing;
+        private bool indexClicat = false;
+
 
         public List<RAudioNAudio> rAudio = new List<RAudioNAudio>();
         
@@ -42,7 +61,7 @@ namespace RAudioControls
         public Font fntNotPlaying = new Font("Arial", 10, System.Drawing.FontStyle.Regular);
         public Font fntPlaying = new Font("Arial", 12, System.Drawing.FontStyle.Bold);
         //public bool isAsio { get; set; }
-        public bool isPlaying;
+        public bool isPlaying = false;
         public List<string> extensions = new List<string>(new string[] { ".mp3" ,".wav",".aac",".m4a",".wma"});
 
         #region Events functions
@@ -112,7 +131,7 @@ namespace RAudioControls
                         //item.SubItems.Add(axr.duration.ToString());
 
                         dropListView1.listView1.Items.Add(itom);
-                        rAudio.Add(new RAudioNAudio(axr.fileName, outDev));
+                        rAudio.Add(new RAudioNAudio(axr.fileName, outDev) { EnableAutoFadeOut = btnCross.Active});
 
                     }
                     catch (TagLib.CorruptFileException)
@@ -152,6 +171,7 @@ namespace RAudioControls
             {
                 MessageBox.Show(error);
             }
+            CalcularSeguenIndex();
         }
 
         public void BuidarLlista()
@@ -161,6 +181,7 @@ namespace RAudioControls
                 dropListView1.listView1.Items.Clear();
                 rAudio.Clear();
             }
+            CalcularSeguenIndex();
         }
 
         public void Stop()
@@ -170,8 +191,11 @@ namespace RAudioControls
                 rAudio[index].Stop();
                 foreach(RAudioNAudio i in rAudio)
                 {
+                    
                     i.Stop();
                 }
+                index = -1;
+                isPlaying = false;
             }
             catch { }
             ResetVUMeter();
@@ -183,26 +207,10 @@ namespace RAudioControls
 
             ResetTimeLabels();
 
-            stoped = true;
         }
 
         public void PlaySong()
         {
-
-
-
-            if (index.IsInRange(dropListView1.listView1.Items.Count) && rAudio[index] != null)
-            {
-
-                if (rAudio[index].Status == PlaybackState.Paused)
-                {
-
-                    rAudio[index].Play();
-                    timer1.Start();
-
-                    return;
-                }
-            }
 
             if (seguen.IsInRange(dropListView1.listView1.Items.Count))
             {
@@ -215,42 +223,50 @@ namespace RAudioControls
                     rAudio[seguen].Play();
                 }
                 rAudio[seguen].postVolumeMeter.StreamVolume += PostVolumeMeter_StreamVolume;
-                timer1.Start();
+                
                 rAudio[seguen].Ending += RAudio_Ending;
                 rAudio[seguen].Ended += RAudio_Ended;
+                indexClicat = false;
+                index = seguen;
+                isPlaying = true;
+                CalcularSeguenIndex();
+
+                timer1.Start();
             }
+
         }
 
         public void Seguen()
         {
-            if (btnContinuar.Active && !btnDel.Active)
-            {
-                if (dropListView1.listView1.Items.Count > 1 && index < dropListView1.listView1.Items.Count)
-                {
-                    index++;
-                    PlaySong();
-
-                    if (index < dropListView1.listView1.Items.Count)
-                    {
-                        dropListView1.listView1.Items[index - 1].Font = fntNotPlaying;
-                    }
-                    else
-                    {
-                        isPlaying = false;
-                    }
-                }
-            }
-            else if (!btnContinuar.Active && btnDel.Active)
-            {
-                dropListView1.listView1.Items.RemoveAt(index);
-                rAudio.RemoveAt(index);
-            }
+            CalcularSeguenIndex();
+            PlaySong();
         }
 
         #endregion
 
 
         #region Windows Forms events
+
+        private void BtnLoop_Click(object sender, EventArgs e)
+        {
+            CalcularSeguenIndex();
+        }
+
+        private void BtnDel_Click(object sender, EventArgs e)
+        {
+            CalcularSeguenIndex();
+        }
+
+        private void BtnContinuar_Click(object sender, EventArgs e)
+        {
+            CalcularSeguenIndex();
+        }
+
+        private void BtnCross_Click(object sender, EventArgs e)
+        {
+            rAudio[index].EnableAutoFadeOut = btnCross.Active;
+            CalcularSeguenIndex();
+        }
 
         private void ListView1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -266,6 +282,7 @@ namespace RAudioControls
                     }
                 }
                 index = dropListView1.listView1.Items.IndexOf(playing);
+                CalcularSeguenIndex();
 
             }
         }
@@ -284,6 +301,7 @@ namespace RAudioControls
         private void OnButtonStopClick(object sender, EventArgs e)
         {
             Stop();
+            index = -1;
         }
         private void btnDB_Click(object sender, EventArgs e)
         {
@@ -297,6 +315,8 @@ namespace RAudioControls
             {
                 dropListView1.listView1.FocusedItem.Remove();
                 rAudio.RemoveAt(dropListView1.listView1.FocusedItem.Index);
+
+                CalcularSeguenIndex();
             }
         }
 
@@ -340,13 +360,14 @@ namespace RAudioControls
                     dropListView1.listView1.Items[index].Font = fntNotPlaying;
                 }
 
-                clicat = true;
+                
 
                 if (isPlaying)
                 {
                     rAudio[index].Stop();
                 }
                 index = dropListView1.listView1.SelectedItems[0].Index;
+                indexClicat = true;
                 PlaySong();
             }
         }
@@ -449,6 +470,7 @@ namespace RAudioControls
                 {
                     dropListView1.listView1.Items[index].Remove();
                     rAudio.RemoveAt(index);
+                    rAudio[index].Dispose();
                 }
             }
         }
@@ -460,36 +482,39 @@ namespace RAudioControls
         private void OnEnding()
         {
                 ResetVUMeter();
-            CalcularSeguenIndex();
+            
             PlaySong();
         }
         private void CalcularSeguenIndex()
         {
-            if (btnContinuar.Active)
+            if (indexClicat)
             {
-                if (btnLoop.Active)
+                if (btnContinuar.Active)
                 {
-                    if(index == rAudio.Count - 1)
+                    if (btnLoop.Active)
                     {
-                        seguen = 0;
+                        if(index == rAudio.Count - 1)
+                        {
+                            seguen = 0;
+                        }
+                        else
+                        {
+                            seguen = index + 1;
+                        }
                     }
                     else
                     {
                         seguen = index + 1;
                     }
                 }
+                else if (btnLoop.Active)
+                {
+                    seguen = index;
+                }
                 else
                 {
-                    seguen = index + 1;
+                    seguen = -1;
                 }
-            }
-            else if (btnLoop.Active)
-            {
-                seguen = index;
-            }
-            else
-            {
-                seguen = -1;
             }
         }
     }

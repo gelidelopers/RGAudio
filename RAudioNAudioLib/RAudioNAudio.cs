@@ -11,7 +11,7 @@ using System.Timers;
 
 namespace RAudioNAudioLib
 {
-    public class RAudioNAudio
+    public class RAudioNAudio : IDisposable
     {
         #region Properites
         public bool EnableAutoFadeOut { get; set; }
@@ -185,7 +185,20 @@ namespace RAudioNAudioLib
                 throw new RAudioNAudioException("error al inicialitzar el so", e);
             }
         }
-        
+
+
+
         #endregion
+
+        public void Dispose()
+        {
+            fadeTimer.Stop();
+            waveOut.Stop();
+            waveOut.Dispose();
+            ou.Dispose();
+            audioFileReader.Dispose();
+            fadeTimer.Dispose();
+
+        }
     }
 }
