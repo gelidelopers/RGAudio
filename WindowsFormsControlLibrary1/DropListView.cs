@@ -138,5 +138,16 @@ namespace RAudioControls
                 }
             }
         }
+
+        private void listView1_Enter(object sender, EventArgs e)
+        {
+            listView1.BackColor = Color.LightGreen;
+        }
+
+        private void listView1_Leave(object sender, EventArgs e)
+        {
+            listView1.BackColor = Color.White;
+        }
+
     }
 }

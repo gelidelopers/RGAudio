@@ -439,7 +439,6 @@
 
         #endregion
 
-        private RAudioControls.AudioFinder audioFinder1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;

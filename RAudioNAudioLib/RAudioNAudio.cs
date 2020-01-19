@@ -35,8 +35,12 @@ namespace RAudioNAudioLib
             get { return _fadems; }
             set { _fadems = value; }
         }
+        private bool _isAudioLoaded = false;
 
-
+        public bool IsAudioLoaded
+        {
+            get { return _isAudioLoaded; }
+        }
 
         #endregion
 
@@ -67,10 +71,11 @@ namespace RAudioNAudioLib
         #region Constructor
         public RAudioNAudio(string fullpath, int outdev)
         {
-            OutDev = -1;
+            OutDev = outdev;
             FullPath = fullpath;
             CarregarFitxer();
             InicialitzarSo();
+            _isAudioLoaded = true;
         }
 
         #endregion
@@ -117,6 +122,7 @@ namespace RAudioNAudioLib
 
         private void WaveOut_PlaybackStopped(object sender, StoppedEventArgs e)
         {
+            Ending.Invoke(sender, e);
             Ended.Invoke(sender, e);
         }
 
@@ -157,8 +163,9 @@ namespace RAudioNAudioLib
         {
             audioFileReader = new AudioFileReader(fileName);
             SampleChannel sampleChannel = new SampleChannel(audioFileReader, true);
-            fade = new FadeInOutSampleProvider(audioFileReader);
-            postVolumeMeter = new MeteringSampleProvider(fade);
+            postVolumeMeter = new MeteringSampleProvider(sampleChannel);
+            fade = new FadeInOutSampleProvider(postVolumeMeter);
+            
             
             return fade;
         }

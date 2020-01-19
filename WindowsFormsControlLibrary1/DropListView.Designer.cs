@@ -44,19 +44,21 @@
             this.tableLayoutPanel1.Controls.Add(this.listView1, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(279, 443);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(372, 545);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // checkBoxOrder
             // 
             this.checkBoxOrder.AutoSize = true;
-            this.checkBoxOrder.Location = new System.Drawing.Point(3, 3);
+            this.checkBoxOrder.Location = new System.Drawing.Point(4, 4);
+            this.checkBoxOrder.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxOrder.Name = "checkBoxOrder";
-            this.checkBoxOrder.Size = new System.Drawing.Size(153, 17);
+            this.checkBoxOrder.Size = new System.Drawing.Size(206, 21);
             this.checkBoxOrder.TabIndex = 0;
             this.checkBoxOrder.Text = "Mode reordenar al arrastrar";
             this.checkBoxOrder.UseVisualStyleBackColor = true;
@@ -70,15 +72,18 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.FullRowSelect = true;
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 28);
+            this.listView1.Location = new System.Drawing.Point(4, 35);
+            this.listView1.Margin = new System.Windows.Forms.Padding(4);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(273, 412);
+            this.listView1.Size = new System.Drawing.Size(364, 506);
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
             this.listView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.listView1_ItemDrag);
             this.listView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.listView1_DragDrop);
             this.listView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView1_DragEnter);
+            this.listView1.Enter += new System.EventHandler(this.listView1_Enter);
+            this.listView1.Leave += new System.EventHandler(this.listView1_Leave);
             // 
             // columnHeader1
             // 
@@ -91,11 +96,12 @@
             // 
             // DropListView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "DropListView";
-            this.Size = new System.Drawing.Size(279, 443);
+            this.Size = new System.Drawing.Size(372, 545);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

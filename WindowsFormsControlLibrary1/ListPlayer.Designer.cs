@@ -43,10 +43,12 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnDB = new System.Windows.Forms.Button();
             this.materialFlatButton3 = new System.Windows.Forms.Button();
+            this.groupBoxOnFinish = new System.Windows.Forms.GroupBox();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnContinuar = new RAudioControls.RAudioButton();
-            this.btnLoop = new RAudioControls.RAudioButton();
-            this.btnCross = new RAudioControls.RAudioButton();
             this.btnDel = new RAudioControls.RAudioButton();
+            this.btnCross = new RAudioControls.RAudioButton();
+            this.btnLoop = new RAudioControls.RAudioButton();
             this.panelVuLeft = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.volumeMeter1 = new NAudio.Gui.VolumeMeter();
@@ -59,13 +61,6 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.toolTipDesen = new System.Windows.Forms.ToolTip(this.components);
             this.contextMenuStripSelected = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuDelete = new System.Windows.Forms.ToolStripMenuItem();
@@ -75,6 +70,8 @@
             this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).BeginInit();
             this.flowLayoutPanelButtons.SuspendLayout();
+            this.groupBoxOnFinish.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.panelVuLeft.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panelVuRight.SuspendLayout();
@@ -83,10 +80,6 @@
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox7.SuspendLayout();
             this.contextMenuStripSelected.SuspendLayout();
             this.contextMenuStripList.SuspendLayout();
             this.SuspendLayout();
@@ -140,20 +133,20 @@
             this.panelBottom.Controls.Add(this.panelVuLeft);
             this.panelBottom.Controls.Add(this.flowLayoutPanelTimers);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 282);
-            this.panelBottom.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelBottom.Location = new System.Drawing.Point(0, 256);
+            this.panelBottom.Margin = new System.Windows.Forms.Padding(4);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(701, 333);
+            this.panelBottom.Size = new System.Drawing.Size(561, 359);
             this.panelBottom.TabIndex = 30;
             // 
             // trackBarPosition
             // 
             this.trackBarPosition.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.trackBarPosition.Location = new System.Drawing.Point(0, 57);
-            this.trackBarPosition.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.trackBarPosition.Margin = new System.Windows.Forms.Padding(4);
             this.trackBarPosition.Maximum = 100;
             this.trackBarPosition.Name = "trackBarPosition";
-            this.trackBarPosition.Size = new System.Drawing.Size(701, 56);
+            this.trackBarPosition.Size = new System.Drawing.Size(561, 56);
             this.trackBarPosition.TabIndex = 1;
             this.trackBarPosition.MouseDown += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseDown);
             this.trackBarPosition.MouseUp += new System.Windows.Forms.MouseEventHandler(this.trackBarPosition_MouseUp);
@@ -167,15 +160,12 @@
             this.flowLayoutPanelButtons.Controls.Add(this.btnNext);
             this.flowLayoutPanelButtons.Controls.Add(this.btnDB);
             this.flowLayoutPanelButtons.Controls.Add(this.materialFlatButton3);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnContinuar);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnLoop);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnCross);
-            this.flowLayoutPanelButtons.Controls.Add(this.btnDel);
+            this.flowLayoutPanelButtons.Controls.Add(this.groupBoxOnFinish);
             this.flowLayoutPanelButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.flowLayoutPanelButtons.Location = new System.Drawing.Point(0, 113);
-            this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelButtons.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanelButtons.Name = "flowLayoutPanelButtons";
-            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(701, 136);
+            this.flowLayoutPanelButtons.Size = new System.Drawing.Size(561, 162);
             this.flowLayoutPanelButtons.TabIndex = 33;
             // 
             // btnPLay
@@ -272,6 +262,28 @@
             this.materialFlatButton3.UseVisualStyleBackColor = true;
             this.materialFlatButton3.Click += new System.EventHandler(this.OnOpenFileClick);
             // 
+            // groupBoxOnFinish
+            // 
+            this.groupBoxOnFinish.Controls.Add(this.flowLayoutPanel1);
+            this.groupBoxOnFinish.Location = new System.Drawing.Point(3, 83);
+            this.groupBoxOnFinish.Name = "groupBoxOnFinish";
+            this.groupBoxOnFinish.Size = new System.Drawing.Size(376, 76);
+            this.groupBoxOnFinish.TabIndex = 38;
+            this.groupBoxOnFinish.TabStop = false;
+            this.groupBoxOnFinish.Text = "Al acabar àudio actual";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.btnContinuar);
+            this.flowLayoutPanel1.Controls.Add(this.btnDel);
+            this.flowLayoutPanel1.Controls.Add(this.btnCross);
+            this.flowLayoutPanel1.Controls.Add(this.btnLoop);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 18);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(370, 55);
+            this.flowLayoutPanel1.TabIndex = 0;
+            // 
             // btnContinuar
             // 
             this.btnContinuar.Active = true;
@@ -279,46 +291,14 @@
             this.btnContinuar.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnContinuar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnContinuar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnContinuar.Location = new System.Drawing.Point(5, 87);
+            this.btnContinuar.Location = new System.Drawing.Point(5, 7);
             this.btnContinuar.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnContinuar.Name = "btnContinuar";
-            this.btnContinuar.Size = new System.Drawing.Size(119, 42);
+            this.btnContinuar.Size = new System.Drawing.Size(96, 42);
             this.btnContinuar.TabIndex = 34;
             this.btnContinuar.Text = "Continuar";
             this.btnContinuar.UnactiveColor = System.Drawing.Color.Transparent;
             this.btnContinuar.UseVisualStyleBackColor = false;
-            // 
-            // btnLoop
-            // 
-            this.btnLoop.Active = true;
-            this.btnLoop.ActiveColor = System.Drawing.Color.LightBlue;
-            this.btnLoop.BackColor = System.Drawing.Color.LightBlue;
-            this.btnLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoop.Location = new System.Drawing.Point(134, 87);
-            this.btnLoop.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.btnLoop.Name = "btnLoop";
-            this.btnLoop.Size = new System.Drawing.Size(100, 42);
-            this.btnLoop.TabIndex = 35;
-            this.btnLoop.Text = "Bucle";
-            this.btnLoop.UnactiveColor = System.Drawing.Color.Transparent;
-            this.btnLoop.UseVisualStyleBackColor = false;
-            // 
-            // btnCross
-            // 
-            this.btnCross.Active = true;
-            this.btnCross.ActiveColor = System.Drawing.Color.LawnGreen;
-            this.btnCross.BackColor = System.Drawing.Color.LawnGreen;
-            this.btnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCross.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCross.Location = new System.Drawing.Point(244, 87);
-            this.btnCross.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
-            this.btnCross.Name = "btnCross";
-            this.btnCross.Size = new System.Drawing.Size(113, 42);
-            this.btnCross.TabIndex = 36;
-            this.btnCross.Text = "Crossfade";
-            this.btnCross.UnactiveColor = System.Drawing.Color.Transparent;
-            this.btnCross.UseVisualStyleBackColor = false;
             // 
             // btnDel
             // 
@@ -327,14 +307,46 @@
             this.btnDel.BackColor = System.Drawing.Color.Red;
             this.btnDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(367, 87);
+            this.btnDel.Location = new System.Drawing.Point(111, 7);
             this.btnDel.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(100, 42);
+            this.btnDel.Size = new System.Drawing.Size(68, 42);
             this.btnDel.TabIndex = 37;
             this.btnDel.Text = "Borrar";
             this.btnDel.UnactiveColor = System.Drawing.Color.Transparent;
             this.btnDel.UseVisualStyleBackColor = false;
+            // 
+            // btnCross
+            // 
+            this.btnCross.Active = true;
+            this.btnCross.ActiveColor = System.Drawing.Color.LawnGreen;
+            this.btnCross.BackColor = System.Drawing.Color.LawnGreen;
+            this.btnCross.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCross.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCross.Location = new System.Drawing.Point(189, 7);
+            this.btnCross.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnCross.Name = "btnCross";
+            this.btnCross.Size = new System.Drawing.Size(97, 42);
+            this.btnCross.TabIndex = 36;
+            this.btnCross.Text = "Crossfade";
+            this.btnCross.UnactiveColor = System.Drawing.Color.Transparent;
+            this.btnCross.UseVisualStyleBackColor = false;
+            // 
+            // btnLoop
+            // 
+            this.btnLoop.Active = true;
+            this.btnLoop.ActiveColor = System.Drawing.Color.LightBlue;
+            this.btnLoop.BackColor = System.Drawing.Color.LightBlue;
+            this.btnLoop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLoop.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoop.Location = new System.Drawing.Point(296, 7);
+            this.btnLoop.Margin = new System.Windows.Forms.Padding(5, 7, 5, 7);
+            this.btnLoop.Name = "btnLoop";
+            this.btnLoop.Size = new System.Drawing.Size(63, 42);
+            this.btnLoop.TabIndex = 35;
+            this.btnLoop.Text = "Bucle";
+            this.btnLoop.UnactiveColor = System.Drawing.Color.Transparent;
+            this.btnLoop.UseVisualStyleBackColor = false;
             // 
             // panelVuLeft
             // 
@@ -343,9 +355,9 @@
             this.panelVuLeft.Controls.Add(this.panelVuRight);
             this.panelVuLeft.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelVuLeft.Location = new System.Drawing.Point(0, 0);
-            this.panelVuLeft.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelVuLeft.Margin = new System.Windows.Forms.Padding(4);
             this.panelVuLeft.Name = "panelVuLeft";
-            this.panelVuLeft.Size = new System.Drawing.Size(701, 57);
+            this.panelVuLeft.Size = new System.Drawing.Size(561, 57);
             this.panelVuLeft.TabIndex = 31;
             // 
             // panel1
@@ -354,9 +366,9 @@
             this.panel1.Controls.Add(this.volumeMeter3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(701, 36);
+            this.panel1.Size = new System.Drawing.Size(561, 36);
             this.panel1.TabIndex = 33;
             // 
             // volumeMeter1
@@ -371,7 +383,7 @@
             this.volumeMeter1.MinimumSize = new System.Drawing.Size(67, 12);
             this.volumeMeter1.Name = "volumeMeter1";
             this.volumeMeter1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter1.Size = new System.Drawing.Size(648, 12);
+            this.volumeMeter1.Size = new System.Drawing.Size(508, 12);
             this.volumeMeter1.TabIndex = 30;
             this.volumeMeter1.Text = "volumeMeter1";
             // 
@@ -380,8 +392,8 @@
             this.volumeMeter3.Amplitude = 0F;
             this.volumeMeter3.Dock = System.Windows.Forms.DockStyle.Right;
             this.volumeMeter3.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter3.Location = new System.Drawing.Point(648, 0);
-            this.volumeMeter3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.volumeMeter3.Location = new System.Drawing.Point(508, 0);
+            this.volumeMeter3.Margin = new System.Windows.Forms.Padding(4);
             this.volumeMeter3.MaxDb = 0.2F;
             this.volumeMeter3.MaximumSize = new System.Drawing.Size(67, 12);
             this.volumeMeter3.MinDb = -1F;
@@ -398,9 +410,9 @@
             this.panelVuRight.Controls.Add(this.volumeMeter4);
             this.panelVuRight.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelVuRight.Location = new System.Drawing.Point(0, 36);
-            this.panelVuRight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelVuRight.Margin = new System.Windows.Forms.Padding(4);
             this.panelVuRight.Name = "panelVuRight";
-            this.panelVuRight.Size = new System.Drawing.Size(701, 21);
+            this.panelVuRight.Size = new System.Drawing.Size(561, 21);
             this.panelVuRight.TabIndex = 32;
             // 
             // volumeMeter2
@@ -415,7 +427,7 @@
             this.volumeMeter2.MinimumSize = new System.Drawing.Size(67, 12);
             this.volumeMeter2.Name = "volumeMeter2";
             this.volumeMeter2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.volumeMeter2.Size = new System.Drawing.Size(648, 12);
+            this.volumeMeter2.Size = new System.Drawing.Size(508, 12);
             this.volumeMeter2.TabIndex = 30;
             this.volumeMeter2.Text = "volumeMeter2";
             // 
@@ -424,8 +436,8 @@
             this.volumeMeter4.Amplitude = 0F;
             this.volumeMeter4.Dock = System.Windows.Forms.DockStyle.Right;
             this.volumeMeter4.ForeColor = System.Drawing.Color.Red;
-            this.volumeMeter4.Location = new System.Drawing.Point(648, 0);
-            this.volumeMeter4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.volumeMeter4.Location = new System.Drawing.Point(508, 0);
+            this.volumeMeter4.Margin = new System.Windows.Forms.Padding(4);
             this.volumeMeter4.MaxDb = 0.2F;
             this.volumeMeter4.MaximumSize = new System.Drawing.Size(67, 12);
             this.volumeMeter4.MinDb = -1F;
@@ -441,12 +453,11 @@
             this.flowLayoutPanelTimers.AutoSize = true;
             this.flowLayoutPanelTimers.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.flowLayoutPanelTimers.Controls.Add(this.groupActual);
-            this.flowLayoutPanelTimers.Controls.Add(this.groupBox4);
             this.flowLayoutPanelTimers.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 249);
-            this.flowLayoutPanelTimers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowLayoutPanelTimers.Location = new System.Drawing.Point(0, 275);
+            this.flowLayoutPanelTimers.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanelTimers.Name = "flowLayoutPanelTimers";
-            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(701, 84);
+            this.flowLayoutPanelTimers.Size = new System.Drawing.Size(561, 84);
             this.flowLayoutPanelTimers.TabIndex = 31;
             // 
             // groupActual
@@ -457,9 +468,9 @@
             this.groupActual.Controls.Add(this.groupBox2);
             this.groupActual.Controls.Add(this.groupBox1);
             this.groupActual.Location = new System.Drawing.Point(4, 4);
-            this.groupActual.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupActual.Margin = new System.Windows.Forms.Padding(4);
             this.groupActual.Name = "groupActual";
-            this.groupActual.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupActual.Padding = new System.Windows.Forms.Padding(4);
             this.groupActual.Size = new System.Drawing.Size(281, 76);
             this.groupActual.TabIndex = 28;
             this.groupActual.TabStop = false;
@@ -469,9 +480,9 @@
             // 
             this.groupBox3.Controls.Add(this.labelRemain);
             this.groupBox3.Location = new System.Drawing.Point(173, 25);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(96, 41);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
@@ -481,9 +492,9 @@
             // 
             this.groupBox2.Controls.Add(this.labelCurrentTime);
             this.groupBox2.Location = new System.Drawing.Point(95, 25);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(71, 41);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -493,107 +504,13 @@
             // 
             this.groupBox1.Controls.Add(this.labelTotalTime);
             this.groupBox1.Location = new System.Drawing.Point(9, 25);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(77, 41);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Duracio";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox4.Controls.Add(this.groupBox5);
-            this.groupBox4.Controls.Add(this.groupBox6);
-            this.groupBox4.Controls.Add(this.groupBox7);
-            this.groupBox4.Location = new System.Drawing.Point(293, 4);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox4.Size = new System.Drawing.Size(261, 76);
-            this.groupBox4.TabIndex = 29;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Tota la llista";
-            this.toolTipDesen.SetToolTip(this.groupBox4, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.label1);
-            this.groupBox5.Location = new System.Drawing.Point(173, 25);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox5.Size = new System.Drawing.Size(80, 41);
-            this.groupBox5.TabIndex = 2;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Restant";
-            this.toolTipDesen.SetToolTip(this.groupBox5, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(8, 15);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 24);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "0:00";
-            this.toolTipDesen.SetToolTip(this.label1, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.label2);
-            this.groupBox6.Location = new System.Drawing.Point(95, 25);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox6.Size = new System.Drawing.Size(71, 41);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Passat";
-            this.toolTipDesen.SetToolTip(this.groupBox6, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(8, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 24);
-            this.label2.TabIndex = 24;
-            this.label2.Text = "0:00";
-            this.toolTipDesen.SetToolTip(this.label2, "Temporitzador total pendent de desenvolupament");
-            // 
-            // groupBox7
-            // 
-            this.groupBox7.Controls.Add(this.label3);
-            this.groupBox7.Location = new System.Drawing.Point(9, 25);
-            this.groupBox7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox7.Size = new System.Drawing.Size(77, 41);
-            this.groupBox7.TabIndex = 0;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Duracio";
-            this.toolTipDesen.SetToolTip(this.groupBox7, "Temporitzador total pendent de desenvolupament");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(8, 15);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 24);
-            this.label3.TabIndex = 25;
-            this.label3.Text = "0:00";
-            this.toolTipDesen.SetToolTip(this.label3, "Temporitzador total pendent de desenvolupament");
             // 
             // toolTipDesen
             // 
@@ -635,9 +552,9 @@
             this.dropListView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dropListView1.Index = 0;
             this.dropListView1.Location = new System.Drawing.Point(0, 0);
-            this.dropListView1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.dropListView1.Margin = new System.Windows.Forms.Padding(5);
             this.dropListView1.Name = "dropListView1";
-            this.dropListView1.Size = new System.Drawing.Size(701, 282);
+            this.dropListView1.Size = new System.Drawing.Size(561, 256);
             this.dropListView1.TabIndex = 31;
             // 
             // ListPlayer
@@ -646,15 +563,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.dropListView1);
             this.Controls.Add(this.panelBottom);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximumSize = new System.Drawing.Size(1067, 55385);
             this.MinimumSize = new System.Drawing.Size(360, 615);
             this.Name = "ListPlayer";
-            this.Size = new System.Drawing.Size(701, 615);
+            this.Size = new System.Drawing.Size(561, 615);
             this.panelBottom.ResumeLayout(false);
             this.panelBottom.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarPosition)).EndInit();
             this.flowLayoutPanelButtons.ResumeLayout(false);
+            this.groupBoxOnFinish.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.panelVuLeft.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panelVuRight.ResumeLayout(false);
@@ -666,13 +585,6 @@
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox6.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
             this.contextMenuStripSelected.ResumeLayout(false);
             this.contextMenuStripList.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -704,13 +616,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TrackBar trackBarPosition;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnNext;
@@ -724,5 +629,7 @@
         private RAudioButton btnLoop;
         private RAudioButton btnCross;
         private RAudioButton btnDel;
+        private System.Windows.Forms.GroupBox groupBoxOnFinish;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }
